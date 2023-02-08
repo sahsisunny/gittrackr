@@ -11,10 +11,13 @@ const prbody = document.querySelector('.pr-body');
 const issuebody = document.querySelector('.issue-body');
 const assignedIssuesCounts = document.querySelector('.assigned-issues');
 const closedIssuesCounts = document.querySelector('.closed-issues');
-const openPrsCount = document.querySelector('.open-prs');
-const closedPrsCount = document.querySelector('.closed-prs');
 const openIssuesCount = document.querySelector('.own-issues');
+const allIssuesCount = document.querySelector('.all-issues');
+
+const closedPrsCount = document.querySelector('.closed-prs');
+const openPrsCount = document.querySelector('.open-prs');
 const mergedPrsCount = document.querySelector('.merged-prs');
+const allPrsCount = document.querySelector('.all-prs');
 
 const ORG_NAME = "Real-Dev-Squad";
 const GITHUB_TOKEN = "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";
@@ -25,6 +28,7 @@ let totalPRs = 0;
 let closedPRs = 0;
 let openPRs = 0;
 let mergedPRs = 0;
+
 let totalissues = 0;
 let closedissues = 0;
 let openissues = 0;
@@ -67,6 +71,7 @@ function getAllPrs() {
                openPrsCount.innerHTML = openPRs;
                closedPrsCount.innerHTML = closedPRs;
                mergedPrsCount.innerHTML = mergedPRs;
+               allPrsCount.innerHTML = totalPRs;
           })
           .catch(error => console.error(error));
 }
@@ -98,6 +103,8 @@ function updateIssueCounts(data) {
      assignedIssuesCounts.innerHTML = filterOpenIssues(data);
      closedIssuesCounts.innerHTML = filterClosedIssues(data);
      openIssuesCount.innerHTML = filterOwnIssues(data);
+     allIssuesCount.innerHTML = totalissues;
+
 }
 
 function getAllIssues() {
