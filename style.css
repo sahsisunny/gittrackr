@@ -187,3 +187,90 @@ td {
           overflow: hidden;
      }
 }
+
+
+/* Floating Box */
+.floating-box {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-direction: column;
+     z-index: 1;
+     box-shadow: 0 2px 20px black;
+     position: fixed;
+     top: 50%;
+     left: 50%;
+     transform: translate(-50%, -50%);
+     border-radius: 6px;
+     padding: 20px;
+     background-color: aliceblue;
+}
+
+.floating-box h1 {
+     font-size: 1.5rem;
+     text-decoration: none;
+     margin: 1rem;
+     font-family: 'Roboto', sans-serif;
+}
+
+.floating-box p {
+     font-size: 1rem;
+     text-decoration: none;
+     margin: 1rem;
+     text-align: justify;
+}
+
+.button-section {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     flex-wrap: wrap;
+}
+
+.btn-floating {
+     border: none;
+     color: white;
+     padding: 10px;
+     font-size: 1rem;
+     margin: 4px;
+     cursor: pointer;
+     border-radius: 10px;
+     background-color: #4CAF50;
+}
+
+/* set background blur */
+.blur {
+     filter: blur(5px);
+}
+
+.btn-floating:hover {
+     background-color: #3e8e41;
+}
+
+.close-button {
+     position: absolute;
+     top: -14px;
+     right: 0;
+     padding: 10px;
+     cursor: pointer;
+     font-size: 2rem;
+     color: grey;
+}
+
+.close-button:hover {
+     color: rgb(10, 10, 10);
+}
+
+input {
+     width: 100%;
+     padding: 10px;
+     font-size: 1rem;
+     margin: 4px;
+     border-radius: 10px;
+     border: 1px solid grey;
+     text-align: center;
+}
+
+.hide{
+     display: none;
+}

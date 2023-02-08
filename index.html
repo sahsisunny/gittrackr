@@ -10,11 +10,11 @@
 </head>
 
 <body>
-     <div class="header">
+     <div class="header blur">
           <h1>My Dashboard - Real Dev Squad</h1>
           <!-- <h1>Sunny Sahsi</h1> -->
      </div>
-     <div class="main">
+     <div class="main blur">
 
           <div class="left">
                <h1>Issues</h1>
@@ -120,10 +120,27 @@
                     </div>
                </div>
           </div>
-
      </div>
-     <footer>
-          <p>© 2023 Sunny Sahsi</p>
+
+     <div class="floating-box">
+          <h1>
+               Enter your GitHub username
+          </h1>
+          <div class="button-section">
+               <!-- input github user name -->
+               <input type="text" id="username" placeholder="Enter your GitHub username">
+               <button id="view-details"
+               class="btn-floating"
+               >View Details</button>
+          </div>
+          <p>
+               <strong>Note:</strong>If you want to see you task related details given by Real Dev Squad, then enter your GitHub username in the input box and click on the button.
+          </p>
+          <span class="close-button" id="close-btn">x</span>
+     </div>
+
+     <footer class="blur">
+          <p>Made with ❤️ by <a href="https://github.com/sahsisunny">Sunny Sahsi</a></p>
      </footer>
      <script src="script.js"></script>
 </body>
