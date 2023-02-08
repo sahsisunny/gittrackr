@@ -1,0 +1,157 @@
+@import url('https://fonts.googleapis.com/css2?family=Itim&display=swap');
+
+* {
+     margin: 0;
+     padding: 0;
+     box-sizing: border-box;
+}
+
+:root {
+     --primary-color: #704545;
+     --background-color: #fff;
+     --accent-color: #ff0101;
+     --text-color: #000;
+     --shadow-color: #000;
+}
+
+body {
+     font-family: 'Itim', cursive;
+     max-height: 100vh;
+}
+
+.header,
+footer {
+     padding: 10px;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     box-shadow: 0 0 10px var(--shadow-color);
+}
+
+footer {
+     position: relative;
+     bottom: 0;
+     width: 100%;
+}
+
+
+a {
+     text-decoration: none;
+}
+
+.btn {
+     padding: 8px 15px;
+     background-color: var(--background-color);
+     color: var(--text-color);
+     border-radius: 5px;
+     text-transform: uppercase;
+     font-weight: bold;
+     border: 1px solid var(--accent-color);
+}
+
+.btn:hover {
+     background-color: var(--accent-color);
+     color: var(--background-color);
+}
+
+.main {
+     display: flex;
+}
+
+.left,
+.right {
+     width: 40%;
+     height: 90vh;
+     display: flex;
+     align-items: center;
+     padding: 10px;
+     flex-direction: column;
+     box-shadow: 0 0 10px var(--shadow-color);
+     /* min-width: 640px */
+     /* flex: auto; */
+     overflow: scroll;
+
+}
+
+.shortcut {
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+}
+
+.icons {
+     display: flex;
+     justify-content: space-between;
+}
+
+.stats {
+     width: 20%;
+     height: 90vh;
+     display: flex;
+     align-items: center;
+     flex-direction: column;
+     box-shadow: 0 0 10px var(--shadow-color);
+     overflow: scroll;
+}
+
+
+
+.link-icon {
+     width: 50px;
+     height: 50px;
+     background-color: var(--background-color);
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 10px;
+}
+
+::-webkit-scrollbar {
+     width: 10px;
+     background-color: var(--background-color);
+     border-radius: 5px;
+     box-shadow: inset 0 0 5px var(--shadow-color);
+}
+
+::-webkit-scrollbar-thumb {
+     background-color: var(--accent-color);
+     border-radius: 5px;
+}
+
+table {
+     border-collapse: collapse;
+     width: 100%;
+     /* height: 100vh; */
+}
+
+thead {
+     background-color: #444444;
+     color: var(--background-color);
+}
+
+tbody {
+     background-color: var(--background-color);
+     color: var(--text-color);
+}
+
+tr tr:nth-child(even) {
+     background-color: #f2f2f2;
+}
+
+tr:hover {
+     background-color: #898585;
+     color: #fff;
+     cursor: pointer;
+}
+
+/* add margin to every row */
+tr {
+     margin: 10px;
+}
+
+th,
+td {
+     padding: 10px;
+}
