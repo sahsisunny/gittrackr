@@ -1,6 +1,6 @@
 const username = "sahsisunny";
 const org = "Real-Dev-Squad";
-const token = peocess.env.GITHUB_TOKEN;
+const token = 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;
 let totalPRs = 0;
 let closedPRs = 0;
 let openPRs = 0;
