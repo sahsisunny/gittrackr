@@ -1,6 +1,6 @@
 const username = "sahsisunny";
 const org = "Real-Dev-Squad";
-const token = "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";
+const token = "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";
 let totalPRs = 0;
 let closedPRs = 0;
 let openPRs = 0;
