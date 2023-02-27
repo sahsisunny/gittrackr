@@ -2,27 +2,44 @@ import './home.css'
 import IssueListCard from '../tableDataCard/index'
 import TableHeadCard from '../tableHeadCard';
 
+const array = (length) => Array.from({ length });
+
 function Home() {
   return (
     <div className='home'>
-      <h1>Welcome to my GitHub dashboard!</h1>
-      <p>This is a dashboard that displays information about my GitHub profile and repositories.</p>
-      <TableHeadCard>
-
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-      <IssueListCard />
-        <IssueListCard />
+      <div className="left">
+        <TableHeadCard
+          title="Issues"
+        >          
+        {
+            array(100).fill().map((_, i) => <IssueListCard key={i}
+              sn={i+1}
+              title="Idle user next task preference response time is too long and should be"
+              status="open"
+              onClick={() => console.log('clicked')}
+            />)
+        }
         </TableHeadCard>
-    </div>
+    </div> 
+      <div className="right">
+        <TableHeadCard
+          title="Pulll Requests"
+        >
+        {
+            array(100).fill().map((_, i) => <IssueListCard key={i}
+              sn={i+1}
+              title="Idle user next task preference response time is too long and should be"
+              status="closed"
+              onClick={() => console.log('clicked')}
+            />)
+        }
+        </TableHeadCard>
+      </div>
+      <div className="sidebar">
+
+      </div>
+      
+      </div>
   );
 }
 

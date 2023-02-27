@@ -1,34 +1,32 @@
-.issue-list-card{
-     border-radius: 6px;
-     margin-bottom: 5px;
-     padding: 16px;
+.table-list-card{
      width: 100%;
-     display: flex;
-     flex-direction: row;
-     justify-content: center;
-     align-items: center;
-
+     border-collapse: collapse;
+     
 }
 
-.s-number{
-     font-size: 1.25rem;
-     font-weight: 600;
-     margin-right: 16px;
+.serial-number{
+     padding: 10px;
+     text-align: center;
 }
 
-.s-title{
-     font-size: 1.25rem;
-     font-weight: 600;
-     margin-right: 16px;
+.data-title{
+     padding: 10px;
 }
-
 .action-buttons{
-     display: flex;
-     flex-direction: row;
-     justify-content: center;
-     align-items: center;
+     height: 100%;
 }
 
 .action-buttons button{
-     margin: 0 4px;
+     margin: 0 5px;
+    
 }
+
+.action-buttons button:hover{
+     color: #0ae;
+}
+
+tbody tr:hover{
+     background-color: rgb(2, 63, 87);
+     cursor: pointer;
+}
+

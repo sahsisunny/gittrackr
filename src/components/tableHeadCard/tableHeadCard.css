@@ -1,0 +1,41 @@
+.section {
+     width: 100%;
+     overflow-x: hidden;
+     overflow-y: scroll;
+     height: 100%;
+}
+
+.section-head-text {
+     font-size: 1.55rem;
+     font-weight: 600;
+     text-align: center;
+     background-color: #0ae;
+     width: 100%;
+     /* stick */
+     position: sticky;
+     top: 0;
+     padding: 5px;
+}
+
+.section-table {
+     width: 100%;
+     border-radius: 5px;
+     padding: 10px;
+     border-collapse: collapse;
+
+}
+
+.section-table-head {
+     font-size: 1.25rem;
+     border-radius: 5px;
+     background-color: rgb(2, 63, 87);
+     padding: 10px;
+     text-align: center;
+     position: sticky;
+     top:38px;
+
+}
+
+.table-sn {
+     padding-left: 10px;
+}
