@@ -1,7 +1,6 @@
 .table-list-card{
      width: 100%;
-     border-collapse: collapse;
-     
+     border-collapse: collapse;     
 }
 
 .serial-number{
@@ -18,7 +17,6 @@
 
 .action-buttons button{
      margin: 0 5px;
-    
 }
 
 .action-buttons button:hover{

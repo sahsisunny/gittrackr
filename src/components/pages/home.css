@@ -1,10 +1,11 @@
 .home {
-     min-height: 100%;
+     min-height: 85vh;
      max-height: 85vh;
      padding: 1rem;
      display: flex;
      flex-direction: row;
 }
+
 ::-webkit-scrollbar {
      width: 5px;
      border-radius: 10px;
@@ -22,15 +23,63 @@
      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
 }
 
-.left{
+.left {
      width: 40%;
-     border-radius: 5px;
      padding: 10px;
      margin-right: 1rem;
 }
 
-.right{
+.right {
      width: 40%;
-     border-radius: 5px;
      padding: 10px;
+}
+
+.sidebar {
+     width: 20%;
+     padding: 10px;
+     margin-left: 1rem;
+     height: 85vh;
+     overflow-x: hidden;
+     overflow-y: scroll;
+}
+
+.sidebar h1 {
+     font-size: 1.5rem;
+     font-weight: 600;
+     text-align: center;
+     background-color: #0ae;
+     width: 100%;
+     position: sticky;
+     top: 0;
+     padding: 5px;
+}
+
+.issues,
+.pull {
+     width: 100%;
+     padding: 10px;
+}
+
+.open-issues,
+.open-and-close-pull {
+     width: 100%;
+     padding: 10px;
+}
+
+.open-issues table,
+.open-and-close-pull table {
+     width: 100%;
+     border-collapse: collapse;
+}
+
+.open-issues table caption,
+.open-and-close-pull table caption {
+     font-size: 1.5rem;
+     font-weight: 600;
+     text-align: center;
+     background-color: #0ae;
+     width: 100%;
+     position: sticky;
+     top: 0;
+     padding: 5px;
 }
