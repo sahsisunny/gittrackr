@@ -14,13 +14,6 @@ function Navbar() {
         />
         <h1>RepoBoss</h1>
       </Link>
-      <ul className='nav-links'>
-        <Link to={'/'}>Home</Link>
-        <Link to={'/myrepos'}>My Repos</Link>
-        <Link to={'/orgs'}>Org Repos</Link>
-        <Link to={'about'}>About</Link>
-      </ul>
-
       <div className='profile hide'>
         <img
           src='https://avatars.githubusercontent.com/u/59611672?v=4'

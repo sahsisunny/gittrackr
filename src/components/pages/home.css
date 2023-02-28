@@ -83,11 +83,9 @@
      border-radius: 10px;
 }
 
-table tr {
-     width: 100%;
-     padding: 5px;
-     margin-bottom: 5px;
-     border-bottom: 5px solid transparent;
+table tr td {
+     border: 3px solid transparent;
+     margin: 5px;
 }
 
 @media only screen and (max-width: 768px) {
