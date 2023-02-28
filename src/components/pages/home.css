@@ -1,9 +1,7 @@
 .home {
-     min-height: 85vh;
-     max-height: 85vh;
+     height: 85vh;
      padding: 1rem;
      display: flex;
-     flex-direction: row;
 }
 
 ::-webkit-scrollbar {
@@ -41,6 +39,10 @@
      height: 85vh;
      overflow-x: hidden;
      overflow-y: scroll;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
 }
 
 .sidebar h1 {
@@ -60,26 +62,68 @@
      padding: 10px;
 }
 
-.open-issues,
-.open-and-close-pull {
-     width: 100%;
-     padding: 10px;
-}
-
-.open-issues table,
-.open-and-close-pull table {
+.issues table,
+.pull table {
      width: 100%;
      border-collapse: collapse;
+     display: flex;
+     flex-direction: column;
+     justify-content: center;
+     align-items: center;
 }
 
-.open-issues table caption,
-.open-and-close-pull table caption {
-     font-size: 1.5rem;
+.issues table caption,
+.pull table caption {
+     font-size: 1.2rem;
      font-weight: 600;
      text-align: center;
-     background-color: #0ae;
-     width: 100%;
-     position: sticky;
-     top: 0;
+     width: 50%;
      padding: 5px;
+     background-color: #0ae;
+     border-radius: 10px;
+}
+
+table tr {
+     width: 100%;
+     padding: 5px;
+     margin-bottom: 5px;
+     border-bottom: 5px solid transparent;
+}
+
+@media only screen and (max-width: 768px) {
+     .home {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          height: auto;
+          min-height: auto;
+     }
+
+     .left,
+     .right,
+     .sidebar {
+          width: 100%;
+          height: auto;
+          overflow-x: hidden;
+          overflow-y: hidden;
+     }
+
+
+     .sidebar {
+          order: -1;
+     }
+
+     .summary {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          height: auto;
+          padding: 10px;
+     }
+
+     footer {
+          width: 100%;
+          height: auto;
+          position: relative;
+     }
 }

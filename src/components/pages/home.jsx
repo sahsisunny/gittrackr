@@ -89,15 +89,15 @@ function Home() {
       </div>
       <div className="sidebar">
         <h1>Summary</h1>
-        <div className="issues">
-          <div className="open-issues">
+        <div className="summary">
+          <div className="issues">
             <table>
               <caption>Issues</caption>
               <tbody>
                 <tr>
                   <th>Assigned Issues</th>
                   <th>:</th>
-                  <td className="assigned-issues">{issues.length}</td>
+                  <td className="assigned-issues">{issues.filter(pr => pr.state === 'open').length}</td>
                 </tr>
                 <tr>
                   <th>Closed Issues</th>
@@ -118,13 +118,18 @@ function Home() {
                     }).length}
                   </td>
                 </tr>
+                {/* all issue */}
+                <tr>
+                  <th>All Issues</th>
+                  <th>:</th>
+                  <td className="all-issues">
+                    {issues.length}
+                  </td>
+                </tr>
               </tbody>
             </table>
           </div>
-          <div className="closed-issues"></div>
-        </div>
-        <div className="pull">
-          <div className="open-and-close-pull">
+          <div className="pull">
             <table>
               <caption>PR's</caption>
               <tbody>
@@ -156,14 +161,15 @@ function Home() {
                     }).length}
                   </td>
                 </tr>
+                <tr>
+                  <th> All PR's</th>
+                  <th>:</th>
+                  <td className="all-prs">
+                    {prs.length}
+                  </td>
+                </tr>
               </tbody>
             </table>
-          </div>
-          <div className="closed-issues"></div>
-        </div>
-        <div className="shortcut">
-          <h1>Shortcuts</h1>
-          <div className="icons">
           </div>
         </div>
       </div>
