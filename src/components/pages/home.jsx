@@ -10,7 +10,7 @@ const ORG = "Real-Dev-Squad";
 const GITHUB_BASE_URL = `https://api.github.com/search/issues?q=type`;
 const GITHUB_API_URL_ISSUES = `${GITHUB_BASE_URL}:issue+assignee:${USERNAME}+org:${ORG}`;
 const GITHUB_API_URL_PR = `${GITHUB_BASE_URL}:pr+author:${USERNAME}+org:${ORG}`;
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
+const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 
 function Home() {
   const [prs, setPrs] = React.useState([]);
@@ -33,7 +33,7 @@ function Home() {
   async function getAllIssues() {
     const options = {
       headers: {
-        Authorization: `token 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`,
+        Authorization: `token ${GITHUB_TOKEN}`,
       },
     };
     axios.get(GITHUB_API_URL_ISSUES, options)
