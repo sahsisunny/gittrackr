@@ -81,3 +81,12 @@ nav {
 .hide {
   display: none;
 }
+
+.input-field{
+  width: 100%;
+  height: 40px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 0 10px;
+  margin: 10px 0;
+}

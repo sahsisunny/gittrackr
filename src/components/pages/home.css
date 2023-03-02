@@ -41,7 +41,6 @@
      overflow-y: scroll;
      display: flex;
      flex-direction: column;
-     justify-content: center;
      align-items: center;
 }
 
@@ -68,7 +67,6 @@
      border-collapse: collapse;
      display: flex;
      flex-direction: column;
-     justify-content: center;
      align-items: center;
 }
 
@@ -86,6 +84,15 @@
 table tr td {
      border: 3px solid transparent;
      margin: 5px;
+}
+
+.filters h2{
+     font-size: 1.1rem;
+     text-align: center;
+     background-color: #0ae;
+     padding: 5px;
+     border-radius: 10px;
+     margin: 10px;
 }
 
 @media only screen and (max-width: 768px) {

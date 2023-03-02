@@ -5,9 +5,6 @@
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: #fff;
   color: #000;
   transition: all 0.3s ease-in-out;
