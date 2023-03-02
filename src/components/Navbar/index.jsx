@@ -3,11 +3,18 @@ import Button from '../Reusable/Button/index';
 import Image from '../Reusable/Image/index';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function Navbar() {
+
+const USERNAME = localStorage.getItem('username');
+const GIT_API = `https://api.github.com/users/${USERNAME}`;
+const Navbar = (props) => {
   const [userNames, setUserNames] = useState('');
   const [orgName, setOrgName] = useState('');
   const [display, setDisplay] = useState('block');
+  const [username, setUsername] = useState('Sign In');
+  const [profile, setProfile] = useState('');
+
   function getUserNames(e) {
     setUserNames(e.target.value);
   }
@@ -36,8 +43,21 @@ function Navbar() {
   useEffect(() => {
     if (localStorage.getItem('username') !== null && localStorage.getItem('orgname') !== null) {
       setDisplay('none');
+      // fetch github profile name and image and display it
+      async function fetchProfile() {
+        axios.get(GIT_API)
+          .then((response) => {
+            setUsername(response.data.name);
+            setProfile(response.data.avatar_url);
+          })
+          .catch((error) => {
+            console.log(error);
+          })
+      }
+      fetchProfile();
     }
-  }, []); 
+  }, [userNames, orgName]);
+
 
   return (
     <nav>
@@ -58,6 +78,13 @@ function Navbar() {
         <p className='user-fname'>Sunny</p>
       </div>
       <div className='sign-in-section'>
+        <img
+          src={profile}
+          alt={username}
+          className={`user-icon ${display === 'none' ? 'show' : 'hide'}`}
+        />
+        <p className={`sign-in-text ${display === 'none' ? 'show' : 'hide'}`}
+        >{username}</p>
         <input
           type='username'
           placeholder='Username'
@@ -73,9 +100,19 @@ function Navbar() {
           style={{ display: display }}
         />
         <Button
-          text='Submit'
+          text='Login'
           onClick={(e) => onSubmitHandler(e)}
-          style={{ display: display }}
+          className={display === 'none' ? 'hide' : 'show'}
+        />
+        <img
+          src='https://cdn-icons-png.flaticon.com/512/660/660350.png'
+          alt='logo'
+          className={`logo-icon ${display === 'none' ? 'show' : 'hide'}`}
+          onClick={() => {
+            localStorage.removeItem('username');
+            localStorage.removeItem('orgname');
+            window.location.reload();
+          }}
         />
       </div>
     </nav>

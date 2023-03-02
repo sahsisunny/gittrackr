@@ -16,7 +16,7 @@ const GITHUB_API_URL_PR = `${GITHUB_BASE_URL}:pr+author:${USERNAME}+org:${ORG}`;
 const GITHUB_TOKEN = process.env.REACT_APP_GITHUB_TOKEN;
 const HUNDRED_PER_PAGE = '+&per_page=200&page=1';
 
-function Home() {
+const Home = () => {
   const [prs, setPrs] = React.useState([]);
   const [prSummary, setPrSummary] = React.useState([]);
   const [prSummary2, setPrSummary2] = React.useState([]);

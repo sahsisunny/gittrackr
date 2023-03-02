@@ -64,6 +64,7 @@ nav {
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  margin-right: 0.8rem;
 }
 
 .user-fname {
@@ -89,4 +90,19 @@ nav {
   border-radius: 5px;
   padding: 0 10px;
   margin: 10px 0;
+}
+
+.sign-in-text{
+  font: 500 1rem/1.2 sans-serif;
+  letter-spacing: 1px;
+  margin-right: 0.8rem;
+}
+
+.logout-btn{
+  font: 500 1rem/1.2 sans-serif;
+  letter-spacing: 1px;
+  margin-right: 0.8rem;
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
 }
