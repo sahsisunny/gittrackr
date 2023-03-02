@@ -4,19 +4,15 @@
      align-items: center;
      width: 100%;
      flex-wrap: wrap;
-
 }
-
 
 input[type="checkbox"] {
      margin: 0 10px;
      font-size: 1.2rem;
      cursor: pointer;
      border-radius: 5px;
-
 }
 
-/* Hide the default checkbox */
 .container input {
      position: absolute;
      opacity: 0;
@@ -34,7 +30,6 @@ input[type="checkbox"] {
      display: flex;
 }
 
-/* Create a custom checkbox */
 .checkmark {
      position: relative;
      top: 0;
@@ -46,13 +41,11 @@ input[type="checkbox"] {
      transition: all 0.5s;
 }
 
-/* When the checkbox is checked, add a blue background */
 .container input:checked~.checkmark {
      background-color: #f0f0f0;
      border: 2px solid #343434;
 }
 
-/* Create the checkmark/indicator (hidden when not checked) */
 .checkmark:after {
      content: "";
      position: absolute;
@@ -60,12 +53,10 @@ input[type="checkbox"] {
      filter: drop-shadow(0 0 10px #888);
 }
 
-/* Show the checkmark when checked */
 .container input:checked~.checkmark:after {
      display: block;
 }
 
-/* Style the checkmark/indicator */
 .container .checkmark:after {
      left: 0.3em;
      top: 0.05em;
