@@ -86,8 +86,6 @@ const Navbar = () => {
         />
         <p className={`sign-in-text ${display === 'none' ? 'show' : 'hide'}`}
         >{username}</p>
-
-
         <div className="input-group">
           <input
             type="username"
@@ -108,16 +106,14 @@ const Navbar = () => {
             required="required"
             autoComplete="on"
             
-          />
-
+            />
+            </div>
           <Button
             className={`button--submit ${display === 'none' ? 'hide' : 'show'}`}
             type="submit"
             onClick={(e) => onSubmitHandler(e)}
             text="Login"
           />
-
-          </div>
         <img
           src='https://cdn-icons-png.flaticon.com/512/660/660350.png'
           alt='logout'

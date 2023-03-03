@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "GitTrackr",
+  "name": "GitTrackr",
   "icons": [
     {
       "src": "favicon.ico",
