@@ -1,0 +1,82 @@
+.checkbox {
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     width: 100%;
+     flex-wrap: wrap;
+}
+
+input[type="checkbox"] {
+     margin: 0 10px;
+     font-size: 1.2rem;
+     cursor: pointer;
+     border-radius: 5px;
+}
+
+.container input {
+     position: absolute;
+     opacity: 0;
+     cursor: pointer;
+     height: 0;
+     width: 0;
+}
+
+.container {
+     margin-left: 10px;
+     position: relative;
+     cursor: pointer;
+     font-size: 18px;
+     user-select: none;
+     display: flex;
+}
+
+.checkmark {
+     position: relative;
+     top: 0;
+     left: 0;
+     height: 1.2em;
+     width: 1.2em;
+     background-color: #ffffff;
+     border-radius: 5px;
+     transition: all 0.5s;
+}
+
+.container input:checked~.checkmark {
+     background-color: #f0f0f0;
+     border: 2px solid #343434;
+}
+
+.checkmark:after {
+     content: "";
+     position: absolute;
+     display: none;
+     filter: drop-shadow(0 0 10px #888);
+}
+
+.container input:checked~.checkmark:after {
+     display: block;
+}
+
+.container .checkmark:after {
+     left: 0.3em;
+     top: 0.05em;
+     width: 0.3em;
+     height: 0.65em;
+     border: solid #343434;
+     border-width: 0 0.2em 0.2em 0;
+     border-radius: 4px;
+     transform: rotate(45deg);
+     animation: bounceFadeIn 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+@keyframes bounceFadeIn {
+     from {
+          transform: translate(0, -10px) rotate(45deg);
+          opacity: 0;
+     }
+
+     to {
+          transform: translate(0, 0) rotate(45deg);
+          opacity: 1;
+     }
+}

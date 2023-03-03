@@ -1,0 +1,47 @@
+.btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  background: #fff;
+  color: #000;
+  transition: all 0.3s ease-in-out;
+  min-width: 100px;
+}
+
+.btn:hover {
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn--red {
+  background: red;
+  color: #fff;
+}
+
+.btn--red:hover {
+  background: #d63031;
+  color: #fff !important;
+}
+
+
+.btn--green {
+  background: green;
+  color: #fff;
+}
+
+.btn--green:hover {
+  background: #00b894;
+  color: #fff !important;
+}
+
+.btn--blue {
+  background: blue;
+  color: #fff;
+}
+
+.btn--blue:hover {
+  background: #0984e3;
+  color: #ffffff !important;
+}

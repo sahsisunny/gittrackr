@@ -1,0 +1,30 @@
+.table-list-card{
+     width: 100%;
+     border-collapse: collapse;     
+}
+
+.serial-number{
+     padding: 10px;
+     text-align: center;
+}
+
+.data-title{
+     padding: 10px;
+}
+.action-buttons{
+     height: 100%;
+}
+
+.action-buttons button{
+     margin: 0 5px;
+}
+
+.action-buttons button:hover{
+     color: #0ae;
+}
+
+tbody tr:hover{
+     background-color: rgb(2, 63, 87);
+     cursor: pointer;
+}
+
