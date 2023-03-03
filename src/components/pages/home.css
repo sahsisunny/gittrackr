@@ -1,0 +1,134 @@
+.home {
+     height: 85vh;
+     padding: 1rem;
+     display: flex;
+}
+
+::-webkit-scrollbar {
+     width: 5px;
+     border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+     background: #0ae;
+     border-radius: 10px;
+     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
+}
+
+::-webkit-scrollbar-track {
+     border-radius: 10px;
+     background: #F5F5F5;
+     box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
+}
+
+.left {
+     width: 40%;
+     padding: 10px;
+     margin-right: 1rem;
+}
+
+.right {
+     width: 40%;
+     padding: 10px;
+}
+
+.sidebar {
+     width: 20%;
+     padding: 10px;
+     margin-left: 1rem;
+     height: 85vh;
+     overflow-x: hidden;
+     overflow-y: scroll;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+.sidebar h1 {
+     font-size: 1.5rem;
+     font-weight: 600;
+     text-align: center;
+     background-color: #0ae;
+     width: 100%;
+     position: sticky;
+     top: 0;
+     padding: 5px;
+}
+
+.issues,
+.pull {
+     width: 100%;
+     padding: 10px;
+}
+
+.issues table,
+.pull table {
+     width: 100%;
+     border-collapse: collapse;
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+}
+
+.issues table caption,
+.pull table caption {
+     font-size: 1.2rem;
+     font-weight: 600;
+     text-align: center;
+     width: 50%;
+     padding: 5px;
+     background-color: #0ae;
+     border-radius: 10px;
+}
+
+table tr td {
+     border: 3px solid transparent;
+     margin: 5px;
+}
+
+.filters h2{
+     font-size: 1.1rem;
+     text-align: center;
+     background-color: #0ae;
+     padding: 5px;
+     border-radius: 10px;
+     margin: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+     .home {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          height: auto;
+          min-height: auto;
+     }
+
+     .left,
+     .right,
+     .sidebar {
+          width: 100%;
+          height: auto;
+          overflow-x: hidden;
+          overflow-y: hidden;
+     }
+
+
+     .sidebar {
+          order: -1;
+     }
+
+     .summary {
+          display: flex;
+          justify-content: space-between;
+          width: 100%;
+          height: auto;
+          padding: 10px;
+     }
+
+     footer {
+          width: 100%;
+          height: auto;
+          position: relative;
+     }
+}
