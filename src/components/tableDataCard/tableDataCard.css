@@ -20,11 +20,12 @@
 }
 
 .action-buttons button:hover{
-     color: #0ae;
+     color: white;
 }
 
 tbody tr:hover{
-     background-color: rgb(2, 63, 87);
+     background-color: rgb(139, 143, 146);
      cursor: pointer;
+     color: white;
 }
 
