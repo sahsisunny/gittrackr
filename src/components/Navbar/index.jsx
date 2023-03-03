@@ -1,14 +1,18 @@
 import './navbar.css';
-import Button from '../Reusable/Button/index';
 import Image from '../Reusable/Image/index';
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import Logo from '../../assets/GitTrackr.png';
+import { GITHUB_BASE_API } from '../../constants/urls';
+import Button from '../Reusable/Button/index';
+
 
 
 const USERNAME = localStorage.getItem('username');
-const GIT_API = `https://api.github.com/users/${USERNAME}`;
-const Navbar = (props) => {
+const GIT_API = `${GITHUB_BASE_API}users/${USERNAME}`;
+
+const Navbar = () => {
   const [userNames, setUserNames] = useState('');
   const [orgName, setOrgName] = useState('');
   const [display, setDisplay] = useState('block');
@@ -40,10 +44,15 @@ const Navbar = (props) => {
     setDisplay('none');
   }
 
+  function logout() {
+    localStorage.removeItem('username');
+    localStorage.removeItem('orgname');
+    window.location.reload();
+  }
+
   useEffect(() => {
     if (localStorage.getItem('username') !== null && localStorage.getItem('orgname') !== null) {
       setDisplay('none');
-      // fetch github profile name and image and display it
       async function fetchProfile() {
         axios.get(GIT_API)
           .then((response) => {
@@ -63,20 +72,12 @@ const Navbar = (props) => {
     <nav>
       <Link to={'/'} className='logo'>
         <Image
-          src='https://img.icons8.com/ios/50/000000/github.png'
+          src={Logo}
           alt='logo'
           className='logo-icon'
         />
-        <h1>RepoBoss</h1>
+        <h1>GitTrackr</h1>
       </Link>
-      <div className='profile hide'>
-        <img
-          src='https://avatars.githubusercontent.com/u/59611672?v=4'
-          alt='profile'
-          className='user-icon'
-        />
-        <p className='user-fname'>Sunny</p>
-      </div>
       <div className='sign-in-section'>
         <img
           src={profile}
@@ -85,34 +86,43 @@ const Navbar = (props) => {
         />
         <p className={`sign-in-text ${display === 'none' ? 'show' : 'hide'}`}
         >{username}</p>
-        <input
-          type='username'
-          placeholder='Username'
-          className="input-field"
-          onChange={(e) => getUserNames(e)}
-          style={{ display: display }}
-        />
-        <input
-          type='organization'
-          placeholder='Organization'
-          className='input-field'
-          onChange={(e) => getOrgName(e)}
-          style={{ display: display }}
-        />
-        <Button
-          text='Login'
-          onClick={(e) => onSubmitHandler(e)}
-          className={display === 'none' ? 'hide' : 'show'}
-        />
+
+
+        <div className="input-group">
+          <input
+            type="username"
+            className="input"
+            placeholder='Username'
+            onChange={(e) => getUserNames(e)}
+            style={{ display: display }}
+            autoFocus
+            required="required"
+            autoComplete="on"
+          />
+          <input
+            type="orgname"
+            className="input"
+            placeholder='Organization'
+            onChange={(e) => getOrgName(e)}
+            style={{ display: display }}
+            required="required"
+            autoComplete="on"
+            
+          />
+
+          <Button
+            className={`button--submit ${display === 'none' ? 'hide' : 'show'}`}
+            type="submit"
+            onClick={(e) => onSubmitHandler(e)}
+            text="Login"
+          />
+
+          </div>
         <img
           src='https://cdn-icons-png.flaticon.com/512/660/660350.png'
-          alt='logo'
-          className={`logo-icon ${display === 'none' ? 'show' : 'hide'}`}
-          onClick={() => {
-            localStorage.removeItem('username');
-            localStorage.removeItem('orgname');
-            window.location.reload();
-          }}
+          alt='logout'
+          className={`logo-icon logout ${display === 'none' ? 'show' : 'hide'}`}
+          onClick={() => {logout();}}
         />
       </div>
     </nav>

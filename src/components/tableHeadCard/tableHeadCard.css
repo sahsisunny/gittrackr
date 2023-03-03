@@ -1,3 +1,5 @@
+@import './../../styles/global.css';
+
 .section {
      width: 100%;
      overflow-x: hidden;
@@ -9,7 +11,9 @@
      font-size: 1.55rem;
      font-weight: 600;
      text-align: center;
-     background-color: #0ae;
+     @import './../../styles/global.css';
+     background-color: var(--primary-color);
+     color: var(--secondary-color);
      width: 100%;
      position: sticky;
      top: 0;
@@ -27,11 +31,11 @@
 .section-table-head {
      font-size: 1.25rem;
      border-radius: 5px;
-     background-color: rgb(2, 63, 87);
      padding: 10px;
      text-align: center;
+     background-color: #EEEEEE;
      position: sticky;
-     top:40px;
+     top: 40px;
 
 }
 

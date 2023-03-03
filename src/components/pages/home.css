@@ -1,7 +1,32 @@
-.home {
+@import './../../styles/global.css';
+.loader {
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
      height: 85vh;
+     width: 100%;
+     background-color: var(--primary-color);
+}
+
+.error{
+     display: flex;
+     justify-content: center;
+     flex-direction: column;
+     align-items: center;
+     color: var(--secondary-color);
+}
+
+.try{
+     border-radius: 10px;
+     min-height: 45px;
+     min-width: 100px;
+     margin-top: 10px;
+}
+.home {
      padding: 1rem;
      display: flex;
+     height: 85vh;
 }
 
 ::-webkit-scrollbar {
@@ -10,7 +35,7 @@
 }
 
 ::-webkit-scrollbar-thumb {
-     background: #0ae;
+     background: var(--primary-color);
      border-radius: 10px;
      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
 }
@@ -48,7 +73,8 @@
      font-size: 1.5rem;
      font-weight: 600;
      text-align: center;
-     background-color: #0ae;
+     background-color: var(--primary-color);
+     color: var(--secondary-color);
      width: 100%;
      position: sticky;
      top: 0;
@@ -77,7 +103,8 @@
      text-align: center;
      width: 50%;
      padding: 5px;
-     background-color: #0ae;
+     background-color: rgb(113, 116, 117);
+     color: white;
      border-radius: 10px;
 }
 
@@ -86,10 +113,12 @@ table tr td {
      margin: 5px;
 }
 
-.filters h2{
+.filters h2 {
      font-size: 1.1rem;
      text-align: center;
-     background-color: #0ae;
+     background-color: rgb(113, 116, 117);
+     width: 100%;
+     color: white;
      padding: 5px;
      border-radius: 10px;
      margin: 10px;
@@ -132,3 +161,8 @@ table tr td {
           position: relative;
      }
 }
+
+.hide{
+     display: none;
+}
+

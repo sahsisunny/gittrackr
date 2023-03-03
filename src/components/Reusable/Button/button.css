@@ -1,47 +1,31 @@
+@import './../..//../styles/global.css';
+
 .btn {
   padding: 10px 20px;
   border: none;
-  border-radius: 5px;
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
-  background: #fff;
-  color: #000;
-  transition: all 0.3s ease-in-out;
   min-width: 100px;
-}
-
-.btn:hover {
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-}
-
-.btn--red {
-  background: red;
-  color: #fff;
+  border-radius: 5px;
+  transition: all 0.3s;
+  border: 2px solid var(--primary-color);
 }
 
 .btn--red:hover {
   background: #d63031;
   color: #fff !important;
-}
-
-
-.btn--green {
-  background: green;
-  color: #fff;
+  border: 2px solid #d63031;
 }
 
 .btn--green:hover {
-  background: #00b894;
+  background: green;
   color: #fff !important;
-}
-
-.btn--blue {
-  background: blue;
-  color: #fff;
+  border: 2px solid green;
 }
 
 .btn--blue:hover {
   background: #0984e3;
   color: #ffffff !important;
+  border: 2px solid #0984e3;
 }

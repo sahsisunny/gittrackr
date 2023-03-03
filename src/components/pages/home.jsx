@@ -5,6 +5,7 @@ import IssueListCard from '../tableDataCard/index'
 import TableHeadCard from '../tableHeadCard';
 import Filters from '../Filters';
 import Checkbox from '../Filters/checkbox';
+import Loader from '../Reusable/Loader';
 
 
 const USERNAME = localStorage.getItem('username');
@@ -30,7 +31,11 @@ const Home = () => {
   const [closedPr, setClosedPr] = React.useState(false);
   const [mergedPr, setMergedPr] = React.useState(false);
   const [allPr, setAllPr] = React.useState(true);
+  const [cls, setCls] = React.useState('');
+  const [cls2, setCls2] = React.useState('');
+  const [cls3, setCls3] = React.useState('hide');
 
+  
   const handleOpenIssue = () => {
     setOpenIssue(!openIssue);
     setClosedIssue(false);
@@ -78,6 +83,13 @@ const Home = () => {
   }
 
   React.useEffect(() => {
+    if (!USERNAME || !ORG) {
+      setCls('hide');
+      setCls2('show');
+    } else {
+      setCls('');
+      setCls2('hide');
+    }
     async function getAllPrs() {
       const options = {
         headers: {
@@ -100,10 +112,22 @@ const Home = () => {
         .then((response) => {
           setPrs(response.data.items);
         })
+        .catch((error) => {
+          console.log(error);
+          setCls('hide');
+          setCls2('show');
+          setCls3('show');
+        })
       axios.get(GITHUB_API_URL_PR + HUNDRED_PER_PAGE, options)
         .then((response) => {
           setPrSummary(response.data.items);
           setPrSummary2(response.data);
+        })
+      .catch((error) => {
+          console.log(error);
+          setCls('hide');
+        setCls2('show');
+        setCls3('show');
         })
     }
 
@@ -122,10 +146,22 @@ const Home = () => {
         .then((response) => {
           setIssues(response.data.items);
         })
+      .catch((error) => {
+          console.log(error);
+          setCls('hide');
+        setCls2('show');
+        setCls3('show');
+        })
       axios.get(GITHUB_API_URL_ISSUES + HUNDRED_PER_PAGE, options)
         .then((response) => {
           setIssueSummary(response.data.items);
           setIssueSummary2(response.data);
+        })
+      .catch((error) => {
+          console.log(error);
+          setCls('hide');
+        setCls2('show');
+        setCls3('show');
         })
     }
     getAllPrs();
@@ -133,9 +169,9 @@ const Home = () => {
   }, [openIssue, closedIssue, openPr, closedPr, mergedPr, allPr, allIssue]);
 
   return (
-    <div className='home'>
+    <div className="home-section">
+    <div className={`home ${cls}`}>
       <div className="left">
-
         <TableHeadCard
           title="Issues"
         >
@@ -300,6 +336,22 @@ const Home = () => {
               onChange={() => handleAllPr()}
             />
           </Filters>
+        </div>
+      </div>
+      </div>
+      <div className={`loader ${cls2}`}>
+        <Loader />
+        <div className={`error ${cls3}`}>
+          <h1>Something went wrong</h1>
+          <button
+              className="button--submit try"
+            onClick={() => {
+              window.location.reload();
+            }}
+          >
+            Reload
+          </button>
+
         </div>
       </div>
     </div>
