@@ -10,7 +10,6 @@ import Loader from '../Reusable/Loader';
 
 const USERNAME = localStorage.getItem('username');
 const ORG = localStorage.getItem('orgname');
-console.log(USERNAME, ORG);
 const GITHUB_BASE_URL = `https://api.github.com/search/issues?q=type`;
 const GITHUB_API_URL_ISSUES = `${GITHUB_BASE_URL}:issue+assignee:${USERNAME}+org:${ORG}`;
 const GITHUB_API_URL_PR = `${GITHUB_BASE_URL}:pr+author:${USERNAME}+org:${ORG}`;
@@ -182,7 +181,6 @@ const Home = () => {
               status={item.state}
               onClick={() => {
                 window.open(item.html_url);
-                console.log(item.pull_request.merged)
               }
               }
             />)
@@ -191,7 +189,7 @@ const Home = () => {
       </div>
       <div className="right">
         <TableHeadCard
-          title="Pulll Requests"
+          title="Pull Requests"
         >
           {
             prs.map((item, i) => <IssueListCard key={i}
@@ -201,7 +199,6 @@ const Home = () => {
               merged={item.pull_request.merged_at !== null}
               onClick={() => {
                 window.open(item.html_url);
-                console.log(item.pull_request.merged)
               }
               }
             />)
