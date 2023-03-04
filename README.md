@@ -1,6 +1,10 @@
 # GitTrackr - Manage your issues and pull requests of your organization
 
 - This is a web application that allows you to manage your organization's GitHub issues and pull requests.
+
+
+https://user-images.githubusercontent.com/70854507/222915706-0bcc6e62-e475-403f-8d60-3e37c6e8e60e.mp4
+
   
 ## How to use
 
