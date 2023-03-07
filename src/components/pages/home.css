@@ -144,6 +144,7 @@ table tr td {
 
      .sidebar {
           order: -1;
+          margin-left: 0;
      }
 
      .summary {
