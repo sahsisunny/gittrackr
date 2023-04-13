@@ -1,30 +1,38 @@
-# GitTrackr - Manage your issues and pull requests of your organization
+This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-- This is a web application that allows you to manage your organization's GitHub issues and pull requests.
+## Getting Started
 
+First, run the development server:
 
-https://user-images.githubusercontent.com/70854507/222915706-0bcc6e62-e475-403f-8d60-3e37c6e8e60e.mp4
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+```
 
-  
-## How to use
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- Go to [GitTrackr](https://gittrackr.netlify.app/).
-- Enter your GitHub username and organization username and click on `Login`.
-- After logging in, you will able to see all the your issues and pull requests of organization.
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-## How to contribute
+[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
 
-- Fork this repository.
-- Clone the forked repository.
-- Go to the project directory.
-- Create the `.env` file in the root directory.
-- Add `REACT_APP_GITHUB_TOKEN` in the `.env` file and set it to your GitHub personal access token.
-- Open the terminal and run `npm install` to install all the dependencies.
-- Run `npm start` to start the development server.
-- Go to `http://localhost:3000/` to see the application running.
-- Make the changes and create a pull request.
-- Wait for the review and merge.
+The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## License
+This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-- There is no license for this project.
+## Learn More
+
+To learn more about Next.js, take a look at the following resources:
+
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
