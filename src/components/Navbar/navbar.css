@@ -1,0 +1,141 @@
+:root {
+  --primary-color: #2C3E50;
+  --secondary-color: white;
+}
+
+.navbar {
+  background-color: var(--primary-color);
+  color: white;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logo {
+  font: 600 1rem/1.2;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+}
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0 0.5rem;
+}
+
+.profile-img img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  font: 1rem 'Roboto', sans-serif;
+  margin-left: 1rem;
+}
+
+
+.dropdown {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .1);
+  padding: 0 1rem;
+  display: none;
+  z-index: 1;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  color: #191919;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+}
+
+.show {
+  display: block;
+}
+
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 15px;
+  background-color: #181717;
+  outline: 3px #181717 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.button .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.button svg path {
+  transition: 400ms;
+}
+
+.button:hover {
+  background-color: transparent;
+}
+
+.button:hover .text {
+  color: #181717;
+}
+
+.button:hover svg path {
+  fill: #181717;
+}
+
+
+.nav-links{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: 400ms;
+}
