@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Signika+Negative:wght@400;600&display=swap');
 
 :root {
-  --primary-color: #2C3E50;
+  --primary-color: #212332;
   --secondary-color: white;
 }
 
@@ -17,7 +17,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   height: 100vh;
-  background: #EEEEEE;
+  background: #212332;
   color: black;
 }
 

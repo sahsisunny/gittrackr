@@ -12,6 +12,14 @@ export const authOptions = {
     async session({ session, token, user }) {
       session.user.id = token.id;
       session.accessToken = token.accessToken;
+      // // get user login from github
+      // const githubUser = await fetch("https://api.github.com/user", {
+      //   headers: {
+      //     Authorization: `token ${token.accessToken}`,
+      //   },
+      // }).then((res) => res.json());
+      // session.user.login = githubUser.login;
+
       return session;
     },
     async jwt({ token, user, account }) {
@@ -22,8 +30,12 @@ export const authOptions = {
         token.accessToken = account.access_token;
       }
       return token;
-    },
+    },      
   },
+  pages: {
+    signIn: "/login",
+  },
+    
   secret: process.env.NEXTAUTH_SECRET,
 };
 
