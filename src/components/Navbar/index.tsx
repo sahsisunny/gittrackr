@@ -1,5 +1,4 @@
 import React from 'react';
-import './navbar.css';
 import Image from 'next/image';
 import Logo from '../../assets/GitTrackr.png';
 import { useSession, signOut } from 'next-auth/react';

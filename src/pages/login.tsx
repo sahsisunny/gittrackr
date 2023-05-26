@@ -2,7 +2,6 @@ import { getProviders, signIn } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import './../styles/signin.css';
 import Logo from './../assets/GitTrackr.png';
 import Image from 'next/image';
 

@@ -25,3 +25,314 @@ body {
 a {
   text-decoration: none;
 }
+
+/* Navbar */
+:root {
+  --primary-color: #212332;
+  --secondary-color: white;
+}
+
+.navbar {
+  background-color: var(--primary-color);
+  color: white;
+  height: 10vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px 10px;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.logo {
+  font: 600 1rem/1.2;
+  letter-spacing: 1px;
+  display: flex;
+  align-items: center;
+  padding: 5px 10px;
+  cursor: pointer;
+  color: white;
+}
+
+.logo-icon {
+  width: 30px;
+  height: 30px;
+  margin-right: 10px;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+  background-color: #2A2D3E;
+  padding: 0 1rem;
+  width: 160px;
+  height: 50px;
+  border-radius: 10px;
+}
+
+.profile-img img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile-name {
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  font: 1rem 'Roboto', sans-serif;
+  margin-left: 1rem;
+}
+
+.profile-arrow {
+  margin-left: 10px;
+}
+
+
+.dropdown {
+  position: absolute;
+  top: 65px;
+  right: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px white;
+  padding: 0 1rem;
+  display: none;
+  z-index: 1;
+  color: white;
+  width: 160px;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 0.5rem 0;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+}
+
+.dropdown-greeting-text {
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  padding: 0.5rem 0;
+  text-align: center;
+}
+
+.show {
+  display: block;
+}
+
+
+.button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px 18px;
+  gap: 15px;
+  background-color: #181717;
+  outline: 3px #181717 solid;
+  outline-offset: -3px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+  transition: 400ms;
+}
+
+.button .text {
+  color: white;
+  font-weight: 700;
+  font-size: 1em;
+  transition: 400ms;
+}
+
+.button svg path {
+  transition: 400ms;
+}
+
+.button:hover {
+  background-color: transparent;
+}
+
+.button:hover .text {
+  color: #181717;
+}
+
+.button:hover svg path {
+  fill: #181717;
+}
+
+
+.nav-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: 400ms;
+}
+
+.dropdown-item-btn {
+  text-decoration: none;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  transition: 400ms;
+  background-color: #2A2D3E;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 1rem;
+
+  &:hover {
+    background-color: #181717;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    min-width: 100vw;
+  }
+
+  .nav-links {
+    margin-top: 1rem;
+  }
+
+  .nav-link {
+    padding: 0.5rem 0;
+  }
+
+  .profile {
+    margin-top: 1rem;
+  }
+
+  .dropdown {
+    width: 90vw;
+  }
+
+  .dropdown-item-btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 1rem;
+  }
+}
+
+
+
+/* SIgn In */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+}
+
+.sign-container {
+  display: flex;
+  height: 80vh;
+  width: 80%;
+  border-radius: 10px;
+  /* From https://css.glass */
+  background: rgba(42, 45, 62, 0.4);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(42, 45, 62, 0.3);
+  color: #ffffff;
+}
+
+.left-side {
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px 0 0 10px;
+}
+
+.logo-img {
+  object-fit: cover;
+  border-radius: 10px 0 0 10px;
+  margin-bottom: 1rem;
+}
+
+.right-side {
+  min-width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0 10px 10px 0;
+}
+
+.sign-btn {
+  border-radius: 10px;
+  background-color: #2A2D3E;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  margin-top: 1rem;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+button svg {
+  margin-left: 10px;
+}
+
+.sign-btn:hover {
+  background-color: #3A3D4E;
+  border: 1px solid #3A3D4E;
+}
+
+@media screen and (max-width: 768px) {
+  .sign-container {
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+  }
+
+  .left-side {
+    min-width: 100%;
+    border-radius: 10px 10px 0 0;
+    height: 50%;
+  }
+
+  .right-side {
+    min-width: 100%;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .sign-btn {
+    margin-bottom: 0;
+    margin-top: 4rem;
+  }
+}
