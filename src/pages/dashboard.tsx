@@ -11,13 +11,6 @@ const Dashboard = () => {
       <>
         <Navbar />
         Welcome to the dashboard {session.user?.name} <br />
-        <strong>Token:</strong> {session.accessToken} <br />
-        <strong>Email:</strong> {session.user?.email} <br />
-        <strong>Image:</strong> {session.user?.image} <br />
-        <strong>Name:</strong> {session.user?.name} <br />
-        <strong>ID:</strong> {session.user?.id} <br />
-        <strong>ID:</strong> {session.user?.login} <br />
-
         <button onClick={() => signOut()}>Sign out</button>
       </>
     );
@@ -30,7 +23,7 @@ const Dashboard = () => {
   }
 };
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps(context : any) {
   const session = await getSession(context);
   if (!session) {
     return {
