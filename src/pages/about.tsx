@@ -1,5 +1,5 @@
-import React from 'react'
-import Navbar from '@/components/Navbar'
+import React from 'react';
+import Navbar from '@/components/Navbar';
 
 const about = () => {
   return (
@@ -7,7 +7,7 @@ const about = () => {
       <Navbar />
       <h1>About</h1>
     </div>
-  )
-}
+  );
+};
 
-export default about
+export default about;

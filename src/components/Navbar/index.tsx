@@ -1,13 +1,13 @@
-import React from 'react'
-import './navbar.css'
-import Image from 'next/image'
-import Logo from '../../assets/GitTrackr.png'
-import { useSession, signOut } from 'next-auth/react'
-import Link from 'next/link'
+import React from 'react';
+import './navbar.css';
+import Image from 'next/image';
+import Logo from '../../assets/GitTrackr.png';
+import { useSession, signOut } from 'next-auth/react';
+import Link from 'next/link';
 
 const Navbar = () => {
-  const { data: session } = useSession({ required: true })
-  const [showDropdown, setShowDropdown] = React.useState(false)
+  const { data: session } = useSession({ required: true });
+  const [showDropdown, setShowDropdown] = React.useState(false);
 
   return (
     <>
@@ -21,8 +21,8 @@ const Navbar = () => {
           <div
             className="profile"
             onClick={() => {
-              console.log('clicked')
-              setShowDropdown(!showDropdown)
+              console.log('clicked');
+              setShowDropdown(!showDropdown);
             }}
           >
             <div className="profile-img">
@@ -60,7 +60,7 @@ const Navbar = () => {
         )}
       </nav>
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

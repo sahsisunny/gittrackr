@@ -1,5 +1,5 @@
-import { SessionProvider } from 'next-auth/react'
-import '@/styles/globals.css'
+import { SessionProvider } from 'next-auth/react';
+import '@/styles/globals.css';
 
 interface AppProps {
   Component: any
@@ -11,7 +11,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     <SessionProvider session={pageProps.session}>
       <Component {...pageProps} />
     </SessionProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

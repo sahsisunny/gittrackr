@@ -1,25 +1,25 @@
-import { getProviders, signIn } from 'next-auth/react'
-import { GetServerSideProps, NextPage } from 'next'
-import { getSession } from 'next-auth/react'
-import { useRouter } from 'next/router'
-import { useEffect } from 'react'
-import './../styles/signin.css'
-import Logo from './../assets/GitTrackr.png'
-import Image from 'next/image'
+import { getProviders, signIn } from 'next-auth/react';
+import { GetServerSideProps, NextPage } from 'next';
+import { getSession } from 'next-auth/react';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
+import './../styles/signin.css';
+import Logo from './../assets/GitTrackr.png';
+import Image from 'next/image';
 
 interface SignInProps {
   providers: Record<string, unknown>
 }
 
 const SignInPage: NextPage<SignInProps> = ({ providers }) => {
-  const router = useRouter()
+  const router = useRouter();
 
   useEffect(() => {
-    const { query } = router
+    const { query } = router;
     if (query.error) {
-      router.replace('/login')
+      router.replace('/login');
     }
-  }, [router])
+  }, [router]);
   return (
     <div className="container">
       <div className="sign-container">
@@ -55,14 +55,14 @@ const SignInPage: NextPage<SignInProps> = ({ providers }) => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const providersResult = await getProviders()
+  const providersResult = await getProviders();
   return {
     props: { providers: providersResult },
-  }
-}
+  };
+};
 
-export default SignInPage
+export default SignInPage;
