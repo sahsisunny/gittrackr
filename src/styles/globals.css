@@ -221,16 +221,22 @@ a {
 
   .profile {
     margin-top: 1rem;
+    width: 12rem;
   }
 
   .dropdown {
     width: 90vw;
+    top: 6+rem
   }
 
   .dropdown-item-btn {
     width: 100%;
     text-align: center;
     margin-top: 1rem;
+  }
+
+  .dropdown-item {
+    text-align: center;
   }
 }
 
