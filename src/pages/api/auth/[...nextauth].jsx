@@ -9,7 +9,7 @@ export const authOptions = {
     }),
   ],
   callbacks: {
-    async session({ session, token, user }) {
+    async session({ session, token }) {
       session.user.id = token.id;
       session.accessToken = token.accessToken;
       // // get user login from github

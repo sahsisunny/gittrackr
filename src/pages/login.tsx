@@ -1,17 +1,12 @@
 import { getProviders, signIn } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
-import { getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import './../styles/signin.css';
 import Logo from './../assets/GitTrackr.png';
 import Image from 'next/image';
 
-interface SignInProps {
-  providers: Record<string, unknown>
-}
-
-const SignInPage: NextPage<SignInProps> = ({ providers }) => {
+const SignInPage: NextPage = () => {
   const router = useRouter();
 
   useEffect(() => {
@@ -58,7 +53,7 @@ const SignInPage: NextPage<SignInProps> = ({ providers }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const providersResult = await getProviders();
   return {
     props: { providers: providersResult },
