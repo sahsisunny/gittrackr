@@ -1,5 +1,5 @@
-import React from 'react';
-import { useSession, signOut, getSession } from 'next-auth/react';
+import React from 'react'; 
+import { useSession, signOut, getSession} from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 
 const Dashboard = () => {
