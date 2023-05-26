@@ -1,5 +1,5 @@
-import NextAuth from "next-auth";
-import GithubProvider from "next-auth/providers/github";
+import NextAuth from 'next-auth';
+import GithubProvider from 'next-auth/providers/github';
 
 export const authOptions = {
   providers: [
@@ -33,7 +33,7 @@ export const authOptions = {
     },      
   },
   pages: {
-    signIn: "/login",
+    signIn: '/login',
   },
     
   secret: process.env.NEXTAUTH_SECRET,
