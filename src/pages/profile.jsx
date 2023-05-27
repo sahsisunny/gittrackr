@@ -34,7 +34,7 @@ const ProfilePage = () => {
     const formattedDate = date.toLocaleDateString(undefined, options);
     const formattedTime = date.toLocaleTimeString();
 
-    return `${formattedDate} ${formattedTime}`;
+    return `${formattedDate}`;
   }
 
   useEffect(() => {
@@ -62,57 +62,50 @@ const ProfilePage = () => {
       <Navbar />
       <div className="main-container">
         <div className="profile-section">
-          <div className="profile-photo">
-            <Image
-              src={data?.avatar_url || ProfileImage}
-              alt="User Avatar"
-              className="avatar-photo"
-              width={200}
-              height={200}
-            />
+          <h5 className="section-title">
+            Profile Information
+          </h5>
+          <Image
+            src={data?.avatar_url || ProfileImage}
+            alt="User Avatar"
+            className="avatar-photo"
+            width={200}
+            height={200}
+          />
+          <div className="profile-name-container">
+            {
+              data?.name ? (
+                <h5 className="user-full-name">
+                  {data?.name || 'No name'}
+                </h5>
+              ) : (
+                <h5 className="user-login">
+                  {data?.login || 'No username'}
+                </h5>
+              )
+            }
           </div>
-          {
-            data?.name ? (
-              <h5 className="text-center h5 mb-0">
-                {data?.name || 'No name'}
-              </h5>
-            ) : (
-              <h5 className="text-center h5 mb-0">
-                {data?.login || 'No username'}
-              </h5>
-            )
-          }
-          <p className="text-center text-muted font-14">
+          <p className="user-login">
             {data?.login || 'No username'}
           </p>
-          <div className="follow">
-            <table>
-              <tbody>
-                <tr>
-                  <td>
-                    <span>Followers</span>
-                    <hr />
-                    <h5>{data?.followers}</h5>
-                  </td>
-                  <td>
-                    <span>Following</span>
-                    <hr />
-                    <h5>{data?.following}</h5>
-                  </td>
-                  <td>
-                    <span>Public</span>
-                    <hr />
-                    <h5>{data?.public_repos}</h5>
-                  </td>
-                  <td>
-                    <span>Private</span>
-                    <hr />
-                    <h5>{data?.total_private_repos}</h5>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+          <table className="profile-table">
+            <tbody>
+              <tr>
+                <td>
+                  <span>Followers</span>
+                  <hr />
+                  <h5>{data?.followers}</h5>
+                </td>
+                <td>
+                  <span>Following</span>
+                  <hr />
+                  <h5>{data?.following}</h5>
+
+                </td>
+              </tr>
+            </tbody>
+          </table>
+
           {/* Orgs */}
           <div>
             <h5 className="profile-title">Organizations</h5>
@@ -143,7 +136,7 @@ const ProfilePage = () => {
           </div>
         </div>
         <div className="repos-section">
-          <h5 className="profile-title">Repositories</h5>
+          <h5 className="section-title">Repositories</h5>
           <div
             className="repo-list"
           >
@@ -155,32 +148,32 @@ const ProfilePage = () => {
                     window.open(`${repo.html_url}`, '_blank');
                   }}
                 ><div className="repo-details">
-                    
-                  <div className="repo-item-left">
-                    <span
-                      className="repo-item-name"
-                    >{repo.name}</span>
-                </div>
-                  <div className="repo-item-right">
-                    <span
-                      className="repo-item-language"
-                    >{repo.language}</span>
-                    <span
-                      className="repo-item-privacy"
-                    >{repo.private ? 'Private' : 'Public'}</span>
-                    <span
-                      className="repo-item-updated"
-                    >{formatDate(repo.updated_at)}</span>
+
+                    <div className="repo-item-left">
+                      <span
+                        className="repo-item-name"
+                      >{repo.name}</span>
+                    </div>
+                    <div className="repo-item-right">
+                      <span
+                        className="repo-item-language"
+                      >{repo.language}</span>
+                      <span
+                        className="repo-item-privacy"
+                      >{repo.private ? 'Private' : 'Public'}</span>
+                      <span
+                        className="repo-item-updated"
+                      >{formatDate(repo.updated_at)}</span>
                     </div>
                   </div>
-                    <button
-                      className="repo-view-btn"
-                      onClick={() => {
-                        window.open(`${repo.html_url}`, '_blank');
-                      }}
-                    >
-                      Open
-                    </button>
+                  <button
+                    className="repo-view-btn"
+                    onClick={() => {
+                      window.open(`${repo.html_url}`, '_blank');
+                    }}
+                  >
+                    Open
+                  </button>
                 </div>
               </div>
             ))}
