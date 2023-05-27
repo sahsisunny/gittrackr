@@ -9,7 +9,7 @@ import Footer from '@/components/Footer';
 
 
 const ProfilePage = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession({ required: true });
   const [data, setData] = useState(null);
   const [orgsData, setOrgsData] = useState([]);
   const [reposData, setReposData] = useState([]);
@@ -108,7 +108,7 @@ const ProfilePage = () => {
 
           {/* Orgs */}
           <div>
-            <h5 className="profile-title">Organizations</h5>
+            <h5 className="section-title">Organizations</h5>
             <div className="profile-orgs-container">
               {orgsData?.map((org) => (
                 <div key={org.id}>

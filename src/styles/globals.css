@@ -22,9 +22,21 @@ body {
   height: 100vh;
 }
 
+::-webkit-scrollbar {
+  width: 5px;
+  border-radius: 10px;
+}
 
-a {
-  text-decoration: none;
+::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 10px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
+}
+
+::-webkit-scrollbar-track {
+  border-radius: 10px;
+  background: #F5F5F5;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
 }
 
 /* Navbar */
@@ -136,46 +148,6 @@ a {
 .show {
   display: block;
 }
-
-
-.button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 8px 18px;
-  gap: 15px;
-  background-color: #181717;
-  outline: 3px #181717 solid;
-  outline-offset: -3px;
-  border-radius: 5px;
-  border: none;
-  cursor: pointer;
-  transition: 400ms;
-}
-
-.button .text {
-  color: white;
-  font-weight: 700;
-  font-size: 1em;
-  transition: 400ms;
-}
-
-.button svg path {
-  transition: 400ms;
-}
-
-.button:hover {
-  background-color: transparent;
-}
-
-.button:hover .text {
-  color: #181717;
-}
-
-.button:hover svg path {
-  fill: #181717;
-}
-
 
 .nav-links {
   display: flex;
@@ -398,7 +370,6 @@ button svg {
     font-size: 1rem;
   }
 
-  /* button to be bottom */
   .back-to-home-btn {
     margin-top: 4rem;
   }
@@ -418,7 +389,7 @@ button svg {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .profile-section {
@@ -489,7 +460,7 @@ button svg {
   overflow-x: hidden;
   overflow-y: scroll;
   min-height: 70vh;
-  max-height: 70vh;
+    max-height: 70vh;
 }
 
 .repo-item {
@@ -556,144 +527,6 @@ button svg {
 }
 
 
-@media screen and (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    height: (100vh - 10vh);
-  }
-
-  .profile-section {
-    width: 100%;
-    margin-right: 0;
-    margin-bottom: 20px;
-  }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  .repos-section {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .repo-item {
-    padding: 0.5rem;
-    max-height: 50vh;
-  }
-
-
-  .repo-item-right {
-    margin-top: 0.5rem;
-  }
-
-  .repo-item-name {
-    font-size: 1rem;
-  }
-
-  .repo-item-language {
-    font-size: 0.8rem;
-  }
-
-  .repo-item-privacy {
-    font-size: 0.8rem;
-  }
-
-  .repo-item-updated {
-    font-size: 0.8rem;
-  }
-
-  .repo-view-btn {
-    font-size: 0.8rem;
-    padding: 0.4rem 1rem;
-    /* float bottom cente */
-
-
-  }
-}
-
-
-
-
-
-
-
-
-
-.text-center {
-  text-align: center;
-}
-
-.h5 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0;
-}
-
-.text-muted {
-  color: #888888;
-}
-
-.font-14 {
-  font-size: 14px;
-}
-
-.profile-info ul {
-  list-style: none;
-  padding-left: 0;
-}
-
-.profile-info span {
-  font-weight: bold;
-}
-
-.profile-social .btn {
-  color: #ffffff;
-  border: none;
-  padding: 6px 12px;
-  border-radius: 4px;
-  cursor: pointer;
-}
-
-.profile-skills .progress {
-  background-color: #ebedf2;
-  border-radius: 4px;
-  overflow: hidden;
-}
-
-.progress-bar {
-  background-color: #4e73df;
-  transition: width 0.3s ease-in-out;
-}
-
-.mb-20 {
-  margin-bottom: 20px;
-}
-
-.text-blue {
-  color: #4e73df;
-}
-
-.clearfix::after {
-  content: '';
-  display: table;
-  clear: both;
-}
-
-/* Add more custom styling as needed */
 
 
 .profile-orgs-container {
@@ -736,58 +569,7 @@ button svg {
   font-weight: bold;
   margin: 0 0 .5rem;
   color: #2A2D3E;
-  /* underline */
   text-decoration: underline;
-}
-
-
-
-/* accordian */
-
-.accordion {
-  cursor: pointer;
-  padding: 18px;
-  width: 100%;
-  text-align: left;
-  border: none;
-  outline: none;
-  transition: 0.4s;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 0 .5rem;
-  border-radius: 10px;
-  background-color: #3A3D4E;
-  color: white;
-}
-
-/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
-.active,
-.accordion:hover {
-  background-color: #ccc;
-}
-
-/* Style the accordion panel. Note: hidden by default */
-.panel {
-  padding: 0 18px;
-  display: none;
-  overflow: hidden;
-  background-color: #3A3D4E;
-  color: white;
-  border-radius: 10px;
-}
-
-.repos {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 1rem;
-  padding: 1rem;
-  border-radius: 10px;
-  background-color: #f8f9ff;
-  color: black;
-  cursor: pointer;
-
 }
 
 .footer {
@@ -809,19 +591,51 @@ button svg {
 
 
 
-::-webkit-scrollbar {
-  width: 5px;
-  border-radius: 10px;
-}
+@media screen and (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    height: (100vh - 10vh);
+  }
 
-::-webkit-scrollbar-thumb {
-  background: var(--primary-color);
-  border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
-}
+  .profile-section {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
 
-::-webkit-scrollbar-track {
-  border-radius: 10px;
-  background: #F5F5F5;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
+  .repos-section {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .repo-item {
+    padding: 0.5rem;
+    max-height: 50vh;
+  }
+
+
+  .repo-item-right {
+    margin-top: 0.5rem;
+  }
+
+  .repo-item-name {
+    font-size: 1rem;
+  }
+
+  .repo-item-language {
+    font-size: 0.8rem;
+  }
+
+  .repo-item-privacy {
+    font-size: 0.8rem;
+  }
+
+  .repo-item-updated {
+    font-size: 0.8rem;
+  }
+
+  .repo-view-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 1rem;
+  }
 }
