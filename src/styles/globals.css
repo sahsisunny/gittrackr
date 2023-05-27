@@ -401,6 +401,7 @@ button svg {
   width: 50%;
   margin-right: 20px;
   max-height: 80vh;
+  min-height: 80vh;
   padding: 1rem;
   border-radius: 10px;
 }
@@ -601,6 +602,7 @@ button svg {
     width: 100%;
     margin-right: 0;
     margin-bottom: 20px;
+    min-height: 50vh;
   }
 
   .profile-orgs-container {
