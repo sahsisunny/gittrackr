@@ -589,11 +589,12 @@ button svg {
 }
 
 
-
+/*  Media Queries  for Profile Section  */
 @media screen and (max-width: 768px) {
   .main-container {
     flex-direction: column;
     height: (100vh - 10vh);
+    padding: .5rem;
   }
 
   .profile-section {
@@ -605,7 +606,6 @@ button svg {
   .profile-orgs-container {
     flex-wrap: wrap;
     margin: 0;
-
   }
 
   .repos-section {
@@ -617,7 +617,6 @@ button svg {
     padding: 0.5rem;
     max-height: 50vh;
   }
-
 
   .repo-item-right {
     margin-top: 0.5rem;
