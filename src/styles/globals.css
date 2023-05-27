@@ -444,12 +444,29 @@ button svg {
   width: 100%;
 }
 
+.profile-table-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
 .profile-table tr td {
   padding: 0.5rem 1rem;
   border: 2px solid white;
   border-radius: 10px;
   background-color: #3A3D4E;
   color: white;
+}
+
+/* show alternative background color for table rows */
+.profile-table tr:nth-child(even) td {
+  background-color: #2A2D3E;
+}
+
+.profile-table-data {
+  min-width: 25%;
+  flex-grow: 1;
 }
 
 .profile-orgs-container {
@@ -603,6 +620,10 @@ button svg {
     margin-right: 0;
     margin-bottom: 20px;
     min-height: 50vh;
+  }
+
+  .profile-table-data {
+    min-width: 50%;
   }
 
   .profile-orgs-container {

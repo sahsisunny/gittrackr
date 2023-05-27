@@ -31,7 +31,8 @@
     "src/pages/api/auth/[...nextauth].jsx",
     "src/pages/1index.tsx",
     "src/pages/index.tsx",
-    "src/pages/profile.jsx"
+    "src/pages/profile.jsx",
+    "src/utils/FetchData.jsx"
   ],
   "exclude": ["node_modules"]
 }

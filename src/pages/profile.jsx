@@ -5,7 +5,8 @@ import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import ProfileImage from '../assets/dummyProfileImage.png';
 import Footer from '@/components/Footer';
-
+import FormatDate from '@/utils/FormatDate';
+import fetchData  from '@/utils/FetchData';
 
 
 const ProfilePage = () => {
@@ -14,37 +15,23 @@ const ProfilePage = () => {
   const [orgsData, setOrgsData] = useState([]);
   const [reposData, setReposData] = useState([]);
 
-  const fetchData = async (url, token, setDataCallback) => {
-    try {
-      const response = await fetch(url, {
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
-      const data = await response.json();
-      setDataCallback(data);
-    } catch (error) {
-      console.error('Error fetching data:', error);
-    }
-  };
 
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const options = { year: 'numeric', month: 'long', day: 'numeric' };
-    const formattedDate = date.toLocaleDateString(undefined, options);
-    const formattedTime = date.toLocaleTimeString();
-
-    return `${formattedDate}`;
-  }
 
   useEffect(() => {
     if (session) {
       const userUrl = 'https://api.github.com/user';
-      const orgsUrl = data?.organizations_url;
-      const reposUrl = data?.repos_url;
       const token = session?.accessToken;
 
       fetchData(userUrl, token, setData);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (session && data) {
+      const orgsUrl = data.organizations_url;
+      const reposUrl = data.repos_url;
+      const token = session.accessToken;
+
       if (orgsUrl) {
         fetchData(orgsUrl, token, setOrgsData);
       }
@@ -53,6 +40,7 @@ const ProfilePage = () => {
       }
     }
   }, [session, data]);
+
 
   return (
     <>
@@ -89,19 +77,29 @@ const ProfilePage = () => {
             {data?.login || 'No username'}
           </p>
           <table className="profile-table">
-            <tbody>
-              <tr>
-                <td>
+            <tbody className="profile-table-body">
+              <tr className="profile-table-row">
+                <td className="profile-table-data">
                   <span>Followers</span>
                   <hr />
                   <h5>{data?.followers}</h5>
                 </td>
-                <td>
+                <td className="profile-table-data">
                   <span>Following</span>
                   <hr />
                   <h5>{data?.following}</h5>
-
                 </td>
+                <td className="profile-table-data">
+                  <span>Public Repos</span>
+                  <hr />
+                  <h5>{data?.public_repos}</h5>
+                </td>
+                <td className="profile-table-data">
+                  <span>Private Repos</span>
+                  <hr />
+                  <h5>{data?.total_private_repos}</h5>
+                </td>
+
               </tr>
             </tbody>
           </table>
@@ -155,15 +153,21 @@ const ProfilePage = () => {
                       >{repo.name}</span>
                     </div>
                     <div className="repo-item-right">
-                      <span
-                        className="repo-item-language"
-                      >{repo.language}</span>
+                      {
+                        repo.language ? (
+                          <span
+                            className="repo-item-language"
+                          >{repo.language}</span>
+                        ) : (
+                           <></>
+                          )
+                      }
                       <span
                         className="repo-item-privacy"
                       >{repo.private ? 'Private' : 'Public'}</span>
                       <span
                         className="repo-item-updated"
-                      >{formatDate(repo.updated_at)}</span>
+                      >{FormatDate(repo.updated_at)}</span>
                     </div>
                   </div>
                   <button
