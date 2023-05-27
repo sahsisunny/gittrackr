@@ -1,79 +1,76 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
-import { useSession, signOut } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
-import { useState } from 'react';
-import Logo from '../assets/GitTrackr.png';
+import ProfileImage from '../assets/dummyProfileImage.png';
+
+type Data = {
+  avatar_url: string;
+  name: string;
+  login: string;
+  followers: number;
+  following: number;
+  public_repos: number;
+  total_private_repos: number;
+  total_repos: number;
+  organizations_url: string;
+  repos_url: string;
+};
+
+type Org = {
+  id: number;
+  login: string;
+  avatar_url: string;
+};
+
+type Repo = {
+  id: number;
+  name: string;
+  html_url: string;
+};
 
 const ProfilePage = () => {
-  const { data: session, status } = useSession();
-  const [data, setData] = useState();
-  const [orgsData, setOrgsData] = useState();
-  const [reposData, setReposData] = useState();
+  const { data: session } = useSession();
+  const [data, setData] = useState<Data | null>(null);
+  const [orgsData, setOrgsData] = useState<Org[]>([]);
+  const [reposData, setReposData] = useState<Repo[]>([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  async function fetchUserData(token: string): Promise<void> {
+  const fetchData = async (
+    url: string,
+    token: string,
+    setDataCallback: React.Dispatch<React.SetStateAction<any>>
+  ): Promise<void> => {
     try {
-      const response = await fetch('https://api.github.com/user', {
+      const response = await fetch(url, {
         headers: {
           Authorization: `token ${token}`,
         },
       });
-      const userData = await response.json();
-      setData(userData);
-      console.log(data);
+      const data = await response.json();
+      setDataCallback(data);
     } catch (error) {
-      console.error('Error fetching user data:', error);
+      console.error('Error fetching data:', error);
     }
-  }
-  // function to fetch orgs list
-  async function fetchOrgsData(orgUrl: string, token: string): Promise<void> {
-    try {
-      const response = await fetch(orgUrl, {
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
-      const orgsData = await response.json();
-      setOrgsData(orgsData);
-      console.log(orgsData);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  }
-  // function to fetch repos list
-  async function fetchReposData(repoUrl: string, token: string): Promise<void> {
-    try {
-      const response = await fetch(repoUrl, {
-        headers: {
-          Authorization: `token ${token}`,
-        },
-      });
-      const reposData = await response.json();
-      setReposData(reposData);
-      console.log(reposData);
-    } catch (error) {
-      console.error('Error fetching user data:', error);
-    }
-  }
+  };
 
   useEffect(() => {
     if (session) {
-      fetchUserData(session.accessToken);
-    }
-  }, [session]);
+      const userUrl = 'https://api.github.com/user';
+      const orgsUrl = data?.organizations_url;
+      const reposUrl = data?.repos_url;
+      const token = session.accessToken;
 
-  useEffect(() => {
-    if (session) {
-      fetchOrgsData(data?.organizations_url, session.accessToken);
-      fetchReposData(data?.repos_url, session.accessToken);
+      fetchData(userUrl, token, setData);
+      if (orgsUrl) {
+        fetchData(orgsUrl, token, setOrgsData);
+      }
+      if (reposUrl) {
+        fetchData(reposUrl, token, setReposData);
+      }
     }
   }, [session, data]);
-
-  if (!session) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <>
@@ -89,7 +86,7 @@ const ProfilePage = () => {
                 <div className="pd-20 card-box height-100-p">
                   <div className="profile-photo">
                     <Image
-                      src={data?.avatar_url || Logo}
+                      src={data?.avatar_url || ProfileImage}
                       alt="User Avatar"
                       className="avatar-photo"
                       width={200}
@@ -117,18 +114,20 @@ const ProfilePage = () => {
                             <h5>{data?.following}</h5>
                           </td>
                           <td>
-                            <span>Repositories</span>
+                            <span>Public</span>
                             <hr />
-                            <h5>
-                              {data?.public_repos + data?.total_private_repos}
-                            </h5>
+                            <h5>{data?.public_repos}</h5>
+                          </td>
+                          <td>
+                            <span>Private</span>
+                            <hr />
+                            <h5>{data?.total_private_repos}</h5>
                           </td>
                         </tr>
                       </tbody>
                     </table>
                   </div>
                   <div>
-                    {/* join org list*/}
                     <h5 className="profile-title">Organizations</h5>
                     <div className="profile-orgs-container">
                       {orgsData?.map((org: any) => (
@@ -155,7 +154,6 @@ const ProfilePage = () => {
                       ))}
                     </div>
                   </div>
-                  {/* Repo list in accordian */}
                   <div>
                     <h5 className="profile-title">Repositories</h5>
                     <button
@@ -182,29 +180,6 @@ const ProfilePage = () => {
                           </div>
                         </div>
                       ))}
-                    </div>
-                  </div>
-
-                  <div className="profile-social">
-                    <h5 className="mb-20 h5 text-blue">Social Links</h5>
-                    <ul className="clearfix">
-                      <li>
-                        <a
-                          href="#"
-                          className="btn"
-                          data-bgcolor="#3b5998"
-                          data-color="#ffffff"
-                        >
-                          <i className="fa fa-facebook"></i>
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                  <div className="profile-skills">
-                    <h5 className="mb-20 h5 text-blue">Key Skills</h5>
-                    <h6 className="mb-5 font-14">Bootstrap</h6>
-                    <div className="progress mb-20" style={{ height: '6px' }}>
-                      {/* progress bar */}
                     </div>
                   </div>
                 </div>
