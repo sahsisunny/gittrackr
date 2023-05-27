@@ -114,6 +114,17 @@ a {
   font-size: 1rem;
   font-weight: 600;
   font: 1rem 'Roboto', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+.dropdown-divider {
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  margin: 0.5rem 0;
 }
 
 .dropdown-greeting-text {
@@ -226,7 +237,7 @@ a {
 
   .dropdown {
     width: 90vw;
-    top: 6+rem
+    top: 6rem
   }
 
   .dropdown-item-btn {
@@ -249,7 +260,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 100vh;
+  height: (100vh - 10vh);
   width: 100vw;
 }
 
@@ -258,13 +269,7 @@ a {
   height: 80vh;
   width: 80%;
   border-radius: 10px;
-  /* From https://css.glass */
-  background: rgba(42, 45, 62, 0.4);
-  border-radius: 16px;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
-  border: 1px solid rgba(42, 45, 62, 0.3);
+  border: 1px solid rgba(140, 142, 153, 0.3);
   color: #ffffff;
 }
 
@@ -322,23 +327,339 @@ button svg {
 @media screen and (max-width: 768px) {
   .sign-container {
     flex-direction: column;
-    height: 100%;
+    height: (100vh - 10vh);
     width: 100%;
+    border: none;
   }
 
   .left-side {
     min-width: 100%;
-    border-radius: 10px 10px 0 0;
     height: 50%;
   }
 
   .right-side {
     min-width: 100%;
-    border-radius: 0 0 10px 10px;
+    height: 50%;
   }
 
   .sign-btn {
     margin-bottom: 0;
     margin-top: 4rem;
   }
+}
+
+
+/* 404 Page */
+.page-not-found {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 80vh;
+  color: #eeeded;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.description {
+  font-size: 1.2rem;
+}
+
+.back-to-home-btn {
+  border-radius: 10px;
+  background-color: #2A2D3E;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  margin-top: 1rem;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .page-not-found {
+    height: (100vh - 10vh);
+  }
+
+  .title {
+    font-size: 1.2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  /* button to be bottom */
+  .back-to-home-btn {
+    margin-top: 4rem;
+  }
+}
+
+
+
+/* TODO: */
+.main-container {
+  padding: 20px;
+  width: 500px;
+}
+
+.pd-ltr-20 {
+  padding: 20px;
+}
+
+.xs-pd-20-10 {
+  padding: 20px 10px;
+}
+
+.min-height-200px {
+  min-height: 200px;
+}
+
+.row {
+  margin-left: -15px;
+  margin-right: -15px;
+}
+
+.col-xl-4,
+.col-lg-4,
+.col-md-4,
+.col-sm-12 {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+
+.mb-30 {
+  margin-bottom: 30px;
+}
+
+.pd-20 {
+  padding: 20px;
+}
+
+.card-box {
+  background-color: #ffffff;
+  border: 1px solid #ebedf2;
+  border-radius: 4px;
+}
+
+.height-100-p {
+  height: 100%;
+}
+
+.profile-photo {
+  position: relative;
+}
+
+.profile-photo a.edit-avatar {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background-color: #ffffff;
+  border-radius: 50%;
+  padding: 6px;
+  color: #333333;
+  text-decoration: none;
+}
+
+.avatar-photo {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.h5 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0;
+}
+
+.text-muted {
+  color: #888888;
+}
+
+.font-14 {
+  font-size: 14px;
+}
+
+.profile-info ul {
+  list-style: none;
+  padding-left: 0;
+}
+
+.profile-info span {
+  font-weight: bold;
+}
+
+.profile-social .btn {
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.profile-skills .progress {
+  background-color: #ebedf2;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar {
+  background-color: #4e73df;
+  transition: width 0.3s ease-in-out;
+}
+
+.mb-20 {
+  margin-bottom: 20px;
+}
+
+.text-blue {
+  color: #4e73df;
+}
+
+.clearfix::after {
+  content: '';
+  display: table;
+  clear: both;
+}
+
+/* Add more custom styling as needed */
+.follow {
+  font-size: 1.2rem;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  border: 1px solid white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+
+.follow table {
+  margin: 0;
+  border: 2px solid #2A2D3E;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.follow table tr td {
+  padding: 0.5rem 1rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  background-color: #3A3D4E;
+  color: white;
+}
+
+.profile-orgs-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  border-radius: 10px;
+  padding: .2rem;
+  margin: 1rem;
+}
+
+.profile-orgs {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  margin: 0 .5rem;
+  border-radius: 10px;
+  padding: .5rem;
+  cursor: pointer;
+  background-color: #3A3D4E;
+  color: white;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.org-photo {
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto;
+}
+
+.profile-title{
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin:  0  0 .5rem;
+  color: #2A2D3E;
+  /* underline */
+  text-decoration: underline;
+}
+
+
+
+/* accordian */
+
+.accordion {
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  border: none;
+  outline: none;
+  transition: 0.4s;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin:  0  0 .5rem;
+  border-radius: 10px;
+  background-color: #3A3D4E;
+  color: white;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active,
+.accordion:hover {
+  background-color: #ccc;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.panel {
+  padding: 0 18px;
+  display: none;
+  overflow: hidden;
+  background-color: #3A3D4E;
+  color: white;
+  border-radius: 10px;
+}
+
+.repos{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 1rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: #f8f9ff;
+  color: black;
+  cursor: pointer;
+  
 }

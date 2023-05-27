@@ -29,8 +29,8 @@
     "**/*.tsx",
     ".next/types/**/*.ts",
     "src/pages/api/auth/[...nextauth].jsx",
-    "src/pages/login.tsx",
-    "src/pages/dashboard.tsx"
+    "src/pages/1index.tsx",
+    "src/pages/index.tsx"
   ],
   "exclude": ["node_modules"]
 }

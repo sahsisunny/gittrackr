@@ -7,8 +7,10 @@ interface AppProps {
   session: any;
 }
 
-const MyApp = ({ Component, pageProps: { session, ...pageProps } }: AppProps) => {
-
+const MyApp = ({
+  Component,
+  pageProps: { session, ...pageProps },
+}: AppProps) => {
   return (
     <SessionProvider session={session} refetchInterval={60}>
       <Component {...pageProps} />
