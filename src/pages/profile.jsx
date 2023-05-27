@@ -5,43 +5,16 @@ import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import ProfileImage from '../assets/dummyProfileImage.png';
 
-type Data = {
-  avatar_url: string;
-  name: string;
-  login: string;
-  followers: number;
-  following: number;
-  public_repos: number;
-  total_private_repos: number;
-  total_repos: number;
-  organizations_url: string;
-  repos_url: string;
-};
 
-type Org = {
-  id: number;
-  login: string;
-  avatar_url: string;
-};
-
-type Repo = {
-  id: number;
-  name: string;
-  html_url: string;
-};
 
 const ProfilePage = () => {
   const { data: session } = useSession();
-  const [data, setData] = useState<Data | null>(null);
-  const [orgsData, setOrgsData] = useState<Org[]>([]);
-  const [reposData, setReposData] = useState<Repo[]>([]);
+  const [data, setData] = useState(null);
+  const [orgsData, setOrgsData] = useState([]);
+  const [reposData, setReposData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
 
-  const fetchData = async (
-    url: string,
-    token: string,
-    setDataCallback: React.Dispatch<React.SetStateAction<any>>
-  ): Promise<void> => {
+  const fetchData = async (url, token, setDataCallback) => {
     try {
       const response = await fetch(url, {
         headers: {
@@ -60,7 +33,7 @@ const ProfilePage = () => {
       const userUrl = 'https://api.github.com/user';
       const orgsUrl = data?.organizations_url;
       const reposUrl = data?.repos_url;
-      const token = session.accessToken;
+      const token = session?.accessToken;
 
       fetchData(userUrl, token, setData);
       if (orgsUrl) {
@@ -93,9 +66,19 @@ const ProfilePage = () => {
                       height={200}
                     />
                   </div>
-                  <h5 className="text-center h5 mb-0">
-                    {data?.name || 'No name'}
-                  </h5>
+                  {
+                    // render name if it exists, otherwise render username
+
+                    data?.name ? (
+                      <h5 className="text-center h5 mb-0">
+                        {data?.name || 'No name'}
+                      </h5>
+                    ) : (
+                        <h5 className="text-center h5 mb-0">
+                          {data?.login || 'No username'}
+                        </h5>
+                      )
+                  }
                   <p className="text-center text-muted font-14">
                     {data?.login || 'No username'}
                   </p>
@@ -130,7 +113,7 @@ const ProfilePage = () => {
                   <div>
                     <h5 className="profile-title">Organizations</h5>
                     <div className="profile-orgs-container">
-                      {orgsData?.map((org: any) => (
+                      {orgsData?.map((org) => (
                         <div key={org.id}>
                           <div
                             className="profile-orgs"
@@ -168,7 +151,7 @@ const ProfilePage = () => {
                       className="panel"
                       style={{ display: showDropdown ? 'block' : 'none' }}
                     >
-                      {reposData?.map((repo: any) => (
+                      {reposData?.map((repo) => (
                         <div key={repo.id}>
                           <div
                             className="repos"

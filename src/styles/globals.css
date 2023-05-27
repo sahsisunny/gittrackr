@@ -105,6 +105,7 @@ a {
   z-index: 1;
   color: white;
   width: 160px;
+  background-color: #2A2D3E;
 }
 
 .dropdown-item {
@@ -206,7 +207,7 @@ a {
   padding: 0.5rem 1rem;
   border-radius: 5px;
   transition: 400ms;
-  background-color: #2A2D3E;
+  background-color: #747680;
   border: none;
   cursor: pointer;
   width: 100%;
