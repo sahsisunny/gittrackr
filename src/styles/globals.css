@@ -412,8 +412,8 @@ button svg {
   align-items: center;
   height: (100vh - 20vh);
   padding: 0 2rem;
-
 }
+
 
 .profile-section {
   background-color: #f5f5f5;
@@ -433,13 +433,10 @@ button svg {
   border-radius: 10px;
 }
 
-
-
 .repo-list {
   overflow-x: hidden;
   overflow-y: scroll;
   max-height: 70vh;
-
 }
 
 .repo-item {
@@ -451,8 +448,6 @@ button svg {
   display: flex;
   align-items: center;
   justify-content: center;
-
-
 }
 
 .repo-details {
@@ -495,7 +490,6 @@ button svg {
 }
 
 .repo-view-btn {
-
   margin-left: auto;
   border-radius: 10px;
   background-color: #2A2D3E;
@@ -506,11 +500,26 @@ button svg {
   border: none;
   cursor: pointer;
   padding: 0.6rem 1.5rem;
-
 }
 
 
+@media screen and (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    height: (100vh - 10vh);
+  }
 
+  .profile-section {
+    width: 100%;
+    margin-right: 0;
+    margin-bottom: 20px;
+  }
+
+  .repos-section {
+    width: 100%;
+    margin-left: 0;
+  }
+}
 
 
 

@@ -13,7 +13,6 @@ const ProfilePage = () => {
   const [data, setData] = useState(null);
   const [orgsData, setOrgsData] = useState([]);
   const [reposData, setReposData] = useState([]);
-  const [showDropdown, setShowDropdown] = useState(false);
 
   const fetchData = async (url, token, setDataCallback) => {
     try {
@@ -37,7 +36,6 @@ const ProfilePage = () => {
 
     return `${formattedDate} ${formattedTime}`;
   }
-
 
   useEffect(() => {
     if (session) {
