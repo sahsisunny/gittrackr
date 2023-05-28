@@ -10,7 +10,7 @@ import { GITHUB_USER_URL } from '@/constants/url';
 import { useEffect } from 'react';
 
 const Navbar = () => {
-  const { data: session } = useSession({ required: true });
+  const { data: session } = useSession();
   const [data, setData] = useState(null);
   const [orgsData, setOrgsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
@@ -114,15 +114,13 @@ const Navbar = () => {
                 <strong>{session.user?.name ?? ''}</strong>
               </p>
               <hr className="dropdown-divider" />
-              <Link href="/" className="nav-link">
-                Dashboard
-              </Link>
-              <hr className="dropdown-divider" />
-              <p>Org List</p>
+              <span
+                className="dropdown-item-heading"
+              >Dashboard</span>
               {orgsData.length > 0 ? (
                 orgsData.map((org) => (
                   <Link
-                    href={`/orgs/${org.login}`}
+                    href={`/dashboard/${org.login}`}
                     className="nav-link"
                     key={org.id}
                   >

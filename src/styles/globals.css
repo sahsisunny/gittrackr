@@ -143,6 +143,15 @@ a {
   text-align: center;
 }
 
+.dropdown-item-heading {
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  padding: 0.5rem 0;
+  text-align: center;
+  color: #747680;
+}
+
 .show {
   display: block;
 }
@@ -715,4 +724,21 @@ button svg {
     overflow-x: scroll;
     overflow-y: hidden;
   }
+}
+
+/* dashboard */
+
+.issue-view-btn {
+  margin-left: auto;
+  border-radius: 10px;
+  background-color: #2A2D3E;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 1.2rem;
+  min-width: 6rem;
+  text-align: center;
 }
