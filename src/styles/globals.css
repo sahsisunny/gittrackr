@@ -732,8 +732,6 @@ button svg {
   .profile-members-container {
     min-height: 0vh;
     max-height: 40vh;
-    border: 1px solid red;
-
   }
 }
 
