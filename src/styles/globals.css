@@ -657,7 +657,6 @@ button svg {
 }
 
 
-/*  Media Queries  for Profile Section  */
 @media screen and (max-width: 768px) {
   .main-container {
     flex-direction: column;
@@ -684,6 +683,10 @@ button svg {
   .section-two {
     width: 100%;
     margin-left: 0;
+  }
+
+  .repo-list {
+    min-height: auto;
   }
 
   .repo-item {
