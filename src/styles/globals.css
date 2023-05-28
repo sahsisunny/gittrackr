@@ -195,9 +195,6 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-  .navbar {
-    min-width: 100vw;
-  }
 
   .nav-links {
     margin-top: 1rem;
@@ -237,13 +234,13 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: (100vh - 10vh);
+  height: (100vh - 6vh);
   width: 100vw;
 }
 
 .sign-container {
   display: flex;
-  height: 80vh;
+  height: 84vh;
   width: 80%;
   border-radius: 10px;
   border: 1px solid rgba(140, 142, 153, 0.3);
@@ -332,7 +329,7 @@ button svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  height: 84vh;
   color: #eeeded;
 }
 
@@ -388,7 +385,7 @@ button svg {
   width: 100%;
   display: flex;
   align-items: center;
-  height: (100vh - 20vh);
+  height: (100vh - 16vh);
   padding: 0 2rem;
 }
 
@@ -471,9 +468,6 @@ button svg {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  border-radius: 10px;
-  padding: .2rem;
-  margin: 1rem;
 }
 
 .profile-orgs {
@@ -482,12 +476,9 @@ button svg {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: 0 .5rem;
+  margin: .5rem;
   border-radius: 10px;
-  padding: .5rem;
   cursor: pointer;
-  background-color: #3A3D4E;
-  color: white;
   min-width: 9rem;
   max-width: 8rem;
   min-height: 6rem;
@@ -515,8 +506,8 @@ button svg {
 .repo-list {
   overflow-x: hidden;
   overflow-y: scroll;
-  min-height: 70vh;
-  max-height: 70vh;
+  min-height: 60vh;
+  max-height: 60vh;
 }
 
 .repo-item {
@@ -648,7 +639,7 @@ button svg {
   border-radius: 10px;
   color: white;
   cursor: pointer;
-  height: 10vh;
+  height: 6vh;
 }
 
 .footer a {
@@ -660,7 +651,7 @@ button svg {
 @media screen and (max-width: 768px) {
   .main-container {
     flex-direction: column;
-    height: (100vh - 10vh);
+    height: (100vh - 16vh);
     padding: .5rem;
   }
 
@@ -672,12 +663,6 @@ button svg {
 
   .profile-table-data {
     min-width: 50%;
-  }
-
-  .profile-orgs-container {
-    flex-wrap: wrap;
-    margin: 0;
-
   }
 
   .section-two {
@@ -743,7 +728,7 @@ button svg {
   text-align: center;
 }
 
-.repo-filters{
+.repo-filters {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -751,7 +736,7 @@ button svg {
   width: 100%;
 }
 
-.repo-search{
+.repo-search {
   width: 100%;
   padding: 0.5rem;
   border-radius: 10px;
@@ -762,7 +747,7 @@ button svg {
   font: 1rem 'Roboto', sans-serif;
 }
 
-.repo-filter-button{
+.repo-filter-button {
   border-radius: 10px;
   background-color: #2A2D3E;
   color: white;
@@ -777,7 +762,7 @@ button svg {
   margin-left: 1rem;
 }
 
-.repo-filter-item{
+.repo-filter-item {
   margin: 0 1rem;
   display: flex;
   flex-direction: column;
@@ -794,7 +779,7 @@ button svg {
   max-height: 6rem;
 }
 
-.filter-checkbox{
+.filter-checkbox {
   margin: 0 0.5rem;
   font-size: 1rem;
 }

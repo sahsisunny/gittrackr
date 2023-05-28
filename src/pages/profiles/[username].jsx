@@ -155,24 +155,24 @@ const ProfilePage = () => {
         </div>
         <div className="section-two">
           <h5 className="section-title">Repositories</h5>
+          <div className="repo-filters">
+            <input
+              type="text"
+              placeholder="Search repositories..."
+              className="repo-search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button
+              className="repo-filter-button"
+              onClick={() => {
+                filterRepos();
+              }}
+            >
+              Search
+            </button>
+          </div>
           <div className="repo-list">
-            <div className="repo-filters">
-              <input
-                type="text"
-                placeholder="Search repositories..."
-                className="repo-search"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                className="repo-filter-button"
-                onClick={() => {
-                  filterRepos();
-                }}
-              >
-                Search
-              </button>
-            </div>
             {filteredRepos?.map((repo) => (
               <div key={repo.id}>
                 <div
