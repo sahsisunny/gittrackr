@@ -4,13 +4,16 @@ import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
 import fetchData from '@/utils/FetchData';
-import { GITHUB_USER_URL } from '@/constants/url';
+import FetchIssuePr from '@/utils/FetchIssuePr';
+import { GITHUB_USER_URL, GITHUB_SEARCH_ISSUES_URL, GITHUB_PAGINATION_HUNDRED } from '@/constants/url';
 import { useState, useEffect } from 'react';
+
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
   const [data, setData] = useState(null);
-  const [orgsData, setOrgsData] = useState([]);
+  const [issuesData, setIssuesData] = useState([]);
+  const [prsData, setPrsData] = useState([]);
 
   useEffect(() => {
     if (session) {
@@ -23,10 +26,14 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (session && data) {
-      const orgsUrl = data.organizations_url;
+      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+author:${data.login}+${GITHUB_PAGINATION_HUNDRED}`;
+      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${data.login}+${GITHUB_PAGINATION_HUNDRED}`;
       const token = session.accessToken;
-      if (orgsUrl) {
-        fetchData(orgsUrl, token, setOrgsData);
+      if (issueUrl) {
+        FetchIssuePr(issueUrl, token, setIssuesData);
+      }
+      if (prUrl) {
+        FetchIssuePr(prUrl, token, setPrsData);
       }
     }
   }, [session, data]);
@@ -40,54 +47,74 @@ const Dashboard = () => {
       <div className="main-container">
         <div className="section-one">
           <h5 className="section-title">Pull Requests</h5>
-          <div></div>
-        </div>
-        <div className="section-two">
-          <h5 className="section-title">Issues</h5>
           <div className="repo-list">
-            {/* {reposData?.map((repo) => (
-              <div key={repo.id}>
+            {prsData.map((pr) => (
+              <div key={pr.id}>
                 <div
                   className="repo-item"
                   onClick={() => {
-                    window.open(`${repo.html_url}`, '_blank');
+                    window.open(`${pr.html_url}`, '_blank');
                   }}
                 ><div className="repo-details">
 
                     <div className="repo-item-left">
                       <span
                         className="repo-item-name"
-                      >{repo.name}</span>
+                      >{pr.title}</span>
                     </div>
                     <div className="repo-item-right">
-                      {
-                        repo.language ? (
-                          <span
-                            className="repo-item-language"
-                          >{repo.language}</span>
-                        ) : (
-                          <></>
-                        )
-                      }
-                      <span
-                        className="repo-item-privacy"
-                      >{repo.private ? 'Private' : 'Public'}</span>
-                      <span
-                        className="repo-item-updated"
-                      >{FormatDate(repo.updated_at)}</span>
                     </div>
                   </div>
                   <button
-                    className="repo-view-btn"
+                    className="issue-view-btn"
                     onClick={() => {
-                      window.open(`${repo.html_url}`, '_blank');
+                      window.open(`${pr.html_url}`, '_blank');
                     }}
                   >
-                    Open
+                    {
+                      pr.state === 'open' ? 'Open' :
+                        pr.pull_request.merged_at !== null ? 'Merged' : 'Closed'
+
+                    }
                   </button>
                 </div>
               </div>
-            ))} */}
+            ))}
+          </div>
+        </div>
+        <div className="section-two">
+          <h5 className="section-title">Issues</h5>
+          <div className="repo-list">
+            {issuesData.map((issue) => (
+              <div key={issue.id}>
+                <div
+                  className="repo-item"
+                  onClick={() => {
+                    window.open(`${issue.html_url}`, '_blank');
+                  }}
+                ><div className="repo-details">
+
+                    <div className="repo-item-left">
+                      <span
+                        className="repo-item-name"
+                      >{issue.title}</span>
+                    </div>
+                    <div className="repo-item-right">
+                    </div>
+                  </div>
+                  <button
+                    className="issue-view-btn"
+                    onClick={() => {
+                      window.open(`${issue.html_url}`, '_blank');
+                    }}
+                  >
+                    {
+                      issue.state === 'open' ? 'Open' : 'Closed'
+                    }
+                  </button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>

@@ -16,14 +16,22 @@ const ProfilePage = () => {
   const [data, setData] = useState(null);
   const [reposData, setReposData] = useState([]);
   const [membersData, setMembersData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredRepos, setFilteredRepos] = useState(reposData);
   const router = useRouter();
   const { username } = router.query;
+
+  const filterRepos = () => {
+    const filtered = reposData.filter((repo) =>
+      repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredRepos(filtered);
+  };
 
   useEffect(() => {
     if (session) {
       const userUrl = `${GITHUB_ORGANIZATION_URL}/${username}`;
       const token = session?.accessToken;
-
       fetchData(userUrl, token, setData);
     }
   }, [session, username]);
@@ -33,18 +41,21 @@ const ProfilePage = () => {
       const membersUrl = `https://api.github.com/orgs/${username}/members`;
       const reposUrl = data.repos_url;
       const token = session.accessToken;
-
       if (membersUrl) {
         fetchData(membersUrl, token, setMembersData);
       }
-      console.log(membersData);
-
       if (reposUrl) {
-        fetchData(reposUrl, token, setReposData);
+        fetchData(reposUrl, token, (repos) => {
+          setReposData(repos);
+          setFilteredRepos(repos);
+        });
       }
     }
   }, [session, data]);
 
+  useEffect(() => {
+    filterRepos();
+  }, [searchQuery]);
 
   return (
     <>
@@ -100,8 +111,6 @@ const ProfilePage = () => {
               </tr>
             </tbody>
           </table>
-
-          {/* Orgs */}
           <div>
             <h5 className="section-title">Members</h5>
             <div className="profile-members-container">
@@ -131,10 +140,28 @@ const ProfilePage = () => {
         </div>
         <div className="section-two">
           <h5 className="section-title">Repositories</h5>
+          <div className="repo-filters">
+            <input
+              type="text"
+              placeholder="Search repositories..."
+              className="repo-search"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            <button
+              className="repo-filter-button"
+              onClick={() => {
+                filterRepos();
+              }}
+            >
+              Search
+            </button>
+          </div>
+
           <div
             className="repo-list"
           >
-            {reposData?.map((repo) => (
+            {filteredRepos?.map((repo) => (
               <div key={repo.id}>
                 <div
                   className="repo-item"

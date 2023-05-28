@@ -16,8 +16,17 @@ const ProfilePage = () => {
   const [data, setData] = useState(null);
   const [orgsData, setOrgsData] = useState([]);
   const [reposData, setReposData] = useState([]);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [filteredRepos, setFilteredRepos] = useState(reposData);
   const router = useRouter();
   const { username } = router.query;
+
+  const filterRepos = () => {
+    const filtered = reposData.filter((repo) =>
+      repo.name.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredRepos(filtered);
+  };
 
   useEffect(() => {
     if (session) {
@@ -39,10 +48,17 @@ const ProfilePage = () => {
       }
 
       if (reposUrl) {
-        fetchData(reposUrl, token, setReposData);
+        fetchData(reposUrl, token, (repos) => {
+          setReposData(repos);
+          setFilteredRepos(repos);
+        });
       }
     }
   }, [session, data]);
+
+  useEffect(() => {
+    filterRepos();
+  }, [searchQuery]);
 
 
   return (
@@ -139,10 +155,25 @@ const ProfilePage = () => {
         </div>
         <div className="section-two">
           <h5 className="section-title">Repositories</h5>
-          <div
-            className="repo-list"
-          >
-            {reposData?.map((repo) => (
+          <div className="repo-list">
+            <div className="repo-filters">
+              <input
+                type="text"
+                placeholder="Search repositories..."
+                className="repo-search"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+              />
+              <button
+                className="repo-filter-button"
+                onClick={() => {
+                  filterRepos();
+                }}
+              >
+                Search
+              </button>
+            </div>
+            {filteredRepos?.map((repo) => (
               <div key={repo.id}>
                 <div
                   className="repo-item"

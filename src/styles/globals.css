@@ -401,12 +401,10 @@ button svg {
 
 .section-one {
   background-color: #f5f5f5;
-  width: 50%;
-  margin-right: 20px;
-  max-height: 80vh;
-  min-height: 80vh;
-  padding: 1rem;
-  border-radius: 10px;
+    width: 50%;
+    margin-right: 20px;
+    padding: 1rem;
+    border-radius: 10px;
 }
 
 .avatar-photo {
@@ -741,4 +739,102 @@ button svg {
   padding: 0.4rem 1.2rem;
   min-width: 6rem;
   text-align: center;
+}
+
+.repo-filters{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.repo-search{
+  width: 100%;
+  padding: 0.5rem;
+  border-radius: 10px;
+  border: 1px solid #2A2D3E;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+}
+
+.repo-filter-button{
+  border-radius: 10px;
+  background-color: #2A2D3E;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem 1.2rem;
+  min-width: 6rem;
+  text-align: center;
+  margin-left: 1rem;
+}
+
+.repo-filter-item{
+  margin: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: .5rem;
+  cursor: pointer;
+  background-color: #3A3D4E;
+  color: white;
+  min-width: 9rem;
+  max-width: 8rem;
+  min-height: 6rem;
+  max-height: 6rem;
+}
+
+.filter-checkbox{
+  margin: 0 0.5rem;
+  font-size: 1rem;
+}
+
+
+/*  */
+.radio-inputs {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  border-radius: 0.5rem;
+  background-color: #EEE;
+  box-sizing: border-box;
+  box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
+  padding: 0.25rem;
+  width: 300px;
+  font-size: 14px;
+}
+
+.radio-inputs .radio {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.radio-inputs .radio input {
+  display: none;
+}
+
+.radio-inputs .radio .name {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  padding: .5rem 0;
+  color: rgba(51, 65, 85, 1);
+  transition: all .15s ease-in-out;
+}
+
+.radio-inputs .radio input:checked+.name {
+  background-color: #3A3D4E;
+  color: white;
+  font-weight: 600;
 }
