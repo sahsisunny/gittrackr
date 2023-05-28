@@ -9,7 +9,7 @@ import FormatDate from '@/utils/FormatDate';
 import fetchData from '@/utils/FetchData';
 import { GITHUB_ORGANIZATION_URL } from '@/constants/url';
 import { useRouter } from 'next/router';
-
+import Link from 'next/link';
 
 const ProfilePage = () => {
   const { data: session } = useSession({ required: true });
@@ -39,7 +39,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (session && data) {
       const membersUrl = `https://api.github.com/orgs/${username}/members`;
-      const reposUrl = data.repos_url;
+      const reposUrl = `${data.repos_url}?page=1&per_page=100`;
       const token = session.accessToken;
       if (membersUrl) {
         fetchData(membersUrl, token, setMembersData);
@@ -61,57 +61,47 @@ const ProfilePage = () => {
     <>
       <Head>
         <title>
-          {username?.split('-').map((word) => (
-            word.charAt(0).toUpperCase() + word.slice(1) + ' '
-          ))}
+          {username
+            ?.split('-')
+            .map((word) => word.charAt(0).toUpperCase() + word.slice(1) + ' ')}
         </title>
       </Head>
       <Navbar />
       <div className="main-container">
         <div className="section-one">
-          <h5 className="section-title">
-            Profile Information
-          </h5>
-          <Image
-            src={data?.avatar_url || ProfileImage}
-            alt="User Avatar"
-            className="avatar-photo"
-            width={200}
-            height={200}
-          />
-          <div className="profile-name-container">
-            {
-              data?.name ? (
-                <h5 className="user-full-name">
-                  {data?.name || 'No name'}
-                </h5>
+          <h5 className="section-title">Profile Information</h5>
+          <div className="profile-container">
+            <Image
+              src={data?.avatar_url || ProfileImage}
+              alt="User Avatar"
+              className="avatar-photo"
+              width={200}
+              height={200}
+            />
+            <div className="profile-name-container">
+              {data?.name ? (
+                <h5 className="user-full-name">{data?.name || 'No name'}</h5>
               ) : (
-                <h5 className="user-login">
-                  {data?.login || 'No username'}
-                </h5>
-              )
-            }
-          </div>
-          <p className="user-login">
-            {data?.login || 'No username'}
-          </p>
-          <table className="profile-table">
-            <tbody className="profile-table-body">
-              <tr className="profile-table-row">
-                <td className="profile-table-data">
-                  <span>Followers</span>
-                  <hr />
-                  <h5>{data?.followers}</h5>
-                </td>
-                <td className="profile-table-data">
-                  <span>Public Repos</span>
-                  <hr />
-                  <h5>{data?.public_repos}</h5>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-          <div>
+                <h5 className="user-login">{data?.login || 'No username'}</h5>
+              )}
+            </div>
+            <p className="user-login">{data?.login || 'No username'}</p>
+            <table className="profile-table">
+              <tbody className="profile-table-body">
+                <tr className="profile-table-row">
+                  <td className="profile-table-data">
+                    <span>Followers</span>
+                    <hr />
+                    <h5>{data?.followers}</h5>
+                  </td>
+                  <td className="profile-table-data">
+                    <span>Public Repos</span>
+                    <hr />
+                    <h5>{data?.public_repos}</h5>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
             <h5 className="section-title">Members</h5>
             <div className="profile-members-container">
               {membersData?.map((members) => (
@@ -122,16 +112,30 @@ const ProfilePage = () => {
                       router.push(`/profiles/${members.login}`);
                     }}
                   >
-                    <Image
-                      src={members.avatar_url}
-                      alt="User Avatar"
-                      className="members-photo"
-                      width={50}
-                      height={50}
-                    />
-                    <span
-                      className="members-name"
-                    >{members.login}</span>
+                    <div className="member-details">
+                      <Image
+                        src={members.avatar_url}
+                        alt="User Avatar"
+                        className="members-photo"
+                        width={50}
+                        height={50}
+                      />
+                      <span className="member-name">{members.login}</span>
+                    </div>
+                    <div className="member-action">
+                      {/* <Link
+                        className="member-action-button"
+                        href={`/profiles/${members.login}`}
+                      >
+                        View
+                      </Link> */}
+                      <Link
+                        className="member-action-button"
+                        href={members.html_url}
+                      >
+                        Visit
+                      </Link>
+                    </div>
                   </div>
                 </div>
               ))}
@@ -158,9 +162,7 @@ const ProfilePage = () => {
             </button>
           </div>
 
-          <div
-            className="repo-list"
-          >
+          <div className="repo-list">
             {filteredRepos?.map((repo) => (
               <div key={repo.id}>
                 <div
@@ -168,29 +170,25 @@ const ProfilePage = () => {
                   onClick={() => {
                     window.open(`${repo.html_url}`, '_blank');
                   }}
-                ><div className="repo-details">
-
+                >
+                  <div className="repo-details">
                     <div className="repo-item-left">
-                      <span
-                        className="repo-item-name"
-                      >{repo.name}</span>
+                      <span className="repo-item-name">{repo.name}</span>
                     </div>
                     <div className="repo-item-right">
-                      {
-                        repo.language ? (
-                          <span
-                            className="repo-item-language"
-                          >{repo.language}</span>
-                        ) : (
-                          <></>
-                        )
-                      }
-                      <span
-                        className="repo-item-privacy"
-                      >{repo.private ? 'Private' : 'Public'}</span>
-                      <span
-                        className="repo-item-updated"
-                      >{FormatDate(repo.updated_at)}</span>
+                      {repo.language ? (
+                        <span className="repo-item-language">
+                          {repo.language}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
+                      <span className="repo-item-privacy">
+                        {repo.private ? 'Private' : 'Public'}
+                      </span>
+                      <span className="repo-item-updated">
+                        {FormatDate(repo.updated_at)}
+                      </span>
                     </div>
                   </div>
                   <button

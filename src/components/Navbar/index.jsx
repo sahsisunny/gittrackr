@@ -114,9 +114,7 @@ const Navbar = () => {
                 <strong>{session.user?.name ?? ''}</strong>
               </p>
               <hr className="dropdown-divider" />
-              <span
-                className="dropdown-item-heading"
-              >Dashboard</span>
+              <span className="dropdown-item-heading">Dashboard</span>
               {orgsData.length > 0 ? (
                 orgsData.map((org) => (
                   <Link
@@ -131,8 +129,10 @@ const Navbar = () => {
                 <p className="dropdown-no-orgs">No organizations</p>
               )}
               <hr className="dropdown-divider" />
-              <Link href={`/profiles/${data?.login ?? ''}`}
-                className="nav-link">
+              <Link
+                href={`/profiles/${data?.login ?? ''}`}
+                className="nav-link"
+              >
                 Profile
               </Link>
               <Link href="/about" className="nav-link">

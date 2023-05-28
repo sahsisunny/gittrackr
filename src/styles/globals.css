@@ -30,13 +30,15 @@ body {
 ::-webkit-scrollbar-thumb {
   background: var(--primary-color);
   border-radius: 10px;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3),
+    background-color 0.5px 0px 0px 0.5px;
 }
 
 ::-webkit-scrollbar-track {
   border-radius: 10px;
-  background: #F5F5F5;
-  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3), background-color 0.5px 0px 0px 0.5px;
+  background: #f5f5f5;
+  box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3),
+    background-color 0.5px 0px 0px 0.5px;
 }
 
 a {
@@ -80,7 +82,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   cursor: pointer;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
   padding: 0 1rem;
   width: 160px;
   height: 50px;
@@ -92,12 +94,9 @@ a {
   object-fit: cover;
 }
 
-
-
 .profile-arrow {
   margin-left: 10px;
 }
-
 
 .dropdown {
   position: absolute;
@@ -110,10 +109,8 @@ a {
   z-index: 1;
   color: white;
   width: 200px;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
 }
-
-
 
 .dropdown-item {
   display: block;
@@ -195,7 +192,6 @@ a {
 }
 
 @media screen and (max-width: 768px) {
-
   .nav-links {
     margin-top: 1rem;
   }
@@ -211,7 +207,7 @@ a {
 
   .dropdown {
     width: 90vw;
-    top: 6rem
+    top: 6rem;
   }
 
   .dropdown-item-btn {
@@ -224,8 +220,6 @@ a {
     text-align: center;
   }
 }
-
-
 
 /* SIgn In */
 
@@ -273,7 +267,7 @@ a {
 
 .sign-btn {
   border-radius: 10px;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -286,7 +280,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: center;
-
 }
 
 button svg {
@@ -294,8 +287,8 @@ button svg {
 }
 
 .sign-btn:hover {
-  background-color: #3A3D4E;
-  border: 1px solid #3A3D4E;
+  background-color: #3a3d4e;
+  border: 1px solid #3a3d4e;
 }
 
 @media screen and (max-width: 768px) {
@@ -322,7 +315,6 @@ button svg {
   }
 }
 
-
 /* 404 Page */
 .page-not-found {
   display: flex;
@@ -345,7 +337,7 @@ button svg {
 
 .back-to-home-btn {
   border-radius: 10px;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -379,13 +371,12 @@ button svg {
   }
 }
 
-
 /* Profile Page */
 .main-container {
   width: 100%;
   display: flex;
   align-items: center;
-  height: (100vh - 16vh);
+  max-height: (100vh - 16vh);
   padding: 0 2rem;
 }
 
@@ -398,10 +389,19 @@ button svg {
 
 .section-one {
   background-color: #f5f5f5;
-    width: 50%;
-    margin-right: 20px;
-    padding: 1rem;
-    border-radius: 10px;
+  width: 50%;
+  margin-right: 20px;
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  min-height: 70vh;
 }
 
 .avatar-photo {
@@ -424,14 +424,14 @@ button svg {
 .user-full-name {
   font-size: 1.5rem;
   font-weight: bold;
-  margin-bottom: .3rem;
+  margin-bottom: 0.3rem;
   text-align: center;
 }
 
 .user-login {
   font-size: 1rem;
   font-weight: bold;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
   text-align: center;
 }
 
@@ -453,7 +453,7 @@ button svg {
   padding: 0.5rem 1rem;
   border: 2px solid white;
   border-radius: 10px;
-  background-color: #3A3D4E;
+  background-color: #3a3d4e;
   color: white;
 }
 
@@ -476,7 +476,7 @@ button svg {
   align-items: center;
   justify-content: center;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  margin: .5rem;
+  margin: 0.5rem;
   border-radius: 10px;
   cursor: pointer;
   min-width: 9rem;
@@ -506,8 +506,8 @@ button svg {
 .repo-list {
   overflow-x: hidden;
   overflow-y: scroll;
-  min-height: 60vh;
-  max-height: 60vh;
+  min-height: 65vh;
+  max-height: 65vh;
 }
 
 .repo-item {
@@ -563,7 +563,7 @@ button svg {
 .repo-view-btn {
   margin-left: auto;
   border-radius: 10px;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -573,45 +573,67 @@ button svg {
   padding: 0.6rem 1.5rem;
 }
 
-
 /* Org Profile */
 
 .profile-members-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-x: scroll;
-  overflow-y: hidden;
-
-
-
+  overflow-x: hidden;
+  overflow-y: scroll;
+  min-height: 30vh;
+  max-height: 30vh;
+  width: 100%;
 }
 
 .profile-members-item {
-  margin: 0 .5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  margin: 0.5rem;
   border-radius: 10px;
-  padding: .5rem;
+  padding: 0.5rem;
   cursor: pointer;
-  background-color: #3A3D4E;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+  box-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
+}
+
+.member-details {
+  display: flex;
+  align-items: center;
+  text-align: center;
+}
+
+.member-action {
+}
+
+.member-action-button {
+  border-radius: 10px;
+  background-color: #2a2d3e;
   color: white;
-  min-width: 9rem;
-  max-width: 8rem;
-  min-height: 6rem;
-  max-height: 6rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font: 1rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.6rem 1.5rem;
+  margin-left: auto;
+  margin-right: 0.5rem;
+  width: 10rem;
+  height: 2rem;
+
+  &:hover {
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
 }
 
 .members-photo {
   border-radius: 50%;
   width: 3.5rem;
   height: 3.5rem;
+  margin-right: 1rem;
 }
 
 .members-name {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   white-space: nowrap;
   text-overflow: ellipsis;
 }
@@ -624,11 +646,9 @@ button svg {
   width: 3rem;
   height: 2rem;
   border-radius: 10px;
-  background-color: #3A3D4E;
+  background-color: #3a3d4e;
   color: white;
 }
-
-
 
 .footer {
   display: flex;
@@ -647,12 +667,10 @@ button svg {
   text-decoration: none;
 }
 
-
 @media screen and (max-width: 768px) {
   .main-container {
     flex-direction: column;
-    height: (100vh - 16vh);
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
   .section-one {
@@ -716,7 +734,7 @@ button svg {
 .issue-view-btn {
   margin-left: auto;
   border-radius: 10px;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -740,7 +758,7 @@ button svg {
   width: 100%;
   padding: 0.5rem;
   border-radius: 10px;
-  border: 1px solid #2A2D3E;
+  border: 1px solid #2a2d3e;
   outline: none;
   font-size: 1rem;
   font-weight: 600;
@@ -749,7 +767,7 @@ button svg {
 
 .repo-filter-button {
   border-radius: 10px;
-  background-color: #2A2D3E;
+  background-color: #2a2d3e;
   color: white;
   font-size: 1rem;
   font-weight: 600;
@@ -769,9 +787,9 @@ button svg {
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  padding: .5rem;
+  padding: 0.5rem;
   cursor: pointer;
-  background-color: #3A3D4E;
+  background-color: #3a3d4e;
   color: white;
   min-width: 9rem;
   max-width: 8rem;
@@ -784,14 +802,13 @@ button svg {
   font-size: 1rem;
 }
 
-
 /*  */
 .radio-inputs {
   position: relative;
   display: flex;
   flex-wrap: wrap;
   border-radius: 0.5rem;
-  background-color: #EEE;
+  background-color: #eee;
   box-sizing: border-box;
   box-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.06);
   padding: 0.25rem;
@@ -815,13 +832,13 @@ button svg {
   justify-content: center;
   border-radius: 0.5rem;
   border: none;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   color: rgba(51, 65, 85, 1);
-  transition: all .15s ease-in-out;
+  transition: all 0.15s ease-in-out;
 }
 
-.radio-inputs .radio input:checked+.name {
-  background-color: #3A3D4E;
+.radio-inputs .radio input:checked + .name {
+  background-color: #3a3d4e;
   color: white;
   font-weight: 600;
 }

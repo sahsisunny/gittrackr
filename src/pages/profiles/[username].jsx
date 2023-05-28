@@ -10,7 +10,6 @@ import fetchData from '@/utils/FetchData';
 import { GITHUB_USERS_URL } from '@/constants/url';
 import { useRouter } from 'next/router';
 
-
 const ProfilePage = () => {
   const { data: session } = useSession({ required: true });
   const [data, setData] = useState(null);
@@ -40,7 +39,7 @@ const ProfilePage = () => {
   useEffect(() => {
     if (session && data) {
       const orgsUrl = data.organizations_url;
-      const reposUrl = data.repos_url;
+      const reposUrl = `${data.repos_url}?page=1&per_page=100`;
       const token = session.accessToken;
 
       if (orgsUrl) {
@@ -60,7 +59,6 @@ const ProfilePage = () => {
     filterRepos();
   }, [searchQuery]);
 
-
   return (
     <>
       <Head>
@@ -69,52 +67,42 @@ const ProfilePage = () => {
       <Navbar />
       <div className="main-container">
         <div className="section-one">
-          <h5 className="section-title">
-            Profile Information
-          </h5>
-          <Image
-            src={data?.avatar_url || ProfileImage}
-            alt="User Avatar"
-            className="avatar-photo"
-            width={200}
-            height={200}
-          />
-          <div className="profile-name-container">
-            {
-              data?.name ? (
-                <h5 className="user-full-name">
-                  {data?.name || 'No name'}
-                </h5>
+          <h5 className="section-title">Profile Information</h5>
+          <div className="profile-container">
+            <Image
+              src={data?.avatar_url || ProfileImage}
+              alt="User Avatar"
+              className="avatar-photo"
+              width={200}
+              height={200}
+            />
+            <div className="profile-name-container">
+              {data?.name ? (
+                <h5 className="user-full-name">{data?.name || 'No name'}</h5>
               ) : (
-                <h5 className="user-login">
-                  {data?.login || 'No username'}
-                </h5>
-              )
-            }
-          </div>
-          <p className="user-login">
-            {data?.login || 'No username'}
-          </p>
-          <table className="profile-table">
-            <tbody className="profile-table-body">
-              <tr className="profile-table-row">
-                <td className="profile-table-data">
-                  <span>Followers</span>
-                  <hr />
-                  <h5>{data?.followers}</h5>
-                </td>
-                <td className="profile-table-data">
-                  <span>Following</span>
-                  <hr />
-                  <h5>{data?.following}</h5>
-                </td>
-                <td className="profile-table-data">
-                  <span>Public Repos</span>
-                  <hr />
-                  <h5>{data?.public_repos}</h5>
-                </td>
-                {
-                  data?.total_private_repos ? (
+                <h5 className="user-login">{data?.login || 'No username'}</h5>
+              )}
+            </div>
+            <p className="user-login">{data?.login || 'No username'}</p>
+            <table className="profile-table">
+              <tbody className="profile-table-body">
+                <tr className="profile-table-row">
+                  <td className="profile-table-data">
+                    <span>Followers</span>
+                    <hr />
+                    <h5>{data?.followers}</h5>
+                  </td>
+                  <td className="profile-table-data">
+                    <span>Following</span>
+                    <hr />
+                    <h5>{data?.following}</h5>
+                  </td>
+                  <td className="profile-table-data">
+                    <span>Public Repos</span>
+                    <hr />
+                    <h5>{data?.public_repos}</h5>
+                  </td>
+                  {data?.total_private_repos ? (
                     <td className="profile-table-data">
                       <span>Private Repos</span>
                       <hr />
@@ -122,34 +110,33 @@ const ProfilePage = () => {
                     </td>
                   ) : (
                     <></>
-                  )
-                }
-              </tr>
-            </tbody>
-          </table>
-          <div>
-            <h5 className="section-title">Organizations</h5>
-            <div className="profile-orgs-container">
-              {orgsData?.map((org) => (
-                <div key={org.id}>
-                  <div
-                    className="profile-orgs"
-                    onClick={() => {
-                      router.push(`/orgs/${org.login}`);
-
-                    }}
-                  >
-                    <Image
-                      src={org.avatar_url}
-                      alt="User Avatar"
-                      className="org-photo"
-                      width={50}
-                      height={50}
-                    />
-                    <span>{org.login}</span>
+                  )}
+                </tr>
+              </tbody>
+            </table>
+            <div>
+              <h5 className="section-title">Organizations</h5>
+              <div className="profile-orgs-container">
+                {orgsData?.map((org) => (
+                  <div key={org.id}>
+                    <div
+                      className="profile-orgs"
+                      onClick={() => {
+                        router.push(`/orgs/${org.login}`);
+                      }}
+                    >
+                      <Image
+                        src={org.avatar_url}
+                        alt="User Avatar"
+                        className="org-photo"
+                        width={50}
+                        height={50}
+                      />
+                      <span>{org.login}</span>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -180,29 +167,25 @@ const ProfilePage = () => {
                   onClick={() => {
                     window.open(`${repo.html_url}`, '_blank');
                   }}
-                ><div className="repo-details">
-
+                >
+                  <div className="repo-details">
                     <div className="repo-item-left">
-                      <span
-                        className="repo-item-name"
-                      >{repo.name}</span>
+                      <span className="repo-item-name">{repo.name}</span>
                     </div>
                     <div className="repo-item-right">
-                      {
-                        repo.language ? (
-                          <span
-                            className="repo-item-language"
-                          >{repo.language}</span>
-                        ) : (
-                          <></>
-                        )
-                      }
-                      <span
-                        className="repo-item-privacy"
-                      >{repo.private ? 'Private' : 'Public'}</span>
-                      <span
-                        className="repo-item-updated"
-                      >{FormatDate(repo.updated_at)}</span>
+                      {repo.language ? (
+                        <span className="repo-item-language">
+                          {repo.language}
+                        </span>
+                      ) : (
+                        <></>
+                      )}
+                      <span className="repo-item-privacy">
+                        {repo.private ? 'Private' : 'Public'}
+                      </span>
+                      <span className="repo-item-updated">
+                        {FormatDate(repo.updated_at)}
+                      </span>
                     </div>
                   </div>
                   <button

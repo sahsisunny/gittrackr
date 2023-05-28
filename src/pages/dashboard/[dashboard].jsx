@@ -5,7 +5,11 @@ import Head from 'next/head';
 import Footer from '@/components/Footer';
 import fetchData from '@/utils/FetchData';
 import FetchIssuePr from '@/utils/FetchIssuePr';
-import { GITHUB_USER_URL, GITHUB_SEARCH_ISSUES_URL, GITHUB_PAGINATION_HUNDRED } from '@/constants/url';
+import {
+  GITHUB_USER_URL,
+  GITHUB_SEARCH_ISSUES_URL,
+  GITHUB_PAGINATION_HUNDRED,
+} from '@/constants/url';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
@@ -25,7 +29,9 @@ const Dashboard = () => {
       const openIssues = issuesData.filter((issue) => issue.state === 'open');
       setFilterData(openIssues);
     } else if (status === 'closed') {
-      const closedIssues = issuesData.filter((issue) => issue.state === 'closed');
+      const closedIssues = issuesData.filter(
+        (issue) => issue.state === 'closed'
+      );
       setFilterData(closedIssues);
     } else {
       setFilterData(issuesData);
@@ -40,10 +46,11 @@ const Dashboard = () => {
       const closedPrs = prsData.filter((pr) => pr.state === 'closed');
       setPrFilterData(closedPrs);
     } else if (status === 'merged') {
-      const mergedPrs = prsData.filter((pr) => pr.pull_request.merged_at !== null);
+      const mergedPrs = prsData.filter(
+        (pr) => pr.pull_request.merged_at !== null
+      );
       setPrFilterData(mergedPrs);
-    }
-    else {
+    } else {
       setPrFilterData(prsData);
     }
   };
@@ -89,7 +96,9 @@ const Dashboard = () => {
           <div className="repo-filters">
             <div className="radio-inputs">
               <label className="radio">
-                <input type="radio" name="radio"
+                <input
+                  type="radio"
+                  name="radio"
                   defaultChecked
                   onChange={() => {
                     filterPrs('all');
@@ -98,7 +107,9 @@ const Dashboard = () => {
                 <span className="name">All</span>
               </label>
               <label className="radio">
-                <input type="radio" name="radio"
+                <input
+                  type="radio"
+                  name="radio"
                   onChange={() => {
                     filterPrs('open');
                   }}
@@ -106,7 +117,9 @@ const Dashboard = () => {
                 <span className="name">Open</span>
               </label>
               <label className="radio">
-                <input type="radio" name="radio"
+                <input
+                  type="radio"
+                  name="radio"
                   onChange={() => {
                     filterPrs('closed');
                   }}
@@ -114,7 +127,9 @@ const Dashboard = () => {
                 <span className="name">closed</span>
               </label>
               <label className="radio">
-                <input type="radio" name="radio"
+                <input
+                  type="radio"
+                  name="radio"
                   onChange={() => {
                     filterPrs('closed');
                   }}
@@ -131,15 +146,12 @@ const Dashboard = () => {
                   onClick={() => {
                     window.open(`${pr.html_url}`, '_blank');
                   }}
-                ><div className="repo-details">
-
+                >
+                  <div className="repo-details">
                     <div className="repo-item-left">
-                      <span
-                        className="repo-item-name"
-                      >{pr.title}</span>
+                      <span className="repo-item-name">{pr.title}</span>
                     </div>
-                    <div className="repo-item-right">
-                    </div>
+                    <div className="repo-item-right"></div>
                   </div>
                   <button
                     className="issue-view-btn"
@@ -147,10 +159,11 @@ const Dashboard = () => {
                       window.open(`${pr.html_url}`, '_blank');
                     }}
                   >
-                    {
-                      pr.state === 'open' ? 'Open' :
-                        pr.pull_request.merged_at !== null ? 'Merged' : 'Closed'
-                    }
+                    {pr.state === 'open'
+                      ? 'Open'
+                      : pr.pull_request.merged_at !== null
+                      ? 'Merged'
+                      : 'Closed'}
                   </button>
                 </div>
               </div>
@@ -162,7 +175,9 @@ const Dashboard = () => {
           <div className="repo-filters">
             <div className="radio-inputs">
               <label className="radio">
-                <input type="radio" name="radio-two"
+                <input
+                  type="radio"
+                  name="radio-two"
                   defaultChecked
                   onChange={() => {
                     filterIssues('all');
@@ -171,7 +186,9 @@ const Dashboard = () => {
                 <span className="name">All</span>
               </label>
               <label className="radio">
-                <input type="radio" name="radio-two"
+                <input
+                  type="radio"
+                  name="radio-two"
                   onChange={() => {
                     filterIssues('open');
                   }}
@@ -179,7 +196,9 @@ const Dashboard = () => {
                 <span className="name">Open</span>
               </label>
               <label className="radio">
-                <input type="radio" name="radio-two"
+                <input
+                  type="radio"
+                  name="radio-two"
                   onChange={() => {
                     filterIssues('closed');
                   }}
@@ -196,15 +215,12 @@ const Dashboard = () => {
                   onClick={() => {
                     window.open(`${issue.html_url}`, '_blank');
                   }}
-                ><div className="repo-details">
-
+                >
+                  <div className="repo-details">
                     <div className="repo-item-left">
-                      <span
-                        className="repo-item-name"
-                      >{issue.title}</span>
+                      <span className="repo-item-name">{issue.title}</span>
                     </div>
-                    <div className="repo-item-right">
-                    </div>
+                    <div className="repo-item-right"></div>
                   </div>
                   <button
                     className="issue-view-btn"
@@ -212,9 +228,7 @@ const Dashboard = () => {
                       window.open(`${issue.html_url}`, '_blank');
                     }}
                   >
-                    {
-                      issue.state === 'open' ? 'Open' : 'Closed'
-                    }
+                    {issue.state === 'open' ? 'Open' : 'Closed'}
                   </button>
                 </div>
               </div>
