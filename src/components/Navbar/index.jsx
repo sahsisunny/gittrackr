@@ -133,7 +133,7 @@ const Navbar = () => {
                 <p className="dropdown-no-orgs">No organizations</p>
               )}
               <hr className="dropdown-divider" />
-              <Link href={`/profiles/${session.user?.login ?? ''}`}
+              <Link href={`/profiles/${data?.login ?? ''}`}
                 className="nav-link">
                 Profile
               </Link>

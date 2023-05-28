@@ -579,12 +579,14 @@ button svg {
 /* Org Profile */
 
 .profile-members-container {
-  overflow-x: hidden;
-  overflow-y: hidden;
-  display: flex;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow-x: scroll;
+  overflow-y: hidden;
+
+
+
 }
 
 .profile-members-item {
@@ -710,7 +712,7 @@ button svg {
 
   /* profile */
   .profile-members-container {
-    overflow-x: hidden;
+    overflow-x: scroll;
     overflow-y: hidden;
   }
 }

@@ -98,7 +98,7 @@ const ProfilePage = () => {
                   <h5>{data?.public_repos}</h5>
                 </td>
                 {
-                  data?.private_repos ? (
+                  data?.total_private_repos ? (
                     <td className="profile-table-data">
                       <span>Private Repos</span>
                       <hr />
@@ -111,7 +111,6 @@ const ProfilePage = () => {
               </tr>
             </tbody>
           </table>
-          {/* Orgs */}
           <div>
             <h5 className="section-title">Organizations</h5>
             <div className="profile-orgs-container">
