@@ -602,8 +602,7 @@ button svg {
   text-align: center;
 }
 
-.member-action {
-}
+.member-action {}
 
 .member-action-button {
   border-radius: 10px;
@@ -723,9 +722,18 @@ button svg {
   }
 
   /* profile */
+
+  .profile-container {
+    flex-direction: column;
+    padding: 0.5rem;
+    min-height: 0vh;
+  }
+
   .profile-members-container {
-    overflow-x: scroll;
-    overflow-y: hidden;
+    min-height: 0vh;
+    max-height: 40vh;
+    border: 1px solid red;
+
   }
 }
 
@@ -837,7 +845,7 @@ button svg {
   transition: all 0.15s ease-in-out;
 }
 
-.radio-inputs .radio input:checked + .name {
+.radio-inputs .radio input:checked+.name {
   background-color: #3a3d4e;
   color: white;
   font-weight: 600;
