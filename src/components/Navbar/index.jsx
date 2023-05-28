@@ -1,13 +1,18 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Logo from '../../assets/GitTrackr.png';
+import Logo from './../../assets/GitTrackr.png';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useMediaQuery } from 'react-responsive';
+import fetchData from '@/utils/FetchData';
+import { GITHUB_USER_URL } from '@/constants/url';
+import { useEffect } from 'react';
 
 const Navbar = () => {
-  const { data: session } = useSession();
+  const { data: session } = useSession({ required: true });
+  const [data, setData] = useState(null);
+  const [orgsData, setOrgsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
   const isMobile = useMediaQuery({ maxWidth: 768 });
@@ -47,6 +52,26 @@ const Navbar = () => {
     );
   };
 
+  useEffect(() => {
+    if (session) {
+      const userUrl = GITHUB_USER_URL;
+      const token = session?.accessToken;
+
+      fetchData(userUrl, token, setData);
+    }
+  }, [session]);
+
+  useEffect(() => {
+    if (session && data) {
+      const orgsUrl = data.organizations_url;
+      const token = session.accessToken;
+
+      if (orgsUrl) {
+        fetchData(orgsUrl, token, setOrgsData);
+      }
+    }
+  }, [session, data]);
+
   return (
     <nav className="navbar">
       <Link href="/" className="logo">
@@ -76,12 +101,40 @@ const Navbar = () => {
           </div>
           <div className={`dropdown ${showDropdown ? 'show' : ''}`}>
             <div className="dropdown-item">
+              <div className="dropdown-item-img">
+                <Image
+                  src={session.user?.image ?? ''}
+                  alt="profile image"
+                  width={70}
+                  height={70}
+                  className="profile-image"
+                />
+              </div>
               <p className="dropdown-greeting-text">
-                Hello,{' '}
-                <strong>{session.user?.name?.split(' ')[0] ?? ''}</strong>
+                <strong>{session.user?.name ?? ''}</strong>
               </p>
               <hr className="dropdown-divider" />
-              <Link href="/profile" className="nav-link">
+              <Link href="/" className="nav-link">
+                Dashboard
+              </Link>
+              <hr className="dropdown-divider" />
+              <p>Org List</p>
+              {orgsData.length > 0 ? (
+                orgsData.map((org) => (
+                  <Link
+                    href={`/orgs/${org.login}`}
+                    className="nav-link"
+                    key={org.id}
+                  >
+                    {org.login.replace(/-/g, ' ')}
+                  </Link>
+                ))
+              ) : (
+                <p className="dropdown-no-orgs">No organizations</p>
+              )}
+              <hr className="dropdown-divider" />
+              <Link href={`/profiles/${session.user?.login ?? ''}`}
+                className="nav-link">
                 Profile
               </Link>
               <Link href="/about" className="nav-link">

@@ -3,10 +3,12 @@ import Image from 'next/image';
 import { useSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
-import ProfileImage from '../assets/dummyProfileImage.png';
+import ProfileImage from '../../assets/dummyProfileImage.png';
 import Footer from '@/components/Footer';
 import FormatDate from '@/utils/FormatDate';
-import fetchData  from '@/utils/FetchData';
+import fetchData from '@/utils/FetchData';
+import { GITHUB_USERS_URL } from '@/constants/url';
+import { useRouter } from 'next/router';
 
 
 const ProfilePage = () => {
@@ -14,17 +16,17 @@ const ProfilePage = () => {
   const [data, setData] = useState(null);
   const [orgsData, setOrgsData] = useState([]);
   const [reposData, setReposData] = useState([]);
-
-
+  const router = useRouter();
+  const { username } = router.query;
 
   useEffect(() => {
     if (session) {
-      const userUrl = 'https://api.github.com/user';
+      const userUrl = `${GITHUB_USERS_URL}/${username}`;
       const token = session?.accessToken;
 
       fetchData(userUrl, token, setData);
     }
-  }, [session]);
+  }, [session, username]);
 
   useEffect(() => {
     if (session && data) {
@@ -35,6 +37,7 @@ const ProfilePage = () => {
       if (orgsUrl) {
         fetchData(orgsUrl, token, setOrgsData);
       }
+
       if (reposUrl) {
         fetchData(reposUrl, token, setReposData);
       }
@@ -49,7 +52,7 @@ const ProfilePage = () => {
       </Head>
       <Navbar />
       <div className="main-container">
-        <div className="profile-section">
+        <div className="section-one">
           <h5 className="section-title">
             Profile Information
           </h5>
@@ -94,16 +97,20 @@ const ProfilePage = () => {
                   <hr />
                   <h5>{data?.public_repos}</h5>
                 </td>
-                <td className="profile-table-data">
-                  <span>Private Repos</span>
-                  <hr />
-                  <h5>{data?.total_private_repos}</h5>
-                </td>
-
+                {
+                  data?.private_repos ? (
+                    <td className="profile-table-data">
+                      <span>Private Repos</span>
+                      <hr />
+                      <h5>{data?.total_private_repos}</h5>
+                    </td>
+                  ) : (
+                    <></>
+                  )
+                }
               </tr>
             </tbody>
           </table>
-
           {/* Orgs */}
           <div>
             <h5 className="section-title">Organizations</h5>
@@ -113,10 +120,8 @@ const ProfilePage = () => {
                   <div
                     className="profile-orgs"
                     onClick={() => {
-                      window.open(
-                        `https://github.com/${org.login}`,
-                        '_blank'
-                      );
+                      router.push(`/orgs/${org.login}`);
+
                     }}
                   >
                     <Image
@@ -133,7 +138,7 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className="repos-section">
+        <div className="section-two">
           <h5 className="section-title">Repositories</h5>
           <div
             className="repo-list"
@@ -159,8 +164,8 @@ const ProfilePage = () => {
                             className="repo-item-language"
                           >{repo.language}</span>
                         ) : (
-                           <></>
-                          )
+                          <></>
+                        )
                       }
                       <span
                         className="repo-item-privacy"

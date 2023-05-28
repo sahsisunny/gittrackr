@@ -1,8 +1,4 @@
 const fetchData = async ( url, token, setDataCallback ) => {
-  console.log('Fetching data...');
-  console.log('url:', url);
-  console.log('token:', token);
-  console.log('setDataCallback:', setDataCallback);
   try {
     const response = await fetch(url, {
       headers: {
