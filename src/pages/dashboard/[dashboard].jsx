@@ -5,6 +5,7 @@ import Head from 'next/head';
 import Footer from '@/components/Footer';
 import fetchData from '@/utils/FetchData';
 import FetchIssuePr from '@/utils/FetchIssuePr';
+import Loader from '@/components/Loader';
 import {
   GITHUB_USER_URL,
   GITHUB_SEARCH_ISSUES_URL,
@@ -20,6 +21,7 @@ const Dashboard = () => {
   const [prsData, setPrsData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [prFilterData, setPrFilterData] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   const router = useRouter();
   const { dashboard } = router.query;
@@ -70,15 +72,19 @@ const Dashboard = () => {
       const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${data.login}+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`;
       const token = session.accessToken;
       if (issueUrl) {
+        setLoading(true); // Start loading before fetching issues
         FetchIssuePr(issueUrl, token, (issues) => {
           setIssuesData(issues);
           setFilterData(issues);
+          setLoading(false); // Stop loading after fetching issues
         });
       }
       if (prUrl) {
+        setLoading(true); // Start loading before fetching issues
         FetchIssuePr(prUrl, token, (prs) => {
           setPrsData(prs);
           setPrFilterData(prs);
+          setLoading(false); // Stop loading after fetching issues
         });
       }
     }
@@ -87,153 +93,169 @@ const Dashboard = () => {
   return (
     <>
       <Head>
-        <title>Profile</title>
+        <title>{dashboard} | Dashboard - GitTrackr</title>
       </Head>
       <Navbar />
       <div className="main-container">
         <div className="section-one">
           <h5 className="section-title">Pull Requests</h5>
-          <div className="repo-filters">
-            <div className="radio-inputs">
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  defaultChecked
-                  onChange={() => {
-                    filterPrs('all');
-                  }}
-                />
-                <span className="name">All</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('open');
-                  }}
-                />
-                <span className="name">Open</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('closed');
-                  }}
-                />
-                <span className="name">closed</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('closed');
-                  }}
-                />
-                <span className="name">Merged</span>
-              </label>
-            </div>
-          </div>
-          <div className="repo-list">
-            {prFilterData.map((pr) => (
-              <div key={pr.id}>
-                <div
-                  className="repo-item"
-                  onClick={() => {
-                    window.open(`${pr.html_url}`, '_blank');
-                  }}
-                >
-                  <div className="repo-details">
-                    <div className="repo-item-left">
-                      <span className="repo-item-name">{pr.title}</span>
-                    </div>
-                    <div className="repo-item-right"></div>
-                  </div>
-                  <button
-                    className="issue-view-btn"
-                    onClick={() => {
-                      window.open(`${pr.html_url}`, '_blank');
-                    }}
-                  >
-                    {pr.state === 'open'
-                      ? 'Open'
-                      : pr.pull_request.merged_at !== null
-                      ? 'Merged'
-                      : 'Closed'}
-                  </button>
+          {prFilterData.length > 0 ? (
+            <>
+              <div className="repo-filters">
+                <div className="radio-inputs">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio"
+                      defaultChecked
+                      onChange={() => {
+                        filterPrs('all');
+                      }}
+                    />
+                    <span className="name">All</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio"
+                      onChange={() => {
+                        filterPrs('open');
+                      }}
+                    />
+                    <span className="name">Open</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio"
+                      onChange={() => {
+                        filterPrs('closed');
+                      }}
+                    />
+                    <span className="name">closed</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio"
+                      onChange={() => {
+                        filterPrs('closed');
+                      }}
+                    />
+                    <span className="name">Merged</span>
+                  </label>
                 </div>
               </div>
-            ))}
-          </div>
+              <div className="repo-list">
+                {prFilterData.map((pr) => (
+                  <div key={pr.id}>
+                    <div
+                      className="repo-item"
+                      onClick={() => {
+                        window.open(`${pr.html_url}`, '_blank');
+                      }}
+                    >
+                      <div className="repo-details">
+                        <div className="repo-item-left">
+                          <span className="repo-item-name">{pr.title}</span>
+                        </div>
+                        <div className="repo-item-right"></div>
+                      </div>
+                      <button
+                        className="issue-view-btn"
+                        onClick={() => {
+                          window.open(`${pr.html_url}`, '_blank');
+                        }}
+                      >
+                        {pr.state === 'open'
+                          ? 'Open'
+                          : pr.pull_request.merged_at !== null
+                          ? 'Merged'
+                          : 'Closed'}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="no-data">
+              <h3>No Pull Requests</h3>
+            </div>
+          )}
         </div>
         <div className="section-two">
           <h5 className="section-title">Issues</h5>
-          <div className="repo-filters">
-            <div className="radio-inputs">
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  defaultChecked
-                  onChange={() => {
-                    filterIssues('all');
-                  }}
-                />
-                <span className="name">All</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  onChange={() => {
-                    filterIssues('open');
-                  }}
-                />
-                <span className="name">Open</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  onChange={() => {
-                    filterIssues('closed');
-                  }}
-                />
-                <span className="name">Close</span>
-              </label>
-            </div>
-          </div>
-          <div className="repo-list">
-            {filterData.map((issue) => (
-              <div key={issue.id}>
-                <div
-                  className="repo-item"
-                  onClick={() => {
-                    window.open(`${issue.html_url}`, '_blank');
-                  }}
-                >
-                  <div className="repo-details">
-                    <div className="repo-item-left">
-                      <span className="repo-item-name">{issue.title}</span>
-                    </div>
-                    <div className="repo-item-right"></div>
-                  </div>
-                  <button
-                    className="issue-view-btn"
-                    onClick={() => {
-                      window.open(`${issue.html_url}`, '_blank');
-                    }}
-                  >
-                    {issue.state === 'open' ? 'Open' : 'Closed'}
-                  </button>
+          {issuesData.length > 0 ? (
+            <>
+              <div className="repo-filters">
+                <div className="radio-inputs">
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio-two"
+                      defaultChecked
+                      onChange={() => {
+                        filterIssues('all');
+                      }}
+                    />
+                    <span className="name">All</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio-two"
+                      onChange={() => {
+                        filterIssues('open');
+                      }}
+                    />
+                    <span className="name">Open</span>
+                  </label>
+                  <label className="radio">
+                    <input
+                      type="radio"
+                      name="radio-two"
+                      onChange={() => {
+                        filterIssues('closed');
+                      }}
+                    />
+                    <span className="name">Close</span>
+                  </label>
                 </div>
               </div>
-            ))}
-          </div>
+              <div className="repo-list">
+                {filterData.map((issue) => (
+                  <div key={issue.id}>
+                    <div
+                      className="repo-item"
+                      onClick={() => {
+                        window.open(`${issue.html_url}`, '_blank');
+                      }}
+                    >
+                      <div className="repo-details">
+                        <div className="repo-item-left">
+                          <span className="repo-item-name">{issue.title}</span>
+                        </div>
+                        <div className="repo-item-right"></div>
+                      </div>
+                      <button
+                        className="issue-view-btn"
+                        onClick={() => {
+                          window.open(`${issue.html_url}`, '_blank');
+                        }}
+                      >
+                        {issue.state === 'open' ? 'Open' : 'Closed'}
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </>
+          ) : (
+            <div className="no-data">
+              <h3>No Issues</h3>
+            </div>
+          )}
         </div>
       </div>
       <Footer />

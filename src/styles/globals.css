@@ -149,6 +149,28 @@ a {
   color: #747680;
 }
 
+.dropdown-item-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  margin-bottom: 0.5rem;
+}
+
+.dropdown-item-input {
+  width: 100%;
+  height: 2rem;
+  border: none;
+  padding: 0 0.5rem;
+  font: 0.8rem 'Roboto', sans-serif;
+  margin-bottom: 0.5rem;
+  background-color: transparent;
+  border-bottom: 1px solid white;
+  color: white;
+  outline: none;
+}
+
 .show {
   display: block;
 }
@@ -602,7 +624,8 @@ button svg {
   text-align: center;
 }
 
-.member-action {}
+.member-action {
+}
 
 .member-action-button {
   border-radius: 10px;
@@ -843,8 +866,47 @@ button svg {
   transition: all 0.15s ease-in-out;
 }
 
-.radio-inputs .radio input:checked+.name {
+.radio-inputs .radio input:checked + .name {
   background-color: #3a3d4e;
   color: white;
   font-weight: 600;
+}
+
+/* Loader */
+.svg {
+  width: 3.25em;
+  transform-origin: center;
+  animation: rotate4 2s linear infinite;
+}
+
+circle {
+  fill: none;
+  stroke: hsl(214, 97%, 59%);
+  stroke-width: 2;
+  stroke-dasharray: 1, 200;
+  stroke-dashoffset: 0;
+  stroke-linecap: round;
+  animation: dash4 1.5s ease-in-out infinite;
+}
+
+@keyframes rotate4 {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash4 {
+  0% {
+    stroke-dasharray: 1, 200;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90, 200;
+    stroke-dashoffset: -35px;
+  }
+
+  100% {
+    stroke-dashoffset: -125px;
+  }
 }

@@ -9,6 +9,7 @@ import FormatDate from '@/utils/FormatDate';
 import fetchData from '@/utils/FetchData';
 import { GITHUB_USERS_URL } from '@/constants/url';
 import { useRouter } from 'next/router';
+import Loader from '@/components/Loader';
 
 const ProfilePage = () => {
   const { data: session } = useSession({ required: true });
@@ -17,6 +18,7 @@ const ProfilePage = () => {
   const [reposData, setReposData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRepos, setFilteredRepos] = useState(reposData);
+  const [loading, setLoading] = useState(true);
   const router = useRouter();
   const { username } = router.query;
 
@@ -31,8 +33,9 @@ const ProfilePage = () => {
     if (session) {
       const userUrl = `${GITHUB_USERS_URL}/${username}`;
       const token = session?.accessToken;
-
+      setLoading(true);
       fetchData(userUrl, token, setData);
+      setLoading(false);
     }
   }, [session, username]);
 
@@ -43,13 +46,17 @@ const ProfilePage = () => {
       const token = session.accessToken;
 
       if (orgsUrl) {
+        setLoading(true);
         fetchData(orgsUrl, token, setOrgsData);
+        setLoading(false);
       }
 
       if (reposUrl) {
+        setLoading(true);
         fetchData(reposUrl, token, (repos) => {
           setReposData(repos);
           setFilteredRepos(repos);
+          setLoading(false);
         });
       }
     }
@@ -69,13 +76,17 @@ const ProfilePage = () => {
         <div className="section-one">
           <h5 className="section-title">Profile Information</h5>
           <div className="profile-container">
-            <Image
-              src={data?.avatar_url || ProfileImage}
-              alt="User Avatar"
-              className="avatar-photo"
-              width={200}
-              height={200}
-            />
+            {loading ? (
+              <Loader />
+            ) : (
+              <Image
+                src={data?.avatar_url || ProfileImage}
+                alt="User Avatar"
+                className="avatar-photo"
+                width={200}
+                height={200}
+              />
+            )}
             <div className="profile-name-container">
               {data?.name ? (
                 <h5 className="user-full-name">{data?.name || 'No name'}</h5>
@@ -125,13 +136,17 @@ const ProfilePage = () => {
                         router.push(`/orgs/${org.login}`);
                       }}
                     >
-                      <Image
-                        src={org.avatar_url}
-                        alt="User Avatar"
-                        className="org-photo"
-                        width={50}
-                        height={50}
-                      />
+                      {loading ? (
+                        <Loader />
+                      ) : (
+                        <Image
+                          src={org.avatar_url}
+                          alt="User Avatar"
+                          className="org-photo"
+                          width={50}
+                          height={50}
+                        />
+                      )}
                       <span>{org.login}</span>
                     </div>
                   </div>

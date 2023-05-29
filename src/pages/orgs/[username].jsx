@@ -10,6 +10,7 @@ import fetchData from '@/utils/FetchData';
 import { GITHUB_ORGANIZATION_URL } from '@/constants/url';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import Loader from '@/components/Loader';
 
 const ProfilePage = () => {
   const { data: session } = useSession({ required: true });
@@ -18,6 +19,8 @@ const ProfilePage = () => {
   const [membersData, setMembersData] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [filteredRepos, setFilteredRepos] = useState(reposData);
+  const [loading, setLoading] = useState(true);
+
   const router = useRouter();
   const { username } = router.query;
 
@@ -32,22 +35,28 @@ const ProfilePage = () => {
     if (session) {
       const userUrl = `${GITHUB_ORGANIZATION_URL}/${username}`;
       const token = session?.accessToken;
+      setLoading(true);
       fetchData(userUrl, token, setData);
+      setLoading(false);
     }
   }, [session, username]);
 
   useEffect(() => {
     if (session && data) {
-      const membersUrl = `https://api.github.com/orgs/${username}/members`;
+      const membersUrl = `https://api.github.com/orgs/${username}/members?page=1&per_page=100`;
       const reposUrl = `${data.repos_url}?page=1&per_page=100`;
       const token = session.accessToken;
       if (membersUrl) {
+        setLoading(true);
         fetchData(membersUrl, token, setMembersData);
+        setLoading(false);
       }
       if (reposUrl) {
+        setLoading(true);
         fetchData(reposUrl, token, (repos) => {
           setReposData(repos);
           setFilteredRepos(repos);
+          setLoading(false);
         });
       }
     }
@@ -71,13 +80,20 @@ const ProfilePage = () => {
         <div className="section-one">
           <h5 className="section-title">Profile Information</h5>
           <div className="profile-container">
-            <Image
-              src={data?.avatar_url || ProfileImage}
-              alt="User Avatar"
-              className="avatar-photo"
-              width={200}
-              height={200}
-            />
+            {
+              // add a loader here
+              loading ? (
+                <Loader />
+              ) : (
+                <Image
+                  src={data?.avatar_url || ProfileImage}
+                  alt="User Avatar"
+                  className="avatar-photo"
+                  width={200}
+                  height={200}
+                />
+              )
+            }
             <div className="profile-name-container">
               {data?.name ? (
                 <h5 className="user-full-name">{data?.name || 'No name'}</h5>
@@ -113,13 +129,17 @@ const ProfilePage = () => {
                     }}
                   >
                     <div className="member-details">
-                      <Image
-                        src={members.avatar_url}
-                        alt="User Avatar"
-                        className="members-photo"
-                        width={50}
-                        height={50}
-                      />
+                      {loading ? (
+                        <Loader />
+                      ) : (
+                        <Image
+                          src={members.avatar_url}
+                          alt="User Avatar"
+                          className="members-photo"
+                          width={50}
+                          height={50}
+                        />
+                      )}
                       <span className="member-name">{members.login}</span>
                     </div>
                     <div className="member-action">
