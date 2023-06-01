@@ -4,7 +4,6 @@ import Logo from './../../assets/GitTrackr.png';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useMediaQuery } from 'react-responsive';
 import fetchData from '@/utils/FetchData';
 import { GITHUB_USER_URL } from '@/constants/url';
 import { useEffect } from 'react';
@@ -15,7 +14,6 @@ const Navbar = () => {
   const [orgsData, setOrgsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
-  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);

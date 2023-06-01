@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSession, signOut, getSession } from 'next-auth/react';
+import { useSession, getSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
