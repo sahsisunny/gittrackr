@@ -848,3 +848,262 @@ button svg {
   color: white;
   font-weight: 600;
 }
+
+
+
+/* ABout Page */
+.about-container{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  color: white;
+  cursor: default;
+}
+
+
+.hero {
+  margin-bottom: 20px;
+  width: 100%;
+  height: 80vh;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 5rem;
+
+}
+.hero-title{
+  font-size: 3.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  width: 80%;
+}
+
+.hero-title-highlight{
+  color: cyan;
+}
+
+.hero-subtitle{
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 50%;
+  letter-spacing: 1px;
+}
+.hero-button-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.hero-button{
+  border-radius: 10px;
+  background-color: #2a2d3e;
+  color: white;
+  font-weight: 600;
+  font: 1.2rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  min-width: 8rem;
+  text-align: center;
+  margin-left: 1rem;
+}
+
+.hero-button:hover{
+  background-color: #3a3d4e;
+}
+
+.demo-btn{
+  background-color: cyan;
+  color: black;
+}
+
+.demo-btn:hover{
+  background-color: rgb(7, 211, 211);
+}
+
+
+
+
+
+
+.features {
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+
+}
+.features-button-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
+}
+
+.features-button{
+  border-radius: 10px;
+  background-color: #2a2d3e;
+  color: white;
+  font-weight: 600;
+  font: .8rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 1.5rem;
+  text-align: center;
+  margin-left: 1rem;
+  border: 1px solid #2a2d3e;
+  letter-spacing: 1px;
+}
+
+.features-button.active{
+  background-color: cyan;
+  color: black;
+}
+
+.features-button:hover{
+  border-color:cyan;
+}
+
+.feature-image-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.feature-image{
+  border-radius: 18px;
+  object-fit: cover;
+  width: 80%;
+  height: 80%;
+  animation: slideInFromLeft .5s ease-in-out forwards;
+  box-shadow: 0 0 12px 1px white;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateY(10%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+
+
+
+
+.testimonial {
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.section-title{
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  width: 100%;
+  text-decoration: underline cyan;
+}
+
+.testimonial-text-quote{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.testimonial-text-author{
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+
+
+.about {
+  
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;  
+}
+
+.about-text{
+  letter-spacing: 1px;
+  width: 80%;
+}
+
+.about-text-heading{
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: cyan;
+}
+
+.about-text-paragraph{
+  margin-bottom: 1rem;
+  text-align: center;
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.faq {
+  background-color: #f2f2f2;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.contact {
+  background-color: #fff;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+
+.hide{
+  display: none;
+}
