@@ -599,8 +599,6 @@ button svg {
   text-align: center;
 }
 
-.member-action {}
-
 .member-action-button {
   border-radius: 10px;
   background-color: #2a2d3e;
@@ -769,7 +767,7 @@ button svg {
   transition: all 0.15s ease-in-out;
 }
 
-.radio-inputs .radio input:checked+.name {
+.radio-inputs .radio input:checked + .name {
   background-color: #3a3d4e;
   color: white;
   font-weight: 600;

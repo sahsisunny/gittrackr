@@ -1,10 +1,6 @@
-interface IFormatDate {
-  (dateString: string): string;
-}
-
-const FormatDate: IFormatDate = (dateString: string): string => {
+const FormatDate = (dateString) => {
   const date = new Date(dateString);
-  const options: Intl.DateTimeFormatOptions = {
+  const options = {
     year: 'numeric',
     month: 'long',
     day: 'numeric',
