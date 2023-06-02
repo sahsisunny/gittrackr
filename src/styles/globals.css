@@ -553,6 +553,9 @@ button svg {
   font-weight: bold;
 }
 
+.repo-item-privacy {
+  cursor: pointer;
+}
 .repo-item-updated {
   font-size: 1rem;
   font-weight: bold;

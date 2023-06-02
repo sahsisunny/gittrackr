@@ -33,7 +33,7 @@
     "src/pages/profiles/[username].jsx",
     "src/utils/FetchData.jsx",
     "src/components/Navbar/index.jsx",
-    "src/pages/index.jsx"
+    "src/pages/index.jsx",
     "src/utils/FormatDate.jsx"
   ],
   "exclude": ["node_modules"]
