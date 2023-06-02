@@ -63,7 +63,10 @@ const ProfilePage = () => {
         <title>
           {username
             ?.split('-')
-            .map((word) => word.charAt(0).toUpperCase() + word.slice(1) + ' ')}
+            .map(
+              (word) => word.charAt(0).toUpperCase() + word.slice(1) + ' '
+            )}{' '}
+          | Org Profile
         </title>
       </Head>
       <Navbar />

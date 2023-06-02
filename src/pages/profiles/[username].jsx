@@ -62,7 +62,7 @@ const ProfilePage = () => {
   return (
     <>
       <Head>
-        <title>Profile</title>
+        <title>{data?.name ? `${data?.name} ` : data?.login} | Profile</title>
       </Head>
       <Navbar />
       <div className="main-container">

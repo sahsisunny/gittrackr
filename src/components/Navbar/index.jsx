@@ -4,7 +4,6 @@ import Logo from './../../assets/GitTrackr.png';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { useMediaQuery } from 'react-responsive';
 import fetchData from '@/utils/FetchData';
 import { GITHUB_USER_URL } from '@/constants/url';
 import { useEffect } from 'react';
@@ -15,7 +14,6 @@ const Navbar = () => {
   const [orgsData, setOrgsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
-  const isMobile = useMediaQuery({ maxWidth: 768 });
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -25,10 +23,10 @@ const Navbar = () => {
     if (!session && router.pathname === '/login') {
       return (
         <>
-          <Link href="/about" className="nav-link">
+          <Link href="/#about" className="nav-link">
             About
           </Link>
-          <Link href="/contact" className="nav-link">
+          <Link href="/#contact" className="nav-link">
             Contact
           </Link>
         </>
@@ -42,10 +40,16 @@ const Navbar = () => {
         <Link href="/login" className="nav-link">
           Login
         </Link>
-        <Link href="/about" className="nav-link">
+        <Link href="/#features" className="nav-link">
+          Features
+        </Link>
+        <Link href="/#about" className="nav-link">
           About
         </Link>
-        <Link href="/contact" className="nav-link">
+        <Link href="/#faq" className="nav-link">
+          FAQ
+        </Link>
+        <Link href="/#contact" className="nav-link">
           Contact
         </Link>
       </>
@@ -135,10 +139,10 @@ const Navbar = () => {
               >
                 Profile
               </Link>
-              <Link href="/about" className="nav-link">
+              <Link href="/#about" className="nav-link">
                 About
               </Link>
-              <Link href="/contact" className="nav-link">
+              <Link href="/#contact" className="nav-link">
                 Contact
               </Link>
               <button className="dropdown-item-btn" onClick={() => signOut()}>
