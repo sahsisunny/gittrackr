@@ -11,6 +11,9 @@ import {
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
 import { useState, useEffect } from 'react';
+import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
+import FormatDate from '@/utils/FormatDate';
+import getRepoUrl from '@/utils/getRepoUrl';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
@@ -132,7 +135,19 @@ const Dashboard = () => {
                     <div className="repo-item-left">
                       <span className="repo-item-name">{pr.title}</span>
                     </div>
-                    <div className="repo-item-right"></div>
+                    <div className="repo-item-right">
+                      <span
+                        className="repo-item-privacy"
+                        onClick={() => {
+                          window.open(`${getRepoUrl(pr.html_url)}`, '_blank');
+                        }}
+                      >
+                        {getRepoNameFromUrl(pr.repository_url)}
+                      </span>
+                      <span className="repo-item-updated">
+                        {FormatDate(pr.updated_at)}
+                      </span>
+                    </div>
                   </div>
                   <button
                     className="issue-view-btn"
@@ -201,7 +216,22 @@ const Dashboard = () => {
                     <div className="repo-item-left">
                       <span className="repo-item-name">{issue.title}</span>
                     </div>
-                    <div className="repo-item-right"></div>
+                    <div className="repo-item-right">
+                      <span
+                        className="repo-item-privacy"
+                        onClick={() => {
+                          window.open(
+                            `${getRepoUrl(issue.html_url)}`,
+                            '_blank'
+                          );
+                        }}
+                      >
+                        {getRepoNameFromUrl(issue.repository_url)}
+                      </span>
+                      <span className="repo-item-updated">
+                        {FormatDate(issue.created_at)}
+                      </span>
+                    </div>
                   </div>
                   <button
                     className="issue-view-btn"
