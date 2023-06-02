@@ -127,9 +127,6 @@ const Dashboard = () => {
               <div key={pr.id}>
                 <div
                   className="repo-item"
-                  onClick={() => {
-                    window.open(`${pr.html_url}`, '_blank');
-                  }}
                 >
                   <div className="repo-details">
                     <div className="repo-item-left">
@@ -208,9 +205,6 @@ const Dashboard = () => {
               <div key={issue.id}>
                 <div
                   className="repo-item"
-                  onClick={() => {
-                    window.open(`${issue.html_url}`, '_blank');
-                  }}
                 >
                   <div className="repo-details">
                     <div className="repo-item-left">
