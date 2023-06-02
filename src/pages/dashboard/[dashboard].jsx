@@ -12,6 +12,8 @@ import {
 } from '@/constants/url';
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
+import FormatDate from '@/utils/FormatDate';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
@@ -141,17 +143,19 @@ const Dashboard = () => {
           <div className="repo-list">
             {prFilterData.map((pr) => (
               <div key={pr.id}>
-                <div
-                  className="repo-item"
-                  onClick={() => {
-                    window.open(`${pr.html_url}`, '_blank');
-                  }}
-                >
+                <div className="repo-item">
                   <div className="repo-details">
                     <div className="repo-item-left">
                       <span className="repo-item-name">{pr.title}</span>
                     </div>
-                    <div className="repo-item-right"></div>
+                    <div className="repo-item-right">
+                      <span className="repo-item-privacy">
+                        {getRepoNameFromUrl(pr.repository_url)}
+                      </span>
+                      <span className="repo-item-updated">
+                        {FormatDate(pr.updated_at)}
+                      </span>
+                    </div>
                   </div>
                   <button
                     className="issue-view-btn"
