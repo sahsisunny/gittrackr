@@ -11,9 +11,6 @@ import {
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
-import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
-import FormatDate from '@/utils/FormatDate';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
@@ -22,9 +19,6 @@ const Dashboard = () => {
   const [prsData, setPrsData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [prFilterData, setPrFilterData] = useState([]);
-
-  const router = useRouter();
-  const { dashboard } = router.query;
 
   const filterIssues = (status) => {
     if (status === 'open') {
@@ -47,11 +41,6 @@ const Dashboard = () => {
     } else if (status === 'closed') {
       const closedPrs = prsData.filter((pr) => pr.state === 'closed');
       setPrFilterData(closedPrs);
-    } else if (status === 'merged') {
-      const mergedPrs = prsData.filter(
-        (pr) => pr.pull_request.merged_at !== null
-      );
-      setPrFilterData(mergedPrs);
     } else {
       setPrFilterData(prsData);
     }
@@ -68,8 +57,8 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (session && data) {
-      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${data.login}+org:${dashboard}`;
-      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${data.login}+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`;
+      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+author:${data.login}+${GITHUB_PAGINATION_HUNDRED}`;
+      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${data.login}+${GITHUB_PAGINATION_HUNDRED}`;
       const token = session.accessToken;
       if (issueUrl) {
         FetchIssuePr(issueUrl, token, (issues) => {
@@ -84,12 +73,12 @@ const Dashboard = () => {
         });
       }
     }
-  }, [session, data, dashboard]);
+  }, [session, data]);
 
   return (
     <>
       <Head>
-        <title>{dashboard} | Dashboard - GitTrack</title>
+        <title>Profile</title>
       </Head>
       <Navbar />
       <div className="main-container">
@@ -128,34 +117,22 @@ const Dashboard = () => {
                 />
                 <span className="name">closed</span>
               </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('closed');
-                  }}
-                />
-                <span className="name">Merged</span>
-              </label>
             </div>
           </div>
           <div className="repo-list">
             {prFilterData.map((pr) => (
               <div key={pr.id}>
-                <div className="repo-item">
+                <div
+                  className="repo-item"
+                  onClick={() => {
+                    window.open(`${pr.html_url}`, '_blank');
+                  }}
+                >
                   <div className="repo-details">
                     <div className="repo-item-left">
                       <span className="repo-item-name">{pr.title}</span>
                     </div>
-                    <div className="repo-item-right">
-                      <span className="repo-item-privacy">
-                        {getRepoNameFromUrl(pr.repository_url)}
-                      </span>
-                      <span className="repo-item-updated">
-                        {FormatDate(pr.updated_at)}
-                      </span>
-                    </div>
+                    <div className="repo-item-right"></div>
                   </div>
                   <button
                     className="issue-view-btn"
