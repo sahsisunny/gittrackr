@@ -789,7 +789,7 @@ button svg {
 .hero {
   margin-bottom: 20px;
   width: 100%;
-  height: 80vh;
+  height: 100vh;
   border-radius: 18px;
   display: flex;
   flex-direction: column;
@@ -855,8 +855,8 @@ button svg {
 }
 
 .features {
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 1rem;
+  margin-bottom: 1rem;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -868,7 +868,7 @@ button svg {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
 }
 
 .features-button {
@@ -876,7 +876,7 @@ button svg {
   background-color: #2a2d3e;
   color: white;
   font-weight: 600;
-  font: .8rem 'Roboto', sans-serif;
+  font: 0.8rem 'Roboto', sans-serif;
   border: none;
   cursor: pointer;
   padding: 0.4rem 1.5rem;
@@ -904,10 +904,9 @@ button svg {
 
 .feature-image {
   border-radius: 18px;
-  object-fit: cover;
   width: 80%;
   height: 80%;
-  animation: slideInFromLeft .5s ease-in-out forwards;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
   box-shadow: 0 0 12px 1px white;
 }
 
@@ -965,6 +964,7 @@ button svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 80vh;
 }
 
 .about-text {
@@ -993,11 +993,13 @@ button svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  height: 80vh;
 }
 
 .faq-container {
   width: 80%;
   color: black;
+  margin-top: 2rem;
 }
 
 .faq {
@@ -1077,6 +1079,7 @@ button svg {
   align-items: center;
   justify-content: center;
   padding: 2rem;
+  height: 70vh;
 }
 
 .contact-container {
@@ -1098,7 +1101,7 @@ button svg {
   object-fit: cover;
   width: 60%;
   height: 60%;
-  animation: slideInFromLeft .5s ease-in-out forwards;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
 }
 
 .contact-form {
@@ -1277,7 +1280,7 @@ button svg {
   .features-button {
     font-size: 1rem;
     padding: 0.5rem 1rem;
-    margin: .5rem;
+    margin: 0.5rem;
   }
 
   .feature-image {
@@ -1337,7 +1340,7 @@ button svg {
     object-fit: cover;
     width: 60%;
     height: 60%;
-    animation: slideInFromLeft .5s ease-in-out forwards;
+    animation: slideInFromLeft 0.5s ease-in-out forwards;
   }
 
   .contact-form {

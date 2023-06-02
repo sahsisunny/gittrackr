@@ -23,10 +23,10 @@ const Navbar = () => {
     if (!session && router.pathname === '/login') {
       return (
         <>
-          <Link href="/about" className="nav-link">
+          <Link href="/#about" className="nav-link">
             About
           </Link>
-          <Link href="/contact" className="nav-link">
+          <Link href="/#contact" className="nav-link">
             Contact
           </Link>
         </>
@@ -40,10 +40,16 @@ const Navbar = () => {
         <Link href="/login" className="nav-link">
           Login
         </Link>
-        <Link href="/about" className="nav-link">
+        <Link href="/#features" className="nav-link">
+          Features
+        </Link>
+        <Link href="/#about" className="nav-link">
           About
         </Link>
-        <Link href="/contact" className="nav-link">
+        <Link href="/#faq" className="nav-link">
+          FAQ
+        </Link>
+        <Link href="/#contact" className="nav-link">
           Contact
         </Link>
       </>
@@ -133,10 +139,10 @@ const Navbar = () => {
               >
                 Profile
               </Link>
-              <Link href="/about" className="nav-link">
+              <Link href="/#about" className="nav-link">
                 About
               </Link>
-              <Link href="/contact" className="nav-link">
+              <Link href="/#contact" className="nav-link">
                 Contact
               </Link>
               <button className="dropdown-item-btn" onClick={() => signOut()}>

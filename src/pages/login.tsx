@@ -19,7 +19,7 @@ const SignInPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Sign In | GitTrackr</title>
+        <title>Sign in with GitHub - GitTrackr</title>
       </Head>
       <Navbar />
 
@@ -41,7 +41,7 @@ const SignInPage: NextPage = () => {
 
             <button
               className="sign-btn"
-              onClick={() => signIn('github', { callbackUrl: '/' })}
+              onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
             >
               Sign in with GitHub
               <svg
