@@ -123,9 +123,7 @@ const Navbar = () => {
                     {org.login.replace(/-/g, ' ')}
                   </Link>
                 ))
-              ) : (
-                <p className="dropdown-no-orgs">No organizations</p>
-              )}
+              ) : (<></>)}
               <hr className="dropdown-divider" />
               <Link href="/#about" className="nav-link">
                 About
