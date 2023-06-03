@@ -107,6 +107,9 @@ const Navbar = () => {
                 <strong>{session.user?.name ?? ''}</strong>
               </p>
               <hr className="dropdown-divider" />
+              <Link href="/profile" className="nav-link">
+                Profile
+              </Link>
               <Link href="/dashboard" className="nav-link">
                 Dashboard
               </Link>
@@ -124,9 +127,6 @@ const Navbar = () => {
                 <p className="dropdown-no-orgs">No organizations</p>
               )}
               <hr className="dropdown-divider" />
-              <Link href={`/profiles/${USERNAME}`} className="nav-link">
-                Profile
-              </Link>
               <Link href="/#about" className="nav-link">
                 About
               </Link>
