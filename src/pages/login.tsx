@@ -41,7 +41,7 @@ const SignInPage: NextPage = () => {
 
             <button
               className="sign-btn"
-              onClick={() => signIn('github', { callbackUrl: '/dashboard' })}
+              onClick={() => signIn('github', { callbackUrl: '/' })}
             >
               Sign in with GitHub
               <svg

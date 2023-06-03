@@ -103,7 +103,7 @@ const about = () => {
         </div>
 
         <div className="features" id="features">
-          <h2 className="section-title">Features</h2>
+          <h2 className="section-heading">Features</h2>
           <div className="features-button-container">
             <button
               onClick={changeFeatureImage}
@@ -155,7 +155,7 @@ const about = () => {
 
         <div className="testimonial" id="testimonials">
           <div className="testimonial-title">
-            <h2 className="section-title">Testimonials</h2>
+            <h2 className="section-heading">Testimonials</h2>
             <div className="testimonial-text">
               <p className="testimonial-text-quote">
                 GitTrackr has been a game changer for our team. We are able to
@@ -168,7 +168,7 @@ const about = () => {
         </div>
 
         <div className="about" id="about">
-          <h2 className="section-title">
+          <h2 className="section-heading">
             About <span>GitTrackr</span>
           </h2>
           <div className="about-text">
@@ -209,7 +209,7 @@ const about = () => {
         </div>
 
         <div className="faq-section" id="faq">
-          <h2 className="section-title">Frequently Asked Questions</h2>
+          <h2 className="section-heading">Frequently Asked Questions</h2>
           <div className="faq-container">
             <div className="faq">
               <div className="faq__title" onClick={() => toggleAccordion(1)}>
@@ -283,7 +283,7 @@ const about = () => {
         </div>
 
         <div className="contact" id="contact">
-          <h2 className="section-title">Contact Us</h2>
+          <h2 className="section-heading">Contact Us</h2>
           <div className="contact-container">
             <div className="contact-image-container">
               <Image

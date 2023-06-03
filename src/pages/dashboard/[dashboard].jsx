@@ -3,10 +3,8 @@ import { useSession, getSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
-import fetchData from '@/utils/FetchData';
 import FetchIssuePr from '@/utils/FetchIssuePr';
 import {
-  GITHUB_USER_URL,
   GITHUB_SEARCH_ISSUES_URL,
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
@@ -18,11 +16,12 @@ import getRepoUrl from '../../utils/getRepoUrl';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
-  const [data, setData] = useState(null);
   const [issuesData, setIssuesData] = useState([]);
   const [prsData, setPrsData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [prFilterData, setPrFilterData] = useState([]);
+  const USERNAME = session?.user?.login;
+  const TOKEN = session?.accessToken;
 
   const router = useRouter();
   const { dashboard } = router.query;
@@ -60,32 +59,22 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (session) {
-      const userUrl = GITHUB_USER_URL;
-      const token = session?.accessToken;
-
-      fetchData(userUrl, token, setData);
-    }
-  }, [session]);
-
-  useEffect(() => {
-    if (session && data) {
-      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${data.login}+org:${dashboard}`;
-      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${data.login}+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`;
-      const token = session.accessToken;
+      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${USERNAME}+org:${dashboard}`;
+      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${USERNAME}+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`;
       if (issueUrl) {
-        FetchIssuePr(issueUrl, token, (issues) => {
+        FetchIssuePr(issueUrl, TOKEN, (issues) => {
           setIssuesData(issues);
           setFilterData(issues);
         });
       }
       if (prUrl) {
-        FetchIssuePr(prUrl, token, (prs) => {
+        FetchIssuePr(prUrl, TOKEN, (prs) => {
           setPrsData(prs);
           setPrFilterData(prs);
         });
       }
     }
-  }, [session, data, dashboard]);
+  }, [session, dashboard, USERNAME, TOKEN]);
 
   return (
     <>

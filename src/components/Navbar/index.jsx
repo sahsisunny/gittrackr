@@ -5,15 +5,16 @@ import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import fetchData from '@/utils/FetchData';
-import { GITHUB_USER_URL } from '@/constants/url';
 import { useEffect } from 'react';
 
 const Navbar = () => {
   const { data: session } = useSession();
-  const [data, setData] = useState(null);
   const [orgsData, setOrgsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
+  const USERNAME = session?.user?.login;
+  const ORGS_URL = session?.user?.organizations_url;
+  const TOKEN = session?.accessToken;
 
   const toggleDropdown = () => {
     setShowDropdown(!showDropdown);
@@ -58,23 +59,11 @@ const Navbar = () => {
 
   useEffect(() => {
     if (session) {
-      const userUrl = GITHUB_USER_URL;
-      const token = session?.accessToken;
-
-      fetchData(userUrl, token, setData);
-    }
-  }, [session]);
-
-  useEffect(() => {
-    if (session && data) {
-      const orgsUrl = data.organizations_url;
-      const token = session.accessToken;
-
-      if (orgsUrl) {
-        fetchData(orgsUrl, token, setOrgsData);
+      if (ORGS_URL) {
+        fetchData(ORGS_URL, TOKEN, setOrgsData);
       }
     }
-  }, [session, data]);
+  }, [session, ORGS_URL, TOKEN]);
 
   return (
     <nav className="navbar">
@@ -118,7 +107,9 @@ const Navbar = () => {
                 <strong>{session.user?.name ?? ''}</strong>
               </p>
               <hr className="dropdown-divider" />
-              <span className="dropdown-item-heading">Dashboard</span>
+              <Link href="/dashboard" className="nav-link">
+                Dashboard
+              </Link>
               {orgsData.length > 0 ? (
                 orgsData.map((org) => (
                   <Link
@@ -133,10 +124,7 @@ const Navbar = () => {
                 <p className="dropdown-no-orgs">No organizations</p>
               )}
               <hr className="dropdown-divider" />
-              <Link
-                href={`/profiles/${data?.login ?? ''}`}
-                className="nav-link"
-              >
+              <Link href={`/profiles/${USERNAME}`} className="nav-link">
                 Profile
               </Link>
               <Link href="/#about" className="nav-link">

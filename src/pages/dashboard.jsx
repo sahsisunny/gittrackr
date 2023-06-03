@@ -1,12 +1,10 @@
 import React from 'react';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Footer from '@/components/Footer';
-import fetchData from '@/utils/FetchData';
 import FetchIssuePr from '@/utils/FetchIssuePr';
 import {
-  GITHUB_USER_URL,
   GITHUB_SEARCH_ISSUES_URL,
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
@@ -15,13 +13,15 @@ import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
 import FormatDate from '@/utils/FormatDate';
 import getRepoUrl from '@/utils/getRepoUrl';
 
-const Dashboard = () => {
+const MyDashboard = () => {
   const { data: session } = useSession({ required: true });
-  const [data, setData] = useState(null);
   const [issuesData, setIssuesData] = useState([]);
   const [prsData, setPrsData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [prFilterData, setPrFilterData] = useState([]);
+  const USERNAME = session?.user?.login;
+  const NAME = session?.user?.name;
+  const TOKEN = session?.accessToken;
 
   const filterIssues = (status) => {
     if (status === 'open') {
@@ -51,37 +51,28 @@ const Dashboard = () => {
 
   useEffect(() => {
     if (session) {
-      const userUrl = GITHUB_USER_URL;
-      const token = session?.accessToken;
+      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+author:${USERNAME}+${GITHUB_PAGINATION_HUNDRED}`;
+      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${USERNAME}+${GITHUB_PAGINATION_HUNDRED}`;
 
-      fetchData(userUrl, token, setData);
-    }
-  }, [session]);
-
-  useEffect(() => {
-    if (session && data) {
-      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+author:${data.login}+${GITHUB_PAGINATION_HUNDRED}`;
-      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${data.login}+${GITHUB_PAGINATION_HUNDRED}`;
-      const token = session.accessToken;
       if (issueUrl) {
-        FetchIssuePr(issueUrl, token, (issues) => {
+        FetchIssuePr(issueUrl, TOKEN, (issues) => {
           setIssuesData(issues);
           setFilterData(issues);
         });
       }
       if (prUrl) {
-        FetchIssuePr(prUrl, token, (prs) => {
+        FetchIssuePr(prUrl, TOKEN, (prs) => {
           setPrsData(prs);
           setPrFilterData(prs);
         });
       }
     }
-  }, [session, data]);
+  }, [session, USERNAME]);
 
   return (
     <>
       <Head>
-        <title>Profile</title>
+        <title>{NAME ? `${NAME} ` : USERNAME} | Dashboard</title>
       </Head>
       <Navbar />
       <div className="main-container">
@@ -125,9 +116,7 @@ const Dashboard = () => {
           <div className="repo-list">
             {prFilterData.map((pr) => (
               <div key={pr.id}>
-                <div
-                  className="repo-item"
-                >
+                <div className="repo-item">
                   <div className="repo-details">
                     <div className="repo-item-left">
                       <span className="repo-item-name">{pr.title}</span>
@@ -203,9 +192,7 @@ const Dashboard = () => {
           <div className="repo-list">
             {filterData.map((issue) => (
               <div key={issue.id}>
-                <div
-                  className="repo-item"
-                >
+                <div className="repo-item">
                   <div className="repo-details">
                     <div className="repo-item-left">
                       <span className="repo-item-name">{issue.title}</span>
@@ -246,21 +233,4 @@ const Dashboard = () => {
   );
 };
 
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
-
-export default Dashboard;
+export default MyDashboard;
