@@ -27,18 +27,17 @@ export const authOptions = {
       session.user.public_repos = user.public_repos;
       session.user.organizations_url = user.organizations_url;
       session.user.created_at = user.created_at;
-
       return session;
     },
-    // async jwt({ token, user, account }) {
-    //   if (user) {
-    //     token.id = user.id;
-    //   }
-    //   if (account) {
-    //     token.accessToken = account.access_token;
-    //   }
-    //   return token;
-    // },
+    async jwt({ token, user, account }) {
+      if (user) {
+        token.id = user.id;
+      }
+      if (account) {
+        token.accessToken = account.access_token;
+      }
+      return token;
+    },
   },
   pages: {
     signIn: '/login',
