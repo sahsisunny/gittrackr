@@ -12,7 +12,6 @@ const Navbar = () => {
   const [orgsData, setOrgsData] = useState([]);
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
-  const USERNAME = session?.user?.login;
   const ORGS_URL = session?.user?.organizations_url;
   const TOKEN = session?.accessToken;
 
@@ -24,6 +23,9 @@ const Navbar = () => {
     if (!session && router.pathname === '/login') {
       return (
         <>
+          <Link href="/" className="nav-link">
+            Home
+          </Link>
           <Link href="/#about" className="nav-link">
             About
           </Link>
@@ -123,7 +125,9 @@ const Navbar = () => {
                     {org.login.replace(/-/g, ' ')}
                   </Link>
                 ))
-              ) : (<></>)}
+              ) : (
+                <></>
+              )}
               <hr className="dropdown-divider" />
               <Link href="/#about" className="nav-link">
                 About

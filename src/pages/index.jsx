@@ -95,8 +95,8 @@ const about = () => {
                 </Link>
               </>
             ) : (
-              <Link href="/dashboard" className="hero-button demo-btn">
-                Go to Dashboard
+              <Link href="/profile" className="hero-button demo-btn">
+                See Profile
               </Link>
             )}
           </div>
