@@ -6,7 +6,7 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
-      scope: 'user',
+      scope: 'read:user read:org',
     }),
   ],
   callbacks: {

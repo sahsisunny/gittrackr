@@ -183,7 +183,6 @@ a {
   border: none;
   cursor: pointer;
   width: 100%;
-  margin-top: 1rem;
 
   &:hover {
     background-color: #181717;
@@ -212,7 +211,6 @@ a {
   .dropdown-item-btn {
     width: 100%;
     text-align: center;
-    margin-top: 1rem;
   }
 
   .dropdown-item {
@@ -937,6 +935,7 @@ button svg {
   margin-bottom: 1rem;
   text-align: center;
   letter-spacing: 0.1rem;
+  color: white;
   width: 100%;
   text-decoration: underline cyan;
 }
@@ -965,7 +964,7 @@ button svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .about-text {
@@ -994,7 +993,7 @@ button svg {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 80vh;
+  min-height: 80vh;
 }
 
 .faq-container {
@@ -1049,6 +1048,30 @@ button svg {
 .answer {
   border-top: 1px solid cyan;
   padding-top: 1rem;
+}
+
+.answer-div {
+  border-top: 1px solid cyan;
+  margin-bottom: 1rem;
+  padding: 1rem;
+}
+
+.answer-div ol {
+  margin-left: 2rem;
+}
+
+.answer-div li {
+  margin-bottom: 0.5rem;
+}
+.help-section {
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
 }
 
 .faq-btn {
