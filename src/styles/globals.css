@@ -485,6 +485,10 @@ button svg {
   }
 }
 
+.profile-orgs span {
+  color: black;
+}
+
 .org-photo {
   border-radius: 50%;
   display: block;
@@ -1374,5 +1378,9 @@ button svg {
     justify-content: center;
     flex-direction: column;
     padding: 2rem;
+  }
+
+  .faq-container {
+    width: 100%;
   }
 }
