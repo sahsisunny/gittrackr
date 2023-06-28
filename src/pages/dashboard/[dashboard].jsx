@@ -79,7 +79,7 @@ const Dashboard = () => {
   return (
     <>
       <Head>
-        <title>{dashboard} | Dashboard - GitTrack</title>
+        <title>{dashboard} | Dashboard</title>
       </Head>
       <Navbar />
       <div className="main-container">

@@ -19,7 +19,7 @@ const SignInPage: NextPage = () => {
   return (
     <>
       <Head>
-        <title>Sign in with GitHub - GitTrackr</title>
+        <title>Sign in with GitHub | GitTrackr</title>
       </Head>
       <Navbar />
 

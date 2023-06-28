@@ -7,7 +7,7 @@ const NotFound = () => {
   return (
     <>
       <Head>
-        <title>404 - Page Not Found</title>
+        <title>Page Not Found | GitTrackr</title>
       </Head>
       <Navbar />
       <div className="page-not-found">
