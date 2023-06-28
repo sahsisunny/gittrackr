@@ -60,14 +60,7 @@ const ProfilePage = () => {
   return (
     <>
       <Head>
-        <title>
-          {username
-            ?.split('-')
-            .map(
-              (word) => word.charAt(0).toUpperCase() + word.slice(1) + ' '
-            )}{' '}
-          | Org Profile
-        </title>
+        <title>{username} | Org Profile</title>
       </Head>
       <Navbar />
       <div className="main-container">
