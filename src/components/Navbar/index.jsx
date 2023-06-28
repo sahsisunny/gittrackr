@@ -129,11 +129,8 @@ const Navbar = () => {
                 <></>
               )}
               <hr className="dropdown-divider" />
-              <Link href="/#about" className="nav-link">
-                About
-              </Link>
-              <Link href="/#contact" className="nav-link">
-                Contact
+              <Link href="/help" className="nav-link">
+                Help
               </Link>
               <button className="dropdown-item-btn" onClick={() => signOut()}>
                 Sign out
