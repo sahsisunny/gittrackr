@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,14 +10,16 @@ import ContactUsImg from './../assets//contactus.png';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
-import Faq from '@/components/FAQ';
+import Accordion from '@/components/Accordion';
+import styles from '@/styles/index.module.css';
+import { FaqQnA } from '@/constants/faqMock';
 
-const about = () => {
+const About = () => {
   const { data: session } = useSession();
 
-  const [featureImage, setFeatureImage] = React.useState(PRsIssuesImg);
-  const [activeButton, setActiveButton] = React.useState('');
-  const [key, setKey] = React.useState('');
+  const [featureImage, setFeatureImage] = useState(PRsIssuesImg);
+  const [activeButton, setActiveButton] = useState('');
+  const [key, setKey] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
@@ -200,7 +202,20 @@ const about = () => {
             </p>
           </div>
         </div>
-        <Faq />
+        <div className={styles.accordionSection}>
+          <h1 className={styles.sectionHeading}>Frequently Asked Questions</h1>
+          <div className={styles.faqContainer}>
+            {FaqQnA.map((element, index) => (
+              <div className={styles.faq} key={element.id}>
+                <Accordion
+                  answer={element.answer}
+                  question={element.question}
+                  index={index}
+                />
+              </div>
+            ))}
+          </div>
+        </div>
 
         <div className="contact" id="contact">
           <h2 className="section-heading">Contact Us</h2>
@@ -255,4 +270,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;

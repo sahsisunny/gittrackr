@@ -1,4 +1,4 @@
-export const qNa = [
+export const FaqQnA = [
   {
     id: 1,
     question: 'How do I sign up for GitTrackr?',
