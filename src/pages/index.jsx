@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -10,24 +10,19 @@ import ContactUsImg from './../assets//contactus.png';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
+import Accordion from '@/components/Accordion';
+import styles from '@/styles/index.module.css';
+import { FaqQnA } from '@/constants/faqMock';
 
-const about = () => {
+const About = () => {
   const { data: session } = useSession();
 
-  const [featureImage, setFeatureImage] = React.useState(PRsIssuesImg);
-  const [activeButton, setActiveButton] = React.useState('');
-  const [key, setKey] = React.useState('');
-  const [showAccordions, setShowAccordions] = useState({});
+  const [featureImage, setFeatureImage] = useState(PRsIssuesImg);
+  const [activeButton, setActiveButton] = useState('');
+  const [key, setKey] = useState('');
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
-
-  const toggleAccordion = (index) => {
-    setShowAccordions((prevState) => ({
-      ...prevState,
-      [index]: !prevState[index],
-    }));
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -207,78 +202,18 @@ const about = () => {
             </p>
           </div>
         </div>
-
-        <div className="faq-section" id="faq">
-          <h2 className="section-heading">Frequently Asked Questions</h2>
-          <div className="faq-container">
-            <div className="faq">
-              <div className="faq__title" onClick={() => toggleAccordion(1)}>
-                <h3 className="question">How do I sign up for GitTrackr?</h3>
-                <button
-                  type="button"
-                  className={`faq-btn ${
-                    showAccordions[1] ? 'faq-btn-show' : ''
-                  }`}
-                  onClick={() => toggleAccordion(1)}
-                ></button>
+        <div className={styles.accordionSection}>
+          <h1 className={styles.sectionHeading}>Frequently Asked Questions</h1>
+          <div className={styles.faqContainer}>
+            {FaqQnA.map((element, index) => (
+              <div className={styles.faq} key={element.id}>
+                <Accordion
+                  answer={element.answer}
+                  question={element.question}
+                  index={index}
+                />
               </div>
-
-              <div className={`${showAccordions[1] ? 'show' : 'hide'}`}>
-                <p className="answer">
-                  Signing up for GitTrackr is quick and easy. Simply click on
-                  the &apos;Sign Up&apos; button on the homepage and follow the
-                  registration process. You will need a GitHub account to sign
-                  up.
-                </p>
-              </div>
-            </div>
-
-            <div className="faq">
-              <div className="faq__title" onClick={() => toggleAccordion(2)}>
-                <h3 className="question">
-                  Can I track multiple GitHub accounts with GitTrackr?
-                </h3>
-                <button
-                  type="button"
-                  className={`faq-btn ${
-                    showAccordions[2] ? 'faq-btn-show' : ''
-                  }`}
-                  onClick={() => toggleAccordion(2)}
-                ></button>
-              </div>
-
-              <div className={`${showAccordions[2] ? 'show' : 'hide'}`}>
-                <p className="answer">
-                  Yes, GitTrackr allows you to connect and track multiple GitHub
-                  accounts. Simply sign in with each GitHub account you want to
-                  link to GitTrackr, and you will be able to switch between them
-                  seamlessly.
-                </p>
-              </div>
-            </div>
-
-            <div className="faq">
-              <div className="faq__title" onClick={() => toggleAccordion(3)}>
-                <h3 className="question">How do I sign up for GitTrackr?</h3>
-                <button
-                  type="button"
-                  className={`faq-btn ${
-                    showAccordions[3] ? 'faq-btn-show' : ''
-                  }`}
-                  onClick={() => toggleAccordion(3)}
-                ></button>
-              </div>
-
-              <div className={`${showAccordions[3] ? 'show' : 'hide'}`}>
-                {' '}
-                <p className="answer">
-                  Signing up for GitTrackr is quick and easy. Simply click on
-                  the &apos;Sign Up&apos; button on the homepage and follow the
-                  registration process. You will need a GitHub account to sign
-                  up.
-                </p>
-              </div>
-            </div>
+            ))}
           </div>
         </div>
 
@@ -335,4 +270,4 @@ const about = () => {
   );
 };
 
-export default about;
+export default About;
