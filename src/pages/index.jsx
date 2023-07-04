@@ -6,7 +6,6 @@ import UserProfileImg from './../assets/features/user-profile.png';
 import OrgDashboardImg from './../assets/features/org-dashboard.png';
 import OrgProfileImg from './../assets/features/org-profile.png';
 import PRsIssuesImg from './../assets/features/user.png';
-// import ContactUsImg from './../assets//contactus.png';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
@@ -21,21 +20,6 @@ const About = () => {
   const [featureImage, setFeatureImage] = useState(PRsIssuesImg);
   const [activeButton, setActiveButton] = useState('');
   const [key, setKey] = useState('');
-  // const [name, setName] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [message, setMessage] = useState('');
-
-  // const handleSubmit = (e) => {
-  //   e.preventDefault();
-  //   // Handle form submission here (e.g., send the data to a server)
-  //   // You can access the form data using the state variables (name, email, message)
-
-  //   console.log('Form submitted:', { name, email, message });
-  //   // Reset the form fields
-  //   setName('');
-  //   setEmail('');
-  //   setMessage('');
-  // };
 
   const changeFeatureImage = (e) => {
     setFeatureImage(
@@ -219,54 +203,6 @@ const About = () => {
         </div>
 
         <Contacts />
-
-        {/* <div className="contact" id="contact">
-          <h2 className="section-heading">Contact Us</h2>
-          <div className="contact-container">
-            <div className="contact-image-container">
-              <Image
-                src={ContactUsImg}
-                alt="contact"
-                className="contact-image"
-              />
-            </div>
-
-            <form onSubmit={handleSubmit} className="contact-form">
-              <div className="form-group">
-                <label htmlFor="name">Name:</label>
-                <input
-                  type="text"
-                  id="name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="email">Email:</label>
-                <input
-                  type="email"
-                  id="email"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="message">Message:</label>
-                <textarea
-                  id="message"
-                  value={message}
-                  onChange={(e) => setMessage(e.target.value)}
-                  required
-                ></textarea>
-              </div>
-              <button type="submit" className="submit-button">
-                Submit
-              </button>
-            </form>
-          </div>
-        </div> */}
       </div>
       <Footer />
     </div>
