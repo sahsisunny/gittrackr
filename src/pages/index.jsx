@@ -6,13 +6,14 @@ import UserProfileImg from './../assets/features/user-profile.png';
 import OrgDashboardImg from './../assets/features/org-dashboard.png';
 import OrgProfileImg from './../assets/features/org-profile.png';
 import PRsIssuesImg from './../assets/features/user.png';
-import ContactUsImg from './../assets//contactus.png';
+// import ContactUsImg from './../assets//contactus.png';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
 import Accordion from '@/components/Accordion';
 import styles from '@/styles/index.module.css';
 import { FaqQnA } from '@/constants/faqMock';
+import Contacts from '@/components/Contacts';
 
 const About = () => {
   const { data: session } = useSession();
@@ -20,21 +21,21 @@ const About = () => {
   const [featureImage, setFeatureImage] = useState(PRsIssuesImg);
   const [activeButton, setActiveButton] = useState('');
   const [key, setKey] = useState('');
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
+  // const [name, setName] = useState('');
+  // const [email, setEmail] = useState('');
+  // const [message, setMessage] = useState('');
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Handle form submission here (e.g., send the data to a server)
-    // You can access the form data using the state variables (name, email, message)
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   // Handle form submission here (e.g., send the data to a server)
+  //   // You can access the form data using the state variables (name, email, message)
 
-    console.log('Form submitted:', { name, email, message });
-    // Reset the form fields
-    setName('');
-    setEmail('');
-    setMessage('');
-  };
+  //   console.log('Form submitted:', { name, email, message });
+  //   // Reset the form fields
+  //   setName('');
+  //   setEmail('');
+  //   setMessage('');
+  // };
 
   const changeFeatureImage = (e) => {
     setFeatureImage(
@@ -217,7 +218,9 @@ const About = () => {
           </div>
         </div>
 
-        <div className="contact" id="contact">
+        <Contacts />
+
+        {/* <div className="contact" id="contact">
           <h2 className="section-heading">Contact Us</h2>
           <div className="contact-container">
             <div className="contact-image-container">
@@ -263,7 +266,7 @@ const About = () => {
               </button>
             </form>
           </div>
-        </div>
+        </div> */}
       </div>
       <Footer />
     </div>

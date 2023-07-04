@@ -989,7 +989,7 @@ button svg {
   text-align: justify;
 }
 
-.contact {
+/* .contact {
   padding: 20px;
   margin-bottom: 20px;
   width: 100%;
@@ -1080,7 +1080,7 @@ button svg {
   background: cyan;
   color: black;
   cursor: pointer;
-}
+} */
 
 .hide {
   display: none;
