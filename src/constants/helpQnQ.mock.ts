@@ -3,7 +3,7 @@ export const helpQnAMock = [
     id: 1,
     question: 'Organization Not Visible?',
     answer:
-      'Open a web browser and navigate to the GitHub website at' +
+      'Open a web browser and navigate to the GitHub website at \n' +
       '\nLog in to your GitHub account using your credentials.\n' +
       '\nIn the top-right corner of the GitHub page, click on your profile picture or avatar to open the account menu.\n' +
       '\nFrom the account menu, select "Your organizations". This will display a list of organizations you are a member of.\n' +

@@ -1,0 +1,92 @@
+.contact {
+  padding: 1.26rem;
+  margin-bottom: 1.26rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  height: 70vh;
+}
+
+.contactContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contactImageContainer {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactImage {
+  border-radius: 1.2rem;
+  object-fit: cover;
+  width: 60%;
+  height: 60%;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
+}
+
+.contactForm {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 2rem;
+}
+
+.formGroup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  font-size: 1.2rem;
+  width: 30%;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+}
+
+.formGroup input {
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  width: 60%;
+}
+
+.formGroup textarea {
+  width: 60%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.submitButton {
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  border: 1px solid cyan;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background: cyan;
+  color: black;
+  cursor: pointer;
+}
