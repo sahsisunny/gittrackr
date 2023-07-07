@@ -8,14 +8,14 @@ export const helpQnAMock = [
       '\nIn the top-right corner of the GitHub page, click on your profile picture or avatar to open the account menu.\n' +
       '\nFrom the account menu, select "Your organizations". This will display a list of organizations you are a member of.\n' +
       '\nLocate the organization for which you want to make your member profile public and click on its name to access the organizations page.\n' +
-      '\nOn the organizations page, navigate to the "Members" tab or section. This section usually lists all the members of the organization.\n' +
+      '\nOn the organizations page, navigate to the Members tab or section. This section usually lists all the members of the organization.\n' +
       '\nFind your username or account in the list of members and click on it to access your member profile within the organization.\n' +
       '\nOnce you are on your member profile page, you need to make some changes to your organization visibility settings.\n' +
-      '\nNear the top-right corner of the member profile page, click on the"Settings" button. This will open the settings page for your member profile.\n' +
-      '\nOn the settings page, scroll down to the "Profile visibility" section.\n' +
-      '\nBy default, the profile visibility is set to "Private". Click on the drop-down menu and select "Public" to make your member profile visible to the public.\n' +
-      '\nAfter selecting "Public," the settings page may automatically save the changes. If not, look for a "Save" or "Update" button on the page and click it to save the changes.\n' +
-      '\nOnce you have saved the changes, your member profile within the GitHub organization should now be public and visible to anyone who visits the organization&apos;s page.\n',
+      '\nNear the top-right corner of the member profile page, click on the Settings button. This will open the settings page for your member profile.\n' +
+      '\nOn the settings page, scroll down to the Profile visibility section.\n' +
+      '\nBy default, the profile visibility is set to Private. Click on the drop-down menu and select Public to make your member profile visible to the public.\n' +
+      '\nAfter selecting Public, the settings page may automatically save the changes. If not, look for a Save or Update button on the page and click it to save the changes.\n' +
+      '\nOnce you have saved the changes, your member profile within the GitHub organization should now be public and visible to anyone who visits the organizations page.\n',
   },
   {
     id: 2,
