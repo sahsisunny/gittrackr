@@ -10,6 +10,10 @@
   height: 70vh;
 }
 
+.sectionHeading {
+  color: white;
+}
+
 .contactContainer {
   width: 100%;
   display: flex;
@@ -56,6 +60,7 @@
   margin-bottom: 1rem;
   text-align: center;
   letter-spacing: 1px;
+  color: white;
 }
 
 .formGroup input {

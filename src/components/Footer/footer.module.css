@@ -1,0 +1,27 @@
+.footer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  height: 6vh;
+  margin-bottom: 2rem;
+}
+
+.linksContainer {
+  margin: 1rem;
+}
+
+.linksContainer a {
+  margin: 1rem;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.githubRepoLink {
+  color: white;
+  text-decoration: none;
+}

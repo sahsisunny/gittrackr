@@ -9,10 +9,7 @@ import PRsIssuesImg from './../assets/features/user.png';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import { useSession } from 'next-auth/react';
-import Accordion from '@/components/Accordion';
 import styles from '@/styles/index.module.css';
-import { FaqQnA } from '@/constants/faqMock';
-import Contacts from '@/components/Contacts';
 
 const About = () => {
   const { data: session } = useSession();
@@ -82,6 +79,47 @@ const About = () => {
           </div>
         </div>
 
+        <div className="about" id="about">
+          <h2 className="section-heading">
+            About <span>GitTrackr</span>
+          </h2>
+          <div className="about-text">
+            <p className="about-text-heading">
+              Unleash the Power of GitHub with GitTrackr
+            </p>
+            <p className="about-text-paragraph">
+              GitTrackr is a cutting-edge web application designed to
+              revolutionize your GitHub workflow. Seamlessly integrating with
+              your GitHub account, GitTrackr empowers developers and
+              organizations to streamline their collaboration, effortlessly
+              track their contributions, and stay ahead of the game.
+            </p>
+            <p className="about-text-heading">
+              Stay in Sync, Boost Your Productivity
+            </p>
+            <p className="about-text-paragraph">
+              With GitTrackr, you gain instant access to your GitHub profile,
+              pull requests, issues, repositories, and organizational
+              assignments. Effortlessly manage and track your contributions,
+              ensuring you never miss a beat. Whether you are a solo developer
+              or part of a dynamic team, GitTrackr provides you with the tools
+              to collaborate efficiently and take control of your GitHub
+              experience.
+            </p>
+            <p className="about-text-heading">
+              Intuitive, User-Friendly Interface
+            </p>
+            <p className="about-text-paragraph">
+              GitTrackr boasts a sleek and intuitive interface, designed with
+              your productivity in mind. Navigate through your GitHub activities
+              seamlessly, assign pull requests and issues with ease, and gain
+              valuable insights into organizational profiles and repositories.
+              Spend less time managing your GitHub workflow and more time
+              building exceptional software.
+            </p>
+          </div>
+        </div>
+
         <div className="features" id="features">
           <h2 className="section-heading">Features</h2>
           <div className="features-button-container">
@@ -147,64 +185,11 @@ const About = () => {
           </div>
         </div>
 
-        <div className="about" id="about">
-          <h2 className="section-heading">
-            About <span>GitTrackr</span>
-          </h2>
-          <div className="about-text">
-            <p className="about-text-heading">
-              Unleash the Power of GitHub with GitTrackr
-            </p>
-            <p className="about-text-paragraph">
-              GitTrackr is a cutting-edge web application designed to
-              revolutionize your GitHub workflow. Seamlessly integrating with
-              your GitHub account, GitTrackr empowers developers and
-              organizations to streamline their collaboration, effortlessly
-              track their contributions, and stay ahead of the game.
-            </p>
-            <p className="about-text-heading">
-              Stay in Sync, Boost Your Productivity
-            </p>
-            <p className="about-text-paragraph">
-              With GitTrackr, you gain instant access to your GitHub profile,
-              pull requests, issues, repositories, and organizational
-              assignments. Effortlessly manage and track your contributions,
-              ensuring you never miss a beat. Whether you are a solo developer
-              or part of a dynamic team, GitTrackr provides you with the tools
-              to collaborate efficiently and take control of your GitHub
-              experience.
-            </p>
-            <p className="about-text-heading">
-              Intuitive, User-Friendly Interface
-            </p>
-            <p className="about-text-paragraph">
-              GitTrackr boasts a sleek and intuitive interface, designed with
-              your productivity in mind. Navigate through your GitHub activities
-              seamlessly, assign pull requests and issues with ease, and gain
-              valuable insights into organizational profiles and repositories.
-              Spend less time managing your GitHub workflow and more time
-              building exceptional software.
-            </p>
-          </div>
-        </div>
-        <div className={styles.accordionSection}>
-          <h1 className={styles.sectionHeading}>Frequently Asked Questions</h1>
-          <div className={styles.faqContainer}>
-            {FaqQnA.map((element, index) => (
-              <div className={styles.faq} key={element.id}>
-                <Accordion
-                  answer={element.answer}
-                  question={element.question}
-                  index={index}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <Contacts />
+        {/* <Contacts /> */}
       </div>
-      <Footer />
+      <div className={styles.footerContainer}>
+        <Footer />
+      </div>
     </div>
   );
 };
