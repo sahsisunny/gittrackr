@@ -19,7 +19,6 @@ body {
   height: 100vh;
   background: #212332;
   color: black;
-  height: 100vh;
 }
 
 ::-webkit-scrollbar {
@@ -646,23 +645,6 @@ button svg {
   border-radius: 10px;
   background-color: #3a3d4e;
   color: white;
-}
-
-.footer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  border-radius: 10px;
-  color: white;
-  cursor: pointer;
-  height: 6vh;
-}
-
-.footer a {
-  color: white;
-  text-decoration: none;
 }
 
 /* dashboard */

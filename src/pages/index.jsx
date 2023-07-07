@@ -133,20 +133,6 @@ const About = () => {
           </div>
         </div>
 
-        <div className="testimonial" id="testimonials">
-          <div className="testimonial-title">
-            <h2 className="section-heading">Testimonials</h2>
-            <div className="testimonial-text">
-              <p className="testimonial-text-quote">
-                GitTrackr has been a game changer for our team. We are able to
-                track and manage our PRs and issues with ease. We are able to
-                collaborate more efficiently and effectively.
-              </p>
-              <p className="testimonial-text-author">- John Doe</p>
-            </div>
-          </div>
-        </div>
-
         <div className="about" id="about">
           <h2 className="section-heading">
             About <span>GitTrackr</span>
@@ -187,24 +173,26 @@ const About = () => {
             </p>
           </div>
         </div>
-        <div className={styles.accordionSection}>
-          <h1 className={styles.sectionHeading}>Frequently Asked Questions</h1>
-          <div className={styles.faqContainer}>
-            {FaqQnA.map((element, index) => (
-              <div className={styles.faq} key={element.id}>
-                <Accordion
-                  answer={element.answer}
-                  question={element.question}
-                  index={index}
-                />
-              </div>
-            ))}
+
+        <div className="testimonial" id="testimonials">
+          <div className="testimonial-title">
+            <h2 className="section-heading">Testimonials</h2>
+            <div className="testimonial-text">
+              <p className="testimonial-text-quote">
+                GitTrackr has been a game changer for our team. We are able to
+                track and manage our PRs and issues with ease. We are able to
+                collaborate more efficiently and effectively.
+              </p>
+              <p className="testimonial-text-author">- John Doe</p>
+            </div>
           </div>
         </div>
 
-        <Contacts />
+        {/* <Contacts /> */}
       </div>
-      <Footer />
+      <div className={styles.footerContainer}>
+        <Footer />
+      </div>
     </div>
   );
 };

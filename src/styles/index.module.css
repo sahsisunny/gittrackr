@@ -17,6 +17,7 @@
   letter-spacing: 0.1rem;
   width: 100%;
   text-decoration: underline cyan;
+  color: white;
 }
 
 .faqContainer {
@@ -32,4 +33,8 @@
   padding: 1rem;
   margin-bottom: 2rem;
   border-radius: 10px;
+}
+
+.footerContainer {
+  margin: 50px;
 }
