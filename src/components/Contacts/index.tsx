@@ -18,6 +18,13 @@ const Contacts: FC = () => {
     setContact({ ...contact, [e.target.name]: [e.target.value] });
   };
 
+  const handleContactsTextArea = (
+    e: React.ChangeEvent<HTMLTextAreaElement>
+  ) => {
+    e.preventDefault();
+    setContact({ ...contact, [e.target.name]: [e.target.value] });
+  };
+
   // const handleSubmitForm = () => {};
 
   return (
@@ -29,6 +36,7 @@ const Contacts: FC = () => {
             src={ContactUsImg}
             alt="contact"
             className={styles.contactImage}
+            priority={true}
           />
         </div>
 
@@ -56,10 +64,10 @@ const Contacts: FC = () => {
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="message">Message:</label>
-            <input
+            <textarea
               id="message"
               value={contact.message}
-              onChange={handleContacts}
+              onChange={handleContactsTextArea}
               required
             />
           </div>
