@@ -6,9 +6,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  padding: 2rem;
   height: 100%;
-  min-height: 75vh;
+  min-height: 80vh;
 }
 
 .sectionHeading {
@@ -65,16 +64,7 @@
   color: white;
 }
 
-.formGroup input {
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  outline: none;
-  font-size: 1rem;
-  font-weight: 500;
-  letter-spacing: 1px;
-  width: 60%;
-}
-
+.formGroup input,
 .formGroup textarea {
   width: 60%;
   padding: 0.5rem 1rem;
@@ -83,6 +73,10 @@
   font-size: 1rem;
   font-weight: 500;
   letter-spacing: 1px;
+}
+
+.formGroup textarea {
+  height: 10rem;
 }
 
 .submitButton {
@@ -109,8 +103,9 @@
   }
 
   .contactImage {
-    width: 80%;
-    height: 80%;
+    width: 70%;
+    height: 70%;
+    margin-bottom: 1rem;
   }
 
   .contactForm {
@@ -121,11 +116,11 @@
     width: 100%;
   }
 
-  .formGroup input {
-    width: 100%;
-  }
-
+  .formGroup input,
   .formGroup textarea {
     width: 100%;
+  }
+  .formGroup textarea {
+    height: 5rem;
   }
 }

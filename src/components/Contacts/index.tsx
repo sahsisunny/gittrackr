@@ -13,19 +13,20 @@ const Contacts: FC = () => {
 
   const [contact, setContact] = useState<ContactState>(defaultContact);
 
-  const handleContacts = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setContact({ ...contact, [e.target.name]: [e.target.value] });
-  };
-
-  const handleContactsTextArea = (
-    e: React.ChangeEvent<HTMLTextAreaElement>
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    e.preventDefault();
-    setContact({ ...contact, [e.target.name]: [e.target.value] });
+    const { name, value } = e.target;
+    setContact((prevContact) => ({
+      ...prevContact,
+      [name]: value,
+    }));
   };
 
-  // const handleSubmitForm = () => {};
+  const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(contact); // Logging the form values
+  };
 
   return (
     <div className={styles.contact} id="contact">
@@ -40,16 +41,16 @@ const Contacts: FC = () => {
           />
         </div>
 
-        <form className={styles.contactForm}>
+        <form className={styles.contactForm} onSubmit={handleSubmitForm}>
           <div className={styles.formGroup}>
             <label htmlFor="name">Name:</label>
             <input
               type="text"
               id="name"
               name="contactName"
-              value={contact.contactName}
-              onChange={handleContacts}
               required
+              value={contact.contactName}
+              onChange={handleChange}
             />
           </div>
           <div className={styles.formGroup}>
@@ -57,18 +58,20 @@ const Contacts: FC = () => {
             <input
               type="email"
               id="email"
-              value={contact.email}
-              onChange={handleContacts}
+              name="email"
               required
+              value={contact.email}
+              onChange={handleChange}
             />
           </div>
           <div className={styles.formGroup}>
             <label htmlFor="message">Message:</label>
             <textarea
               id="message"
-              value={contact.message}
-              onChange={handleContactsTextArea}
+              name="message"
               required
+              value={contact.message}
+              onChange={handleChange}
             />
           </div>
           <button type="submit" className={styles.submitButton}>
