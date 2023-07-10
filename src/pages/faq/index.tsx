@@ -5,15 +5,15 @@ import Head from 'next/head';
 
 import Accordion from '@/components/Accordion';
 
-import styles from '@/styles/index.module.css';
+import styles from '@/styles/faq.module.css';
 
-import { FaqQnA } from '@/constants/faqMock';
+import { FaqQnA } from '@/mocks/faqMock';
 
 const FrequentlyAskedQuestion: FC = () => {
   return (
     <>
       <Head>
-        <title>GitTrackr | Contact-us</title>
+        <title>GitTrackr | FAQ</title>
       </Head>
       <Navbar />
       <div className={styles.accordionSection}>

@@ -1,0 +1,76 @@
+.features {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.featuresButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.featuresButton {
+  border-radius: 10px;
+  background-color: #2a2d3e;
+  color: white;
+  font-weight: 600;
+  font: 0.8rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 1.5rem;
+  text-align: center;
+  margin-left: 1rem;
+  border: 1px solid #2a2d3e;
+  letter-spacing: 1px;
+}
+
+.featuresButton .active {
+  background-color: cyan;
+  color: black;
+}
+
+.featuresButton:hover {
+  border-color: cyan;
+}
+
+.featureImageContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.featureImage {
+  border-radius: 18px;
+  width: 80%;
+  height: 80%;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
+  box-shadow: 0 0 12px 1px white;
+}
+
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateY(10%);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+}
+
+.sectionHeading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  color: white;
+  width: 100%;
+  text-decoration: underline cyan;
+}

@@ -3,7 +3,7 @@ import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import Head from 'next/head';
 import styles from '@/styles/help.module.css';
-import { helpQnAMock } from '@/constants/helpQnQ.mock';
+import { helpQnAMock } from '@/mocks/helpQnQ.mock';
 import Accordion from '@/components/Accordion';
 
 const Help: FC = () => {

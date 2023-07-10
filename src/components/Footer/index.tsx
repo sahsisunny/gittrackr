@@ -11,6 +11,9 @@ const Footer: React.FC = () => {
         <Link href="/contact-us">Contact us</Link>
         <Link href="/">Home</Link>
       </div>
+      <div>
+        <p>created by code hunter</p>
+      </div>
       <div className={styles.githubRepoLinkContainer}>
         Source code available on &nbsp;
         <a

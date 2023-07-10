@@ -1,40 +1,82 @@
-.accordionSection {
-  padding: 1.2rem;
-  margin-bottom: 1.2rem;
-  width: 100%;
+.Homecontainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 64vh;
+  padding: 1rem;
+  color: white;
+  cursor: default;
 }
 
-.sectionHeading {
-  font-size: 1.8rem;
-  font-weight: 500;
+.hero {
+  width: 100%;
+  height: 80vh;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.heroTitle {
+  font-size: 3.5rem;
+  font-weight: 600;
   margin-bottom: 1rem;
   text-align: center;
   letter-spacing: 0.1rem;
-  width: 100%;
-  text-decoration: underline cyan;
-  color: white;
+  width: 80%;
 }
 
-.faqContainer {
-  width: 70%;
-  color: black;
-  margin-top: 2rem;
+.heroSubtitle {
+  font-size: 1.2rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  text-align: center;
+  width: 50%;
+  letter-spacing: 1px;
 }
 
-.faq {
-  background: #fff;
-  border-radius: 0.5rem;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  margin-bottom: 2rem;
+.heroButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.heroButton {
   border-radius: 10px;
+  background-color: #2a2d3e;
+  color: white;
+  font-weight: 600;
+  font: 1.2rem 'Roboto', sans-serif;
+  border: none;
+  cursor: pointer;
+  padding: 0.8rem 2rem;
+  min-width: 8rem;
+  text-align: center;
+  margin-left: 1rem;
+}
+
+.heroButton:hover {
+  background-color: #3a3d4e;
+}
+
+.heroTitleHighlight {
+  color: cyan;
+}
+
+.demoBtn {
+  background-color: cyan;
+  color: black;
+}
+
+.demoBtn:hover {
+  background-color: rgb(7, 211, 211);
 }
 
 .footerContainer {
-  margin: 50px;
+  margin: 2rem;
+  background-color: white;
+  color: black;
 }
