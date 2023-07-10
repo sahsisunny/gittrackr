@@ -385,7 +385,7 @@ button svg {
 .section-one {
   background-color: #f5f5f5;
   width: 50%;
-  margin-right: 20px;
+  margin-left: 20px;
   padding: 1rem;
   border-radius: 10px;
 }
@@ -497,7 +497,7 @@ button svg {
 .section-two {
   background-color: #f5f5f5;
   width: 50%;
-  margin-left: 20px;
+  margin-right: 20px;
   padding: 1rem;
   border-radius: 10px;
 }

@@ -6,6 +6,7 @@ import Logo from './../assets/GitTrackr.png';
 import Image from 'next/image';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
+import Footer from '@/components/Footer';
 
 const SignInPage: NextPage = () => {
   const router = useRouter();
@@ -57,6 +58,7 @@ const SignInPage: NextPage = () => {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 };

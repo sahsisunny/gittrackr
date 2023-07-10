@@ -76,6 +76,81 @@ const MyDashboard = () => {
       </Head>
       <Navbar />
       <div className="main-container">
+        <div className="section-two">
+          <h5 className="section-title">Issues</h5>
+          <div className="repo-filters">
+            <div className="radio-inputs">
+              <label className="radio">
+                <input
+                  type="radio"
+                  name="radio-two"
+                  defaultChecked
+                  onChange={() => {
+                    filterIssues('all');
+                  }}
+                />
+                <span className="name">All</span>
+              </label>
+              <label className="radio">
+                <input
+                  type="radio"
+                  name="radio-two"
+                  onChange={() => {
+                    filterIssues('open');
+                  }}
+                />
+                <span className="name">Open</span>
+              </label>
+              <label className="radio">
+                <input
+                  type="radio"
+                  name="radio-two"
+                  onChange={() => {
+                    filterIssues('closed');
+                  }}
+                />
+                <span className="name">Close</span>
+              </label>
+            </div>
+          </div>
+          <div className="repo-list">
+            {filterData.map((issue) => (
+              <div key={issue.id}>
+                <div className="repo-item">
+                  <div className="repo-details">
+                    <div className="repo-item-left">
+                      <span className="repo-item-name">{issue.title}</span>
+                    </div>
+                    <div className="repo-item-right">
+                      <span
+                        className="repo-item-privacy"
+                        onClick={() => {
+                          window.open(
+                            `${getRepoUrl(issue.html_url)}`,
+                            '_blank'
+                          );
+                        }}
+                      >
+                        {getRepoNameFromUrl(issue.repository_url)}
+                      </span>
+                      <span className="repo-item-updated">
+                        {FormatDate(issue.created_at)}
+                      </span>
+                    </div>
+                  </div>
+                  <button
+                    className="issue-view-btn"
+                    onClick={() => {
+                      window.open(`${issue.html_url}`, '_blank');
+                    }}
+                  >
+                    {issue.state === 'open' ? 'Open' : 'Closed'}
+                  </button>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
         <div className="section-one">
           <h5 className="section-title">Pull Requests</h5>
           <div className="repo-filters">
@@ -146,81 +221,6 @@ const MyDashboard = () => {
                       : pr.pull_request.merged_at !== null
                       ? 'Merged'
                       : 'Closed'}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="section-two">
-          <h5 className="section-title">Issues</h5>
-          <div className="repo-filters">
-            <div className="radio-inputs">
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  defaultChecked
-                  onChange={() => {
-                    filterIssues('all');
-                  }}
-                />
-                <span className="name">All</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  onChange={() => {
-                    filterIssues('open');
-                  }}
-                />
-                <span className="name">Open</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  onChange={() => {
-                    filterIssues('closed');
-                  }}
-                />
-                <span className="name">Close</span>
-              </label>
-            </div>
-          </div>
-          <div className="repo-list">
-            {filterData.map((issue) => (
-              <div key={issue.id}>
-                <div className="repo-item">
-                  <div className="repo-details">
-                    <div className="repo-item-left">
-                      <span className="repo-item-name">{issue.title}</span>
-                    </div>
-                    <div className="repo-item-right">
-                      <span
-                        className="repo-item-privacy"
-                        onClick={() => {
-                          window.open(
-                            `${getRepoUrl(issue.html_url)}`,
-                            '_blank'
-                          );
-                        }}
-                      >
-                        {getRepoNameFromUrl(issue.repository_url)}
-                      </span>
-                      <span className="repo-item-updated">
-                        {FormatDate(issue.created_at)}
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    className="issue-view-btn"
-                    onClick={() => {
-                      window.open(`${issue.html_url}`, '_blank');
-                    }}
-                  >
-                    {issue.state === 'open' ? 'Open' : 'Closed'}
                   </button>
                 </div>
               </div>

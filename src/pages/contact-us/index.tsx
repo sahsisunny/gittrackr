@@ -8,7 +8,7 @@ const ContactUs: FC = () => {
   return (
     <>
       <Head>
-        <title>GitTrackr | Contact-us</title>
+        <title>GitTrackr | Contact Us</title>
       </Head>
       <Navbar />
       <div>
