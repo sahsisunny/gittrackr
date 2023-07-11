@@ -61,7 +61,7 @@ const ProfilePage = () => {
       </Head>
       <Navbar />
       <div className="main-container">
-        <div className="section-one">
+        <div className="section-two">
           <h5 className="section-title">Profile Information</h5>
           <div className="profile-container">
             <Image
@@ -126,7 +126,7 @@ const ProfilePage = () => {
             </div>
           </div>
         </div>
-        <div className="section-two">
+        <div className="section-one">
           <h5 className="section-title">Repositories</h5>
           <div className="repo-filters">
             <input

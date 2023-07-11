@@ -12,7 +12,7 @@ const Testimonials: FC = () => {
         {TestimonialsMock.map((element) => (
           <div className="testimonial-text" key={element.id}>
             <p className={styles.testimonialTextQuote}>
-              {element.csutomerTestimonial}
+              {element.userTestimonial}
             </p>
             <p className={styles.testimonialTextAuthor}>
               - {element.customerName}
