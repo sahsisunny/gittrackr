@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Logo from './../../assets/GitTrackr.png';
 import { useSession, signOut } from 'next-auth/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import fetchData from '@/utils/FetchData';
-import { useEffect } from 'react';
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -54,12 +53,25 @@ const Navbar = () => {
   };
 
   useEffect(() => {
-    if (session) {
-      if (ORGS_URL) {
-        fetchData(ORGS_URL, TOKEN, setOrgsData);
-      }
+    if (session && ORGS_URL) {
+      fetchData(ORGS_URL, TOKEN, setOrgsData);
     }
   }, [session, ORGS_URL, TOKEN]);
+
+  const renderOrgLinks = () => {
+    if (orgsData.length > 0) {
+      return orgsData.map((org) => (
+        <Link
+          href={`/dashboard/${org.login}`}
+          className="nav-link"
+          key={org.id}
+        >
+          {org.login.replace(/-/g, ' ')}
+        </Link>
+      ));
+    }
+    return null;
+  };
 
   return (
     <nav className="navbar">
@@ -109,19 +121,7 @@ const Navbar = () => {
               <Link href="/dashboard" className="nav-link">
                 Dashboard
               </Link>
-              {orgsData.length > 0 ? (
-                orgsData.map((org) => (
-                  <Link
-                    href={`/dashboard/${org.login}`}
-                    className="nav-link"
-                    key={org.id}
-                  >
-                    {org.login.replace(/-/g, ' ')}
-                  </Link>
-                ))
-              ) : (
-                <></>
-              )}
+              {renderOrgLinks()}
               <hr className="dropdown-divider" />
               <Link href="/help" className="nav-link">
                 Help
