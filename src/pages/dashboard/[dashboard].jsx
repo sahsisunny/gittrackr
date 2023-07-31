@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSession, getSession } from 'next-auth/react';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
@@ -13,6 +12,7 @@ import { useRouter } from 'next/router';
 import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
 import FormatDate from '@/utils/FormatDate';
 import getRepoUrl from '../../utils/getRepoUrl';
+import FilterSection from '@/components/dashboard/FilterSection';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
@@ -20,13 +20,15 @@ const Dashboard = () => {
   const [prsData, setPrsData] = useState([]);
   const [filterData, setFilterData] = useState([]);
   const [prFilterData, setPrFilterData] = useState([]);
-  const USERNAME = session?.user?.login;
-  const TOKEN = session?.accessToken;
+
+  const USERNAME = session.user.login;
+  const TOKEN = session.accessToken;
 
   const router = useRouter();
   const { dashboard } = router.query;
 
   const filterIssues = (status) => {
+    console.log(issuesData);
     if (status === 'open') {
       const openIssues = issuesData.filter((issue) => issue.state === 'open');
       setFilterData(openIssues);
@@ -87,37 +89,7 @@ const Dashboard = () => {
           <h5 className="section-title">Issues</h5>
           <div className="repo-filters">
             <div className="radio-inputs">
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  defaultChecked
-                  onChange={() => {
-                    filterIssues('all');
-                  }}
-                />
-                <span className="name">All</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  onChange={() => {
-                    filterIssues('open');
-                  }}
-                />
-                <span className="name">Open</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio-two"
-                  onChange={() => {
-                    filterIssues('closed');
-                  }}
-                />
-                <span className="name">Close</span>
-              </label>
+              <FilterSection filterIssues={filterIssues} />
             </div>
           </div>
           <div className="repo-list">

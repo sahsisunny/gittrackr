@@ -28,13 +28,13 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/pages/api/auth/[...nextauth].jsx",
+    "src/pages/api/auth/[...nextauth].ts",
     "src/pages/dashboard.jsx",
     "src/pages/profiles/[username].jsx",
     "src/utils/FetchData.jsx",
     "src/components/Navbar/index.jsx",
     "src/pages/index.tsx",
     "src/utils/FormatDate.jsx"
-  ],
+, "src/pages/dashboard/[dashboard].jsx"  ],
   "exclude": ["node_modules"]
 }
