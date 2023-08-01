@@ -13,6 +13,7 @@ import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
 import FormatDate from '@/utils/FormatDate';
 import getRepoUrl from '../../utils/getRepoUrl';
 import FilterSection from '@/components/dashboard/FilterSection';
+import PRFilterSection from '@/components/dashboard/PRFilterSection';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
@@ -28,7 +29,7 @@ const Dashboard = () => {
   const { dashboard } = router.query;
 
   const filterIssues = (status) => {
-    console.log(issuesData);
+    console.log('inside the filterIssues');
     if (status === 'open') {
       const openIssues = issuesData.filter((issue) => issue.state === 'open');
       setFilterData(openIssues);
@@ -43,6 +44,7 @@ const Dashboard = () => {
   };
 
   const filterPrs = (status) => {
+    console.log('inside the filterPRs');
     if (status === 'open') {
       const openPrs = prsData.filter((pr) => pr.state === 'open');
       setPrFilterData(openPrs);
@@ -134,47 +136,7 @@ const Dashboard = () => {
           <h5 className="section-title">Pull Requests</h5>
           <div className="repo-filters">
             <div className="radio-inputs">
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  defaultChecked
-                  onChange={() => {
-                    filterPrs('all');
-                  }}
-                />
-                <span className="name">All</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('open');
-                  }}
-                />
-                <span className="name">Open</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('closed');
-                  }}
-                />
-                <span className="name">closed</span>
-              </label>
-              <label className="radio">
-                <input
-                  type="radio"
-                  name="radio"
-                  onChange={() => {
-                    filterPrs('closed');
-                  }}
-                />
-                <span className="name">Merged</span>
-              </label>
+              <PRFilterSection filterPrs={filterPrs} />
             </div>
           </div>
           <div className="repo-list">
