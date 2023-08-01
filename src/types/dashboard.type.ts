@@ -1,16 +1,10 @@
-// type issueTypeProp = {
-//   issueType: string;
-// };
-
-// type filterSection = {
-//   arg: string;
-// };
-
 export type FilterSectionProps = {
   filterIssues: (arg: string) => void;
 };
 
-// export type ListeSectionProps = {};
+export type PRFilterSectionProps = {
+  filterPrs: (arg: string) => void;
+};
 
 // export type DashoboardProp = {};
 
