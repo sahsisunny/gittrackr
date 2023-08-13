@@ -10,8 +10,6 @@ export const authOptions = {
   ],
   callbacks: {
     async session({ session, token }: { session: any; token: any }) {
-      console.log('session', session);
-      console.log('token', token);
       const userResponse = await fetch('https://api.github.com/user', {
         headers: {
           Authorization: `token ${token.accessToken}`,
@@ -28,6 +26,9 @@ export const authOptions = {
       session.user.public_repos = user.public_repos;
       session.user.organizations_url = user.organizations_url;
       session.user.created_at = user.created_at;
+      session.user.company = user.company;
+      session.user.blog = user.blog;
+      session.user.bio = user.bio;
       return session;
     },
     async jwt({

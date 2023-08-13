@@ -25,7 +25,6 @@ const Contacts: FC = () => {
 
   const handleSubmitForm = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(contact); // Logging the form values
   };
 
   return (

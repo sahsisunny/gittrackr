@@ -29,7 +29,6 @@ const Dashboard = () => {
   const { dashboard } = router.query;
 
   const filterIssues = (status) => {
-    console.log('inside the filterIssues');
     if (status === 'open') {
       const openIssues = issuesData.filter((issue) => issue.state === 'open');
       setFilterData(openIssues);
@@ -44,7 +43,6 @@ const Dashboard = () => {
   };
 
   const filterPrs = (status) => {
-    console.log('inside the filterPRs');
     if (status === 'open') {
       const openPrs = prsData.filter((pr) => pr.state === 'open');
       setPrFilterData(openPrs);

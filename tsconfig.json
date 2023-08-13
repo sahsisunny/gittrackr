@@ -34,7 +34,8 @@
     "src/utils/FetchData.jsx",
     "src/components/Navbar/index.jsx",
     "src/pages/index.tsx",
-    "src/utils/FormatDate.jsx"
-, "src/pages/dashboard/[dashboard].jsx"  ],
+    "src/utils/FormatDate.jsx",
+    "src/pages/dashboard/[dashboard].jsx"
+  ],
   "exclude": ["node_modules"]
 }
