@@ -6,7 +6,6 @@ import styles from './dashboard.module.css';
 import { PRFilterSectionProps } from '@/types/dashboard.type';
 
 const PRFilterSection: FC<PRFilterSectionProps> = ({ filterPrs }) => {
-  console.log('inside PRFIlterSection component');
   return (
     <>
       {PRFiltersList.map((filter) => (

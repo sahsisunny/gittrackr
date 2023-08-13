@@ -7,7 +7,6 @@ function getRepoUrl(url) {
   } else if (pullIndex !== -1) {
     urlParts.splice(pullIndex, 2);
   }
-  console.log(urlParts.join('/'));
   return urlParts.join('/');
 }
 export default getRepoUrl;
