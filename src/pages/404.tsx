@@ -1,7 +1,7 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 
 const NotFound = () => {
   return (

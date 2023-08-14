@@ -1,7 +1,7 @@
 import { FC } from 'react';
+import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Head from 'next/head';
 import Contacts from '@/components/Contacts';
 
 const ContactUs: FC = () => {

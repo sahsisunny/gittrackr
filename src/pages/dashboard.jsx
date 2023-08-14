@@ -1,14 +1,14 @@
 import React from 'react';
+import { useState, useEffect } from 'react';
 import { useSession, getSession } from 'next-auth/react';
-import Navbar from '@/components/Navbar';
 import Head from 'next/head';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import FetchIssuePr from '@/utils/FetchIssuePr';
 import {
   GITHUB_SEARCH_ISSUES_URL,
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
-import { useState, useEffect } from 'react';
 import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
 import FormatDate from '@/utils/FormatDate';
 import getRepoUrl from '@/utils/getRepoUrl';

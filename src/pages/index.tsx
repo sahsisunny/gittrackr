@@ -1,16 +1,15 @@
 import { FC } from 'react';
-import Link from 'next/link';
-import Head from 'next/head';
 import { useSession } from 'next-auth/react';
+import Head from 'next/head';
+import Link from 'next/link';
 
 import About from '@/components/About';
 import Features from '@/components/Features';
 import Footer from '@/components/Footer';
 import Navbar from '@/components/Navbar';
+import Testimonials from '@/components/Testimonials';
 
 import styles from '@/styles/index.module.css';
-
-import Testimonials from '@/components/Testimonials';
 
 const Home: FC = () => {
   const { data: session } = useSession();

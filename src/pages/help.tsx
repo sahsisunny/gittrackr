@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Head from 'next/head';
-import styles from '@/styles/help.module.css';
-import { helpQnAMock } from '@/mocks/helpQnQ.mock';
 import Accordion from '@/components/Accordion';
+import { helpQnAMock } from '@/mocks/helpQnQ.mock';
+import styles from '@/styles/help.module.css';
 
 const Help: FC = () => {
   return (

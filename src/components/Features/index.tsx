@@ -1,12 +1,12 @@
 import { FC, useState } from 'react';
 import Image from 'next/image';
 
-import styles from './features.module.css';
-
-import PRsIssuesImg from '@/assets/features/user.png';
-import UserProfileImg from '@/assets/features/user-profile.png';
 import OrgDashboardImg from '@/assets/features/org-dashboard.png';
 import OrgProfileImg from '@/assets/features/org-profile.png';
+import PRsIssuesImg from '@/assets/features/user.png';
+import UserProfileImg from '@/assets/features/user-profile.png';
+
+import styles from './features.module.css';
 
 const Features: FC = () => {
   const [key, setKey] = useState('');

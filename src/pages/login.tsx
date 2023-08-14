@@ -1,9 +1,9 @@
-import { getProviders, signIn } from 'next-auth/react';
 import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import Logo from './../assets/GitTrackr.png';
+import { getProviders, signIn } from 'next-auth/react';
 import Image from 'next/image';
+import Logo from './../assets/GitTrackr.png';
 import Navbar from '@/components/Navbar';
 import Head from 'next/head';
 import Footer from '@/components/Footer';

@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import Navbar from '@/components/Navbar';
 import Head from 'next/head';
-import ProfileImage from './../../assets/dummyProfileImage.png';
+import Image from 'next/image';
+import Link from 'next/link';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import ProfileImage from './../../assets/dummyProfileImage.png';
 import FormatDate from '@/utils/FormatDate';
 import fetchData from '@/utils/FetchData';
 import { GITHUB_ORGANIZATION_URL } from '@/constants/url';
-import { useRouter } from 'next/router';
-import Link from 'next/link';
 
 const ProfilePage = () => {
   const { data: session } = useSession({ required: true });

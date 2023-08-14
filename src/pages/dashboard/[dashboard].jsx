@@ -1,17 +1,21 @@
 import { useSession, getSession } from 'next-auth/react';
-import Navbar from '@/components/Navbar';
+import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
+
 import Head from 'next/head';
+import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+
 import FetchIssuePr from '@/utils/FetchIssuePr';
 import {
   GITHUB_SEARCH_ISSUES_URL,
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
-import { useState, useEffect } from 'react';
-import { useRouter } from 'next/router';
+
 import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
 import FormatDate from '@/utils/FormatDate';
 import getRepoUrl from '../../utils/getRepoUrl';
+
 import FilterSection from '@/components/dashboard/FilterSection';
 import PRFilterSection from '@/components/dashboard/PRFilterSection';
 

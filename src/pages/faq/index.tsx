@@ -1,13 +1,13 @@
 import { FC } from 'react';
+import Head from 'next/head';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import Head from 'next/head';
 
 import Accordion from '@/components/Accordion';
 
-import styles from '@/styles/faq.module.css';
-
 import { FaqQnA } from '@/mocks/faqMock';
+
+import styles from '@/styles/faq.module.css';
 
 const FrequentlyAskedQuestion: FC = () => {
   return (

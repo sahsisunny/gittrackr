@@ -1,24 +1,22 @@
 import { useEffect, useState } from 'react';
-import Image from 'next/image';
 import { useSession } from 'next-auth/react';
-import Navbar from '@/components/Navbar';
 import Head from 'next/head';
-import ProfileImage from '../assets/dummyProfileImage.png';
-import Footer from '@/components/Footer';
-import FormatDate from '@/utils/FormatDate';
-import fetchData from '@/utils/FetchData';
-import getMostUsedLanguages from '@/utils/mostUsedLanguage';
+import Image from 'next/image';
+import moment from 'moment';
 import {
   AiFillGithub,
   AiFillLinkedin,
   AiFillTwitterSquare,
 } from 'react-icons/ai';
 import { TbWorldWww } from 'react-icons/tb';
-
 import { FaGithubSquare } from 'react-icons/fa';
-import Link from 'next/link';
 
-import moment from 'moment';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import ProfileImage from '../assets/dummyProfileImage.png';
+import FormatDate from '@/utils/FormatDate';
+import fetchData from '@/utils/FetchData';
+import getMostUsedLanguages from '@/utils/mostUsedLanguage';
 
 const ProfilePage = () => {
   const { data: session } = useSession({ required: true });

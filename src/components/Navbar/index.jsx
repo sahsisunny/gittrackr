@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
-import Logo from './../../assets/GitTrackr.png';
+import React, { useState, useEffect } from 'react';
 import { useSession, signOut } from 'next-auth/react';
-import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
+import Link from 'next/link';
+import Logo from './../../assets/GitTrackr.png';
 import fetchData from '@/utils/FetchData';
-import { useEffect } from 'react';
 
 const Navbar = () => {
   const { data: session } = useSession();
