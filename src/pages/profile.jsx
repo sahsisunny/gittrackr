@@ -286,9 +286,7 @@ const ProfilePage = () => {
                     </div>
                   </div>
                 )}
-
                 {/* TODO: Have to add more stats here */}
-                <div className="stats-card">More stats coming soon...</div>
               </div>
             ) : (
               <div className="section-tab-content">
@@ -310,11 +308,14 @@ const ProfilePage = () => {
                   </button>
                 </div>
                 <div className="repo-list-container">
-                  {filteredRepos?.map((repo) => (
+                  {filteredRepos?.map((repo, index) => (
                     <div key={repo.id} className="repo-items">
                       <div className="repo-details">
                         <div className="repo-item-left">
-                          <span className="repo-item-name">{repo.name}</span>
+                          <span className="repo-item-name">
+                            {index + 1 + '. '}
+                            {repo.name}
+                          </span>
                         </div>
                         <div className="repo-item-right">
                           {repo.language && (

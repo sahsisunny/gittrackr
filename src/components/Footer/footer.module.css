@@ -8,7 +8,7 @@
   cursor: pointer;
   margin-bottom: 2rem;
   background-color: #212332;
-  min-height: 5vh;
+  max-height: 5vh;
 }
 
 .linksContainer {
@@ -25,5 +25,6 @@
   .footer {
     padding: 1rem;
     flex-direction: column-reverse;
+    max-height: 15vh;
   }
 }
