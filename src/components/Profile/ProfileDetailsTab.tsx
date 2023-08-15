@@ -1,3 +1,4 @@
+import styles from './ProfileDetailsTab.module.css';
 type ProfileDetailsTabProps = {
   activeTab: string;
   setActiveTab: React.Dispatch<React.SetStateAction<string>>;
@@ -8,15 +9,21 @@ const ProfileDetailsTab = ({
   setActiveTab,
 }: ProfileDetailsTabProps) => {
   return (
-    <div className="section-tab">
+    <div className={styles.sectionTab}>
       <button
-        className={`tab-button ${activeTab === 'github-stats' && 'active-tab'}`}
+        className={
+          styles.tabButton +
+          ' ' +
+          (activeTab === 'github-stats' && styles.activeTab)
+        }
         onClick={() => setActiveTab('github-stats')}
       >
         Github Stats
       </button>
       <button
-        className={`tab-button ${activeTab === 'repos' && 'active-tab'}`}
+        className={
+          styles.tabButton + ' ' + (activeTab === 'repos' && styles.activeTab)
+        }
         onClick={() => setActiveTab('repos')}
       >
         Repositories

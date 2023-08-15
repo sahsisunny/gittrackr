@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Image from 'next/image';
+import styles from './ProfileGitHubStats.module.css';
 
 type ProfileGitHubStatsProps = {
   JOIN_DATE: string;
@@ -24,23 +25,23 @@ const ProfileGitHubStats = ({
   return (
     <div className="section-tab-content">
       <h5 className="section-sidebar-title">GitHub Stats</h5>
-      <div className="profile-stats">
-        <div className="profile-stats-items">
+      <div className={styles.profileStats}>
+        <div className={styles.profileStatsItems}>
           <p>Joined GitHub</p>
           <hr />
           <p>{moment(JOIN_DATE).fromNow()}</p>
         </div>
-        <div className="profile-stats-items">
+        <div className={styles.profileStatsItems}>
           <p>Followers</p>
           <hr />
           <p>{USER_FOLLOWERS}</p>
         </div>
-        <div className="profile-stats-items">
+        <div className={styles.profileStatsItems}>
           <p>Following</p>
           <hr />
           <p>{USER_FOLLOWING}</p>
         </div>
-        <div className="profile-stats-items">
+        <div className={styles.profileStatsItems}>
           <p>Public Repos</p>
           <hr />
           <p>{USER_PUBLIC_REPOS}</p>
@@ -50,14 +51,14 @@ const ProfileGitHubStats = ({
       {orgsData?.length > 0 && (
         <div className="orgs-container">
           <h5 className="section-sidebar-title">Organizations</h5>
-          <div className="orgs-list-container">
+          <div className={styles.orgsListContainer}>
             {orgsData?.map((org) => (
               <a
                 href={org.html_url}
                 target="_blank"
                 rel="noopener noreferrer"
                 key={org.id}
-                className="orgs-list-item"
+                className={styles.orgsListItem}
               >
                 <Image
                   src={org.avatar_url}

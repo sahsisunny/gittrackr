@@ -1,0 +1,52 @@
+.profileStats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: white;
+}
+
+.profileStatsItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 22%;
+  margin: 0.5rem;
+  background-color: rgba(83, 82, 82, 0.349);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.profileStatsItems hr {
+  width: 100%;
+  margin: 0.5rem;
+  border: 1px solid rgba(83, 82, 82, 0.349);
+}
+
+.orgsListContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: white;
+}
+
+.orgsListItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(83, 82, 82, 0.349);
+}
+
+@media screen and (max-width: 960px) {
+  .profileStatsItems {
+    width: 45%;
+  }
+}

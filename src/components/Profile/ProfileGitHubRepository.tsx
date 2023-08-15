@@ -1,3 +1,4 @@
+import styles from './ProfileGitHubRepository.module.css';
 import FormatDate from '@/utils/FormatDate';
 
 type ProfileGitHubRepositoryProps = {
@@ -30,16 +31,16 @@ const ProfileGitHubRepository = ({
 }: ProfileGitHubRepositoryProps) => {
   return (
     <div className="section-tab-content">
-      <div className="repo-filters-container">
+      <div className={styles.repoFiltersContainer}>
         <input
           type="text"
           placeholder="Search repositories..."
-          className="repo-search-input"
+          className={styles.repoSearchInput}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <button
-          className="repo-search-button"
+          className={styles.repoSearchButton}
           onClick={() => {
             setSearchQuery('');
           }}
@@ -47,12 +48,12 @@ const ProfileGitHubRepository = ({
           Search
         </button>
       </div>
-      <div className="repo-list-container">
+      <div className={styles.repoListContainer}>
         {filteredRepos?.map((repo, index) => (
-          <div key={repo.id} className="repo-items">
-            <div className="repo-details">
-              <div className="repo-item-left">
-                <span className="repo-item-name">
+          <div key={repo.id} className={styles.repoItems}>
+            <div>
+              <div>
+                <span>
                   {index + 1 + '. '}
                   {repo.name}
                 </span>
@@ -60,7 +61,7 @@ const ProfileGitHubRepository = ({
               <div className="repo-item-right">
                 {repo.language && (
                   <span
-                    className="repo-item-language"
+                    className={styles.repoItemLanguage}
                     style={{
                       backgroundColor: languageColors[repo.language],
                       color: isColorLight(languageColors[repo.language])
@@ -80,7 +81,7 @@ const ProfileGitHubRepository = ({
               </div>
             </div>
             <button
-              className="repo-view-button"
+              className={styles.repoViewButton}
               onClick={() => {
                 window.open(`${repo.html_url}`, '_blank', 'noopener');
               }}
