@@ -1046,32 +1046,6 @@ button svg {
   border: 1px solid rgba(83, 82, 82, 0.349);
 }
 
-.section-tab {
-  width: 100%;
-  display: flex;
-  justify-content: end;
-  border-radius: 10px;
-}
-
-.tab-button {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-}
-
-.active-tab {
-  border-bottom: 2px solid cyan;
-}
-
 .section-tab-content {
   width: 100%;
   display: flex;
@@ -1082,53 +1056,6 @@ button svg {
   animation: slideInFromRight 0.5s ease-in-out forwards;
 }
 
-.profile-stats {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-  color: white;
-}
-
-.profile-stats-items {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-direction: column;
-  width: 22%;
-  margin: 0.5rem;
-  background-color: rgba(83, 82, 82, 0.349);
-  padding: 1rem;
-  border-radius: 10px;
-}
-
-.profile-stats-items hr {
-  width: 100%;
-  margin: 0.5rem;
-  border: 1px solid rgba(83, 82, 82, 0.349);
-}
-
-.orgs-list-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-  color: white;
-}
-
-.orgs-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  margin: 0.5rem;
-  padding: 1rem;
-  border-radius: 10px;
-  background-color: rgba(83, 82, 82, 0.349);
-}
-
 .stats-card {
   width: 100%;
   min-height: 100%;
@@ -1136,101 +1063,6 @@ button svg {
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-.repo-filters-container {
-  color: white;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-}
-
-.repo-search-input {
-  width: 80%;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background-color: rgba(83, 82, 82, 0.349);
-  color: white;
-  font-size: 1rem;
-  margin-left: 1rem;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-}
-
-.repo-search-input:focus {
-  border: 1px solid cyan;
-}
-
-.repo-search-button {
-  width: 10%;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
-  border: none;
-  outline: none;
-  background-color: rgba(83, 82, 82, 0.349);
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-}
-
-.repo-search-button:hover {
-  background-color: cyan;
-  color: black;
-}
-
-.repo-list-container {
-  width: 100%;
-  animation: slideInFromRight 1s ease-in-out forwards;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  min-height: 45vh;
-  max-height: 45vh;
-}
-
-.repo-items {
-  width: 100%;
-  border-radius: 10px;
-  margin: 0.5rem;
-  border: 1px solid rgba(83, 82, 82, 0.349);
-  padding: 0.5rem 1rem;
-  display: flex;
-  align-items: center;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-}
-
-.repo-item-language {
-  padding: 0.3rem;
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 10px;
-  margin-bottom: 0.2rem;
-}
-
-.repo-view-button {
-  margin-left: auto;
-  border-radius: 10px;
-  background-color: #2a2d3e;
-  color: white;
-  font-size: 1rem;
-  border: none;
-  cursor: pointer;
-  padding: 0.4rem 1rem;
-  text-align: center;
-  height: 2rem;
-}
-
-.repo-view-button:hover {
-  background-color: #3a3d4e;
-  color: white;
 }
 
 .hide {
@@ -1273,9 +1105,11 @@ button svg {
     transform: translateY(0);
   }
 }
+
 @media screen and (max-width: 960px) {
   .section-details {
     flex-direction: column;
+    margin-bottom: 1rem;
   }
 
   .section-details {
@@ -1293,31 +1127,9 @@ button svg {
     margin: 0.25rem;
   }
 
-  .section-tab {
-    justify-content: center;
-  }
-
   .section-main {
     width: 100%;
     padding: 0;
-  }
-
-  .profile-stats-items {
-    width: 45%;
-  }
-
-  .repo-filters-container {
-    flex-direction: column;
-  }
-
-  .repo-search-input {
-    width: 100%;
-    margin-left: 0;
-  }
-
-  .repo-search-button {
-    width: 100%;
-    margin-top: 0.5rem;
   }
 }
 

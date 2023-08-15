@@ -3,25 +3,30 @@ import Link from 'next/link';
 
 import styles from './footer.module.css';
 
-const Footer: React.FC = () => {
+const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.linksContainer}>
         <p>
-          Created by{' '}
-          <a href="https://discord.gg/EQAaFQkQwS" className={styles.anchorLink}>
-            Code Hunter
-          </a>
+          Created by
+          <Link
+            href="https://github.com/sahsisunny"
+            className={styles.anchorLink}
+            target="_blank"
+          >
+            Sunny Sahsi
+          </Link>
         </p>
       </div>
       <div className={styles.linksContainer}>
         Source code available on
-        <a
+        <Link
           href="https://github.com/sahsisunny/gittrackr"
           className={styles.anchorLink}
+          target="_blank"
         >
           GitHub
-        </a>
+        </Link>
       </div>
       <div className={styles.linksContainer}>
         <Link className={styles.anchorLink} href="/faq">
