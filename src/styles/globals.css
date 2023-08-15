@@ -1087,7 +1087,7 @@ button svg {
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
-  animation: slideInFromRight 1s ease-in-out forwards;
+  animation: slideInFromBottom 1s ease-in-out forwards;
   color: white;
 }
 
@@ -1114,9 +1114,8 @@ button svg {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  animation: slideInFromRight 1s ease-in-out forwards;
+  animation: slideInFromBottom 1s ease-in-out forwards;
   color: white;
-  border: 1px solid rgba(83, 82, 82, 0.349);
 }
 
 .orgs-list-item {
@@ -1140,14 +1139,13 @@ button svg {
 }
 
 .repo-filters-container {
-  animation: slideInFromRight 1s ease-in-out forwards;
   color: white;
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-around;
   flex-wrap: wrap;
-  animation: slideInFromRight 1s ease-in-out forwards;
+  animation: slideInFromBottom 1s ease-in-out forwards;
 }
 
 .repo-search-input {
@@ -1160,7 +1158,7 @@ button svg {
   color: white;
   font-size: 1rem;
   margin-left: 1rem;
-  animation: slideInFromRight 1s ease-in-out forwards;
+  animation: slideInFromBottom 1s ease-in-out forwards;
 }
 
 .repo-search-input:focus {
@@ -1178,7 +1176,7 @@ button svg {
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  animation: slideInFromRight 1s ease-in-out forwards;
+  animation: slideInFromBottom 1s ease-in-out forwards;
 }
 
 .repo-search-button:hover {
@@ -1203,7 +1201,8 @@ button svg {
   border: 1px solid rgba(83, 82, 82, 0.349);
   padding: 0.5rem 1rem;
   display: flex;
-  animation: slideInFromRight 1s ease-in-out forwards;
+  align-items: center;
+  animation: slideInFromBottom 1s ease-in-out forwards;
 }
 
 .repo-item-language {
@@ -1214,6 +1213,24 @@ button svg {
   justify-content: center;
   border-radius: 10px;
   margin-bottom: 0.2rem;
+}
+
+.repo-view-button {
+  margin-left: auto;
+  border-radius: 10px;
+  background-color: #2a2d3e;
+  color: white;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 1rem;
+  text-align: center;
+  height: 2rem;
+}
+
+.repo-view-button:hover {
+  background-color: #3a3d4e;
+  color: white;
 }
 
 .hide {
@@ -1239,6 +1256,23 @@ button svg {
   }
 }
 
+@keyframes slideInFromTop {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromBottom {
+  0% {
+    transform: translateY(100%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
 @media screen and (max-width: 960px) {
   .section-details {
     flex-direction: column;
