@@ -1,6 +1,7 @@
 import moment from 'moment';
 import Image from 'next/image';
 import styles from './ProfileGitHubStats.module.css';
+import Link from 'next/link';
 
 type ProfileGitHubStatsProps = {
   JOIN_DATE: string;
@@ -53,12 +54,10 @@ const ProfileGitHubStats = ({
           <h5 className="section-sidebar-title">Organizations</h5>
           <div className={styles.orgsListContainer}>
             {orgsData?.map((org) => (
-              <a
-                href={org.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                key={org.id}
+              <Link
                 className={styles.orgsListItem}
+                key={org.id}
+                href={`/orgs/${org.login}`}
               >
                 <Image
                   src={org.avatar_url}
@@ -67,8 +66,8 @@ const ProfileGitHubStats = ({
                   width={50}
                   height={50}
                 />
-                <p className="org-name">{org.login}</p>
-              </a>
+                <span className="org-name">{org.login}</span>
+              </Link>
             ))}
           </div>
         </div>

@@ -45,6 +45,15 @@
   background-color: rgba(83, 82, 82, 0.349);
 }
 
+.orgsListItem:hover {
+  background-color: rgba(136, 133, 133, 0.349);
+}
+
+.orgsListItem span {
+  margin: 0.6rem;
+  color: white;
+}
+
 @media screen and (max-width: 960px) {
   .profileStatsItems {
     width: 45%;

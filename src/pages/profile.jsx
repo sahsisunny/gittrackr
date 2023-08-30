@@ -66,7 +66,6 @@ const ProfilePage = () => {
         setMostUsedLanguages(languages);
       });
     }
-    console.log(orgsData);
   }, [session, USER_ORG_URL, USER_REPOS_URL, TOKEN, USERNAME]);
 
   useEffect(() => {
