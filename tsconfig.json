@@ -36,6 +36,6 @@
     "src/pages/index.tsx",
     "src/utils/FormatDate.jsx",
     "src/pages/dashboard/[dashboard].jsx"
-  ],
+, "vite.config.js"  ],
   "exclude": ["node_modules"]
 }
