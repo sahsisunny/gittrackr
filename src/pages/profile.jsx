@@ -24,6 +24,7 @@ const ProfilePage = () => {
   const [filteredRepos, setFilteredRepos] = useState(reposData);
   const [mostUsedLanguages, setMostUsedLanguages] = useState([]);
   const [activeTab, setActiveTab] = useState('github-stats');
+
   const USERNAME = session?.user?.login;
   const NAME = session?.user?.name;
   const TOKEN = session?.accessToken;
