@@ -1,0 +1,67 @@
+.sectionSidebar {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  border-radius: 10px;
+  border: 1px solid rgba(83, 82, 82, 0.349);
+}
+
+.sidebarContainer {
+  margin-bottom: 1rem;
+}
+.sectionSidebarTitleSummary {
+  font-size: 2rem;
+  color: white;
+  margin: 0.2rem;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
+  text-align: center;
+}
+.sectionSidebarTitle {
+  font-size: 1.2rem;
+  color: white;
+  margin: 0.2rem;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
+  text-align: center;
+}
+
+.issuesStatsTable {
+  width: 100%;
+  border-collapse: collapse;
+  color: white;
+}
+
+.issuesStatsTableTr:hover {
+  background-color: rgba(83, 82, 82, 0.349);
+  cursor: pointer;
+}
+
+.issuesStatsTableTr {
+  border-bottom: 1px solid rgba(83, 82, 82, 0.349);
+}
+
+.issuesStatsTableTd {
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.issuesStatsTableRowActive {
+  background-color: rgba(83, 82, 82, 0.349);
+}
+
+@media (max-width: 960px) {
+  .sectionSidebar {
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+
+  .summeryItems {
+    width: 100%;
+    display: flex;
+  }
+
+  .sidebarContainer {
+    width: 100%;
+    border: 1px solid rgba(83, 82, 82, 0.349);
+  }
+}

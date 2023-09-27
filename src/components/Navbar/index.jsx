@@ -105,7 +105,8 @@ const Navbar = () => {
               <Link href="/profile" className="nav-link">
                 Profile
               </Link>
-              <Link href="/dashboard" className="nav-link">
+              <Link href={`/dashboard/${session.user?.login}`}
+               className="nav-link">
                 Dashboard
               </Link>
               {orgsData.length > 0 ? (

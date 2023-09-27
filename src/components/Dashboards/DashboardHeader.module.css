@@ -1,0 +1,59 @@
+.dashboardHeader {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  border-radius: 10px;
+  border: 1px solid rgba(83, 82, 82, 0.349);
+}
+
+.dashboardProfile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.dashboardProfileImg {
+  margin-right: 0.5rem;
+  border-radius: 50%;
+}
+
+.dashboardProfileName {
+  font-size: 1.2rem;
+  width: 100%;
+  color: white;
+}
+
+.dashBoardTab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+}
+
+.tabButton {
+  padding: 0.5rem 1rem;
+  margin: 0.5rem;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.activeTab {
+  border-bottom: 2px solid cyan;
+}
+
+@media screen and (max-width: 960px) {
+  .sectionTab {
+    justify-content: center;
+  }
+}

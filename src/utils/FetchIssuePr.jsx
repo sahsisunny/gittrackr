@@ -1,4 +1,4 @@
-const FetchIssuePr = async (url, token, setDataCallback) => {
+const FetchIssuePr = async (url, token, setDataCallback, setCountCallback) => {
   try {
     const response = await fetch(url, {
       headers: {
@@ -6,7 +6,7 @@ const FetchIssuePr = async (url, token, setDataCallback) => {
       },
     });
     const data = await response.json();
-    setDataCallback(data.items);
+    setDataCallback(data);
   } catch (error) {
     console.error('Error fetching data:', error);
   }
