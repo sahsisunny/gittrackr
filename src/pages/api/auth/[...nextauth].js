@@ -4,12 +4,12 @@ import GithubProvider from 'next-auth/providers/github';
 export const authOptions = {
   providers: [
     GithubProvider({
-      clientId: process.env.GITHUB_ID as string,
-      clientSecret: process.env.GITHUB_SECRET as string,
+      clientId: process.env.GITHUB_ID,
+      clientSecret: process.env.GITHUB_SECRET,
     }),
   ],
   callbacks: {
-    async session({ session, token }: { session: any; token: any }) {
+    async session({ session, token }) {
       const userResponse = await fetch('https://api.github.com/user', {
         headers: {
           Authorization: `token ${token.accessToken}`,
@@ -31,15 +31,7 @@ export const authOptions = {
       session.user.bio = user.bio;
       return session;
     },
-    async jwt({
-      token,
-      user,
-      account,
-    }: {
-      token: any;
-      user: any;
-      account: any;
-    }) {
+    async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
       }
