@@ -1,21 +1,14 @@
 import { FC } from 'react';
-import Head from 'next/head';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
+import Layout from '@/components/Layout';
 import Accordion from '@/components/Accordion';
 
 import { FaqQnA } from '@/mocks/faqMock';
-
 import styles from '@/styles/faq.module.css';
 
 const FrequentlyAskedQuestion: FC = () => {
   return (
-    <>
-      <Head>
-        <title>GitTrackr | FAQ</title>
-      </Head>
-      <Navbar />
+    <Layout title="GitTrackr | FAQ">
       <div className={styles.accordionSection}>
         <h1 className={styles.sectionHeading}>Frequently Asked Questions</h1>
         <div className={styles.faqContainer}>
@@ -30,8 +23,7 @@ const FrequentlyAskedQuestion: FC = () => {
           ))}
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

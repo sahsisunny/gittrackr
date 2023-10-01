@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
 import Link from 'next/link';
 
 import About from '@/components/About';
 import Features from '@/components/Features';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
+import Layout from '@/components/Layout';
 import Testimonials from '@/components/Testimonials';
 
 import styles from '@/styles/index.module.css';
@@ -15,11 +13,7 @@ const Home: FC = () => {
   const { data: session } = useSession();
 
   return (
-    <>
-      <Head>
-        <title>GitTrackr</title>
-      </Head>
-      <Navbar />
+    <Layout title="GitTrackr | Home">
       <div className={styles.Homecontainer}>
         <div className={styles.hero} id="home">
           <h1 className={styles.heroTitle}>
@@ -53,7 +47,7 @@ const Home: FC = () => {
                 </Link>
                 <Link
                   href="#"
-                  className={`${styles.heroButton} ${styles.demoBtn}`}
+                  className={`${styles.heroButton} ${styles.demoBtn} hide`}
                 >
                   Demo
                 </Link>
@@ -72,9 +66,7 @@ const Home: FC = () => {
         <Features />
         <Testimonials />
       </div>
-
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

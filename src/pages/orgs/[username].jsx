@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
+import Layout from '@/components/Layout';
 import ProfileImage from './../../assets/dummyProfileImage.png';
 import FormatDate from '@/utils/FormatDate';
 import fetchData from '@/utils/FetchData';
@@ -58,11 +57,7 @@ const ProfilePage = () => {
   }, [searchQuery]);
 
   return (
-    <>
-      <Head>
-        <title>{username} | Org Profile</title>
-      </Head>
-      <Navbar />
+    <Layout title={`${username} | Org Profile`}>
       <div className="main-container">
         <div className="section-two">
           <h5 className="section-title">Profile Information</h5>
@@ -201,8 +196,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

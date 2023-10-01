@@ -1,19 +1,12 @@
 import { FC } from 'react';
-import Head from 'next/head';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
 import Accordion from '@/components/Accordion';
 import { helpQnAMock } from '@/mocks/helpQnQ.mock';
 import styles from '@/styles/help.module.css';
 
 const Help: FC = () => {
   return (
-    <div>
-      <Head>
-        <title>GitTrackr | Help & FAQ</title>
-      </Head>
-      <Navbar />
-
+    <Layout title="GitTrackr | Help & FAQ">
       <div className={styles.accordionSection} id="faq">
         <h2 className={styles.sectionHeading}>Help & FAQ</h2>
         <div className={styles.faqContainer}>
@@ -28,9 +21,7 @@ const Help: FC = () => {
           ))}
         </div>
       </div>
-
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 

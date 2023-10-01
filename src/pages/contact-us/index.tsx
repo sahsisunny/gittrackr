@@ -1,21 +1,12 @@
 import { FC } from 'react';
-import Head from 'next/head';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import Contacts from '@/components/Contacts';
+import Layout from '@/components/Layout';
 
 const ContactUs: FC = () => {
   return (
-    <>
-      <Head>
-        <title>GitTrackr | Contact Us</title>
-      </Head>
-      <Navbar />
-      <div>
-        <Contacts />
-      </div>
-      <Footer />
-    </>
+    <Layout title="GitTrackr | Contact Us">
+      <Contacts />
+    </Layout>
   );
 };
 

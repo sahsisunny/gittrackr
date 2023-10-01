@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSession, getSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
-import Head from 'next/head';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+
+import Layout from '@/components/Layout';
+
 import FetchIssuePr from '@/utils/FetchIssuePr';
 import {
   GITHUB_SEARCH_ISSUES_URL,
@@ -51,16 +51,24 @@ const Dashboard = () => {
         dashboard = null;
       }
       console.log(dashboard);
-      const commonQuery = dashboard ? `+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}` : `+${GITHUB_PAGINATION_HUNDRED}`;
-      
+      const commonQuery = dashboard
+        ? `+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`
+        : `+${GITHUB_PAGINATION_HUNDRED}`;
+
       const ALL_ISSUES_URL = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${USERNAME}${commonQuery}`;
       const ALL_PRS_URL = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${USERNAME}${commonQuery}`;
 
       FetchIssuePr(ALL_ISSUES_URL, TOKEN, (data) => {
         allIssues = data.items;
-        setAssignedIssuesCount(allIssues.filter((issue) => issue.assignee?.login === USERNAME).length);
-        setClosedIssuesCount(allIssues.filter((issue) => issue.state === 'closed').length);
-        setOwnIssuesCount(allIssues.filter((issue) => issue.user.login === USERNAME).length);
+        setAssignedIssuesCount(
+          allIssues.filter((issue) => issue.assignee?.login === USERNAME).length
+        );
+        setClosedIssuesCount(
+          allIssues.filter((issue) => issue.state === 'closed').length
+        );
+        setOwnIssuesCount(
+          allIssues.filter((issue) => issue.user.login === USERNAME).length
+        );
         setIssuesData(filterIssues(allIssues));
         setAllIssuesCount(data.total_count);
       });
@@ -69,7 +77,9 @@ const Dashboard = () => {
         allPrs = data.items;
         setOpenPrsCount(allPrs.filter((pr) => pr.state === 'open').length);
         setClosedPrsCount(allPrs.filter((pr) => pr.state === 'closed').length);
-        setMergedPrsCount(allPrs.filter(item => item.pull_request.merged_at !== null).length);
+        setMergedPrsCount(
+          allPrs.filter((item) => item.pull_request.merged_at !== null).length
+        );
         setPrsData(filterIssues(allPrs));
         setAllPrsCount(data.total_count);
       });
@@ -82,11 +92,7 @@ const Dashboard = () => {
   }, [searchQuery]);
 
   return (
-    <>
-      <Head>
-        <title>{NAME ? `${NAME} ` : USERNAME} | Dashboard</title>
-      </Head>
-      <Navbar />
+    <Layout title={`${NAME ? `${NAME} ` : USERNAME} | Dashboard`}>
       <div className="main-container-profile">
         <DashBoardHeader
           activeTab={activeTab}
@@ -115,8 +121,7 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 
