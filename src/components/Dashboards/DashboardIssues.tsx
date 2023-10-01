@@ -4,7 +4,9 @@ import styles from './DashboardIssues.module.css';
 import FormatDate from '@/utils/FormatDate';
 
 type IssueProps = {
-  issues: {
+  searchQuery: string;
+  setSearchQuery: (searchQuery: string) => void;
+  filteredIssuesPrs: {
     id: number;
     title: string;
     html_url: string;
@@ -12,12 +14,10 @@ type IssueProps = {
     created_at: string;
     repository_url: string;
   }[];
-  searchQuery: string;
-  setSearchQuery: (searchQuery: string) => void;
 };
 
 const DashboardIssues = ({
-  issues,
+  filteredIssuesPrs,
   searchQuery,
   setSearchQuery,
 }: IssueProps) => {
@@ -41,7 +41,7 @@ const DashboardIssues = ({
         </button>
       </div>
       <div className={styles.repoList}>
-        {issues.map((issue) => (
+        {filteredIssuesPrs.map((issue) => (
           <div key={issue.id}>
             <div className="repo-item">
               <div className="repo-details">

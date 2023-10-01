@@ -16,10 +16,17 @@ import DashboardIssues from '@/components/Dashboards/DashboardIssues';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
+
+  const router = useRouter();
+  let { dashboard } = router.query;
+
   const [activeTab, setActiveTab] = useState('issues');
   const [searchQuery, setSearchQuery] = useState('');
   const [issuesData, setIssuesData] = useState([]);
   const [prsData, setPrsData] = useState([]);
+  const [filteredIssues, setFilteredIssues] = useState(issuesData);
+  const [filteredPrs, setFilteredPrs] = useState(prsData);
+
   const [allIssuesCount, setAllIssuesCount] = useState(0);
   const [allPrsCount, setAllPrsCount] = useState(0);
   const [assignedIssuesCount, setAssignedIssuesCount] = useState(0);
@@ -32,17 +39,22 @@ const Dashboard = () => {
   let allIssues = [];
   let allPrs = [];
 
-  const USERNAME = session?.user?.login;
-  const NAME = session?.user?.name;
   const TOKEN = session?.accessToken;
-
-  const router = useRouter();
-  let { dashboard } = router.query;
+  const USERNAME = session?.user?.login;
+  const NAME = dashboard ? dashboard : session?.user?.name;
 
   const filterIssues = (data) => {
-    return data.filter((issue) =>
+    const filteredIssues = data.filter((issue) =>
       issue.title.toLowerCase().includes(searchQuery.toLowerCase())
     );
+    setFilteredIssues(filteredIssues);
+  };
+
+  const filterPrs = (data) => {
+    const filteredPrs = data.filter((pr) =>
+      pr.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredPrs(filteredPrs);
   };
 
   useEffect(() => {
@@ -50,7 +62,6 @@ const Dashboard = () => {
       if (dashboard === USERNAME) {
         dashboard = null;
       }
-      console.log(dashboard);
       const commonQuery = dashboard
         ? `+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`
         : `+${GITHUB_PAGINATION_HUNDRED}`;
@@ -69,7 +80,8 @@ const Dashboard = () => {
         setOwnIssuesCount(
           allIssues.filter((issue) => issue.user.login === USERNAME).length
         );
-        setIssuesData(filterIssues(allIssues));
+        setIssuesData(allIssues);
+        setFilteredIssues(allIssues);
         setAllIssuesCount(data.total_count);
       });
 
@@ -80,15 +92,19 @@ const Dashboard = () => {
         setMergedPrsCount(
           allPrs.filter((item) => item.pull_request.merged_at !== null).length
         );
-        setPrsData(filterIssues(allPrs));
+        setPrsData(allPrs);
+        setFilteredPrs(allPrs);
         setAllPrsCount(data.total_count);
       });
     }
   }, [session, USERNAME, dashboard]);
 
   useEffect(() => {
-    setIssuesData(filterIssues(allIssues));
-    setPrsData(filterIssues(allPrs));
+    if (activeTab === 'issues') {
+      filterIssues(issuesData);
+    } else {
+      filterPrs(prsData);
+    }
   }, [searchQuery]);
 
   return (
@@ -114,7 +130,9 @@ const Dashboard = () => {
 
           <div className="section-main">
             <DashboardIssues
-              issues={activeTab === 'issues' ? issuesData : prsData}
+              filteredIssuesPrs={
+                activeTab === 'issues' ? filteredIssues : filteredPrs
+              }
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}
             />
