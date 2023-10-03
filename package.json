@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src",
+    "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,scss}'"
   },
   "dependencies": {

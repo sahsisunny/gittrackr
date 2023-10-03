@@ -1,4 +1,4 @@
-const FetchIssuePr = async (url, token, setDataCallback, setCountCallback) => {
+const FetchIssuePr = async (url, token, setDataCallback) => {
   try {
     const response = await fetch(url, {
       headers: {
