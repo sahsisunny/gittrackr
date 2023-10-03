@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import About from '@/components/About';
 import Features from '@/components/Features';
@@ -8,13 +9,17 @@ import Layout from '@/components/Layout';
 import Testimonials from '@/components/Testimonials';
 
 import styles from '@/styles/index.module.css';
+import Slider from '@/components/Slider/Slider';
 
 const Home: FC = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const { dev } = router.query;
+  const { frame } = router.query;
 
   return (
     <Layout title="GitTrackr | Home">
-      <div className={styles.Homecontainer}>
+      <div className={styles.homeContainer}>
         <div className={styles.hero} id="home">
           <h1 className={styles.heroTitle}>
             {!session ? (
@@ -63,7 +68,8 @@ const Home: FC = () => {
           </div>
         </div>
         <About />
-        <Features />
+        {!dev && <Features />}
+        {dev && <Slider showFrame={frame === 'true'} />}
         <Testimonials />
       </div>
     </Layout>

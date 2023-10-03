@@ -36,6 +36,6 @@
     "src/pages/index.tsx",
     "src/utils/FormatDate.tsx",
     "src/pages/dashboard/[dashboard].jsx"
-, "src/utils/mostUsedLanguage.jsx"  ],
+, "src/utils/mostUsedLanguage.jsx", "src/components/Slider/Slider.tsx"  ],
   "exclude": ["node_modules"]
 }
