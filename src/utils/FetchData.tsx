@@ -1,4 +1,8 @@
-const FetchIssuePr = async (url, token, setDataCallback) => {
+const fetchData = async (
+  url: string,
+  token: string,
+  setDataCallback: (data: any) => void
+): Promise<void> => {
   try {
     const response = await fetch(url, {
       headers: {
@@ -12,4 +16,4 @@ const FetchIssuePr = async (url, token, setDataCallback) => {
   }
 };
 
-export default FetchIssuePr;
+export default fetchData;

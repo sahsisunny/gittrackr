@@ -31,11 +31,11 @@
     "src/pages/api/auth/[...nextauth].js",
     "src/pages/dashboard.jsx",
     "src/pages/profile/[username].jsx",
-    "src/utils/FetchData.jsx",
+    "src/utils/FetchData.tsx",
     "src/components/Navbar/index.jsx",
     "src/pages/index.tsx",
-    "src/utils/FormatDate.jsx",
+    "src/utils/FormatDate.tsx",
     "src/pages/dashboard/[dashboard].jsx"
-  ],
+, "src/utils/mostUsedLanguage.jsx"  ],
   "exclude": ["node_modules"]
 }

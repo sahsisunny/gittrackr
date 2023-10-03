@@ -1,4 +1,4 @@
-const getRepoNameFromUrl = (url) => {
+const getRepoNameFromUrl = (url: string): string => {
   const parseUrl = new URL(url);
   const pathname = parseUrl.pathname;
   const parts = pathname.split('/');
