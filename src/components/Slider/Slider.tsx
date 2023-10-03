@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './slider.module.css';
 
@@ -35,28 +35,46 @@ type SliderProps = {
 };
 
 const Slider = ({ showFrame = false }: SliderProps) => {
+  const [fullscreenImage, setFullscreenImage] = useState(null);
+
+  const openFullscreen = (imageSrc: any) => {
+    setFullscreenImage(imageSrc);
+  };
+
+  const closeFullscreen = () => {
+    setFullscreenImage(null);
+  };
+
   return (
     <div className={styles.slider}>
       <h2 className={styles.sectionHeading}>Features</h2>
       {showFrame ? (
         <div className={styles.ImageContainer}>
-          <Image src={UserProfileImg} alt="Home" className={styles.imageOne} />
+          <Image
+            src={UserProfileImg}
+            alt="Home"
+            className={styles.imageOne}
+            onClick={() => openFullscreen(UserProfileImg)}
+          />
           <div className={styles.middleContainer}>
             <Image
               src={OrgProfileImage}
               alt="User"
               className={styles.imageTwo}
+              onClick={() => openFullscreen(OrgProfileImage)}
             />
             <Image
               src={UserRepoImage}
               alt="User Repo"
               className={styles.imageThree}
+              onClick={() => openFullscreen(UserRepoImage)}
             />
           </div>
           <Image
             src={OrgDashboardImg}
             alt="Dashboard"
             className={styles.imageFour}
+            onClick={() => openFullscreen(OrgDashboardImg)}
           />
         </div>
       ) : (
@@ -67,10 +85,23 @@ const Slider = ({ showFrame = false }: SliderProps) => {
                 src={image}
                 alt={`Slide ${index}`}
                 className={styles.image}
+                onClick={() => openFullscreen(image)}
               />
               <p className={styles.slideText}>{ImageText[index]}</p>
             </div>
           ))}
+        </div>
+      )}
+      {fullscreenImage && (
+        <div className={styles.fullscreen}>
+          <button onClick={closeFullscreen} className={styles.closeButton}>
+            Close
+          </button>
+          <Image
+            src={fullscreenImage}
+            alt="Fullscreen Image"
+            className={styles.fullscreenImage}
+          />
         </div>
       )}
     </div>
