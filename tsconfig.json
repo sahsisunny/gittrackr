@@ -30,7 +30,7 @@
     ".next/types/**/*.ts",
     "src/pages/api/auth/[...nextauth].js",
     "src/pages/dashboard.jsx",
-    "src/pages/profiles/[username].jsx",
+    "src/pages/profile/[username].jsx",
     "src/utils/FetchData.jsx",
     "src/components/Navbar/index.jsx",
     "src/pages/index.tsx",

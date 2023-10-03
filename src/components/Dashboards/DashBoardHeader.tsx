@@ -20,7 +20,7 @@ const DashBoardHeader = ({
         <Image
           className={styles.dashboardProfileImg}
           src={AVATAR_URL}
-          alt={NAME}
+          alt={NAME || 'User'}
           width="50"
           height="50"
         />

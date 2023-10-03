@@ -25,7 +25,16 @@
   border: 1px solid rgba(83, 82, 82, 0.349);
 }
 
-.orgsListContainer {
+.usersContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: white;
+}
+
+.orgsContainer {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -43,6 +52,8 @@
   padding: 1rem;
   border-radius: 10px;
   background-color: rgba(83, 82, 82, 0.349);
+  max-width: 200px;
+  min-width: 200px;
 }
 
 .orgsListItem:hover {
