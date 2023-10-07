@@ -19,7 +19,7 @@ const ProfileHeader = ({
     <div className="profile-image">
       <Image
         src={AVATAR_URL || ProfileImage}
-        alt={NAME || USERNAME}
+        alt={NAME || USERNAME || 'User'}
         className="avatar-photo"
         width={200}
         height={200}

@@ -1,26 +1,25 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 
 import About from '@/components/About';
 import Features from '@/components/Features';
-import Footer from '@/components/Footer';
-import Navbar from '@/components/Navbar';
+import Layout from '@/components/Layout';
 import Testimonials from '@/components/Testimonials';
 
 import styles from '@/styles/index.module.css';
+import Slider from '@/components/Slider/Slider';
 
 const Home: FC = () => {
   const { data: session } = useSession();
+  const router = useRouter();
+  const { dev } = router.query;
+  const { frame } = router.query;
 
   return (
-    <>
-      <Head>
-        <title>GitTrackr</title>
-      </Head>
-      <Navbar />
-      <div className={styles.Homecontainer}>
+    <Layout title="GitTrackr | Home">
+      <div className={styles.homeContainer}>
         <div className={styles.hero} id="home">
           <h1 className={styles.heroTitle}>
             {!session ? (
@@ -53,7 +52,7 @@ const Home: FC = () => {
                 </Link>
                 <Link
                   href="#"
-                  className={`${styles.heroButton} ${styles.demoBtn}`}
+                  className={`${styles.heroButton} ${styles.demoBtn} hide`}
                 >
                   Demo
                 </Link>
@@ -69,12 +68,11 @@ const Home: FC = () => {
           </div>
         </div>
         <About />
-        <Features />
+        {!dev && <Features />}
+        {dev && <Slider showFrame={frame === 'true'} />}
         <Testimonials />
       </div>
-
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

@@ -28,4 +28,11 @@ export const LANGUAGE_COLORS = {
   Lua: '#000080',
   Clojure: '#db5855',
   Perl: '#0298c3',
+  SCSS: '#c6538c',
+  CoffeeScript: '#244776',
+  'Visual Basic': '#945db7',
+  'Emacs Lisp': '#c065db',
+  Groovy: '#e69f56',
+  Markdown: '#083fa1',
+  Svelte: '#ff3e00',
 };

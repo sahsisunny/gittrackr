@@ -4,9 +4,7 @@ import { useEffect } from 'react';
 import { getProviders, signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Logo from './../assets/GitTrackr.png';
-import Navbar from '@/components/Navbar';
-import Head from 'next/head';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
 
 const SignInPage: NextPage = () => {
   const router = useRouter();
@@ -18,12 +16,7 @@ const SignInPage: NextPage = () => {
     }
   }, [router]);
   return (
-    <>
-      <Head>
-        <title>Sign in with GitHub | GitTrackr</title>
-      </Head>
-      <Navbar />
-
+    <Layout title="GitTrackr | Sign In">
       <div className="container">
         <div className="sign-container">
           <div className="left-side">
@@ -58,8 +51,7 @@ const SignInPage: NextPage = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

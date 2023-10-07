@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
 
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
 import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileSidebar from '@/components/Profile/ProfileSidebar';
 import ProfileGitHubStats from '@/components/Profile/ProfileGitHubStats';
@@ -74,11 +72,7 @@ const ProfilePage = () => {
   }, [searchQuery]);
 
   return (
-    <>
-      <Head>
-        <title>{data?.name ? `${data?.name} ` : data?.login} | Profile</title>
-      </Head>
-      <Navbar />
+    <Layout title={`${data?.name ? `${data?.name} ` : data?.login} | Profile`}>
       <div className="main-container-profile">
         <ProfileHeader
           NAME={data?.name}
@@ -121,8 +115,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

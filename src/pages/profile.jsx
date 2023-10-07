@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
-import Head from 'next/head';
 
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
 import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileSidebar from '@/components/Profile/ProfileSidebar';
 import ProfileGitHubStats from '@/components/Profile/ProfileGitHubStats';
@@ -24,6 +22,7 @@ const ProfilePage = () => {
   const [filteredRepos, setFilteredRepos] = useState(reposData);
   const [mostUsedLanguages, setMostUsedLanguages] = useState([]);
   const [activeTab, setActiveTab] = useState('github-stats');
+
   const USERNAME = session?.user?.login;
   const NAME = session?.user?.name;
   const TOKEN = session?.accessToken;
@@ -73,13 +72,7 @@ const ProfilePage = () => {
   }, [searchQuery]);
 
   return (
-    <>
-      <Head>
-        <title>{NAME ? `${NAME} ` : USERNAME} | Profile</title>
-      </Head>
-
-      <Navbar />
-
+    <Layout title={`${NAME ? `${NAME} ` : USERNAME} | Profile`}>
       <div className="main-container-profile">
         <ProfileHeader
           NAME={NAME}
@@ -122,8 +115,7 @@ const ProfilePage = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

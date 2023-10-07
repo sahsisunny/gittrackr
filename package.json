@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint src",
+    "lint": "eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
     "test": "vitest  --run --reporter verbose  --coverage",
     "coverage": "vitest run --coverage",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,css,scss}'"
@@ -30,6 +30,7 @@
     "react-icons": "^4.10.1",
     "react-redux": "^8.1.2",
     "react-responsive": "^9.0.2",
+    "sharp": "^0.32.6",
     "typescript": "^5.0.4"
   },
   "volta": {

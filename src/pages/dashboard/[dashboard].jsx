@@ -1,10 +1,8 @@
+import React, { useState, useEffect } from 'react';
 import { useSession, getSession } from 'next-auth/react';
-import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 
-import Head from 'next/head';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Layout from '@/components/Layout';
 
 import FetchIssuePr from '@/utils/FetchIssuePr';
 import {
@@ -12,177 +10,136 @@ import {
   GITHUB_PAGINATION_HUNDRED,
 } from '@/constants/url';
 
-import getRepoNameFromUrl from '@/utils/getRepoNameFromUrl';
-import FormatDate from '@/utils/FormatDate';
-import getRepoUrl from '../../utils/getRepoUrl';
-
-import FilterSection from '@/components/dashboard/FilterSection';
-import PRFilterSection from '@/components/dashboard/PRFilterSection';
+import DashBoardHeader from '@/components/Dashboards/DashBoardHeader';
+import DashboardSidebar from '@/components/Dashboards/DashboardSidebar';
+import DashboardIssues from '@/components/Dashboards/DashboardIssues';
 
 const Dashboard = () => {
   const { data: session } = useSession({ required: true });
-  const [issuesData, setIssuesData] = useState([]);
-  const [prsData, setPrsData] = useState([]);
-  const [filterData, setFilterData] = useState([]);
-  const [prFilterData, setPrFilterData] = useState([]);
-
-  const USERNAME = session.user.login;
-  const TOKEN = session.accessToken;
 
   const router = useRouter();
-  const { dashboard } = router.query;
+  let { dashboard } = router.query;
 
-  const filterIssues = (status) => {
-    if (status === 'open') {
-      const openIssues = issuesData.filter((issue) => issue.state === 'open');
-      setFilterData(openIssues);
-    } else if (status === 'closed') {
-      const closedIssues = issuesData.filter(
-        (issue) => issue.state === 'closed'
-      );
-      setFilterData(closedIssues);
-    } else {
-      setFilterData(issuesData);
-    }
+  const [activeTab, setActiveTab] = useState('issues');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [issuesData, setIssuesData] = useState([]);
+  const [prsData, setPrsData] = useState([]);
+  const [filteredIssues, setFilteredIssues] = useState(issuesData);
+  const [filteredPrs, setFilteredPrs] = useState(prsData);
+
+  const [allIssuesCount, setAllIssuesCount] = useState(0);
+  const [allPrsCount, setAllPrsCount] = useState(0);
+  const [assignedIssuesCount, setAssignedIssuesCount] = useState(0);
+  const [closedIssuesCount, setClosedIssuesCount] = useState(0);
+  const [ownIssuesCount, setOwnIssuesCount] = useState(0);
+  const [openPrsCount, setOpenPrsCount] = useState(0);
+  const [closedPrsCount, setClosedPrsCount] = useState(0);
+  const [mergedPrsCount, setMergedPrsCount] = useState(0);
+
+  let allIssues = [];
+  let allPrs = [];
+
+  const TOKEN = session?.accessToken;
+  const USERNAME = session?.user?.login;
+  const NAME = dashboard ? dashboard : session?.user?.name;
+
+  const filterIssues = (data) => {
+    const filteredIssues = data.filter((issue) =>
+      issue.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredIssues(filteredIssues);
   };
 
-  const filterPrs = (status) => {
-    if (status === 'open') {
-      const openPrs = prsData.filter((pr) => pr.state === 'open');
-      setPrFilterData(openPrs);
-    } else if (status === 'closed') {
-      const closedPrs = prsData.filter((pr) => pr.state === 'closed');
-      setPrFilterData(closedPrs);
-    } else if (status === 'merged') {
-      const mergedPrs = prsData.filter(
-        (pr) => pr.pull_request.merged_at !== null
-      );
-      setPrFilterData(mergedPrs);
-    } else {
-      setPrFilterData(prsData);
-    }
+  const filterPrs = (data) => {
+    const filteredPrs = data.filter((pr) =>
+      pr.title.toLowerCase().includes(searchQuery.toLowerCase())
+    );
+    setFilteredPrs(filteredPrs);
   };
 
   useEffect(() => {
     if (session) {
-      const issueUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${USERNAME}+org:${dashboard}`;
-      const prUrl = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${USERNAME}+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`;
-      if (issueUrl) {
-        FetchIssuePr(issueUrl, TOKEN, (issues) => {
-          setIssuesData(issues);
-          setFilterData(issues);
-        });
+      if (dashboard === USERNAME) {
+        dashboard = null;
       }
-      if (prUrl) {
-        FetchIssuePr(prUrl, TOKEN, (prs) => {
-          setPrsData(prs);
-          setPrFilterData(prs);
-        });
-      }
+      const commonQuery = dashboard
+        ? `+org:${dashboard}+${GITHUB_PAGINATION_HUNDRED}`
+        : `+${GITHUB_PAGINATION_HUNDRED}`;
+
+      const ALL_ISSUES_URL = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${USERNAME}${commonQuery}`;
+      const ALL_PRS_URL = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${USERNAME}${commonQuery}`;
+
+      FetchIssuePr(ALL_ISSUES_URL, TOKEN, (data) => {
+        allIssues = data.items;
+        setAssignedIssuesCount(
+          allIssues.filter((issue) => issue.assignee?.login === USERNAME).length
+        );
+        setClosedIssuesCount(
+          allIssues.filter((issue) => issue.state === 'closed').length
+        );
+        setOwnIssuesCount(
+          allIssues.filter((issue) => issue.user.login === USERNAME).length
+        );
+        setIssuesData(allIssues);
+        setFilteredIssues(allIssues);
+        setAllIssuesCount(data.total_count);
+      });
+
+      FetchIssuePr(ALL_PRS_URL, TOKEN, (data) => {
+        allPrs = data.items;
+        setOpenPrsCount(allPrs.filter((pr) => pr.state === 'open').length);
+        setClosedPrsCount(allPrs.filter((pr) => pr.state === 'closed').length);
+        setMergedPrsCount(
+          allPrs.filter((item) => item.pull_request.merged_at !== null).length
+        );
+        setPrsData(allPrs);
+        setFilteredPrs(allPrs);
+        setAllPrsCount(data.total_count);
+      });
     }
-  }, [session, dashboard, USERNAME, TOKEN]);
+  }, [session, USERNAME, dashboard]);
+
+  useEffect(() => {
+    if (activeTab === 'issues') {
+      filterIssues(issuesData);
+    } else {
+      filterPrs(prsData);
+    }
+  }, [searchQuery]);
 
   return (
-    <>
-      <Head>
-        <title>{dashboard} | Dashboard</title>
-      </Head>
-      <Navbar />
-      <div className="main-container">
-        <div className="section-two">
-          <h5 className="section-title">Issues</h5>
-          <div className="repo-filters">
-            <div className="radio-inputs">
-              <FilterSection filterIssues={filterIssues} />
-            </div>
-          </div>
-          <div className="repo-list">
-            {filterData.map((issue) => (
-              <div key={issue.id}>
-                <div className="repo-item">
-                  <div className="repo-details">
-                    <div className="repo-item-left">
-                      <span className="repo-item-name">{issue.title}</span>
-                    </div>
-                    <div className="repo-item-right">
-                      <span
-                        className="repo-name repo-item-privacy "
-                        onClick={() => {
-                          window.open(
-                            `${getRepoUrl(issue.html_url)}`,
-                            '_blank'
-                          );
-                        }}
-                      >
-                        {getRepoNameFromUrl(issue.repository_url)}
-                      </span>
-                      <span className="repo-item-updated">
-                        {FormatDate(issue.created_at)}
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    className="issue-view-btn"
-                    onClick={() => {
-                      window.open(`${issue.html_url}`, '_blank');
-                    }}
-                  >
-                    {issue.state === 'open' ? 'Open' : 'Closed'}
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="section-one">
-          <h5 className="section-title">Pull Requests</h5>
-          <div className="repo-filters">
-            <div className="radio-inputs">
-              <PRFilterSection filterPrs={filterPrs} />
-            </div>
-          </div>
-          <div className="repo-list">
-            {prFilterData.map((pr) => (
-              <div key={pr.id}>
-                <div className="repo-item">
-                  <div className="repo-details">
-                    <div className="repo-item-left">
-                      <span className="repo-item-name">{pr.title}</span>
-                    </div>
-                    <div className="repo-item-right">
-                      <span
-                        className="repo-item-privacy"
-                        onClick={() => {
-                          window.open(`${getRepoUrl(pr.html_url)}`, '_blank');
-                        }}
-                      >
-                        {getRepoNameFromUrl(pr.repository_url)}
-                      </span>
-                      <span className="repo-item-updated">
-                        {FormatDate(pr.updated_at)}
-                      </span>
-                    </div>
-                  </div>
-                  <button
-                    className="issue-view-btn"
-                    onClick={() => {
-                      window.open(`${pr.html_url}`, '_blank');
-                    }}
-                  >
-                    {pr.state === 'open'
-                      ? 'Open'
-                      : pr.pull_request.merged_at !== null
-                      ? 'Merged'
-                      : 'Closed'}
-                  </button>
-                </div>
-              </div>
-            ))}
+    <Layout title={`${NAME ? `${NAME} ` : USERNAME} | Dashboard`}>
+      <div className="main-container-profile">
+        <DashBoardHeader
+          activeTab={activeTab}
+          setActiveTab={setActiveTab}
+          AVATAR_URL={session?.user?.image}
+          NAME={NAME ? NAME : USERNAME}
+        />
+        <div className="section-details">
+          <DashboardSidebar
+            ASSIGNED_ISSUES={assignedIssuesCount}
+            CLOSED_ISSUES={closedIssuesCount}
+            OWN_ISSUES={ownIssuesCount}
+            ALL_ISSUES={allIssuesCount}
+            OPEN_PRS={openPrsCount}
+            CLOSED_PRS={closedPrsCount}
+            MERGED_PRS={mergedPrsCount}
+            ALL_PRS={allPrsCount}
+          />
+
+          <div className="section-main">
+            <DashboardIssues
+              filteredIssuesPrs={
+                activeTab === 'issues' ? filteredIssues : filteredPrs
+              }
+              searchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+            />
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </Layout>
   );
 };
 

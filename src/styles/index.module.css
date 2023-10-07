@@ -1,4 +1,4 @@
-.Homecontainer {
+.homeContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -53,9 +53,7 @@
   background-color: #2a2d3e;
   color: white;
   font-weight: 600;
-  font:
-    1.2rem 'Roboto',
-    sans-serif;
+  font: 1.2rem 'Roboto', sans-serif;
   border: none;
   cursor: pointer;
   padding: 0.8rem 2rem;
