@@ -10,6 +10,7 @@ import Testimonials from '@/components/Testimonials';
 
 import styles from '@/styles/index.module.css';
 import Slider from '@/components/Slider/Slider';
+import AboutDeveloper from '@/components/About-Developer';
 
 const Home: FC = () => {
   const { data: session } = useSession();
@@ -70,6 +71,7 @@ const Home: FC = () => {
         <About />
         {!dev && <Features />}
         {dev && <Slider showFrame={frame === 'true'} />}
+        {dev && <AboutDeveloper />}
         <Testimonials />
       </div>
     </Layout>
