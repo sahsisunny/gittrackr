@@ -71,7 +71,7 @@ const Home: FC = () => {
         <About />
         {!dev && <Features />}
         {dev && <Slider showFrame={frame === 'true'} />}
-        {dev && <AboutDeveloper />}
+        <AboutDeveloper />
         <Testimonials />
       </div>
     </Layout>
