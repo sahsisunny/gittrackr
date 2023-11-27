@@ -1,0 +1,53 @@
+.filter__component {
+  margin-right: 10px;
+}
+
+.filter__button {
+  padding: 0.6rem;
+  text-align: center;
+  background: transparent;
+  color: white;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+}
+
+.filterIcon {
+  margin-right: 0.5rem;
+}
+
+.filter__component:active {
+  border-bottom: 2px solid cyan;
+}
+
+.modalContainer {
+  width: 20%;
+  min-width: 9rem;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 2px;
+  z-index: 1;
+  position: absolute;
+  top: 20%;
+  right: 0;
+  background-color: #2a2d3e;
+  color: white;
+  font: 1rem 'Roboto', sans-serif;
+}
+
+.openModal {
+  display: block;
+  transform: scale(1, 1);
+  transition: 0.5s;
+}
+
+.closeModal {
+  display: none;
+}
+
+.options .filterClass {
+  margin-right: 2rem !important;
+}

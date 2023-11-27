@@ -1,3 +1,4 @@
+import FilterComponent from '../Filter';
 import styles from './DashboardHeader.module.css';
 import Image from 'next/image';
 
@@ -27,6 +28,7 @@ const DashBoardHeader = ({
         <p className={styles.dashboardProfileName}>{NAME}</p>
       </div>
       <div className={styles.dashBoardTab}>
+        <FilterComponent />
         <button
           className={
             styles.tabButton +
