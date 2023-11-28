@@ -12,17 +12,25 @@ const FilterComponent: FC = () => {
 
   return (
     <>
-      <div className={styles.filter__component} onClick={handlefilterClick}>
-        <button className={styles.filter__button}>
+      <div className={styles.filterComponent} onClick={handlefilterClick}>
+        <button className={styles.filterButton}>
           <AiFillFilter className={styles.filterIcon} />
           Filters
         </button>
       </div>
-      <div
-        className={showModal ? `${styles.openModal}` : `${styles.closeModal}`}
-      >
-        <FilterModal />
-      </div>
+      {showModal ? (
+        <>
+          <div
+            className={
+              showModal ? `${styles.openModal}` : `${styles.closeModal}`
+            }
+          >
+            <FilterModal />
+          </div>
+        </>
+      ) : (
+        <></>
+      )}
     </>
   );
 };
