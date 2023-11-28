@@ -11,7 +11,7 @@ const FilterComponent: FC = () => {
   };
 
   return (
-    <div>
+    <>
       <div className={styles.filter__component} onClick={handlefilterClick}>
         <button className={styles.filter__button}>
           <AiFillFilter className={styles.filterIcon} />
@@ -23,7 +23,7 @@ const FilterComponent: FC = () => {
       >
         <FilterModal />
       </div>
-    </div>
+    </>
   );
 };
 
