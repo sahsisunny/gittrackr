@@ -37,8 +37,8 @@ type SliderProps = {
 const Slider = ({ showFrame = false }: SliderProps) => {
   const [fullscreenImage, setFullscreenImage] = useState(null);
 
-  const openFullscreen = (imageSrc: any) => {
-    setFullscreenImage(imageSrc);
+  const openFullscreen = (imageSrc: string) => {
+    setFullscreenImage(imageSrc as never);
   };
 
   const closeFullscreen = () => {
@@ -54,27 +54,27 @@ const Slider = ({ showFrame = false }: SliderProps) => {
             src={UserProfileImg}
             alt="Home"
             className={styles.imageOne}
-            onClick={() => openFullscreen(UserProfileImg)}
+            onClick={() => openFullscreen(UserProfileImg as never)}
           />
           <div className={styles.middleContainer}>
             <Image
               src={OrgProfileImage}
               alt="User"
               className={styles.imageTwo}
-              onClick={() => openFullscreen(OrgProfileImage)}
+              onClick={() => openFullscreen(OrgProfileImage as never)}
             />
             <Image
               src={UserRepoImage}
               alt="User Repo"
               className={styles.imageThree}
-              onClick={() => openFullscreen(UserRepoImage)}
+              onClick={() => openFullscreen(UserRepoImage as never)}
             />
           </div>
           <Image
             src={OrgDashboardImg}
             alt="Dashboard"
             className={styles.imageFour}
-            onClick={() => openFullscreen(OrgDashboardImg)}
+            onClick={() => openFullscreen(OrgDashboardImg as never)}
           />
         </div>
       ) : (
@@ -85,7 +85,7 @@ const Slider = ({ showFrame = false }: SliderProps) => {
                 src={image}
                 alt={`Slide ${index}`}
                 className={styles.image}
-                onClick={() => openFullscreen(image)}
+                onClick={() => openFullscreen(image as never)}
               />
               <p className={styles.slideText}>{ImageText[index]}</p>
             </div>

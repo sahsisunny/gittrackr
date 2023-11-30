@@ -1,7 +1,7 @@
 const FetchIssuePr = async (
   url: string,
   token: string,
-  setDataCallback: (data: any) => void
+  setDataCallback: (data: object) => void
 ): Promise<void> => {
   try {
     const response = await fetch(url, {

@@ -19,6 +19,7 @@
         "name": "next"
       }
     ],
+    "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"]
     }
@@ -36,6 +37,10 @@
     "src/pages/index.tsx",
     "src/utils/FormatDate.tsx",
     "src/pages/dashboard/[dashboard].jsx"
-, "src/utils/mostUsedLanguage.jsx", "src/components/Slider/Slider.tsx" ,"vite.config.js" ],
-  "exclude": ["node_modules"]
+, "src/utils/mostUsedLanguage.jsx", "src/components/Slider/Slider.tsx" ,"vite.config.js",
+"node_modules" 
+
+ ],
+
+  "exclude": []
 }
