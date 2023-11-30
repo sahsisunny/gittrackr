@@ -18,10 +18,10 @@ const Features: FC = () => {
       e.currentTarget.textContent === 'PRs & Issues'
         ? PRsIssuesImg
         : e.currentTarget.textContent === 'User Profile'
-          ? UserProfileImg
-          : e.currentTarget.textContent === 'Org Dashboard'
-            ? OrgDashboardImg
-            : OrgProfileImg
+        ? UserProfileImg
+        : e.currentTarget.textContent === 'Org Dashboard'
+        ? OrgDashboardImg
+        : OrgProfileImg
     );
     setActiveButton('active');
     setKey(Date.now().toString());

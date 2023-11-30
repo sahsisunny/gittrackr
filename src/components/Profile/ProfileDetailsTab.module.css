@@ -1,7 +1,7 @@
 .sectionTab {
   width: 100%;
   display: flex;
-  justify-content: flex-end;
+  justify-content: end;
   border-radius: 10px;
 }
 
