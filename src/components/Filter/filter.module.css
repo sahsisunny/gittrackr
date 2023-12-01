@@ -47,6 +47,15 @@
   display: none;
 }
 
-.options .filterClass {
-  margin-right: 2rem !important;
+.filterClass {
+  margin-right: 1rem;
+  height: 1.3em;
+  width: 1.3em;
+  background-color: #343434;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.options label {
+  font-size: 1.2rem;
 }

@@ -11,8 +11,7 @@ const FilterModal: FC = () => {
               type="checkbox"
               name="openPr"
               id="filter"
-              className="filterClass"
-              style={{ marginRight: '1rem' }}
+              className={styles.filterClass}
             />
             <label htmlFor="filter">All</label>
           </div>
@@ -21,8 +20,7 @@ const FilterModal: FC = () => {
               type="checkbox"
               name="openPr"
               id="filter"
-              className="filterClass"
-              style={{ marginRight: '1rem' }}
+              className={styles.filterClass}
             />
             <label htmlFor="filter">Open</label>
           </div>
@@ -31,8 +29,16 @@ const FilterModal: FC = () => {
               type="checkbox"
               name="openPr"
               id="filter"
-              className="filterClass"
-              style={{ marginRight: '1rem' }}
+              className={styles.filterClass}
+            />
+            <label htmlFor="filter">Close</label>
+          </div>
+          <div className="options">
+            <input
+              type="checkbox"
+              name="openPr"
+              id="filter"
+              className={styles.filterClass}
             />
             <label htmlFor="filter">Close</label>
           </div>
