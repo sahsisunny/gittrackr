@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import Layout from '@/components/Layout';
