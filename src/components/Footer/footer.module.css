@@ -1,0 +1,26 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 1rem;
+  color: white;
+  margin-bottom: 2rem;
+}
+
+.linksContainer {
+  margin: 0.5rem;
+}
+
+.anchorLink {
+  margin: 0.5rem;
+  color: white;
+  text-decoration: none;
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 1rem;
+    flex-direction: column-reverse;
+  }
+}

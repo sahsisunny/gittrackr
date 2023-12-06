@@ -1,0 +1,39 @@
+.about {
+  padding: 20px;
+  margin-bottom: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 80vh;
+}
+
+.sectionHeading {
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 0.1rem;
+  color: white;
+  width: 100%;
+  text-decoration: underline cyan;
+}
+
+.aboutText {
+  letter-spacing: 1px;
+  width: 80%;
+}
+
+.aboutTextHeading {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: cyan;
+}
+
+.aboutTextParagraph {
+  margin-bottom: 1rem;
+  text-align: justify;
+}

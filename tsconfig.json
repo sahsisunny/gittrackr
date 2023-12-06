@@ -1,0 +1,41 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    "src/pages/api/auth/[...nextauth].js",
+    "src/pages/dashboard.jsx",
+    "src/pages/profile/[username].jsx",
+    "src/utils/FetchData.tsx",
+    "src/components/Navbar/index.jsx",
+    "src/pages/index.tsx",
+    "src/utils/FormatDate.tsx",
+    "src/pages/dashboard/[dashboard].jsx"
+, "src/utils/mostUsedLanguage.jsx", "src/components/Slider/Slider.tsx" ,"vite.config.js" ],
+  "exclude": ["node_modules"]
+}

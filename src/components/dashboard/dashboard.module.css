@@ -1,0 +1,26 @@
+.radio {
+  flex: 1 1 auto;
+  text-align: center;
+}
+
+.radio input {
+  display: none;
+}
+
+.name {
+  display: flex;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.5rem;
+  border: none;
+  padding: 0.5rem 0;
+  color: rgba(51, 65, 85, 1);
+  transition: all 0.15s ease-in-out;
+}
+
+.radio input:checked + .name {
+  background-color: #3a3d4e;
+  color: white;
+  font-weight: 600;
+}

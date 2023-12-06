@@ -1,0 +1,126 @@
+.contact {
+  padding: 1rem;
+  margin-bottom: 1rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+  min-height: 80vh;
+}
+
+.sectionHeading {
+  color: white;
+  margin: 1rem;
+}
+
+.contactContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.contactImageContainer {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.contactImage {
+  border-radius: 1.2rem;
+  object-fit: cover;
+  width: 70%;
+  height: 70%;
+  animation: slideInFromLeft 0.5s ease-in-out forwards;
+}
+
+.contactForm {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+.formGroup {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  font-size: 1.2rem;
+  width: 30%;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  text-align: center;
+  letter-spacing: 1px;
+  color: white;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 60%;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+}
+
+.formGroup textarea {
+  height: 10rem;
+}
+
+.submitButton {
+  padding: 0.5rem 2rem;
+  border-radius: 10px;
+  border: 1px solid cyan;
+  outline: none;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 1px;
+  background: cyan;
+  color: black;
+  cursor: pointer;
+  margin-top: 1rem;
+}
+
+@media screen and (max-width: 768px) {
+  .contactContainer {
+    flex-direction: column;
+  }
+
+  .contactImageContainer {
+    width: 100%;
+  }
+
+  .contactImage {
+    width: 70%;
+    height: 70%;
+    margin-bottom: 1rem;
+  }
+
+  .contactForm {
+    width: 100%;
+  }
+
+  .formGroup label {
+    width: 100%;
+  }
+
+  .formGroup input,
+  .formGroup textarea {
+    width: 100%;
+  }
+  .formGroup textarea {
+    height: 5rem;
+  }
+}

@@ -1,0 +1,72 @@
+.profileStats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: white;
+}
+
+.profileStatsItems {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 22%;
+  margin: 0.5rem;
+  background-color: rgba(83, 82, 82, 0.349);
+  padding: 1rem;
+  border-radius: 10px;
+}
+
+.profileStatsItems hr {
+  width: 100%;
+  margin: 0.5rem;
+  border: 1px solid rgba(83, 82, 82, 0.349);
+}
+
+.usersContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: white;
+}
+
+.orgsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: white;
+}
+
+.orgsListItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  margin: 0.5rem;
+  padding: 1rem;
+  border-radius: 10px;
+  background-color: rgba(83, 82, 82, 0.349);
+  max-width: 200px;
+  min-width: 200px;
+}
+
+.orgsListItem:hover {
+  background-color: rgba(136, 133, 133, 0.349);
+}
+
+.orgsListItem span {
+  margin: 0.6rem;
+  color: white;
+}
+
+@media screen and (max-width: 960px) {
+  .profileStatsItems {
+    width: 45%;
+  }
+}
