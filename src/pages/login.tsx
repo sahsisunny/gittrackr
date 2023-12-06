@@ -1,7 +1,7 @@
-import { GetServerSideProps, NextPage } from 'next';
+import { NextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import { getProviders, signIn } from 'next-auth/react';
+import { signIn } from 'next-auth/react';
 import Image from 'next/image';
 import Logo from './../assets/GitTrackr.png';
 import Layout from '@/components/Layout';
@@ -53,13 +53,6 @@ const SignInPage: NextPage = () => {
       </div>
     </Layout>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const providersResult = await getProviders();
-  return {
-    props: { providers: providersResult },
-  };
 };
 
 export default SignInPage;

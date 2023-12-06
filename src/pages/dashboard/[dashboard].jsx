@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useSession, getSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 
 import Layout from '@/components/Layout';
@@ -142,22 +142,5 @@ const Dashboard = () => {
     </Layout>
   );
 };
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-  if (!session) {
-    return {
-      redirect: {
-        destination: '/api/auth/signin',
-        permanent: false,
-      },
-    };
-  }
-  return {
-    props: {
-      session,
-    },
-  };
-}
 
 export default Dashboard;
