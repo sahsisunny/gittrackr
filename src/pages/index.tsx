@@ -11,6 +11,7 @@ import Testimonials from '@/components/Testimonials';
 import styles from '@/styles/index.module.css';
 import Slider from '@/components/Slider/Slider';
 import AboutDeveloper from '@/components/About-Developer';
+import ParticlesBg from '@/components/Particles';
 
 const Home: FC = () => {
   const { data: session } = useSession();
@@ -20,6 +21,8 @@ const Home: FC = () => {
 
   return (
     <Layout title="GitTrackr | Home">
+      <ParticlesBg />
+
       <div className={styles.homeContainer}>
         <div className={styles.hero} id="home">
           <h1 className={styles.heroTitle}>

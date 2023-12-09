@@ -46,7 +46,6 @@ a {
 
 /* Navbar */
 .navbar {
-  background-color: var(--primary-color);
   color: white;
   height: 10vh;
   display: flex;
