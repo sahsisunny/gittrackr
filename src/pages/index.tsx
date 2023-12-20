@@ -1,10 +1,8 @@
 import { FC } from 'react';
 import { useSession } from 'next-auth/react';
 import Link from 'next/link';
-import { useRouter } from 'next/router';
 
 import About from '@/components/About';
-import Features from '@/components/Features';
 import Layout from '@/components/Layout';
 import Testimonials from '@/components/Testimonials';
 
@@ -15,9 +13,6 @@ import ParticlesBg from '@/components/Particles';
 
 const Home: FC = () => {
   const { data: session } = useSession();
-  const router = useRouter();
-  const { dev } = router.query;
-  const { frame } = router.query;
 
   return (
     <Layout title="GitTrackr | Home">
@@ -72,8 +67,7 @@ const Home: FC = () => {
           </div>
         </div>
         <About />
-        {!dev && <Features />}
-        {dev && <Slider showFrame={frame === 'true'} />}
+        <Slider />
         <AboutDeveloper />
         <Testimonials />
       </div>
