@@ -6,16 +6,25 @@ export const authOptions = {
     GithubProvider({
       clientId: process.env.GITHUB_ID,
       clientSecret: process.env.GITHUB_SECRET,
+      authorization: {
+        params: {
+          scope: 'read:user user:email repo read:org',
+        },
+      },
     }),
   ],
+
   callbacks: {
     async session({ session, token }) {
       const userResponse = await fetch('https://api.github.com/user', {
         headers: {
-          Authorization: `token ${token.accessToken}`,
+          Authorization: `Bearer ${token.accessToken}`,
+          Accept: 'application/vnd.github+json',
         },
       });
+
       const user = await userResponse.json();
+
       session.user.id = token.id;
       session.accessToken = token.accessToken;
       session.user.login = user.login;
@@ -29,21 +38,28 @@ export const authOptions = {
       session.user.company = user.company;
       session.user.blog = user.blog;
       session.user.bio = user.bio;
+
       return session;
     },
+
     async jwt({ token, user, account }) {
       if (user) {
         token.id = user.id;
       }
+
       if (account) {
         token.accessToken = account.access_token;
+        token.scope = account.scope;
       }
+
       return token;
     },
   },
+
   pages: {
     signIn: '/login',
   },
+
   secret: process.env.NEXTAUTH_SECRET,
 };
 
