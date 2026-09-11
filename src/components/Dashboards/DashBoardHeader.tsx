@@ -1,5 +1,7 @@
+import FilterComponent from '../Filter';
 import styles from './DashboardHeader.module.css';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 type DashBoardHeaderProps = {
   activeTab: string;
@@ -14,6 +16,9 @@ const DashBoardHeader = ({
   AVATAR_URL,
   NAME,
 }: DashBoardHeaderProps) => {
+  const router = useRouter();
+  const { dev } = router.query;
+
   return (
     <div className={styles.dashboardHeader}>
       <div className={styles.dashboardProfile}>
@@ -27,6 +32,7 @@ const DashBoardHeader = ({
         <p className={styles.dashboardProfileName}>{NAME}</p>
       </div>
       <div className={styles.dashBoardTab}>
+        {dev && <FilterComponent />}
         <button
           className={
             styles.tabButton +
