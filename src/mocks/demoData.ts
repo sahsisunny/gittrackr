@@ -49,6 +49,7 @@ export interface DemoOrg {
   login: string;
   avatar_url: string;
   description: string;
+  html_url: string;
 }
 
 export const DEMO_USER: DemoUser = {
@@ -75,18 +76,21 @@ export const DEMO_ORGS: DemoOrg[] = [
     login: 'github',
     avatar_url: 'https://avatars.githubusercontent.com/u/9919?v=4',
     description: 'How people build software.',
+    html_url: 'https://github.com/github',
   },
   {
     id: 2,
     login: 'vercel',
     avatar_url: 'https://avatars.githubusercontent.com/u/14985020?v=4',
     description: 'Develop. Preview. Ship.',
+    html_url: 'https://github.com/vercel',
   },
   {
     id: 3,
     login: 'tailwindlabs',
     avatar_url: 'https://avatars.githubusercontent.com/u/67104408?v=4',
     description: 'Makers of Tailwind CSS and Tailwind UI.',
+    html_url: 'https://github.com/tailwindlabs',
   },
 ];
 
