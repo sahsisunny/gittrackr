@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Image from 'next/image';
+import Image, { StaticImageData } from 'next/image';
 import styles from './slider.module.css';
 
 import DashboardImage from '@/assets/slider/dashboard.jpg';
@@ -35,9 +35,9 @@ type SliderProps = {
 };
 
 const Slider = ({ showFrame = false }: SliderProps) => {
-  const [fullscreenImage, setFullscreenImage] = useState(null);
+  const [fullscreenImage, setFullscreenImage] = useState<StaticImageData | string | null>(null);
 
-  const openFullscreen = (imageSrc: any) => {
+  const openFullscreen = (imageSrc: StaticImageData | string) => {
     setFullscreenImage(imageSrc);
   };
 

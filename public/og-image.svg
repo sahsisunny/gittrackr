@@ -1,0 +1,69 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="glow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(600 200) rotate(90) scale(450 700)">
+      <stop offset="0%" stop-color="#3b82f6" stop-opacity="0.3"/>
+      <stop offset="60%" stop-color="#8b5cf6" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#08090c" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="textGrad" x1="0" y1="0" x2="600" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#60a5fa"/>
+      <stop offset="50%" stop-color="#a78bfa"/>
+      <stop offset="100%" stop-color="#38bdf8"/>
+    </linearGradient>
+    <linearGradient id="cardGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="userSpaceOnUse">
+      <stop offset="0%" stop-color="#151922" stop-opacity="0.8"/>
+      <stop offset="100%" stop-color="#0e1117" stop-opacity="0.9"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#08090c"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+
+  <!-- Subtle Grid -->
+  <g opacity="0.1" stroke="#3b82f6" stroke-width="1">
+    <path d="M 0 100 L 1200 100 M 0 200 L 1200 200 M 0 300 L 1200 300 M 0 400 L 1200 400 M 0 500 L 1200 500" />
+    <path d="M 200 0 L 200 630 M 400 0 L 400 630 M 600 0 L 600 630 M 800 0 L 800 630 M 1000 0 L 1000 630" />
+  </g>
+
+  <!-- Badge -->
+  <g transform="translate(100, 90)">
+    <rect width="320" height="40" rx="20" fill="#1e293b" stroke="#334155" stroke-width="1.5"/>
+    <circle cx="24" cy="20" r="5" fill="#10b981"/>
+    <text x="38" y="25" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600" letter-spacing="1">GITTRACKR 2.0 • LIVE VELOCITY</text>
+  </g>
+
+  <!-- Main Headline -->
+  <text x="100" y="210" fill="#ffffff" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="64" font-weight="800" letter-spacing="-1.5">
+    Supercharge Your
+  </text>
+  <text x="100" y="285" fill="url(#textGrad)" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="64" font-weight="800" letter-spacing="-1.5">
+    GitHub Workflow
+  </text>
+
+  <!-- Subtitle -->
+  <text x="100" y="350" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="24" font-weight="400">
+    Unified real-time cockpit for Pull Requests, Issues &amp; Team Velocity.
+  </text>
+
+  <!-- Metrics Cards Container -->
+  <g transform="translate(100, 420)">
+    <!-- Card 1 -->
+    <rect x="0" y="0" width="300" height="130" rx="16" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="24" y="44" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600">PULL REQUEST VELOCITY</text>
+    <text x="24" y="94" fill="#38bdf8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="40" font-weight="800">4.2h</text>
+    <text x="120" y="92" fill="#10b981" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">↓ 68% vs baseline</text>
+
+    <!-- Card 2 -->
+    <rect x="330" y="0" width="300" height="130" rx="16" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="354" y="44" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600">CROSS-REPO TRACKING</text>
+    <text x="354" y="94" fill="#a78bfa" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="40" font-weight="800">100%</text>
+    <text x="490" y="92" fill="#94a3b8" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="16" font-weight="600">Unified Feed</text>
+
+    <!-- Card 3 -->
+    <rect x="660" y="0" width="340" height="130" rx="16" fill="url(#cardGrad)" stroke="#1e293b" stroke-width="1.5"/>
+    <text x="684" y="44" fill="#64748b" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="14" font-weight="600">DEPLOYED URL</text>
+    <text x="684" y="92" fill="#f1f5f9" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="20" font-weight="700">gittrackr.sunnysahsi.com</text>
+  </g>
+</svg>
+

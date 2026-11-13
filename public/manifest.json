@@ -1,0 +1,24 @@
+{
+  "name": "GitTrackr - Real-Time GitHub Developer Cockpit",
+  "short_name": "GitTrackr",
+  "description": "Track, triage, and analyze GitHub Pull Requests, Issues, Repositories, and Organizations with real-time velocity metrics.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#08090c",
+  "theme_color": "#08090c",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/next.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/next.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml"
+    }
+  ],
+  "categories": ["developer-tools", "productivity", "utilities"]
+}
+

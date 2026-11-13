@@ -1,30 +1,66 @@
 .sectionTab {
   width: 100%;
   display: flex;
-  justify-content: end;
-  border-radius: 10px;
+  align-items: center;
+  justify-content: flex-end;
+  margin-bottom: 1.5rem;
+  gap: 0.5rem;
+}
+
+.tabsContainer {
+  display: inline-flex;
+  align-items: center;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  padding: 0.35rem;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  gap: 0.35rem;
 }
 
 .tabButton {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.15rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
   cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+  background: var(--bg-surface-elevated);
 }
 
 .activeTab {
-  border-bottom: 2px solid cyan;
+  background: var(--accent-cyan) !important;
+  color: #040914 !important;
+  font-weight: 700 !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.35);
 }
 
-@media screen and (max-width: 960px) {
+.tabBadge {
+  font-size: 0.75rem;
+  padding: 0.1rem 0.45rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-elevated);
+  color: var(--text-secondary);
+  font-weight: 700;
+}
+
+.activeTab .tabBadge {
+  background: rgba(4, 9, 20, 0.2);
+  color: #040914;
+}
+
+@media screen and (max-width: 768px) {
   .sectionTab {
     justify-content: center;
   }

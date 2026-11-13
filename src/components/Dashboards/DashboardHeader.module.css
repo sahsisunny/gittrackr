@@ -2,58 +2,104 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
-  border-radius: 10px;
-  border: 1px solid rgba(83, 82, 82, 0.349);
+  align-items: center;
+  padding: 1.25rem 1.75rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .dashboardProfile {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
+  gap: 1rem;
 }
 
 .dashboardProfileImg {
-  margin-right: 0.5rem;
   border-radius: 50%;
+  border: 2px solid var(--accent-cyan);
+  object-fit: cover;
+}
+
+.dashboardProfileInfo {
+  display: flex;
+  flex-direction: column;
 }
 
 .dashboardProfileName {
-  font-size: 1.2rem;
-  width: 100%;
-  color: white;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.dashboardProfileBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.775rem;
+  color: var(--accent-cyan);
+  font-weight: 500;
 }
 
 .dashBoardTab {
   display: flex;
   align-items: center;
-  justify-content: center;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
+  background: var(--bg-surface-elevated);
+  padding: 0.35rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  gap: 0.25rem;
 }
 
 .tabButton {
-  padding: 0.5rem 1rem;
-  margin: 0.5rem;
-  border: none;
-  outline: none;
-  background: transparent;
-  color: white;
-  font-size: 1rem;
-  font-weight: 600;
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  cursor: pointer;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: all var(--transition-fast);
+}
+
+.tabButton:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .activeTab {
-  border-bottom: 2px solid cyan;
+  background: var(--bg-canvas);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
 
-@media screen and (max-width: 960px) {
-  .sectionTab {
+.tabBadge {
+  font-size: 0.75rem;
+  padding: 0.15rem 0.45rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.08);
+  color: inherit;
+}
+
+@media screen and (max-width: 640px) {
+  .dashboardHeader {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .dashBoardTab {
+    width: 100%;
+    justify-content: center;
+  }
+  .tabButton {
+    flex: 1;
     justify-content: center;
   }
 }

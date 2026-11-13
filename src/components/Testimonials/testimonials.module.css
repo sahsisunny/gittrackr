@@ -1,36 +1,111 @@
-.testimonial {
-  padding: 20px;
-  margin-bottom: 20px;
+.testimonialsSection {
+  padding: 5rem 1.5rem 6rem 1.5rem;
   width: 100%;
+  max-width: 1280px;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+}
+
+.sectionHeader {
+  text-align: center;
+  margin-bottom: 3.5rem;
+  max-width: 720px;
+}
+
+.sectionBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.9rem;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-full);
+  color: var(--accent-emerald);
+  font-size: 0.8rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
 }
 
 .sectionHeading {
-  font-size: 1.8rem;
-  font-weight: 500;
+  font-size: clamp(2rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
   margin-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 0.1rem;
-  color: white;
+}
+
+.sectionHeading span {
+  background: linear-gradient(135deg, #10b981 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
   width: 100%;
-  text-decoration: underline cyan;
 }
 
-.testimonialTextQuote {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 1px;
+.testimonialCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.5rem;
+  transition: all var(--transition-normal);
+  position: relative;
 }
 
-.testimonialTextAuthor {
-  font-size: 1.2rem;
-  font-weight: 400;
-  margin-bottom: 1rem;
-  text-align: center;
-  letter-spacing: 1px;
+.testimonialCard:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+}
+
+.quoteText {
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--text-secondary);
+  font-style: italic;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.authorAvatar {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--border-medium);
+}
+
+.authorMeta {
+  display: flex;
+  flex-direction: column;
+}
+
+.authorName {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.authorRole {
+  font-size: 0.775rem;
+  color: var(--text-muted);
+}
+
+@media screen and (max-width: 960px) {
+  .testimonialsGrid {
+    grid-template-columns: 1fr;
+  }
 }

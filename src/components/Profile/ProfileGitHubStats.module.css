@@ -1,72 +1,330 @@
-.profileStats {
+.statsWrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-  color: white;
-}
-
-.profileStatsItems {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   flex-direction: column;
-  width: 22%;
-  margin: 0.5rem;
-  background-color: rgba(83, 82, 82, 0.349);
-  padding: 1rem;
-  border-radius: 10px;
-}
-
-.profileStatsItems hr {
+  gap: 2rem;
   width: 100%;
-  margin: 0.5rem;
-  border: 1px solid rgba(83, 82, 82, 0.349);
 }
 
-.usersContainer {
+.statsSectionTitle {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
   display: flex;
   align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-  color: white;
+  gap: 0.5rem;
+  margin: 0;
 }
 
-.orgsContainer {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
-  color: white;
+.kpiStatsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
 }
 
-.orgsListItem {
+.kpiCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  margin: 0.5rem;
-  padding: 1rem;
-  border-radius: 10px;
-  background-color: rgba(83, 82, 82, 0.349);
-  max-width: 200px;
-  min-width: 200px;
+  gap: 0.45rem;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
 }
 
-.orgsListItem:hover {
-  background-color: rgba(136, 133, 133, 0.349);
+.kpiCard:hover {
+  border-color: var(--border-medium);
+  background: var(--bg-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-md);
 }
 
-.orgsListItem span {
-  margin: 0.6rem;
-  color: white;
+.kpiHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.775rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
-@media screen and (max-width: 960px) {
-  .profileStatsItems {
-    width: 45%;
+.kpiValue {
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.kpiSubtext {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* ==========================================================================
+   Streak & Activity Heatmap Section
+   ========================================================================== */
+.streakCardGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-top: 0.85rem;
+}
+
+.streakCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  position: relative;
+  overflow: hidden;
+  transition: all var(--transition-fast);
+}
+
+.streakCard:hover {
+  border-color: rgba(245, 158, 11, 0.4);
+  background: var(--bg-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.1);
+}
+
+.streakIconWrapper {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Contribution Calendar Heatmap */
+.heatmapCard {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  margin-top: 0.85rem;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+.heatmapHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+  min-height: 32px;
+  gap: 0.75rem;
+}
+
+.heatmapTitle {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.heatmapTooltipBox {
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-shrink: 0;
+}
+
+.heatmapTooltip {
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.1);
+  padding: 0.2rem 0.65rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  white-space: nowrap;
+  transition: opacity var(--transition-fast), visibility var(--transition-fast);
+}
+
+.heatmapScrollArea {
+  width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 6px 4px 8px 4px;
+}
+
+.heatmapScrollArea::-webkit-scrollbar {
+  height: 6px;
+}
+
+.heatmapScrollArea::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+}
+
+.heatmapGrid {
+  display: flex;
+  gap: 3.5px;
+  min-width: 680px;
+  padding: 2px;
+}
+
+.heatmapCol {
+  display: flex;
+  flex-direction: column;
+  gap: 3.5px;
+}
+
+.heatmapCell {
+  width: 12px;
+  height: 12px;
+  border-radius: 2.5px;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.heatmapCell:hover {
+  transform: scale(1.2);
+  z-index: 10;
+  box-shadow: 0 0 8px rgba(16, 185, 129, 0.8);
+}
+
+.cell0 {
+  background: rgba(255, 255, 255, 0.04);
+}
+.cell1 {
+  background: rgba(16, 185, 129, 0.25);
+}
+.cell2 {
+  background: rgba(16, 185, 129, 0.5);
+}
+.cell3 {
+  background: rgba(16, 185, 129, 0.75);
+}
+.cell4 {
+  background: #10b981;
+  box-shadow: 0 0 4px rgba(16, 185, 129, 0.4);
+}
+
+.heatmapFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 1rem;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.legendBox {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+/* Developer Achievements */
+.achievementsRow {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 0.85rem;
+}
+
+.achievementBadge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.achievementBadge:hover {
+  border-color: var(--accent-cyan);
+  background: var(--bg-surface-elevated);
+  transform: translateY(-1px);
+}
+
+.achievementIcon {
+  font-size: 1.1rem;
+}
+
+/* Organizations & Members Grid */
+.orgsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+}
+
+.orgCard {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  padding: 0.85rem 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+}
+
+.orgCard:hover {
+  border-color: var(--accent-cyan);
+  background: var(--bg-surface-elevated);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.orgAvatar {
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  object-fit: cover;
+}
+
+.orgName {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 900px) {
+  .kpiStatsGrid,
+  .streakCardGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .kpiStatsGrid,
+  .streakCardGrid {
+    grid-template-columns: 1fr;
   }
 }

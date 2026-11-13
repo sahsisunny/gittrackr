@@ -1,26 +1,206 @@
 .footer {
+  width: 100%;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  padding: 3.5rem 2rem 2.5rem 2rem;
+  color: var(--text-secondary);
+  margin-top: 4rem;
+}
+
+.footerInner {
+  max-width: 1280px;
+  margin: 0 auto;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.footerTop {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-width: 340px;
+}
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.footerTagline {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.footerNavColumns {
+  display: flex;
+  gap: 3.5rem;
+  flex-wrap: wrap;
+}
+
+.navGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.navGroupHeading {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-primary);
+}
+
+.navGroupLinks {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.footerLink {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+}
+
+.footerLink:hover {
+  color: var(--accent-cyan);
+}
+
+.footerBottom {
+  display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-bottom: 1rem;
-  color: white;
-  margin-bottom: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-.linksContainer {
-  margin: 0.5rem;
+.statusIndicator {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--text-secondary);
 }
 
-.anchorLink {
-  margin: 0.5rem;
-  color: white;
-  text-decoration: none;
+.statusDot {
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent-emerald);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--accent-emerald);
+  animation: pulse 2s infinite ease-in-out;
 }
 
-@media (max-width: 768px) {
-  .footer {
-    padding: 1rem;
-    flex-direction: column-reverse;
+@keyframes pulse {
+  0% {
+    opacity: 0.6;
+    box-shadow: 0 0 4px var(--accent-emerald);
   }
+  50% {
+    opacity: 1;
+    box-shadow: 0 0 10px var(--accent-emerald);
+  }
+  100% {
+    opacity: 0.6;
+    box-shadow: 0 0 4px var(--accent-emerald);
+  }
+}
+
+/* ==========================================================================
+   Logged-in User Minimal Cockpit Footer
+   ========================================================================== */
+.userFooter {
+  width: 100%;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  padding: 1.25rem 2rem;
+  color: var(--text-secondary);
+  margin-top: 2.5rem;
+}
+
+.userFooterInner {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.userFooterLeft {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.userFooterBrand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.userFooterTag {
+  font-size: 0.75rem;
+  color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.1);
+  border: 1px solid rgba(56, 189, 248, 0.25);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+}
+
+.userFooterLinks {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  list-style: none;
+  font-size: 0.8125rem;
+  flex-wrap: wrap;
+}
+
+.userFooterLink {
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  font-size: inherit;
+}
+
+.userFooterLink:hover {
+  color: var(--accent-cyan);
+}
+
+.userFooterRight {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 0.775rem;
+  color: var(--text-muted);
 }

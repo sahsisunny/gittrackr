@@ -1,0 +1,39 @@
+# https://www.robotstxt.org/robotstxt.html
+# GitTrackr Robots Policy & AI Crawlers Directive
+
+User-agent: *
+Allow: /
+Disallow: /api/
+
+# Explicitly grant indexing access to modern AI & Answer Engines (AEO)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+# Sitemap and LLM endpoints
+Sitemap: https://gittrackr.sunnysahsi.com/sitemap.xml
+Host: https://gittrackr.sunnysahsi.com
+

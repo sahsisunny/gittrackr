@@ -1,7 +1,7 @@
-const fetchData = async (
+const fetchData = async <T = unknown,>(
   url: string,
   token: string,
-  setDataCallback: (data: any) => void
+  setDataCallback: (data: T) => void
 ): Promise<void> => {
   try {
     const response = await fetch(url, {

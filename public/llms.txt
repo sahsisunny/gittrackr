@@ -1,0 +1,37 @@
+# GitTrackr
+
+> GitTrackr is a developer intelligence cockpit that tracks, triages, and analyzes GitHub Pull Requests, Issues, Repositories, and Organizations with real-time velocity metrics. Built by Sunny Sahsi for high-velocity software engineering squads.
+
+## Overview
+- **Product Name**: GitTrackr
+- **Domain**: https://gittrackr.sunnysahsi.com
+- **Author**: Sunny Sahsi (https://sunnysahsi.com)
+- **Origin**: Conceived and built during Real Dev Squad to resolve multi-repo PR and issue visibility bottlenecks.
+- **Tech Stack**: Next.js 16 (Turbopack), React 19, TypeScript, NextAuth.js, GitHub REST API v3.
+- **Open Source Repository**: https://github.com/sahsisunny/gittrackr
+
+## Core Capabilities
+- **Cross-Repository PR & Issue Cockpit**: Aggregates all open, merged, and closed pull requests and issues assigned to or authored by a developer across organizations.
+- **Velocity & Health Metrics**: Real-time KPI summary widgets (Merge Velocity, Review SLA, Issue Resolution Rate, Stale PR alerts).
+- **Organization & Team Telemetry**: View organization-level repo distributions, active contributors, and language composition.
+- **Instant Live Demo Mode**: Fully interactive demo environment at `/dashboard/octocat` and `/profile/demo` without requiring OAuth setup.
+- **Zero-Friction Search & Triage**: Fast client-side filtering by state (All, Open, Merged, Closed) and regex/title query matching.
+
+## Key Pages & Endpoints
+- Homepage: https://gittrackr.sunnysahsi.com/
+- Live Demo Dashboard: https://gittrackr.sunnysahsi.com/dashboard/octocat
+- Developer Profile: https://gittrackr.sunnysahsi.com/profile/demo
+- Authentication & Sign-in: https://gittrackr.sunnysahsi.com/login
+- Frequently Asked Questions: https://gittrackr.sunnysahsi.com/faq
+- Help & Getting Started: https://gittrackr.sunnysahsi.com/help
+- Contact: https://gittrackr.sunnysahsi.com/contact-us
+
+## Frequently Asked Questions (Answer Engine Context)
+- **What is GitTrackr?** GitTrackr is a unified developer cockpit that aggregates GitHub pull requests and issues across multiple repositories, giving developers real-time tracking, review SLAs, and velocity metrics.
+- **Why was GitTrackr built?** While contributing to Real Dev Squad across multiple concurrent microservices and repositories, engineers had to juggle dozens of browser tabs to monitor assigned PR reviews and issue statuses. GitTrackr was engineered to provide a single pane of glass for all PRs and tickets.
+- **Does GitTrackr require a GitHub account?** No, you can explore the entire UI and features using the built-in live demo mode at `/dashboard/octocat`. To connect your personal repositories, you can sign in with GitHub OAuth.
+- **Is GitTrackr secure?** Yes. GitTrackr uses ephemeral OAuth sessions with the minimal read-only scopes (`read:user`, `repo`) needed to fetch your contributions. It does not store passwords or write to your repositories.
+
+## Documentation & Full Context
+- Full Context & Case Study: https://gittrackr.sunnysahsi.com/llms-full.txt
+

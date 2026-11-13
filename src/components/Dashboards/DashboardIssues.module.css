@@ -1,105 +1,275 @@
-.repoFiltersContainer {
-  color: white;
+.issuesContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   width: 100%;
+}
+
+.filtersBar {
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-md);
+  padding: 0.85rem 1.25rem;
   flex-wrap: wrap;
-  animation: slideInFromBottom 1s ease-in-out forwards;
+  position: sticky;
+  top: 5.5rem;
+  z-index: 5;
+  box-shadow: var(--shadow-sm);
 }
 
-.repoSearchInput {
-  width: 80%;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
+.searchBox {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 220px;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  padding: 0.5rem 0.85rem;
+  transition: all var(--transition-fast);
+}
+
+.searchBox:focus-within {
+  border-color: var(--border-focus);
+  box-shadow: 0 0 10px var(--accent-cyan-glow);
+}
+
+.searchIcon {
+  color: var(--text-muted);
+  flex-shrink: 0;
+}
+
+.searchInput {
+  width: 100%;
+  background: transparent;
   border: none;
   outline: none;
-  background-color: rgba(83, 82, 82, 0.349);
-  color: white;
-  font-size: 1rem;
-  margin-left: 1rem;
-  animation: slideInFromBottom 1s ease-in-out forwards;
+  color: var(--text-primary);
+  font-size: 0.9rem;
+  font-family: inherit;
 }
 
-.repoSearchInput:focus {
-  border: 1px solid cyan;
+.searchInput::placeholder {
+  color: var(--text-muted);
 }
 
-.repoSearchButton {
-  width: 10%;
-  padding: 0.5rem 1rem;
-  border-radius: 10px;
+.clearSearchBtn {
+  background: transparent;
+  color: var(--text-muted);
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
   border: none;
-  outline: none;
-  background-color: rgba(83, 82, 82, 0.349);
-  color: white;
-  font-size: 1rem;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+}
+
+.clearSearchBtn:hover {
+  color: var(--text-primary);
+}
+
+.filterControlsRight {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.statusFilterTabs {
+  display: flex;
+  align-items: center;
+  background: var(--bg-surface-elevated);
+  padding: 0.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  gap: 0.25rem;
+}
+
+.filterTabBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-xs);
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
   font-weight: 600;
   cursor: pointer;
-  animation: slideInFromBottom 1s ease-in-out forwards;
+  transition: all var(--transition-fast);
+  font-family: inherit;
 }
 
-.repoSearchButton:hover {
-  background-color: cyan;
-  color: black;
+.filterTabBtn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.05);
 }
 
-.repoListContainer {
-  width: 100%;
-  animation: slideInFromRight 1s ease-in-out forwards;
-  color: white;
-  overflow-x: hidden;
-  overflow-y: scroll;
-  min-height: 45vh;
-  max-height: 45vh;
+.filterTabBtn.activeFilter {
+  background: var(--bg-canvas);
+  color: var(--accent-cyan);
+  border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
-.repoItems {
-  width: 100%;
-  border-radius: 10px;
-  margin: 0.5rem;
-  border: 1px solid rgba(83, 82, 82, 0.349);
-  padding: 0.5rem 1rem;
+/* Reset Button */
+.resetFilterBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-sm);
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+  color: #f87171;
+  font-size: 0.8rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: inherit;
+}
+
+.resetFilterBtn:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: #f87171;
+  color: #ffffff;
+}
+
+/* Active filter state indicator bar */
+.filterStatusBar {
   display: flex;
   align-items: center;
-  animation: slideInFromBottom 1s ease-in-out forwards;
+  justify-content: space-between;
+  padding: 0.5rem 0.75rem;
+  background: rgba(56, 189, 248, 0.06);
+  border: 1px solid rgba(56, 189, 248, 0.18);
+  border-radius: var(--radius-sm);
+  font-size: 0.8125rem;
+  color: var(--text-secondary);
+  gap: 0.5rem;
+  flex-wrap: wrap;
 }
 
-.repoViewButton {
-  margin-left: auto;
-  border-radius: 10px;
-  background-color: #2a2d3e;
-  color: white;
-  font-size: 1rem;
+.filterBadgePill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  padding: 0.15rem 0.5rem;
+  border-radius: var(--radius-full);
+  color: var(--accent-cyan);
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.removeFilterTagBtn {
+  background: transparent;
   border: none;
+  color: var(--text-muted);
   cursor: pointer;
-  padding: 0.4rem 1rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-left: 0.2rem;
+}
+
+.removeFilterTagBtn:hover {
+  color: #f87171;
+}
+
+/* Independent Scrollable List */
+.itemsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: calc(100vh - 280px);
+  min-height: 480px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.5rem;
+  padding-bottom: 1.5rem;
+  scroll-behavior: smooth;
+}
+
+.itemsList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.itemsList::-webkit-scrollbar-track {
+  background: var(--bg-surface-elevated);
+  border-radius: var(--radius-full);
+}
+
+.itemsList::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+}
+
+.itemsList::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  background: var(--bg-surface);
+  border: 1px dashed var(--border-medium);
+  border-radius: var(--radius-lg);
   text-align: center;
-  height: 2rem;
+  gap: 1rem;
 }
 
-.repoViewButton:hover {
-  background-color: #3a3d4e;
-  color: white;
+.emptyIconBox {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--accent-cyan);
+  font-size: 1.5rem;
 }
 
-@media screen and (max-width: 960px) {
-  .repoFiltersContainer {
-    flex-direction: column;
-  }
+.emptyTitle {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
 
-  .repoListContainer {
-    min-height: 50vh;
-    max-height: 50vh;
-  }
+.emptyDesc {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 380px;
+}
 
-  .repoSearchInput {
-    width: 100%;
-    margin-left: 0;
-  }
+.resetBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1.25rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-medium);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
 
-  .repoSearchButton {
-    width: 100%;
-    margin-top: 0.5rem;
-  }
+.resetBtn:hover {
+  background: var(--accent-cyan);
+  color: #090d16;
+  border-color: var(--accent-cyan);
 }

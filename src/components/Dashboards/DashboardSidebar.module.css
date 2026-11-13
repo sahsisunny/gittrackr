@@ -1,67 +1,135 @@
 .sectionSidebar {
-  width: 20%;
   display: flex;
   flex-direction: column;
-  padding: 1rem;
-  border-radius: 10px;
-  border: 1px solid rgba(83, 82, 82, 0.349);
+  gap: 1.5rem;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: 5.5rem;
+  max-height: calc(100vh - 7rem);
+  overflow-y: auto;
+}
+
+.sectionSidebar::-webkit-scrollbar {
+  width: 5px;
+}
+
+.sectionSidebar::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+}
+
+.sidebarTitleBox {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.sidebarTitle {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .sidebarContainer {
-  margin-bottom: 1rem;
-}
-.sectionSidebarTitleSummary {
-  font-size: 2rem;
-  color: white;
-  margin: 0.2rem;
-  animation: slideInFromLeft 0.5s ease-in-out forwards;
-  text-align: center;
-}
-.sectionSidebarTitle {
-  font-size: 1.2rem;
-  color: white;
-  margin: 0.2rem;
-  animation: slideInFromLeft 0.5s ease-in-out forwards;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
 }
 
-.issuesStatsTable {
+.groupHeading {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+.statsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+/* Clickable stat button */
+.statItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  border-collapse: collapse;
-  color: white;
-}
-
-.issuesStatsTableTr:hover {
-  background-color: rgba(83, 82, 82, 0.349);
+  padding: 0.65rem 0.85rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
   cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+  position: relative;
+  font-family: inherit;
 }
 
-.issuesStatsTableTr {
-  border-bottom: 1px solid rgba(83, 82, 82, 0.349);
+.statItem:hover {
+  border-color: var(--border-focus);
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+  transform: translateX(2px);
 }
 
-.issuesStatsTableTd {
-  padding: 0.5rem;
+.statItemActive {
+  background: rgba(56, 189, 248, 0.12) !important;
+  border-color: var(--accent-cyan) !important;
+  color: var(--text-primary) !important;
+  box-shadow: 0 0 12px rgba(56, 189, 248, 0.2);
+}
+
+.statItemActive::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 15%;
+  height: 70%;
+  width: 3px;
+  background: var(--accent-cyan);
+  border-radius: 0 2px 2px 0;
+}
+
+.statName {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-weight: 500;
+}
+
+.statValue {
+  font-weight: 700;
+  color: var(--text-primary);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.9rem;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+}
+
+.statItemActive .statValue {
+  background: var(--accent-cyan);
+  color: #040914;
+}
+
+.filterHint {
+  font-size: 0.75rem;
+  color: var(--text-muted);
   text-align: center;
-}
-
-.issuesStatsTableRowActive {
-  background-color: rgba(83, 82, 82, 0.349);
-}
-
-@media (max-width: 960px) {
-  .sectionSidebar {
-    width: 100%;
-    margin-bottom: 1rem;
-  }
-
-  .summeryItems {
-    width: 100%;
-    display: flex;
-  }
-
-  .sidebarContainer {
-    width: 100%;
-    border: 1px solid rgba(83, 82, 82, 0.349);
-  }
+  padding-top: 0.5rem;
+  border-top: 1px dashed var(--border-subtle);
 }

@@ -1,0 +1,47 @@
+# GitTrackr — Full Technical Context & Case Study
+
+Website: https://gittrackr.sunnysahsi.com
+Author: Sunny Sahsi
+License: MIT
+Repository: https://github.com/sahsisunny/gittrackr
+
+---
+
+## 1. Executive Summary
+
+GitTrackr is a high-performance developer cockpit designed to resolve cross-repository visibility and workflow bottlenecks on GitHub. Originally engineered in the Real Dev Squad engineering ecosystem, GitTrackr aggregates distributed pull requests, issue lifecycles, and contributor metrics into an intuitive, real-time command center.
+
+---
+
+## 2. Problem Statement & Motivation
+
+During high-velocity open-source sprints at Real Dev Squad (RDS), developers and squad leads managed multiple concurrent repositories (frontend micro-apps, backend microservices, shared libraries, and DevOps pipelines).
+
+Pain points experienced:
+1. **Context Switching Overhead**: Developers spent an estimated 35-45 minutes each day clicking between 15+ repository tabs on GitHub to check PR review status, CI checks, and triage assignments.
+2. **Review SLA Degradation**: Pull requests stagnated because contributors lacked an immediate, consolidated view of pending reviewer requests across repos.
+3. **Sprint Velocity Blindspots**: Squad leads lacked an instant overview of individual and team throughput without manually generating query filters.
+
+GitTrackr was created to eliminate this friction with a unified, cross-repo developer cockpit.
+
+---
+
+## 3. Architecture & Modern Tech Stack
+
+- **Framework**: Next.js 16.4.6 with Turbopack (Pages router with optimized SSR/SSG)
+- **Runtime**: Node.js 26.13.1 LTS
+- **UI Engine**: React 19.3.1 with dark-first CSS variable design tokens and glassmorphism
+- **Authentication**: NextAuth.js 4.24.15 with GitHub OAuth provider
+- **API Integration**: GitHub REST API v3 with Bearer token authentication
+- **SEO & AEO**: Full JSON-LD structured schemas, dynamic OpenGraph cards, standard llms.txt endpoints, semantic HTML5, and automated sitemaps
+
+---
+
+## 4. Key Features
+
+- **Live Pull Request Cockpit**: Filter by All, Open, Merged, and Closed states with instant keyword search.
+- **Velocity KPI Cards**: Real-time summary statistics tracking active PRs, merged commits, review response velocity, and open issues.
+- **Demo Mode**: Instant zero-login evaluation via `/dashboard/octocat` and `/profile/demo`.
+- **Organization Explorer**: Inspect member repositories, primary languages, and contributor distributions.
+- **Accessible & High-Performance**: 100/100 Core Web Vitals target, native HTML5 details/summary disclosures, and responsive navigation.
+

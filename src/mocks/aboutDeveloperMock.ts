@@ -1,29 +1,41 @@
-import developerPratiyush from '@/assets/developersImage/pratiyushKumar.jpg';
 import developerSunny from '@/assets/developersImage/sunny.jpg';
 
-export const aboutDevelopersMock = [
+export interface Developer {
+  id: number;
+  developerName: string;
+  developerRole: string;
+  isFounder?: boolean;
+  developerImage: any;
+  developerIntro: string;
+  developerSkills: string[];
+  developerTwitterId?: string;
+  developerLinkedInId?: string;
+  developerGithubId?: string;
+  developerPortfolio?: string;
+  side?: string;
+}
+
+export const aboutDevelopersMock: Developer[] = [
   {
     id: 1,
     developerName: 'Sunny Sahsi',
+    developerRole: 'Software Engineer',
+    isFounder: false,
     developerImage: developerSunny,
-    developerIntro: `I'm a software engineer who is passionate about building websites. 
-    I am working at Infosys as FrontEnd Developer and also an open source contributor`,
+    developerIntro:
+      "Hi, I'm Sunny Sahsi, a software engineer who enjoys building practical web applications. I built GitTrackr as a simple tool to easily view, filter, and track your GitHub pull requests, issues, and activity in one place.",
+    developerSkills: [
+      'Software Engineer',
+      'React',
+      'Next.js',
+      'TypeScript',
+      'GitHub API',
+      'Open Source',
+    ],
     developerTwitterId: 'https://twitter.com/SahsiSunny',
     developerLinkedInId: 'https://www.linkedin.com/in/sahsisunny/',
     developerGithubId: 'https://github.com/sahsisunny',
-    developerPortfolio: 'https://sahsisunny.netlify.app/',
-    side: 'left',
-  },
-  {
-    id: 2,
-    developerName: 'Pratiyush Kumar',
-    developerImage: developerPratiyush,
-    developerIntro: `I'm a software engineer who is passionate about building websites. 
-    I am working at Infosys as FrontEnd Developer and also an open source contributor`,
-    developerTwitterId: 'https://twitter.com/mein_pk',
-    developerLinkedInId: 'https://www.linkedin.com/in/pratiyushkumar/',
-    developerGithubId: 'https://github.com/Pratiyushkumar',
-    developerPortfolio: 'https://www.crio.do/learn/portfolio/pratiyush-inv/',
-    side: 'right',
+    developerPortfolio: 'https://sunnysahsi.com',
+    side: 'center',
   },
 ];

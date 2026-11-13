@@ -1,7 +1,14 @@
 import React from 'react';
-import { AiFillTwitterSquare, AiFillLinkedin } from 'react-icons/ai';
-import { FaGithubSquare } from 'react-icons/fa';
-import { TbWorldWww } from 'react-icons/tb';
+import {
+  FiGithub,
+  FiTwitter,
+  FiLinkedin,
+  FiGlobe,
+  FiUser,
+  FiCode,
+  FiShare2,
+} from 'react-icons/fi';
+import styles from './ProfileSidebar.module.css';
 
 type ProfileSidebarProps = {
   USERNAME: string;
@@ -12,96 +19,110 @@ type ProfileSidebarProps = {
   languageColors: { [key: string]: string };
 };
 
-function isColorLight(hexColor: string) {
-  const r = parseInt(hexColor?.slice(1, 3), 16);
-  const g = parseInt(hexColor?.slice(3, 5), 16);
-  const b = parseInt(hexColor?.slice(5, 7), 16);
-  const brightness = (r * 299 + g * 587 + b * 114) / 1000;
-  return brightness > 128;
-}
-
-const ProfileSidebar = ({
+const ProfileSidebar: React.FC<ProfileSidebarProps> = ({
   USERNAME,
   WEBSITE,
   NAME,
   BIO,
-  mostUsedLanguages,
-  languageColors,
-}: ProfileSidebarProps) => (
-  <div className="section-sidebar">
-    <div className="sidebar-container">
-      <h5 className="section-sidebar-title">Social Links</h5>
-      <div className="social-links-container">
-        <a
-          href={`https://github.com/${USERNAME}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="social-link"
-        >
-          <FaGithubSquare />
-        </a>
-        <a
-          href={`https://twitter.com/${USERNAME}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="social-link"
-        >
-          <AiFillTwitterSquare />
-        </a>
-        <a
-          href={`https://www.linkedin.com/in/${USERNAME}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="social-link"
-        >
-          <AiFillLinkedin />
-        </a>
-        {WEBSITE && (
-          <a
-            href={WEBSITE}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="social-link"
-          >
-            <TbWorldWww />
-          </a>
-        )}
-      </div>
-    </div>
-    <div className="sidebar-container">
-      {BIO && (
-        <>
-          <h5 className="section-sidebar-title">
-            {NAME ? `${NAME}'s Bio` : 'Bio'}
-          </h5>
-          <p className="user-bio">{BIO}</p>
-        </>
-      )}
-    </div>
-    <div className="sidebar-container">
-      <h5 className="section-sidebar-title">Most Used Languages</h5>
-      <div className="languages-container">
-        {mostUsedLanguages.map((language, index) => {
-          const bgColor = languageColors[language];
-          const textColor = isColorLight(bgColor) ? '#000' : '#fff';
-
-          return (
-            <span
-              className="language"
-              key={index}
-              data-language={language}
-              style={{
-                backgroundColor: bgColor,
-                color: textColor,
-              }}
+  mostUsedLanguages = [],
+  languageColors = {},
+}) => {
+  return (
+    <aside className={styles.sidebarWrapper} aria-label="Developer Information">
+      {/* Social Links Card */}
+      <div className={styles.sidebarCard}>
+        <h3 className={styles.cardTitle}>
+          <FiShare2 size={14} color="var(--accent-cyan)" />
+          <span>Social &amp; Profiles</span>
+        </h3>
+        <div className={styles.socialRow}>
+          {USERNAME && (
+            <a
+              href={`https://github.com/${USERNAME}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialBtn}
+              aria-label={`${USERNAME} on GitHub`}
+              title="GitHub Profile"
             >
-              {language}
-            </span>
-          );
-        })}
+              <FiGithub />
+            </a>
+          )}
+          {USERNAME && (
+            <a
+              href={`https://twitter.com/${USERNAME}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialBtn}
+              aria-label={`${USERNAME} on Twitter`}
+              title="Twitter / X Profile"
+            >
+              <FiTwitter />
+            </a>
+          )}
+          {USERNAME && (
+            <a
+              href={`https://www.linkedin.com/in/${USERNAME}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialBtn}
+              aria-label={`${USERNAME} on LinkedIn`}
+              title="LinkedIn Profile"
+            >
+              <FiLinkedin />
+            </a>
+          )}
+          {WEBSITE && (
+            <a
+              href={WEBSITE.startsWith('http') ? WEBSITE : `https://${WEBSITE}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.socialBtn}
+              aria-label="Personal Website"
+              title="Personal Website"
+            >
+              <FiGlobe />
+            </a>
+          )}
+        </div>
       </div>
-    </div>
-  </div>
-);
+
+      {/* Bio Card */}
+      {BIO && (
+        <div className={styles.sidebarCard}>
+          <h3 className={styles.cardTitle}>
+            <FiUser size={14} color="var(--accent-cyan)" />
+            <span>{NAME ? `${NAME.split(' ')[0]}'s Bio` : 'Bio'}</span>
+          </h3>
+          <p className={styles.userBio}>{BIO}</p>
+        </div>
+      )}
+
+      {/* Most Used Languages */}
+      {mostUsedLanguages && mostUsedLanguages.length > 0 && (
+        <div className={styles.sidebarCard}>
+          <h3 className={styles.cardTitle}>
+            <FiCode size={14} color="var(--accent-cyan)" />
+            <span>Most Used Languages</span>
+          </h3>
+          <div className={styles.languagesGrid}>
+            {mostUsedLanguages.map((language) => {
+              const dotColor = languageColors[language] || '#38bdf8';
+              return (
+                <span className={styles.languagePill} key={language}>
+                  <span
+                    className={styles.languageDot}
+                    style={{ backgroundColor: dotColor }}
+                  />
+                  <span>{language}</span>
+                </span>
+              );
+            })}
+          </div>
+        </div>
+      )}
+    </aside>
+  );
+};
 
 export default ProfileSidebar;
