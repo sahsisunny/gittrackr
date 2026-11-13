@@ -254,7 +254,7 @@ const DashboardIssues: React.FC<IssueProps> = ({
 
                   <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
                     <FiClock aria-hidden="true" />
-                    <span>{FormatDate(item.created_at)}</span>
+                    <span suppressHydrationWarning>{FormatDate(item.created_at)}</span>
                   </span>
 
                   {item.labels && item.labels.length > 0 && (

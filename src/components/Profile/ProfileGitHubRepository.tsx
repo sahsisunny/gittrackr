@@ -103,7 +103,7 @@ const ProfileGitHubRepository: React.FC<ProfileGitHubRepositoryProps> = ({
 
                     <span className={styles.updatedTime}>
                       <FiClock size={12} />
-                      <span>Updated {FormatDate(repo.updated_at)}</span>
+                      <span suppressHydrationWarning>Updated {FormatDate(repo.updated_at)}</span>
                     </span>
                   </div>
                 </div>

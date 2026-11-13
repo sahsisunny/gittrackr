@@ -190,7 +190,7 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
               <span>Joined GitHub</span>
               <FiCalendar color="#38bdf8" size={17} />
             </div>
-            <div className={styles.kpiValue} style={{ color: '#38bdf8', fontSize: '1.4rem' }}>
+            <div className={styles.kpiValue} style={{ color: '#38bdf8', fontSize: '1.4rem' }} suppressHydrationWarning>
               {getRelativeDate(JOIN_DATE)}
             </div>
             <div className={styles.kpiSubtext}>Account vintage</div>
