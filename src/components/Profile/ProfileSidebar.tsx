@@ -11,10 +11,10 @@ import {
 import styles from './ProfileSidebar.module.css';
 
 type ProfileSidebarProps = {
-  USERNAME: string;
-  WEBSITE?: string;
-  NAME?: string;
-  BIO?: string;
+  USERNAME?: string;
+  WEBSITE?: string | null;
+  NAME?: string | null;
+  BIO?: string | null;
   mostUsedLanguages: string[];
   languageColors: { [key: string]: string };
 };

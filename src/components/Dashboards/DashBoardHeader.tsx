@@ -5,7 +5,7 @@ import styles from './DashboardHeader.module.css';
 
 type DashBoardHeaderProps = {
   activeTab: string;
-  setActiveTab: React.Dispatch<React.SetStateAction<string>>;
+  setActiveTab: (tab: string) => void;
   AVATAR_URL?: string;
   NAME: string;
   issuesCount?: number;

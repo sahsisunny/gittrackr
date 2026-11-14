@@ -6,10 +6,10 @@ import ProfileImage from '../../assets/dummyProfileImage.png';
 import styles from './ProfileHeader.module.css';
 
 type ProfileHeaderProps = {
-  NAME: string;
-  USERNAME: string;
-  COMPANY: string;
-  AVATAR_URL: string;
+  NAME?: string | null;
+  USERNAME?: string;
+  COMPANY?: string | null;
+  AVATAR_URL?: string | null;
 };
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({

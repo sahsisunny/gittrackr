@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import { useSession } from 'next-auth/react';
 
@@ -6,7 +6,7 @@ import Layout from '@/components/Layout';
 import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileSidebar from '@/components/Profile/ProfileSidebar';
 import ProfileGitHubStats from '@/components/Profile/ProfileGitHubStats';
-import ProfileGitHubRepository from '@/components/Profile/ProfileGitHubRepository';
+import ProfileGitHubRepository, { RepoItem } from '@/components/Profile/ProfileGitHubRepository';
 import ProfileDetailsTab from '@/components/Profile/ProfileDetailsTab';
 
 import { LANGUAGE_COLORS } from '@/constants/constants';
@@ -15,18 +15,40 @@ import getMostUsedLanguages from '@/utils/mostUsedLanguage';
 import fetchData from '@/utils/FetchData';
 import { DEMO_ORGS, DEMO_REPOS } from '@/mocks/demoData';
 
-const OrgProfilePage = () => {
+interface OrgUser {
+  id: number;
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
+
+interface OrgData {
+  login?: string;
+  name?: string;
+  company?: string;
+  avatar_url?: string;
+  blog?: string;
+  bio?: string;
+  created_at?: string;
+  followers?: number;
+  following?: number;
+  public_repos?: number;
+  repos_url?: string;
+  message?: string;
+}
+
+const OrgProfilePage: React.FC = () => {
   const { data: session } = useSession();
-  const [data, setData] = useState(null);
-  const [reposData, setReposData] = useState([]);
-  const [usersData, setUsersData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [mostUsedLanguages, setMostUsedLanguages] = useState([]);
-  const [activeTab, setActiveTab] = useState('github-stats');
-  const [isLoading, setIsLoading] = useState(true);
+  const [data, setData] = useState<OrgData | null>(null);
+  const [reposData, setReposData] = useState<RepoItem[]>([]);
+  const [usersData, setUsersData] = useState<OrgUser[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [mostUsedLanguages, setMostUsedLanguages] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>('github-stats');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const router = useRouter();
-  const { username } = router.query;
+  const username = typeof router.query.username === 'string' ? router.query.username : '';
 
   const isDemo = !session || username === 'github' || username === 'vercel';
 
@@ -45,7 +67,7 @@ const OrgProfilePage = () => {
         following: 0,
         public_repos: 120,
       });
-      setReposData(DEMO_REPOS);
+      setReposData(DEMO_REPOS as unknown as RepoItem[]);
       setUsersData([
         { id: 1, login: 'octocat', avatar_url: 'https://avatars.githubusercontent.com/u/583231?v=4', html_url: 'https://github.com/octocat' },
         { id: 2, login: 'defunkt', avatar_url: 'https://avatars.githubusercontent.com/u/2?v=4', html_url: 'https://github.com/defunkt' },
@@ -58,8 +80,8 @@ const OrgProfilePage = () => {
     if (session && username) {
       setIsLoading(true);
       const userUrl = `${GITHUB_ORGANIZATION_URL}/${username}`;
-      const token = session?.accessToken;
-      fetchData(userUrl, token, (orgData) => {
+      const token = (session as { accessToken?: string })?.accessToken;
+      fetchData<OrgData>(userUrl, token, (orgData) => {
         if (orgData && !orgData.message) {
           setData(orgData);
         }
@@ -72,16 +94,16 @@ const OrgProfilePage = () => {
 
     const membersUrl = `https://api.github.com/orgs/${username}/members`;
     const reposUrl = `${data.repos_url}?page=1&per_page=100`;
-    const token = session.accessToken;
+    const token = (session as { accessToken?: string }).accessToken;
 
     if (membersUrl) {
-      fetchData(membersUrl, token, (members) => {
+      fetchData<OrgUser[]>(membersUrl, token, (members) => {
         if (Array.isArray(members)) setUsersData(members);
       });
     }
 
     if (reposUrl) {
-      fetchData(reposUrl, token, (repos) => {
+      fetchData<RepoItem[]>(reposUrl, token, (repos) => {
         if (Array.isArray(repos)) {
           setReposData(repos);
           setIsLoading(false);
@@ -135,11 +157,12 @@ const OrgProfilePage = () => {
 
             {activeTab === 'github-stats' ? (
               <ProfileGitHubStats
-                JOIN_DATE={data?.created_at}
+                JOIN_DATE={data?.created_at || ''}
                 USER_FOLLOWERS={data?.followers ?? 0}
                 USER_FOLLOWING={data?.following ?? 0}
                 USER_PUBLIC_REPOS={data?.public_repos ?? 0}
                 usersData={usersData}
+                isDemo={isDemo}
               />
             ) : (
               <ProfileGitHubRepository

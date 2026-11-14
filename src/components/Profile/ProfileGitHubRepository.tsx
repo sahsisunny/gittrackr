@@ -4,11 +4,11 @@ import { RepoSkeleton } from '@/components/Loader';
 import styles from './ProfileGitHubRepository.module.css';
 import FormatDate from '@/utils/FormatDate';
 
-type RepoItem = {
+export type RepoItem = {
   id: number;
   name: string;
   html_url: string;
-  language: string;
+  language: string | null;
   private: boolean;
   updated_at: string;
 };
@@ -78,7 +78,7 @@ const ProfileGitHubRepository: React.FC<ProfileGitHubRepositoryProps> = ({
         ) : filteredRepos.length > 0 ? (
           <>
             {displayedRepos.map((repo, index) => {
-              const langColor = languageColors[repo.language] || '#38bdf8';
+              const langColor = (repo.language && languageColors[repo.language]) || '#38bdf8';
 
               return (
                 <div key={repo.id} className={styles.repoCard}>

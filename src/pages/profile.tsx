@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import { FiInfo } from 'react-icons/fi';
@@ -7,7 +7,7 @@ import Layout from '@/components/Layout';
 import ProfileHeader from '@/components/Profile/ProfileHeader';
 import ProfileSidebar from '@/components/Profile/ProfileSidebar';
 import ProfileGitHubStats from '@/components/Profile/ProfileGitHubStats';
-import ProfileGitHubRepository from '@/components/Profile/ProfileGitHubRepository';
+import ProfileGitHubRepository, { RepoItem } from '@/components/Profile/ProfileGitHubRepository';
 import ProfileDetailsTab from '@/components/Profile/ProfileDetailsTab';
 
 import { LANGUAGE_COLORS } from '@/constants/constants';
@@ -15,37 +15,61 @@ import fetchData from '@/utils/FetchData';
 import getMostUsedLanguages from '@/utils/mostUsedLanguage';
 import { DEMO_USER, DEMO_REPOS, DEMO_ORGS } from '@/mocks/demoData';
 
-const ProfilePage = () => {
+interface OrgItem {
+  id: number;
+  login: string;
+  avatar_url: string;
+  html_url: string;
+}
+
+interface ExtendedUser {
+  name?: string | null;
+  email?: string | null;
+  image?: string | null;
+  login?: string;
+  organizations_url?: string;
+  repos_url?: string;
+  followers?: number;
+  following?: number;
+  created_at?: string;
+  public_repos?: number;
+  company?: string;
+  blog?: string;
+  bio?: string;
+}
+
+const ProfilePage: React.FC = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
 
   const isDemo = !session && status !== 'loading';
 
-  const [orgsData, setOrgsData] = useState([]);
-  const [reposData, setReposData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState('');
-  const [mostUsedLanguages, setMostUsedLanguages] = useState([]);
-  const [activeTab, setActiveTab] = useState('github-stats');
-  const [isLoading, setIsLoading] = useState(true);
+  const [orgsData, setOrgsData] = useState<OrgItem[]>([]);
+  const [reposData, setReposData] = useState<RepoItem[]>([]);
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [mostUsedLanguages, setMostUsedLanguages] = useState<string[]>([]);
+  const [activeTab, setActiveTab] = useState<string>('github-stats');
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  const USERNAME = session?.user?.login || (isDemo ? DEMO_USER.login : '');
-  const NAME = session?.user?.name || (isDemo ? DEMO_USER.name : '');
-  const TOKEN = session?.accessToken;
-  const USER_ORG_URL = session?.user?.organizations_url;
-  const USER_REPOS_URL = session?.user?.repos_url;
-  const USER_FOLLOWERS = session?.user?.followers ?? (isDemo ? DEMO_USER.followers : 0);
-  const USER_FOLLOWING = session?.user?.following ?? (isDemo ? DEMO_USER.following : 0);
-  const JOIN_DATE = session?.user?.created_at || (isDemo ? DEMO_USER.created_at : '');
-  const AVATAR_URL = session?.user?.image || (isDemo ? DEMO_USER.image : '');
-  const USER_PUBLIC_REPOS = session?.user?.public_repos ?? (isDemo ? DEMO_USER.public_repos : 0);
-  const COMPANY = session?.user?.company || (isDemo ? DEMO_USER.company : '');
-  const WEBSITE = session?.user?.blog || (isDemo ? DEMO_USER.blog : '');
-  const BIO = session?.user?.bio || (isDemo ? DEMO_USER.bio : '');
+  const sessionUser = session?.user as ExtendedUser | undefined;
+  const USERNAME = sessionUser?.login || (isDemo ? DEMO_USER.login : '');
+  const NAME = sessionUser?.name || (isDemo ? DEMO_USER.name : '');
+  const TOKEN = (session as { accessToken?: string })?.accessToken;
+  const USER_ORG_URL = sessionUser?.organizations_url;
+  const USER_REPOS_URL = sessionUser?.repos_url;
+  const USER_FOLLOWERS = sessionUser?.followers ?? (isDemo ? DEMO_USER.followers : 0);
+  const USER_FOLLOWING = sessionUser?.following ?? (isDemo ? DEMO_USER.following : 0);
+  const JOIN_DATE = sessionUser?.created_at || (isDemo ? DEMO_USER.created_at : '');
+  const AVATAR_URL = sessionUser?.image || (isDemo ? DEMO_USER.image : '');
+  const USER_PUBLIC_REPOS = sessionUser?.public_repos ?? (isDemo ? DEMO_USER.public_repos : 0);
+  const COMPANY = sessionUser?.company || (isDemo ? DEMO_USER.company : '');
+  const WEBSITE = sessionUser?.blog || (isDemo ? DEMO_USER.blog : '');
+  const BIO = sessionUser?.bio || (isDemo ? DEMO_USER.bio : '');
 
   useEffect(() => {
     if (isDemo) {
-      setOrgsData(DEMO_ORGS);
-      setReposData(DEMO_REPOS);
+      setOrgsData(DEMO_ORGS as unknown as OrgItem[]);
+      setReposData(DEMO_REPOS as unknown as RepoItem[]);
       setMostUsedLanguages(['TypeScript', 'Go', 'Rust', 'Python', 'JavaScript']);
       setIsLoading(false);
       return;
@@ -56,13 +80,13 @@ const ProfilePage = () => {
       const reposUrl = `${USER_REPOS_URL}?page=1&per_page=100`;
 
       if (USER_ORG_URL) {
-        fetchData(USER_ORG_URL, TOKEN, (orgs) => {
+        fetchData<OrgItem[]>(USER_ORG_URL, TOKEN, (orgs) => {
           if (Array.isArray(orgs)) setOrgsData(orgs);
         });
       }
 
       if (reposUrl) {
-        fetchData(reposUrl, TOKEN, (repos) => {
+        fetchData<RepoItem[]>(reposUrl, TOKEN, (repos) => {
           if (Array.isArray(repos)) setReposData(repos);
           setIsLoading(false);
         });

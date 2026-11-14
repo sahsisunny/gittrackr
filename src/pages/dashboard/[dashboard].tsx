@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useSession } from 'next-auth/react';
 import { useRouter } from 'next/router';
 import {
@@ -13,10 +13,8 @@ import {
 } from 'react-icons/fi';
 
 import Layout from '@/components/Layout';
-import FetchIssuePr, { fetchPaginatedGitHubData } from '@/utils/FetchIssuePr';
-import {
-  GITHUB_SEARCH_ISSUES_URL,
-} from '@/constants/url';
+import { fetchPaginatedGitHubData } from '@/utils/FetchIssuePr';
+import { GITHUB_SEARCH_ISSUES_URL } from '@/constants/url';
 import {
   DEMO_USER,
   DEMO_PRS,
@@ -25,34 +23,42 @@ import {
 
 import DashBoardHeader from '@/components/Dashboards/DashBoardHeader';
 import DashboardSidebar from '@/components/Dashboards/DashboardSidebar';
-import DashboardIssues from '@/components/Dashboards/DashboardIssues';
+import DashboardIssues, { IssueItem } from '@/components/Dashboards/DashboardIssues';
 import VelocityChart from '@/components/Analytics/VelocityChart';
 
-const Dashboard = () => {
+interface SessionUser {
+  name?: string | null;
+  image?: string | null;
+  login?: string;
+  [key: string]: unknown;
+}
+
+const Dashboard: React.FC = () => {
   const { data: session, status } = useSession();
   const router = useRouter();
-  const { dashboard } = router.query;
+  const dashboard = typeof router.query.dashboard === 'string' ? router.query.dashboard : '';
 
-  const [activeTab, setActiveTab] = useState('issues');
-  const [statusFilter, setStatusFilter] = useState('all');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [showTelemetryGraph, setShowTelemetryGraph] = useState(false);
+  const [activeTab, setActiveTab] = useState<'issues' | 'pullrequests'>('issues');
+  const [statusFilter, setStatusFilter] = useState<string>('all');
+  const [searchQuery, setSearchQuery] = useState<string>('');
+  const [showTelemetryGraph, setShowTelemetryGraph] = useState<boolean>(false);
 
-  const [issuesData, setIssuesData] = useState([]);
-  const [prsData, setPrsData] = useState([]);
-  const [issuesTotalCount, setIssuesTotalCount] = useState(0);
-  const [prsTotalCount, setPrsTotalCount] = useState(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [issuesData, setIssuesData] = useState<IssueItem[]>([]);
+  const [prsData, setPrsData] = useState<IssueItem[]>([]);
+  const [issuesTotalCount, setIssuesTotalCount] = useState<number>(0);
+  const [prsTotalCount, setPrsTotalCount] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
 
   const isDemo = dashboard === 'octocat' || (!session && status !== 'loading');
 
-  const TOKEN = session?.accessToken;
-  const USERNAME = session?.user?.login || (isDemo ? DEMO_USER.login : '');
+  const TOKEN = (session as { accessToken?: string })?.accessToken;
+  const sessionUser = session?.user as SessionUser | undefined;
+  const USERNAME = sessionUser?.login || (isDemo ? DEMO_USER.login : '');
   const NAME =
     dashboard && dashboard !== USERNAME
       ? dashboard
-      : session?.user?.name || (isDemo ? DEMO_USER.name : 'Developer');
-  const AVATAR_URL = session?.user?.image || (isDemo ? DEMO_USER.image : '');
+      : sessionUser?.name || (isDemo ? DEMO_USER.name : 'Developer');
+  const AVATAR_URL = sessionUser?.image || (isDemo ? DEMO_USER.image : '');
 
   // Read initial query params from URL
   useEffect(() => {
@@ -70,7 +76,7 @@ const Dashboard = () => {
   }, [router.isReady, router.query.tab, router.query.filter, router.query.q]);
 
   // Sync state changes to URL query
-  const syncUrlParams = (newTab, newFilter, newQ) => {
+  const syncUrlParams = (newTab?: string, newFilter?: string, newQ?: string) => {
     const nextQuery = { ...router.query };
 
     if (newTab && newTab !== 'issues') {
@@ -104,8 +110,8 @@ const Dashboard = () => {
   // Fetch GitHub issues & PRs or demo data
   useEffect(() => {
     if (isDemo) {
-      setIssuesData(DEMO_ISSUES);
-      setPrsData(DEMO_PRS);
+      setIssuesData(DEMO_ISSUES as unknown as IssueItem[]);
+      setPrsData(DEMO_PRS as unknown as IssueItem[]);
       setIssuesTotalCount(DEMO_ISSUES.length);
       setPrsTotalCount(DEMO_PRS.length);
       setIsLoading(false);
@@ -130,12 +136,12 @@ const Dashboard = () => {
         TOKEN,
         (initial) => {
           setIssuesTotalCount(initial.total_count);
-          setIssuesData(initial.items);
+          setIssuesData(initial.items as IssueItem[]);
           setIsLoading(false);
         },
         (all, total) => {
           setIssuesTotalCount(total);
-          setIssuesData(all);
+          setIssuesData(all as IssueItem[]);
           setIsLoading(false);
         }
       );
@@ -145,12 +151,12 @@ const Dashboard = () => {
         TOKEN,
         (initial) => {
           setPrsTotalCount(initial.total_count);
-          setPrsData(initial.items);
+          setPrsData(initial.items as IssueItem[]);
           setIsLoading(false);
         },
         (all, total) => {
           setPrsTotalCount(total);
-          setPrsData(all);
+          setPrsData(all as IssueItem[]);
           setIsLoading(false);
         }
       );
@@ -258,13 +264,14 @@ const Dashboard = () => {
   }, [prsData, statusFilter, searchQuery]);
 
   // User interactions
-  const handleSelectFilter = (tab, filter) => {
-    setActiveTab(tab);
+  const handleSelectFilter = (tab: string, filter: string) => {
+    const validTab = tab === 'pullrequests' ? 'pullrequests' : 'issues';
+    setActiveTab(validTab);
     setStatusFilter(filter);
-    syncUrlParams(tab, filter, searchQuery);
+    syncUrlParams(validTab, filter, searchQuery);
   };
 
-  const toggleKpiFilter = (tab, filter) => {
+  const toggleKpiFilter = (tab: 'issues' | 'pullrequests', filter: string) => {
     if (activeTab === tab && statusFilter === filter) {
       handleSelectFilter(tab, 'all');
     } else {
@@ -272,12 +279,12 @@ const Dashboard = () => {
     }
   };
 
-  const handleStatusFilterChange = (filter) => {
+  const handleStatusFilterChange = (filter: string) => {
     setStatusFilter(filter);
     syncUrlParams(activeTab, filter, searchQuery);
   };
 
-  const handleSearchChange = (query) => {
+  const handleSearchChange = (query: string) => {
     setSearchQuery(query);
     syncUrlParams(activeTab, statusFilter, query);
   };
@@ -288,7 +295,7 @@ const Dashboard = () => {
     syncUrlParams(activeTab, 'all', '');
   };
 
-  const handleTabChange = (newTab) => {
+  const handleTabChange = (newTab: string) => {
     const validTab = newTab === 'pullrequests' ? 'pullrequests' : 'issues';
     setActiveTab(validTab);
     setStatusFilter('all');
@@ -480,7 +487,6 @@ const Dashboard = () => {
               prsData={prsData}
               issuesData={issuesData}
               isDemo={isDemo}
-              onSelectFilter={handleSelectFilter}
             />
           </div>
         )}
