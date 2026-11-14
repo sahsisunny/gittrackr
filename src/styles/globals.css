@@ -595,12 +595,27 @@ button {
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   transition: all var(--transition-fast);
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
+  width: 100%;
 }
 
 .kpi-card:hover {
-  border-color: var(--border-medium);
+  border-color: var(--accent-cyan);
   transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.15);
+}
+
+.kpi-card:active {
+  transform: translateY(0) scale(0.99);
+}
+
+.kpi-card.active,
+.kpi-card[aria-pressed="true"] {
+  border-color: var(--accent-cyan);
+  background: rgba(56, 189, 248, 0.08);
+  box-shadow: 0 0 16px rgba(56, 189, 248, 0.18);
 }
 
 .kpi-header {

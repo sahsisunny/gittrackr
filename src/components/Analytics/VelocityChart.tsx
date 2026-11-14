@@ -37,6 +37,7 @@ interface VelocityChartProps {
   prsData?: TelemetryItem[];
   issuesData?: TelemetryItem[];
   isDemo?: boolean;
+  onSelectFilter?: (tab: string, filter: string) => void;
 }
 
 export const VelocityChart: FC<VelocityChartProps> = ({
@@ -45,9 +46,14 @@ export const VelocityChart: FC<VelocityChartProps> = ({
   prsData,
   issuesData,
   isDemo = false,
+  onSelectFilter,
 }) => {
   const [timeframe, setTimeframe] = useState<'7d' | '4w' | '3m'>('7d');
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+
+  const cycleTimeframe = () => {
+    setTimeframe((prev) => (prev === '7d' ? '4w' : prev === '4w' ? '3m' : '7d'));
+  };
 
   const hasRealData = !isDemo && Array.isArray(prsData) && prsData.length > 0;
 
@@ -370,7 +376,25 @@ export const VelocityChart: FC<VelocityChartProps> = ({
 
       {/* Mini Stat Cards */}
       <div className={styles.statsGrid}>
-        <div className={styles.miniStatCard}>
+        <div
+          className={styles.miniStatCard}
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            if (onSelectFilter) {
+              onSelectFilter('pullrequests', 'open');
+            } else {
+              cycleTimeframe();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              if (onSelectFilter) onSelectFilter('pullrequests', 'open');
+              else cycleTimeframe();
+            }
+          }}
+          title={onSelectFilter ? 'Filter to Open PRs' : 'Click to cycle time range'}
+        >
           <div className={styles.miniStatLabel}>
             <span>PRs Opened</span>
             <FiGitPullRequest color="#38bdf8" />
@@ -379,11 +403,29 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {totalOpened}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> {hasRealData ? 'Total Indexed' : '+18% vs prev'}
+            <FiTrendingUp /> {hasRealData ? 'Total Indexed • Click to filter' : '+18% vs prev'}
           </div>
         </div>
 
-        <div className={styles.miniStatCard}>
+        <div
+          className={styles.miniStatCard}
+          role="button"
+          tabIndex={0}
+          onClick={() => {
+            if (onSelectFilter) {
+              onSelectFilter('pullrequests', 'merged');
+            } else {
+              cycleTimeframe();
+            }
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+              if (onSelectFilter) onSelectFilter('pullrequests', 'merged');
+              else cycleTimeframe();
+            }
+          }}
+          title={onSelectFilter ? 'Filter to Merged PRs' : 'Click to cycle time range'}
+        >
           <div className={styles.miniStatLabel}>
             <span>PRs Merged</span>
             <FiGitMerge color="#a855f7" />
@@ -392,11 +434,18 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {totalMerged}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> {hasRealData ? 'Production Deployed' : '+24% throughput'}
+            <FiTrendingUp /> {hasRealData ? 'Production Deployed • Click to filter' : '+24% throughput'}
           </div>
         </div>
 
-        <div className={styles.miniStatCard}>
+        <div
+          className={styles.miniStatCard}
+          role="button"
+          tabIndex={0}
+          onClick={cycleTimeframe}
+          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && cycleTimeframe()}
+          title="Click to switch time range (7d / 4w / 3m)"
+        >
           <div className={styles.miniStatLabel}>
             <span>Merge Success</span>
             <FiZap color="#10b981" />
@@ -405,11 +454,18 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {mergeRate}%
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiCheckCircle /> SLA Healthy
+            <FiCheckCircle /> SLA Healthy • Switch range ↺
           </div>
         </div>
 
-        <div className={styles.miniStatCard}>
+        <div
+          className={styles.miniStatCard}
+          role="button"
+          tabIndex={0}
+          onClick={cycleTimeframe}
+          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && cycleTimeframe()}
+          title="Click to switch time range (7d / 4w / 3m)"
+        >
           <div className={styles.miniStatLabel}>
             <span>Avg Review Turnaround</span>
             <FiClock color="#fbbf24" />
@@ -418,7 +474,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {avgTurnaroundText}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> Calculated from merged PRs
+            <FiTrendingUp /> Calculated from merged PRs • Switch range ↺
           </div>
         </div>
       </div>

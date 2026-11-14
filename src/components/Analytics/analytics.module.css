@@ -138,6 +138,19 @@
   padding: 1rem;
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  user-select: none;
+}
+
+.miniStatCard:hover {
+  border-color: var(--accent-cyan);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 16px rgba(56, 189, 248, 0.12);
+}
+
+.miniStatCard:active {
+  transform: translateY(0) scale(0.99);
 }
 
 .miniStatLabel {

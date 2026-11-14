@@ -264,6 +264,14 @@ const Dashboard = () => {
     syncUrlParams(tab, filter, searchQuery);
   };
 
+  const toggleKpiFilter = (tab, filter) => {
+    if (activeTab === tab && statusFilter === filter) {
+      handleSelectFilter(tab, 'all');
+    } else {
+      handleSelectFilter(tab, filter);
+    }
+  };
+
   const handleStatusFilterChange = (filter) => {
     setStatusFilter(filter);
     syncUrlParams(activeTab, filter, searchQuery);
@@ -344,17 +352,16 @@ const Dashboard = () => {
         <section className="kpi-grid" aria-label="Key Performance Indicators">
           <button
             type="button"
-            className="kpi-card"
-            onClick={() => handleSelectFilter('pullrequests', 'open')}
+            className={`kpi-card ${activeTab === 'pullrequests' && statusFilter === 'open' ? 'active' : ''}`}
+            onClick={() => toggleKpiFilter('pullrequests', 'open')}
+            aria-pressed={activeTab === 'pullrequests' && statusFilter === 'open'}
             style={{
-              cursor: 'pointer',
-              textAlign: 'left',
               border:
                 activeTab === 'pullrequests' && statusFilter === 'open'
                   ? '1px solid var(--accent-cyan)'
                   : undefined,
             }}
-            title="Click to view Open PRs"
+            title={activeTab === 'pullrequests' && statusFilter === 'open' ? 'Click to show all PRs' : 'Click to filter Open PRs'}
           >
             <div className="kpi-header">
               <span>Open PRs</span>
@@ -368,17 +375,16 @@ const Dashboard = () => {
 
           <button
             type="button"
-            className="kpi-card"
-            onClick={() => handleSelectFilter('pullrequests', 'merged')}
+            className={`kpi-card ${activeTab === 'pullrequests' && statusFilter === 'merged' ? 'active' : ''}`}
+            onClick={() => toggleKpiFilter('pullrequests', 'merged')}
+            aria-pressed={activeTab === 'pullrequests' && statusFilter === 'merged'}
             style={{
-              cursor: 'pointer',
-              textAlign: 'left',
               border:
                 activeTab === 'pullrequests' && statusFilter === 'merged'
                   ? '1px solid #c084fc'
                   : undefined,
             }}
-            title="Click to view Merged PRs"
+            title={activeTab === 'pullrequests' && statusFilter === 'merged' ? 'Click to show all PRs' : 'Click to filter Merged PRs'}
           >
             <div className="kpi-header">
               <span>Merged PRs</span>
@@ -392,17 +398,16 @@ const Dashboard = () => {
 
           <button
             type="button"
-            className="kpi-card"
-            onClick={() => handleSelectFilter('issues', 'assigned')}
+            className={`kpi-card ${activeTab === 'issues' && statusFilter === 'assigned' ? 'active' : ''}`}
+            onClick={() => toggleKpiFilter('issues', 'assigned')}
+            aria-pressed={activeTab === 'issues' && statusFilter === 'assigned'}
             style={{
-              cursor: 'pointer',
-              textAlign: 'left',
               border:
                 activeTab === 'issues' && statusFilter === 'assigned'
                   ? '1px solid #fbbf24'
                   : undefined,
             }}
-            title="Click to view Assigned Issues"
+            title={activeTab === 'issues' && statusFilter === 'assigned' ? 'Click to show all issues' : 'Click to filter Assigned Issues'}
           >
             <div className="kpi-header">
               <span>Assigned Issues</span>
@@ -416,17 +421,16 @@ const Dashboard = () => {
 
           <button
             type="button"
-            className="kpi-card"
-            onClick={() => handleSelectFilter('issues', 'closed')}
+            className={`kpi-card ${activeTab === 'issues' && statusFilter === 'closed' ? 'active' : ''}`}
+            onClick={() => toggleKpiFilter('issues', 'closed')}
+            aria-pressed={activeTab === 'issues' && statusFilter === 'closed'}
             style={{
-              cursor: 'pointer',
-              textAlign: 'left',
               border:
                 activeTab === 'issues' && statusFilter === 'closed'
                   ? '1px solid #10b981'
                   : undefined,
             }}
-            title="Click to view Closed Issues"
+            title={activeTab === 'issues' && statusFilter === 'closed' ? 'Click to show all issues' : 'Click to filter Closed Issues'}
           >
             <div className="kpi-header">
               <span>Closed Issues</span>
@@ -476,6 +480,7 @@ const Dashboard = () => {
               prsData={prsData}
               issuesData={issuesData}
               isDemo={isDemo}
+              onSelectFilter={handleSelectFilter}
             />
           </div>
         )}

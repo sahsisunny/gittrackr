@@ -32,6 +32,7 @@ type ProfileGitHubStatsProps = {
   usersData?: User[];
   isUser?: boolean;
   username?: string;
+  onSelectTab?: (tab: string) => void;
 };
 
 type HeatmapDay = {
@@ -49,8 +50,18 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
   usersData = [],
   isUser = true,
   username = '',
+  onSelectTab,
 }) => {
   const [hoveredDay, setHoveredDay] = useState<HeatmapDay | null>(null);
+
+  const scrollToCalendar = () => {
+    const el = document.getElementById('developer-activity-calendar');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add(styles.calendarPulse);
+      setTimeout(() => el.classList.remove(styles.calendarPulse), 1200);
+    }
+  };
 
   const getRelativeDate = (d: string) => {
     if (!d) return 'Recently';
@@ -185,7 +196,22 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
           <span>GitHub Contributions &amp; Network</span>
         </h3>
         <div className={styles.kpiStatsGrid} style={{ marginTop: '0.85rem' }}>
-          <div className={styles.kpiCard}>
+          <div
+            className={styles.kpiCard}
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              const url = `https://github.com/${username || 'sahsisunny'}`;
+              window.open(url, '_blank', 'noopener,noreferrer');
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                const url = `https://github.com/${username || 'sahsisunny'}`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+              }
+            }}
+            title="Click to view GitHub profile"
+          >
             <div className={styles.kpiHeader}>
               <span>Joined GitHub</span>
               <FiCalendar color="#38bdf8" size={17} />
@@ -193,10 +219,25 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#38bdf8', fontSize: '1.4rem' }} suppressHydrationWarning>
               {getRelativeDate(JOIN_DATE)}
             </div>
-            <div className={styles.kpiSubtext}>Account vintage</div>
+            <div className={styles.kpiSubtext}>Account vintage • View profile ↗</div>
           </div>
 
-          <div className={styles.kpiCard}>
+          <div
+            className={styles.kpiCard}
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              const url = `https://github.com/${username || 'sahsisunny'}?tab=followers`;
+              window.open(url, '_blank', 'noopener,noreferrer');
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                const url = `https://github.com/${username || 'sahsisunny'}?tab=followers`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+              }
+            }}
+            title="Click to view followers on GitHub"
+          >
             <div className={styles.kpiHeader}>
               <span>Followers</span>
               <FiUsers color="#c084fc" size={17} />
@@ -204,10 +245,25 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#c084fc' }}>
               {USER_FOLLOWERS ?? 0}
             </div>
-            <div className={styles.kpiSubtext}>Developer reach</div>
+            <div className={styles.kpiSubtext}>Developer reach • View list ↗</div>
           </div>
 
-          <div className={styles.kpiCard}>
+          <div
+            className={styles.kpiCard}
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              const url = `https://github.com/${username || 'sahsisunny'}?tab=following`;
+              window.open(url, '_blank', 'noopener,noreferrer');
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                const url = `https://github.com/${username || 'sahsisunny'}?tab=following`;
+                window.open(url, '_blank', 'noopener,noreferrer');
+              }
+            }}
+            title="Click to view following network on GitHub"
+          >
             <div className={styles.kpiHeader}>
               <span>Following</span>
               <FiUserCheck color="#10b981" size={17} />
@@ -215,10 +271,31 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#10b981' }}>
               {USER_FOLLOWING ?? 0}
             </div>
-            <div className={styles.kpiSubtext}>Network connections</div>
+            <div className={styles.kpiSubtext}>Network connections • View list ↗</div>
           </div>
 
-          <div className={styles.kpiCard}>
+          <div
+            className={styles.kpiCard}
+            role="button"
+            tabIndex={0}
+            onClick={() => {
+              if (onSelectTab) {
+                onSelectTab('repos');
+              } else {
+                window.open(`https://github.com/${username || 'sahsisunny'}?tab=repositories`, '_blank', 'noopener,noreferrer');
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                if (onSelectTab) {
+                  onSelectTab('repos');
+                } else {
+                  window.open(`https://github.com/${username || 'sahsisunny'}?tab=repositories`, '_blank', 'noopener,noreferrer');
+                }
+              }
+            }}
+            title="Click to view public repositories"
+          >
             <div className={styles.kpiHeader}>
               <span>Public Repos</span>
               <FiFolder color="#fbbf24" size={17} />
@@ -226,7 +303,7 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#fbbf24' }}>
               {USER_PUBLIC_REPOS ?? 0}
             </div>
-            <div className={styles.kpiSubtext}>Open source repositories</div>
+            <div className={styles.kpiSubtext}>Open source repositories • Explore</div>
           </div>
         </div>
       </div>
@@ -238,7 +315,14 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
           <span>Contribution Streak &amp; Velocity Cadence</span>
         </h3>
         <div className={styles.streakCardGrid}>
-          <div className={styles.streakCard}>
+          <div
+            className={styles.streakCard}
+            role="button"
+            tabIndex={0}
+            onClick={scrollToCalendar}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+            title="Click to view Contribution Calendar"
+          >
             <div className={styles.kpiHeader}>
               <span>Current Streak</span>
               <span style={{ fontSize: '1.15rem' }}>🔥</span>
@@ -246,10 +330,17 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#f59e0b' }}>
               {streakStats.currentStreak} Days
             </div>
-            <div className={styles.kpiSubtext}>Active daily streak</div>
+            <div className={styles.kpiSubtext}>Active daily streak • See heatmap ↓</div>
           </div>
 
-          <div className={styles.streakCard}>
+          <div
+            className={styles.streakCard}
+            role="button"
+            tabIndex={0}
+            onClick={scrollToCalendar}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+            title="Click to view Contribution Calendar"
+          >
             <div className={styles.kpiHeader}>
               <span>Longest Streak</span>
               <span style={{ fontSize: '1.15rem' }}>⚡</span>
@@ -257,10 +348,17 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#38bdf8' }}>
               {streakStats.longestStreak} Days
             </div>
-            <div className={styles.kpiSubtext}>Personal record</div>
+            <div className={styles.kpiSubtext}>Personal record • See heatmap ↓</div>
           </div>
 
-          <div className={styles.streakCard}>
+          <div
+            className={styles.streakCard}
+            role="button"
+            tabIndex={0}
+            onClick={scrollToCalendar}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+            title="Click to view Contribution Calendar"
+          >
             <div className={styles.kpiHeader}>
               <span>Total Contributions</span>
               <span style={{ fontSize: '1.15rem' }}>🚀</span>
@@ -268,10 +366,17 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#10b981' }}>
               {streakStats.totalContributions.toLocaleString()}+
             </div>
-            <div className={styles.kpiSubtext}>PRs, commits &amp; issues</div>
+            <div className={styles.kpiSubtext}>PRs, commits &amp; issues • See heatmap ↓</div>
           </div>
 
-          <div className={styles.streakCard}>
+          <div
+            className={styles.streakCard}
+            role="button"
+            tabIndex={0}
+            onClick={scrollToCalendar}
+            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+            title="Click to view Contribution Calendar"
+          >
             <div className={styles.kpiHeader}>
               <span>Consistency Rate</span>
               <span style={{ fontSize: '1.15rem' }}>🎯</span>
@@ -279,13 +384,13 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#c084fc' }}>
               {streakStats.consistencyRate}%
             </div>
-            <div className={styles.kpiSubtext}>Weekly shipping cadence</div>
+            <div className={styles.kpiSubtext}>Weekly shipping cadence • See heatmap ↓</div>
           </div>
         </div>
       </div>
 
       {/* 3. Contribution Calendar Heatmap */}
-      <div className={styles.heatmapCard}>
+      <div className={styles.heatmapCard} id="developer-activity-calendar">
         <div className={styles.heatmapHeader}>
           <div className={styles.heatmapTitle}>
             <FiActivity color="#10b981" size={17} />

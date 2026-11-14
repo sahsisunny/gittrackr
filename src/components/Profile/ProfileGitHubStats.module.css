@@ -34,13 +34,20 @@
   transition: all var(--transition-fast);
   position: relative;
   overflow: hidden;
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
 }
 
 .kpiCard:hover {
-  border-color: var(--border-medium);
+  border-color: var(--accent-cyan);
   background: var(--bg-surface-elevated);
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 18px rgba(56, 189, 248, 0.15);
+}
+
+.kpiCard:active {
+  transform: translateY(-1px) scale(0.99);
 }
 
 .kpiHeader {
@@ -87,13 +94,39 @@
   position: relative;
   overflow: hidden;
   transition: all var(--transition-fast);
+  cursor: pointer;
+  text-align: left;
+  user-select: none;
 }
 
 .streakCard:hover {
   border-color: rgba(245, 158, 11, 0.4);
   background: var(--bg-surface-elevated);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.15);
+}
+
+.streakCard:active {
+  transform: translateY(-1px) scale(0.99);
+}
+
+.calendarPulse {
+  animation: pulseHighlight 1.2s ease-in-out;
+}
+
+@keyframes pulseHighlight {
+  0% {
+    box-shadow: 0 0 0 rgba(56, 189, 248, 0);
+    border-color: var(--border-subtle);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(56, 189, 248, 0.4);
+    border-color: var(--accent-cyan);
+  }
+  100% {
+    box-shadow: 0 0 0 rgba(56, 189, 248, 0);
+    border-color: var(--border-subtle);
+  }
 }
 
 .streakIconWrapper {

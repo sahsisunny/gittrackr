@@ -154,6 +154,7 @@ const ProfilePage = () => {
                 USER_PUBLIC_REPOS={USER_PUBLIC_REPOS}
                 orgsData={orgsData}
                 username={USERNAME}
+                onSelectTab={setActiveTab}
               />
             ) : (
               <ProfileGitHubRepository
