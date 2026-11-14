@@ -273,6 +273,7 @@ const Features: FC = () => {
                   USER_PUBLIC_REPOS={DEMO_USER.public_repos}
                   orgsData={DEMO_ORGS}
                   username={DEMO_USER.login}
+                  isDemo={true}
                 />
               </div>
             </div>

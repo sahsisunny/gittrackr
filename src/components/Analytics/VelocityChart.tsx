@@ -59,18 +59,18 @@ export const VelocityChart: FC<VelocityChartProps> = ({
 
   // Real data calculations
   const totalOpened = useMemo(() => {
-    if (hasRealData && prsData) {
+    if (prsData) {
       return prsData.length;
     }
-    return 28;
-  }, [hasRealData, prsData]);
+    return isDemo ? 28 : 0;
+  }, [prsData, isDemo]);
 
   const totalMerged = useMemo(() => {
-    if (hasRealData && prsData) {
+    if (prsData) {
       return prsData.filter((pr) => Boolean(pr.pull_request?.merged_at)).length;
     }
-    return 24;
-  }, [hasRealData, prsData]);
+    return isDemo ? 24 : 0;
+  }, [prsData, isDemo]);
 
   const mergeRate = useMemo(() => {
     if (totalOpened === 0) return 0;
@@ -79,7 +79,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
 
   // Average Turnaround Time calculated from real GitHub merged timestamps
   const { avgTurnaroundText, turnaroundSla } = useMemo(() => {
-    if (hasRealData && prsData) {
+    if (prsData && prsData.length > 0) {
       const mergedList = prsData.filter(
         (pr) => pr.pull_request?.merged_at && pr.created_at
       );
@@ -124,20 +124,27 @@ export const VelocityChart: FC<VelocityChartProps> = ({
       }
     }
 
+    if (isDemo) {
+      return {
+        avgTurnaroundText: '4.2h',
+        turnaroundSla: {
+          pctUnder24: 64,
+          pct1to3d: 30,
+          pctOver3d: 6,
+          compliance: '94% On Track',
+        },
+      };
+    }
+
     return {
-      avgTurnaroundText: '4.2h',
-      turnaroundSla: {
-        pctUnder24: 64,
-        pct1to3d: 30,
-        pctOver3d: 6,
-        compliance: '94% On Track',
-      },
+      avgTurnaroundText: '—',
+      turnaroundSla: null,
     };
-  }, [hasRealData, prsData]);
+  }, [prsData, isDemo]);
 
   // Top repositories computed from real user dataset
   const topRepositories = useMemo(() => {
-    if (hasRealData && prsData) {
+    if (prsData && prsData.length > 0) {
       const repoCounts: Record<string, number> = {};
 
       prsData.forEach((pr) => {
@@ -166,12 +173,16 @@ export const VelocityChart: FC<VelocityChartProps> = ({
       }));
     }
 
-    return [
-      { name: 'website-backend', count: 42, percent: 52 },
-      { name: 'tiny-site-frontend', count: 28, percent: 35 },
-      { name: 'website-api-contracts', count: 10, percent: 13 },
-    ];
-  }, [hasRealData, prsData]);
+    if (isDemo) {
+      return [
+        { name: 'website-backend', count: 42, percent: 52 },
+        { name: 'tiny-site-frontend', count: 28, percent: 35 },
+        { name: 'website-api-contracts', count: 10, percent: 13 },
+      ];
+    }
+
+    return [];
+  }, [prsData, isDemo]);
 
   // Dynamic Chart Data points grouped by timeframe
   const chartData: DataPoint[] = useMemo(() => {
@@ -289,31 +300,63 @@ export const VelocityChart: FC<VelocityChartProps> = ({
     }
 
     // Baseline fallback for demo mode
-    if (timeframe === '7d') {
+    if (isDemo) {
+      if (timeframe === '7d') {
+        return [
+          { label: 'Mon', prsOpened: 3, prsMerged: 2, issuesClosed: 4 },
+          { label: 'Tue', prsOpened: 5, prsMerged: 4, issuesClosed: 6 },
+          { label: 'Wed', prsOpened: 4, prsMerged: 4, issuesClosed: 5 },
+          { label: 'Thu', prsOpened: 6, prsMerged: 5, issuesClosed: 7 },
+          { label: 'Fri', prsOpened: 5, prsMerged: 5, issuesClosed: 6 },
+          { label: 'Sat', prsOpened: 3, prsMerged: 2, issuesClosed: 2 },
+          { label: 'Sun', prsOpened: 2, prsMerged: 2, issuesClosed: 1 },
+        ];
+      }
+      if (timeframe === '4w') {
+        return [
+          { label: 'Week 1', prsOpened: 8, prsMerged: 7, issuesClosed: 10 },
+          { label: 'Week 2', prsOpened: 12, prsMerged: 11, issuesClosed: 14 },
+          { label: 'Week 3', prsOpened: 15, prsMerged: 13, issuesClosed: 16 },
+          { label: 'Week 4', prsOpened: 11, prsMerged: 10, issuesClosed: 12 },
+        ];
+      }
       return [
-        { label: 'Mon', prsOpened: 3, prsMerged: 2, issuesClosed: 4 },
-        { label: 'Tue', prsOpened: 5, prsMerged: 4, issuesClosed: 6 },
-        { label: 'Wed', prsOpened: 4, prsMerged: 4, issuesClosed: 5 },
-        { label: 'Thu', prsOpened: 6, prsMerged: 5, issuesClosed: 7 },
-        { label: 'Fri', prsOpened: 5, prsMerged: 5, issuesClosed: 6 },
-        { label: 'Sat', prsOpened: 3, prsMerged: 2, issuesClosed: 2 },
-        { label: 'Sun', prsOpened: 2, prsMerged: 2, issuesClosed: 1 },
+        { label: 'Month 1', prsOpened: 32, prsMerged: 28, issuesClosed: 35 },
+        { label: 'Month 2', prsOpened: 44, prsMerged: 39, issuesClosed: 48 },
+        { label: 'Month 3', prsOpened: 51, prsMerged: 46, issuesClosed: 54 },
       ];
+    }
+
+    // Honest zero-state timeline for authenticated users with 0 PRs in the selected range
+    if (timeframe === '7d') {
+      const days: DataPoint[] = [];
+      const dayNames = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+      for (let i = 6; i >= 0; i--) {
+        const d = new Date();
+        d.setDate(d.getDate() - i);
+        days.push({
+          label: dayNames[d.getDay()],
+          prsOpened: 0,
+          prsMerged: 0,
+          issuesClosed: 0,
+        });
+      }
+      return days;
     }
     if (timeframe === '4w') {
       return [
-        { label: 'Week 1', prsOpened: 8, prsMerged: 7, issuesClosed: 10 },
-        { label: 'Week 2', prsOpened: 12, prsMerged: 11, issuesClosed: 14 },
-        { label: 'Week 3', prsOpened: 15, prsMerged: 13, issuesClosed: 16 },
-        { label: 'Week 4', prsOpened: 11, prsMerged: 10, issuesClosed: 12 },
+        { label: 'W-1', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
+        { label: 'W-2', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
+        { label: 'W-3', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
+        { label: 'W-4', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
       ];
     }
     return [
-      { label: 'Month 1', prsOpened: 32, prsMerged: 28, issuesClosed: 35 },
-      { label: 'Month 2', prsOpened: 44, prsMerged: 39, issuesClosed: 48 },
-      { label: 'Month 3', prsOpened: 51, prsMerged: 46, issuesClosed: 54 },
+      { label: 'Month 1', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
+      { label: 'Month 2', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
+      { label: 'Month 3', prsOpened: 0, prsMerged: 0, issuesClosed: 0 },
     ];
-  }, [hasRealData, prsData, issuesData, timeframe]);
+  }, [hasRealData, prsData, issuesData, timeframe, isDemo]);
 
   const maxVal = useMemo(() => {
     const vals = chartData.flatMap((d) => [d.prsOpened, d.prsMerged, d.issuesClosed]);
@@ -341,8 +384,12 @@ export const VelocityChart: FC<VelocityChartProps> = ({
               <span>{title}</span>
               {hasRealData ? (
                 <span className={styles.liveBadge}>● Live Data Active</span>
-              ) : (
+              ) : isDemo ? (
                 <span className={styles.demoBadge}>● Sandbox Demo Data</span>
+              ) : (
+                <span className={styles.liveBadge} style={{ background: 'rgba(255, 255, 255, 0.05)', color: 'var(--text-secondary)', borderColor: 'var(--border-medium)' }}>
+                  ● Workspace Telemetry
+                </span>
               )}
             </h3>
             <div className={styles.subtitleText}>{subtitle}</div>
@@ -403,7 +450,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {totalOpened}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> {hasRealData ? 'Total Indexed • Click to filter' : '+18% vs prev'}
+            <FiTrendingUp /> {hasRealData ? 'Total Indexed • Click to filter' : isDemo ? '+18% vs prev' : 'No PRs in window'}
           </div>
         </div>
 
@@ -434,7 +481,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {totalMerged}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> {hasRealData ? 'Production Deployed • Click to filter' : '+24% throughput'}
+            <FiTrendingUp /> {hasRealData ? 'Production Deployed • Click to filter' : isDemo ? '+24% throughput' : 'No merges in window'}
           </div>
         </div>
 
@@ -454,7 +501,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {mergeRate}%
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiCheckCircle /> SLA Healthy • Switch range ↺
+            <FiCheckCircle /> {hasRealData || isDemo ? 'SLA Healthy • Switch range ↺' : 'No merge data'}
           </div>
         </div>
 
@@ -474,7 +521,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {avgTurnaroundText}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> Calculated from merged PRs • Switch range ↺
+            <FiTrendingUp /> {hasRealData ? 'Calculated from merged PRs' : isDemo ? 'Estimated SLA' : 'Awaiting merged PRs'}
           </div>
         </div>
       </div>
@@ -681,83 +728,97 @@ export const VelocityChart: FC<VelocityChartProps> = ({
               Top Repository Contributions
             </span>
             <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>
-              {hasRealData ? 'Live GitHub' : 'Sample'}
+              {hasRealData ? 'Live GitHub' : isDemo ? 'Sample' : 'Live Workspace'}
             </span>
           </div>
 
-          {topRepositories.map((repo, idx) => {
-            const colors = ['#10b981', '#38bdf8', '#c084fc'];
-            const color = colors[idx % colors.length];
-            return (
-              <div
-                className={styles.progressItem}
-                key={repo.name}
-                style={idx === topRepositories.length - 1 ? { marginBottom: 0 } : undefined}
-              >
-                <div className={styles.progressHeader}>
-                  <span className={styles.progressLabel}>{repo.name}</span>
-                  <span className={styles.progressCount}>
-                    {repo.percent}% ({repo.count} PRs)
-                  </span>
+          {topRepositories.length > 0 ? (
+            topRepositories.map((repo, idx) => {
+              const colors = ['#10b981', '#38bdf8', '#c084fc'];
+              const color = colors[idx % colors.length];
+              return (
+                <div
+                  className={styles.progressItem}
+                  key={repo.name}
+                  style={idx === topRepositories.length - 1 ? { marginBottom: 0 } : undefined}
+                >
+                  <div className={styles.progressHeader}>
+                    <span className={styles.progressLabel}>{repo.name}</span>
+                    <span className={styles.progressCount}>
+                      {repo.percent}% ({repo.count} PRs)
+                    </span>
+                  </div>
+                  <div className={styles.progressBarBg}>
+                    <div
+                      className={styles.progressBarFill}
+                      style={{ width: `${repo.percent}%`, background: color }}
+                    />
+                  </div>
                 </div>
-                <div className={styles.progressBarBg}>
-                  <div
-                    className={styles.progressBarFill}
-                    style={{ width: `${repo.percent}%`, background: color }}
-                  />
-                </div>
-              </div>
-            );
-          })}
+              );
+            })
+          ) : (
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', padding: '1rem 0', textAlign: 'center' }}>
+              No repository PR activity recorded for this period.
+            </div>
+          )}
         </div>
 
         {/* Real Turnaround SLA Compliance */}
         <div className={styles.metricSubCard}>
           <div className={styles.subCardTitle}>
             <span>Review SLA Compliance</span>
-            <span style={{ fontSize: '0.75rem', color: '#10b981', fontWeight: 600 }}>
-              {turnaroundSla.compliance}
+            <span style={{ fontSize: '0.75rem', color: turnaroundSla ? '#10b981' : 'var(--text-muted)', fontWeight: 600 }}>
+              {turnaroundSla ? turnaroundSla.compliance : 'Awaiting Merged PRs'}
             </span>
           </div>
 
-          <div className={styles.progressItem}>
-            <div className={styles.progressHeader}>
-              <span className={styles.progressLabel}>Under 24 Hours (Fast Review)</span>
-              <span className={styles.progressCount}>{turnaroundSla.pctUnder24}%</span>
-            </div>
-            <div className={styles.progressBarBg}>
-              <div
-                className={styles.progressBarFill}
-                style={{ width: `${turnaroundSla.pctUnder24}%`, background: '#10b981' }}
-              />
-            </div>
-          </div>
+          {turnaroundSla ? (
+            <>
+              <div className={styles.progressItem}>
+                <div className={styles.progressHeader}>
+                  <span className={styles.progressLabel}>Under 24 Hours (Fast Review)</span>
+                  <span className={styles.progressCount}>{turnaroundSla.pctUnder24}%</span>
+                </div>
+                <div className={styles.progressBarBg}>
+                  <div
+                    className={styles.progressBarFill}
+                    style={{ width: `${turnaroundSla.pctUnder24}%`, background: '#10b981' }}
+                  />
+                </div>
+              </div>
 
-          <div className={styles.progressItem}>
-            <div className={styles.progressHeader}>
-              <span className={styles.progressLabel}>1 to 3 Days (Standard)</span>
-              <span className={styles.progressCount}>{turnaroundSla.pct1to3d}%</span>
-            </div>
-            <div className={styles.progressBarBg}>
-              <div
-                className={styles.progressBarFill}
-                style={{ width: `${turnaroundSla.pct1to3d}%`, background: '#38bdf8' }}
-              />
-            </div>
-          </div>
+              <div className={styles.progressItem}>
+                <div className={styles.progressHeader}>
+                  <span className={styles.progressLabel}>1 to 3 Days (Standard)</span>
+                  <span className={styles.progressCount}>{turnaroundSla.pct1to3d}%</span>
+                </div>
+                <div className={styles.progressBarBg}>
+                  <div
+                    className={styles.progressBarFill}
+                    style={{ width: `${turnaroundSla.pct1to3d}%`, background: '#38bdf8' }}
+                  />
+                </div>
+              </div>
 
-          <div className={styles.progressItem} style={{ marginBottom: 0 }}>
-            <div className={styles.progressHeader}>
-              <span className={styles.progressLabel}>Over 3 Days (Extended SLA)</span>
-              <span className={styles.progressCount}>{turnaroundSla.pctOver3d}%</span>
+              <div className={styles.progressItem} style={{ marginBottom: 0 }}>
+                <div className={styles.progressHeader}>
+                  <span className={styles.progressLabel}>Over 3 Days (Extended SLA)</span>
+                  <span className={styles.progressCount}>{turnaroundSla.pctOver3d}%</span>
+                </div>
+                <div className={styles.progressBarBg}>
+                  <div
+                    className={styles.progressBarFill}
+                    style={{ width: `${turnaroundSla.pctOver3d}%`, background: '#f59e0b' }}
+                  />
+                </div>
+              </div>
+            </>
+          ) : (
+            <div style={{ fontSize: '0.85rem', color: 'var(--text-secondary)', padding: '1rem 0', textAlign: 'center' }}>
+              Turnaround SLA will be calculated once pull requests are merged.
             </div>
-            <div className={styles.progressBarBg}>
-              <div
-                className={styles.progressBarFill}
-                style={{ width: `${turnaroundSla.pctOver3d}%`, background: '#f59e0b' }}
-              />
-            </div>
-          </div>
+          )}
         </div>
       </div>
     </div>

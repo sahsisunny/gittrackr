@@ -33,6 +33,7 @@ type ProfileGitHubStatsProps = {
   isUser?: boolean;
   username?: string;
   onSelectTab?: (tab: string) => void;
+  isDemo?: boolean;
 };
 
 type HeatmapDay = {
@@ -51,6 +52,7 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
   isUser = true,
   username = '',
   onSelectTab,
+  isDemo = false,
 }) => {
   const [hoveredDay, setHoveredDay] = useState<HeatmapDay | null>(null);
 
@@ -308,220 +310,224 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
         </div>
       </div>
 
-      {/* 2. Streak & Delivery Cadence */}
-      <div>
-        <h3 className={styles.statsSectionTitle}>
-          <FiZap size={15} color="#f59e0b" />
-          <span>Contribution Streak &amp; Velocity Cadence</span>
-        </h3>
-        <div className={styles.streakCardGrid}>
-          <div
-            className={styles.streakCard}
-            role="button"
-            tabIndex={0}
-            onClick={scrollToCalendar}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
-            title="Click to view Contribution Calendar"
-          >
-            <div className={styles.kpiHeader}>
-              <span>Current Streak</span>
-              <span style={{ fontSize: '1.15rem' }}>🔥</span>
+      {/* 2. Streak & Delivery Cadence (Only in Demo Mode - Authenticated users show only real GitHub telemetry) */}
+      {isDemo && (
+        <>
+          <div>
+            <h3 className={styles.statsSectionTitle}>
+              <FiZap size={15} color="#f59e0b" />
+              <span>Contribution Streak &amp; Velocity Cadence</span>
+            </h3>
+            <div className={styles.streakCardGrid}>
+              <div
+                className={styles.streakCard}
+                role="button"
+                tabIndex={0}
+                onClick={scrollToCalendar}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+                title="Click to view Contribution Calendar"
+              >
+                <div className={styles.kpiHeader}>
+                  <span>Current Streak</span>
+                  <span style={{ fontSize: '1.15rem' }}>🔥</span>
+                </div>
+                <div className={styles.kpiValue} style={{ color: '#f59e0b' }}>
+                  {streakStats.currentStreak} Days
+                </div>
+                <div className={styles.kpiSubtext}>Active daily streak • See heatmap ↓</div>
+              </div>
+
+              <div
+                className={styles.streakCard}
+                role="button"
+                tabIndex={0}
+                onClick={scrollToCalendar}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+                title="Click to view Contribution Calendar"
+              >
+                <div className={styles.kpiHeader}>
+                  <span>Longest Streak</span>
+                  <span style={{ fontSize: '1.15rem' }}>⚡</span>
+                </div>
+                <div className={styles.kpiValue} style={{ color: '#38bdf8' }}>
+                  {streakStats.longestStreak} Days
+                </div>
+                <div className={styles.kpiSubtext}>Personal record • See heatmap ↓</div>
+              </div>
+
+              <div
+                className={styles.streakCard}
+                role="button"
+                tabIndex={0}
+                onClick={scrollToCalendar}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+                title="Click to view Contribution Calendar"
+              >
+                <div className={styles.kpiHeader}>
+                  <span>Total Contributions</span>
+                  <span style={{ fontSize: '1.15rem' }}>🚀</span>
+                </div>
+                <div className={styles.kpiValue} style={{ color: '#10b981' }}>
+                  {streakStats.totalContributions.toLocaleString()}+
+                </div>
+                <div className={styles.kpiSubtext}>PRs, commits &amp; issues • See heatmap ↓</div>
+              </div>
+
+              <div
+                className={styles.streakCard}
+                role="button"
+                tabIndex={0}
+                onClick={scrollToCalendar}
+                onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
+                title="Click to view Contribution Calendar"
+              >
+                <div className={styles.kpiHeader}>
+                  <span>Consistency Rate</span>
+                  <span style={{ fontSize: '1.15rem' }}>🎯</span>
+                </div>
+                <div className={styles.kpiValue} style={{ color: '#c084fc' }}>
+                  {streakStats.consistencyRate}%
+                </div>
+                <div className={styles.kpiSubtext}>Weekly shipping cadence • See heatmap ↓</div>
+              </div>
             </div>
-            <div className={styles.kpiValue} style={{ color: '#f59e0b' }}>
-              {streakStats.currentStreak} Days
-            </div>
-            <div className={styles.kpiSubtext}>Active daily streak • See heatmap ↓</div>
           </div>
 
-          <div
-            className={styles.streakCard}
-            role="button"
-            tabIndex={0}
-            onClick={scrollToCalendar}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
-            title="Click to view Contribution Calendar"
-          >
-            <div className={styles.kpiHeader}>
-              <span>Longest Streak</span>
-              <span style={{ fontSize: '1.15rem' }}>⚡</span>
-            </div>
-            <div className={styles.kpiValue} style={{ color: '#38bdf8' }}>
-              {streakStats.longestStreak} Days
-            </div>
-            <div className={styles.kpiSubtext}>Personal record • See heatmap ↓</div>
-          </div>
-
-          <div
-            className={styles.streakCard}
-            role="button"
-            tabIndex={0}
-            onClick={scrollToCalendar}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
-            title="Click to view Contribution Calendar"
-          >
-            <div className={styles.kpiHeader}>
-              <span>Total Contributions</span>
-              <span style={{ fontSize: '1.15rem' }}>🚀</span>
-            </div>
-            <div className={styles.kpiValue} style={{ color: '#10b981' }}>
-              {streakStats.totalContributions.toLocaleString()}+
-            </div>
-            <div className={styles.kpiSubtext}>PRs, commits &amp; issues • See heatmap ↓</div>
-          </div>
-
-          <div
-            className={styles.streakCard}
-            role="button"
-            tabIndex={0}
-            onClick={scrollToCalendar}
-            onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && scrollToCalendar()}
-            title="Click to view Contribution Calendar"
-          >
-            <div className={styles.kpiHeader}>
-              <span>Consistency Rate</span>
-              <span style={{ fontSize: '1.15rem' }}>🎯</span>
-            </div>
-            <div className={styles.kpiValue} style={{ color: '#c084fc' }}>
-              {streakStats.consistencyRate}%
-            </div>
-            <div className={styles.kpiSubtext}>Weekly shipping cadence • See heatmap ↓</div>
-          </div>
-        </div>
-      </div>
-
-      {/* 3. Contribution Calendar Heatmap */}
-      <div className={styles.heatmapCard} id="developer-activity-calendar">
-        <div className={styles.heatmapHeader}>
-          <div className={styles.heatmapTitle}>
-            <FiActivity color="#10b981" size={17} />
-            <span>Developer Activity Calendar</span>
-            <span
-              style={{
-                fontSize: '0.75rem',
-                fontWeight: 500,
-                color: 'var(--text-secondary)',
-                marginLeft: '0.5rem',
-              }}
-            >
-              ({totalPeriodContributions} contributions in the last 6 months)
-            </span>
-          </div>
-
-          <div className={styles.heatmapTooltipBox}>
-            <div
-              className={styles.heatmapTooltip}
-              style={{
-                opacity: hoveredDay ? 1 : 0,
-                visibility: hoveredDay ? 'visible' : 'hidden',
-                pointerEvents: 'none',
-              }}
-            >
-              {hoveredDay ? (
-                <span>
-                  <strong>
-                    {hoveredDay.count === 0
-                      ? 'No contributions'
-                      : `${hoveredDay.count} contribution${hoveredDay.count > 1 ? 's' : ''}`}
-                  </strong>{' '}
-                  on {hoveredDay.dateStr}
+          {/* 3. Contribution Calendar Heatmap */}
+          <div className={styles.heatmapCard} id="developer-activity-calendar">
+            <div className={styles.heatmapHeader}>
+              <div className={styles.heatmapTitle}>
+                <FiActivity color="#10b981" size={17} />
+                <span>Developer Activity Calendar</span>
+                <span
+                  style={{
+                    fontSize: '0.75rem',
+                    fontWeight: 500,
+                    color: 'var(--text-secondary)',
+                    marginLeft: '0.5rem',
+                  }}
+                >
+                  ({totalPeriodContributions} contributions in the last 6 months)
                 </span>
-              ) : (
-                <span>&nbsp;</span>
-              )}
+              </div>
+
+              <div className={styles.heatmapTooltipBox}>
+                <div
+                  className={styles.heatmapTooltip}
+                  style={{
+                    opacity: hoveredDay ? 1 : 0,
+                    visibility: hoveredDay ? 'visible' : 'hidden',
+                    pointerEvents: 'none',
+                  }}
+                >
+                  {hoveredDay ? (
+                    <span>
+                      <strong>
+                        {hoveredDay.count === 0
+                          ? 'No contributions'
+                          : `${hoveredDay.count} contribution${hoveredDay.count > 1 ? 's' : ''}`}
+                      </strong>{' '}
+                      on {hoveredDay.dateStr}
+                    </span>
+                  ) : (
+                    <span>&nbsp;</span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.heatmapScrollArea}>
+              <div
+                className={styles.heatmapGrid}
+                onMouseLeave={() => setHoveredDay(null)}
+              >
+                {weeksData.map((week, wIndex) => (
+                  <div key={wIndex} className={styles.heatmapCol}>
+                    {week.map((day, dIndex) => {
+                      const cellClass =
+                        day.level === 4
+                          ? styles.cell4
+                          : day.level === 3
+                          ? styles.cell3
+                          : day.level === 2
+                          ? styles.cell2
+                          : day.level === 1
+                          ? styles.cell1
+                          : styles.cell0;
+
+                      return (
+                        <div
+                          key={dIndex}
+                          className={`${styles.heatmapCell} ${cellClass}`}
+                          title={`${day.count} contributions on ${day.dateStr}`}
+                          onMouseEnter={() => setHoveredDay(day)}
+                        />
+                      );
+                    })}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className={styles.heatmapFooter}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                <span>Telemetry: Sample Preview</span>
+                <span style={{ color: 'var(--border-medium)' }}>•</span>
+                <span>24 Weeks Window</span>
+              </div>
+              <div className={styles.legend}>
+                <span style={{ marginRight: '4px' }}>Less</span>
+                <span className={`${styles.legendBox} ${styles.cell0}`} />
+                <span className={`${styles.legendBox} ${styles.cell1}`} />
+                <span className={`${styles.legendBox} ${styles.cell2}`} />
+                <span className={`${styles.legendBox} ${styles.cell3}`} />
+                <span className={`${styles.legendBox} ${styles.cell4}`} />
+                <span style={{ marginLeft: '4px' }}>More</span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className={styles.heatmapScrollArea}>
-          <div
-            className={styles.heatmapGrid}
-            onMouseLeave={() => setHoveredDay(null)}
-          >
-            {weeksData.map((week, wIndex) => (
-              <div key={wIndex} className={styles.heatmapCol}>
-                {week.map((day, dIndex) => {
-                  const cellClass =
-                    day.level === 4
-                      ? styles.cell4
-                      : day.level === 3
-                      ? styles.cell3
-                      : day.level === 2
-                      ? styles.cell2
-                      : day.level === 1
-                      ? styles.cell1
-                      : styles.cell0;
-
-                  return (
-                    <div
-                      key={dIndex}
-                      className={`${styles.heatmapCell} ${cellClass}`}
-                      title={`${day.count} contributions on ${day.dateStr}`}
-                      onMouseEnter={() => setHoveredDay(day)}
-                    />
-                  );
-                })}
-              </div>
-            ))}
+          {/* 4. Developer Achievements & Badges */}
+          <div>
+            <h3 className={styles.statsSectionTitle}>
+              <FiAward size={15} color="#c084fc" />
+              <span>Developer Badges &amp; Recognitions</span>
+            </h3>
+            <div className={styles.achievementsRow}>
+              {achievements.map((item, idx) => (
+                <div
+                  key={idx}
+                  className={styles.achievementBadge}
+                  style={{
+                    borderColor: item.highlight ? 'rgba(56, 189, 248, 0.4)' : undefined,
+                    background: item.highlight ? 'rgba(56, 189, 248, 0.05)' : undefined,
+                  }}
+                >
+                  <span className={styles.achievementIcon}>{item.icon}</span>
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
+                      <span>{item.title}</span>
+                      {item.highlight && <FiCheckCircle size={12} color="var(--accent-cyan)" />}
+                    </div>
+                    <div style={{ fontSize: '0.725rem', color: 'var(--text-secondary)', fontWeight: 400 }}>
+                      {item.desc}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
+        </>
+      )}
 
-        <div className={styles.heatmapFooter}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span>Telemetry: 100% Synced</span>
-            <span style={{ color: 'var(--border-medium)' }}>•</span>
-            <span>24 Weeks Window</span>
-          </div>
-          <div className={styles.legend}>
-            <span style={{ marginRight: '4px' }}>Less</span>
-            <span className={`${styles.legendBox} ${styles.cell0}`} />
-            <span className={`${styles.legendBox} ${styles.cell1}`} />
-            <span className={`${styles.legendBox} ${styles.cell2}`} />
-            <span className={`${styles.legendBox} ${styles.cell3}`} />
-            <span className={`${styles.legendBox} ${styles.cell4}`} />
-            <span style={{ marginLeft: '4px' }}>More</span>
-          </div>
-        </div>
-      </div>
-
-      {/* 4. Developer Achievements & Badges */}
+      {/* 5. Organizations / Members Section (Real GitHub Data) */}
       <div>
         <h3 className={styles.statsSectionTitle}>
-          <FiAward size={15} color="#c084fc" />
-          <span>Developer Badges &amp; Recognitions</span>
+          <FiGrid size={15} color="var(--accent-cyan)" />
+          <span>{hasMembers ? 'Organization Members' : 'Connected Organizations'}</span>
         </h3>
-        <div className={styles.achievementsRow}>
-          {achievements.map((item, idx) => (
-            <div
-              key={idx}
-              className={styles.achievementBadge}
-              style={{
-                borderColor: item.highlight ? 'rgba(56, 189, 248, 0.4)' : undefined,
-                background: item.highlight ? 'rgba(56, 189, 248, 0.05)' : undefined,
-              }}
-            >
-              <span className={styles.achievementIcon}>{item.icon}</span>
-              <div>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
-                  <span>{item.title}</span>
-                  {item.highlight && <FiCheckCircle size={12} color="var(--accent-cyan)" />}
-                </div>
-                <div style={{ fontSize: '0.725rem', color: 'var(--text-secondary)', fontWeight: 400 }}>
-                  {item.desc}
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
 
-      {/* 5. Organizations / Members Section */}
-      {(hasOrgs || hasMembers) && (
-        <div>
-          <h3 className={styles.statsSectionTitle}>
-            <FiGrid size={15} color="var(--accent-cyan)" />
-            <span>{hasMembers ? 'Organization Members' : 'Connected Organizations'}</span>
-          </h3>
-
+        {(hasOrgs || hasMembers) ? (
           <div className={styles.orgsGrid} style={{ marginTop: '0.85rem' }}>
             {(hasMembers ? usersData : orgsData).map((item) => (
               <Link
@@ -541,8 +547,23 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
               </Link>
             ))}
           </div>
-        </div>
-      )}
+        ) : (
+          <div
+            style={{
+              marginTop: '0.85rem',
+              padding: '1.5rem',
+              borderRadius: 'var(--radius-md)',
+              border: '1px dashed var(--border-medium)',
+              background: 'var(--surface-dark)',
+              textAlign: 'center',
+              color: 'var(--text-secondary)',
+              fontSize: '0.875rem',
+            }}
+          >
+            No public organizations associated with this account.
+          </div>
+        )}
+      </div>
     </div>
   );
 };

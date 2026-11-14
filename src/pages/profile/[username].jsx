@@ -127,6 +127,7 @@ const ProfilePage = () => {
                 USER_PUBLIC_REPOS={data?.public_repos ?? 0}
                 orgsData={orgsData}
                 username={data?.login || username}
+                isDemo={isDemo}
               />
             ) : (
               <ProfileGitHubRepository

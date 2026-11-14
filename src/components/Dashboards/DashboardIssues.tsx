@@ -268,7 +268,10 @@ const DashboardIssues: React.FC<IssueProps> = ({
                       <span>{getRepoNameFromUrl(item.repository_url)}</span>
                     </span>
 
-                    <span style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}>
+                    <span
+                      style={{ display: 'inline-flex', alignItems: 'center', gap: '0.35rem' }}
+                      suppressHydrationWarning
+                    >
                       <FiClock aria-hidden="true" />
                       <span suppressHydrationWarning>{FormatDate(item.created_at)}</span>
                     </span>
