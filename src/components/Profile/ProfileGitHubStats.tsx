@@ -198,22 +198,7 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
           <span>GitHub Contributions &amp; Network</span>
         </h3>
         <div className={styles.kpiStatsGrid} style={{ marginTop: '0.85rem' }}>
-          <div
-            className={styles.kpiCard}
-            role="button"
-            tabIndex={0}
-            onClick={() => {
-              const url = `https://github.com/${username || 'sahsisunny'}`;
-              window.open(url, '_blank', 'noopener,noreferrer');
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                const url = `https://github.com/${username || 'sahsisunny'}`;
-                window.open(url, '_blank', 'noopener,noreferrer');
-              }
-            }}
-            title="Click to view GitHub profile"
-          >
+          <div className={styles.kpiCard}>
             <div className={styles.kpiHeader}>
               <span>Joined GitHub</span>
               <FiCalendar color="#38bdf8" size={17} />
@@ -221,25 +206,10 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#38bdf8', fontSize: '1.4rem' }} suppressHydrationWarning>
               {getRelativeDate(JOIN_DATE)}
             </div>
-            <div className={styles.kpiSubtext}>Account vintage • View profile ↗</div>
+            <div className={styles.kpiSubtext}>Account vintage</div>
           </div>
 
-          <div
-            className={styles.kpiCard}
-            role="button"
-            tabIndex={0}
-            onClick={() => {
-              const url = `https://github.com/${username || 'sahsisunny'}?tab=followers`;
-              window.open(url, '_blank', 'noopener,noreferrer');
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                const url = `https://github.com/${username || 'sahsisunny'}?tab=followers`;
-                window.open(url, '_blank', 'noopener,noreferrer');
-              }
-            }}
-            title="Click to view followers on GitHub"
-          >
+          <div className={styles.kpiCard}>
             <div className={styles.kpiHeader}>
               <span>Followers</span>
               <FiUsers color="#c084fc" size={17} />
@@ -247,25 +217,10 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#c084fc' }}>
               {USER_FOLLOWERS ?? 0}
             </div>
-            <div className={styles.kpiSubtext}>Developer reach • View list ↗</div>
+            <div className={styles.kpiSubtext}>Developer reach</div>
           </div>
 
-          <div
-            className={styles.kpiCard}
-            role="button"
-            tabIndex={0}
-            onClick={() => {
-              const url = `https://github.com/${username || 'sahsisunny'}?tab=following`;
-              window.open(url, '_blank', 'noopener,noreferrer');
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                const url = `https://github.com/${username || 'sahsisunny'}?tab=following`;
-                window.open(url, '_blank', 'noopener,noreferrer');
-              }
-            }}
-            title="Click to view following network on GitHub"
-          >
+          <div className={styles.kpiCard}>
             <div className={styles.kpiHeader}>
               <span>Following</span>
               <FiUserCheck color="#10b981" size={17} />
@@ -273,31 +228,10 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#10b981' }}>
               {USER_FOLLOWING ?? 0}
             </div>
-            <div className={styles.kpiSubtext}>Network connections • View list ↗</div>
+            <div className={styles.kpiSubtext}>Network connections</div>
           </div>
 
-          <div
-            className={styles.kpiCard}
-            role="button"
-            tabIndex={0}
-            onClick={() => {
-              if (onSelectTab) {
-                onSelectTab('repos');
-              } else {
-                window.open(`https://github.com/${username || 'sahsisunny'}?tab=repositories`, '_blank', 'noopener,noreferrer');
-              }
-            }}
-            onKeyDown={(e) => {
-              if (e.key === 'Enter' || e.key === ' ') {
-                if (onSelectTab) {
-                  onSelectTab('repos');
-                } else {
-                  window.open(`https://github.com/${username || 'sahsisunny'}?tab=repositories`, '_blank', 'noopener,noreferrer');
-                }
-              }
-            }}
-            title="Click to view public repositories"
-          >
+          <div className={styles.kpiCard}>
             <div className={styles.kpiHeader}>
               <span>Public Repos</span>
               <FiFolder color="#fbbf24" size={17} />
@@ -305,7 +239,7 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
             <div className={styles.kpiValue} style={{ color: '#fbbf24' }}>
               {USER_PUBLIC_REPOS ?? 0}
             </div>
-            <div className={styles.kpiSubtext}>Open source repositories • Explore</div>
+            <div className={styles.kpiSubtext}>Open source repositories</div>
           </div>
         </div>
       </div>

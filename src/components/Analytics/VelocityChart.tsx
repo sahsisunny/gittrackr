@@ -423,25 +423,7 @@ export const VelocityChart: FC<VelocityChartProps> = ({
 
       {/* Mini Stat Cards */}
       <div className={styles.statsGrid}>
-        <div
-          className={styles.miniStatCard}
-          role="button"
-          tabIndex={0}
-          onClick={() => {
-            if (onSelectFilter) {
-              onSelectFilter('pullrequests', 'open');
-            } else {
-              cycleTimeframe();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              if (onSelectFilter) onSelectFilter('pullrequests', 'open');
-              else cycleTimeframe();
-            }
-          }}
-          title={onSelectFilter ? 'Filter to Open PRs' : 'Click to cycle time range'}
-        >
+        <div className={styles.miniStatCard}>
           <div className={styles.miniStatLabel}>
             <span>PRs Opened</span>
             <FiGitPullRequest color="#38bdf8" />
@@ -450,29 +432,11 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {totalOpened}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> {hasRealData ? 'Total Indexed • Click to filter' : isDemo ? '+18% vs prev' : 'No PRs in window'}
+            <FiTrendingUp /> {hasRealData ? 'Total Indexed' : isDemo ? '+18% vs prev' : 'No PRs in window'}
           </div>
         </div>
 
-        <div
-          className={styles.miniStatCard}
-          role="button"
-          tabIndex={0}
-          onClick={() => {
-            if (onSelectFilter) {
-              onSelectFilter('pullrequests', 'merged');
-            } else {
-              cycleTimeframe();
-            }
-          }}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              if (onSelectFilter) onSelectFilter('pullrequests', 'merged');
-              else cycleTimeframe();
-            }
-          }}
-          title={onSelectFilter ? 'Filter to Merged PRs' : 'Click to cycle time range'}
-        >
+        <div className={styles.miniStatCard}>
           <div className={styles.miniStatLabel}>
             <span>PRs Merged</span>
             <FiGitMerge color="#a855f7" />
@@ -481,18 +445,11 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {totalMerged}
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiTrendingUp /> {hasRealData ? 'Production Deployed • Click to filter' : isDemo ? '+24% throughput' : 'No merges in window'}
+            <FiTrendingUp /> {hasRealData ? 'Production Deployed' : isDemo ? '+24% throughput' : 'No merges in window'}
           </div>
         </div>
 
-        <div
-          className={styles.miniStatCard}
-          role="button"
-          tabIndex={0}
-          onClick={cycleTimeframe}
-          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && cycleTimeframe()}
-          title="Click to switch time range (7d / 4w / 3m)"
-        >
+        <div className={styles.miniStatCard}>
           <div className={styles.miniStatLabel}>
             <span>Merge Success</span>
             <FiZap color="#10b981" />
@@ -501,18 +458,11 @@ export const VelocityChart: FC<VelocityChartProps> = ({
             {mergeRate}%
           </div>
           <div className={`${styles.miniStatTrend} ${styles.trendPositive}`}>
-            <FiCheckCircle /> {hasRealData || isDemo ? 'SLA Healthy • Switch range ↺' : 'No merge data'}
+            <FiCheckCircle /> {hasRealData || isDemo ? 'SLA Healthy' : 'No merge data'}
           </div>
         </div>
 
-        <div
-          className={styles.miniStatCard}
-          role="button"
-          tabIndex={0}
-          onClick={cycleTimeframe}
-          onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && cycleTimeframe()}
-          title="Click to switch time range (7d / 4w / 3m)"
-        >
+        <div className={styles.miniStatCard}>
           <div className={styles.miniStatLabel}>
             <span>Avg Review Turnaround</span>
             <FiClock color="#fbbf24" />
