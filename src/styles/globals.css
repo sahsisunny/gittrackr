@@ -340,15 +340,6 @@ button {
   font-weight: 600;
 }
 
-.dropdown-active-dot {
-  margin-left: auto;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background-color: var(--accent-cyan);
-  box-shadow: 0 0 8px var(--accent-cyan);
-}
-
 .dropdown-divider {
   height: 1px;
   background-color: var(--border-subtle);

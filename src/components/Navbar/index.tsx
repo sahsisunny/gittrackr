@@ -233,9 +233,6 @@ const Navbar: React.FC = () => {
                 >
                   <FiUser aria-hidden="true" />
                   <span>Personal ({userLogin})</span>
-                  {router.asPath === `/dashboard/${userLogin}` && (
-                    <span className="dropdown-active-dot" aria-label="Current workspace" />
-                  )}
                 </Link>
 
                 {orgsData.map((org) => {
@@ -249,9 +246,6 @@ const Navbar: React.FC = () => {
                     >
                       <FiGithub aria-hidden="true" />
                       <span>{org.login}</span>
-                      {isOrgActive && (
-                        <span className="dropdown-active-dot" aria-label="Current workspace" />
-                      )}
                     </Link>
                   );
                 })}
