@@ -16,7 +16,19 @@ export const fetchPaginatedGitHubData = async (
     });
 
     if (!res1.ok) {
-      console.error(`GitHub API error ${res1.status}: ${res1.statusText}`);
+      // GitHub Search API returns 422 Unprocessable Entity when an organization/target
+      // has no searchable repositories or requires third-party OAuth access.
+      // 404 is returned if a resource is missing.
+      // In either case, resolve gracefully with 0 results so the UI exits loading cleanly.
+      if (res1.status === 422 || res1.status === 404) {
+        onInitialPage({ total_count: 0, items: [] });
+        onAllPages([], 0);
+        return;
+      }
+
+      console.warn(`GitHub API notice: ${res1.status} ${res1.statusText}`);
+      onInitialPage({ total_count: 0, items: [] });
+      onAllPages([], 0);
       return;
     }
 
@@ -59,6 +71,8 @@ export const fetchPaginatedGitHubData = async (
     }
   } catch (error) {
     console.error('Error fetching paginated GitHub data:', error);
+    onInitialPage({ total_count: 0, items: [] });
+    onAllPages([], 0);
   }
 };
 

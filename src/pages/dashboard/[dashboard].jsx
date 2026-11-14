@@ -114,8 +114,13 @@ const Dashboard = () => {
 
     if (session && TOKEN && USERNAME) {
       setIsLoading(true);
+      setIssuesData([]);
+      setPrsData([]);
+      setIssuesTotalCount(0);
+      setPrsTotalCount(0);
+
       const targetOrg = dashboard && dashboard !== USERNAME ? dashboard : null;
-      const orgFilter = targetOrg ? `+org:${targetOrg}` : '';
+      const orgFilter = targetOrg ? `+org:${encodeURIComponent(targetOrg)}` : '';
 
       const ALL_ISSUES_BASE_URL = `${GITHUB_SEARCH_ISSUES_URL}?q=type:issue+assignee:${USERNAME}${orgFilter}`;
       const ALL_PRS_BASE_URL = `${GITHUB_SEARCH_ISSUES_URL}?q=type:pr+author:${USERNAME}${orgFilter}`;

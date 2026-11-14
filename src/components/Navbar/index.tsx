@@ -11,7 +11,7 @@ import {
   FiChevronDown,
   FiCompass,
   FiGithub,
-  FiGrid,
+  FiExternalLink,
 } from 'react-icons/fi';
 
 import Logo from '../../assets/GitTrackr.png';
@@ -119,21 +119,6 @@ const Navbar: React.FC = () => {
               <span>Profile</span>
             </Link>
 
-            {orgsData.length > 0 && (
-              <Link
-                href={`/dashboard/${orgsData[0].login}`}
-                className={`nav-link ${
-                  router.asPath.includes(`/dashboard/${orgsData[0].login}`) ||
-                  router.asPath.includes(`/orgs/${orgsData[0].login}`)
-                    ? 'active'
-                    : ''
-                }`}
-              >
-                <FiGithub style={{ marginRight: '0.35rem', verticalAlign: '-2px' }} />
-                <span>{orgsData[0].login}</span>
-              </Link>
-            )}
-
             <Link
               href="/help"
               className={`nav-link ${router.pathname === '/help' ? 'active' : ''}`}
@@ -234,54 +219,55 @@ const Navbar: React.FC = () => {
                 )}
                 <div className="dropdown-user-info">
                   <span className="dropdown-greeting-text">{user?.name}</span>
-                  <span className="dropdown-user-login">@{user?.login}</span>
+                  <span className="dropdown-user-login">@{userLogin}</span>
                 </div>
               </div>
 
               <div className="dropdown-menu-list">
+                <div className="dropdown-section-title">Workspaces</div>
+
                 <Link
-                  href={userLogin ? `/dashboard/${userLogin}` : '/dashboard'}
-                  className="dropdown-link"
-                  onClick={() => setShowDropdown(false)}
-                >
-                  <FiActivity aria-hidden="true" />
-                  <span>Your Dashboard</span>
-                </Link>
-                <Link
-                  href="/profile"
-                  className="dropdown-link"
+                  href={`/dashboard/${userLogin}`}
+                  className={`dropdown-link ${router.asPath === `/dashboard/${userLogin}` ? 'active' : ''}`}
                   onClick={() => setShowDropdown(false)}
                 >
                   <FiUser aria-hidden="true" />
-                  <span>Your Profile</span>
+                  <span>Personal ({userLogin})</span>
+                  {router.asPath === `/dashboard/${userLogin}` && (
+                    <span className="dropdown-active-dot" aria-label="Current workspace" />
+                  )}
                 </Link>
 
-                {orgsData.length > 0 && (
-                  <>
-                    <div className="dropdown-divider" />
-                    {orgsData.map((org) => (
-                      <Link
-                        href={`/dashboard/${org.login}`}
-                        className="dropdown-link"
-                        key={org.id}
-                        onClick={() => setShowDropdown(false)}
-                      >
-                        <FiGithub aria-hidden="true" />
-                        <span>{org.login.replace(/-/g, ' ')}</span>
-                      </Link>
-                    ))}
-                  </>
-                )}
+                {orgsData.map((org) => {
+                  const isOrgActive = router.asPath.includes(`/dashboard/${org.login}`);
+                  return (
+                    <Link
+                      href={`/dashboard/${org.login}`}
+                      className={`dropdown-link ${isOrgActive ? 'active' : ''}`}
+                      key={org.id}
+                      onClick={() => setShowDropdown(false)}
+                    >
+                      <FiGithub aria-hidden="true" />
+                      <span>{org.login}</span>
+                      {isOrgActive && (
+                        <span className="dropdown-active-dot" aria-label="Current workspace" />
+                      )}
+                    </Link>
+                  );
+                })}
 
                 <div className="dropdown-divider" />
-                <Link
-                  href="/help"
+
+                <a
+                  href={`https://github.com/${userLogin}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="dropdown-link"
                   onClick={() => setShowDropdown(false)}
                 >
-                  <FiHelpCircle aria-hidden="true" />
-                  <span>Help &amp; Guide</span>
-                </Link>
+                  <FiExternalLink aria-hidden="true" />
+                  <span>GitHub Profile</span>
+                </a>
 
                 <button
                   type="button"

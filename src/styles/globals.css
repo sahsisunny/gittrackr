@@ -308,6 +308,15 @@ button {
   gap: 0.25rem;
 }
 
+.dropdown-section-title {
+  font-size: 0.675rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  padding: 0.4rem 0.75rem 0.2rem 0.75rem;
+}
+
 .dropdown-link {
   display: flex;
   align-items: center;
@@ -323,6 +332,21 @@ button {
 .dropdown-link:hover {
   color: var(--text-primary);
   background-color: var(--bg-surface-hover);
+}
+
+.dropdown-link.active {
+  color: var(--accent-cyan);
+  background-color: rgba(56, 189, 248, 0.1);
+  font-weight: 600;
+}
+
+.dropdown-active-dot {
+  margin-left: auto;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent-cyan);
+  box-shadow: 0 0 8px var(--accent-cyan);
 }
 
 .dropdown-divider {
