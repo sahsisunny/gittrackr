@@ -1,24 +1,14 @@
-async function fetchUserRepositories(username, session) {
-  const response = await fetch(
-    `https://api.github.com/users/${username}/repos`,
-    {
-      headers: {
-        Authorization: `token ${session.accessToken}`,
-      },
-    }
-  );
-
-  if (!response.ok) {
-    throw new Error('Error fetching user repositories');
-  }
-
-  const repositories = await response.json();
-  return repositories;
-}
+import { fetchGitHubWithCache } from './githubCache';
 
 export default async function getMostUsedLanguages(username, session) {
   try {
-    const repositories = await fetchUserRepositories(username, session);
+    const token = session?.accessToken;
+    const url = `https://api.github.com/users/${username}/repos?per_page=100`;
+    const { data: repositories } = await fetchGitHubWithCache(url, token, 300_000);
+
+    if (!Array.isArray(repositories)) {
+      return [];
+    }
 
     const languages = repositories.reduce((acc, repo) => {
       const language = repo.language;
@@ -34,7 +24,7 @@ export default async function getMostUsedLanguages(username, session) {
 
     return mostUsedLanguages;
   } catch (error) {
-    console.error('Error fetching user repositories:', error);
+    console.error('[GitTrackr] Error calculating most used languages:', error);
     return [];
   }
 }

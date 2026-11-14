@@ -1,3 +1,59 @@
+import { fetchGitHubWithCache, getRateLimitInfo } from './githubCache';
+
+export type GitHubSearchResult = {
+  total_count: number;
+  items: any[];
+  hasMore: boolean;
+  page: number;
+  isRateLimited?: boolean;
+};
+
+/**
+ * Fetch a single page of GitHub Search results with in-memory caching and rate-limit guard.
+ * This prevents the explosive multi-request bursts that trigger GitHub 403 / 429 rate limits.
+ */
+export const fetchGitHubSearchPage = async (
+  queryUrl: string,
+  token: string,
+  page: number = 1,
+  perPage: number = 25
+): Promise<GitHubSearchResult> => {
+  try {
+    const separator = queryUrl.includes('?') ? '&' : '?';
+    const pageUrl = `${queryUrl}${separator}per_page=${perPage}&page=${page}`;
+
+    const { data, status } = await fetchGitHubWithCache<any>(pageUrl, token, 120_000);
+
+    if (status === 422 || status === 404) {
+      return { total_count: 0, items: [], hasMore: false, page };
+    }
+
+    if (status === 403 || status === 429) {
+      return { total_count: 0, items: [], hasMore: false, page, isRateLimited: true };
+    }
+
+    if (!data) {
+      return { total_count: 0, items: [], hasMore: false, page };
+    }
+
+    const totalCount =
+      typeof data.total_count === 'number'
+        ? data.total_count
+        : data.items?.length || 0;
+    const items = Array.isArray(data.items) ? [...data.items] : [];
+    const hasMore = items.length === perPage && page * perPage < totalCount;
+
+    return { total_count: totalCount, items, hasMore, page };
+  } catch (error) {
+    console.error('[GitTrackr] Error fetching GitHub search page:', error);
+    return { total_count: 0, items: [], hasMore: false, page };
+  }
+};
+
+/**
+ * Safe paginated fetch: fetches the initial page without firing explosive concurrent requests.
+ * Compatible with existing dashboard callers.
+ */
 export const fetchPaginatedGitHubData = async (
   queryUrl: string,
   token: string,
@@ -5,72 +61,12 @@ export const fetchPaginatedGitHubData = async (
   onAllPages: (allItems: any[], totalCount: number) => void
 ): Promise<void> => {
   try {
-    const separator = queryUrl.includes('?') ? '&' : '?';
-    const page1Url = `${queryUrl}${separator}per_page=100&page=1`;
+    const firstPage = await fetchGitHubSearchPage(queryUrl, token, 1, 30);
 
-    const res1 = await fetch(page1Url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-
-    if (!res1.ok) {
-      // GitHub Search API returns 422 Unprocessable Entity when an organization/target
-      // has no searchable repositories or requires third-party OAuth access.
-      // 404 is returned if a resource is missing.
-      // In either case, resolve gracefully with 0 results so the UI exits loading cleanly.
-      if (res1.status === 422 || res1.status === 404) {
-        onInitialPage({ total_count: 0, items: [] });
-        onAllPages([], 0);
-        return;
-      }
-
-      console.warn(`GitHub API notice: ${res1.status} ${res1.statusText}`);
-      onInitialPage({ total_count: 0, items: [] });
-      onAllPages([], 0);
-      return;
-    }
-
-    const data1 = await res1.json();
-    const totalCount =
-      typeof data1.total_count === 'number'
-        ? data1.total_count
-        : data1.items?.length || 0;
-    const items = Array.isArray(data1.items) ? [...data1.items] : [];
-
-    // Immediately notify with first page items and actual total count
-    onInitialPage({ total_count: totalCount, items });
-
-    // If more than 100 items exist, concurrently fetch remaining pages up to 1,000 items
-    const totalPages = Math.min(10, Math.ceil(totalCount / 100));
-    if (totalPages > 1) {
-      const pagePromises = [];
-      for (let p = 2; p <= totalPages; p++) {
-        const nextUrl = `${queryUrl}${separator}per_page=100&page=${p}`;
-        pagePromises.push(
-          fetch(nextUrl, {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              Accept: 'application/vnd.github.v3+json',
-            },
-          }).then((r) => (r.ok ? r.json() : null))
-        );
-      }
-
-      const results = await Promise.all(pagePromises);
-      results.forEach((pg) => {
-        if (pg && Array.isArray(pg.items)) {
-          items.push(...pg.items);
-        }
-      });
-
-      onAllPages(items, totalCount);
-    } else {
-      onAllPages(items, totalCount);
-    }
+    onInitialPage({ total_count: firstPage.total_count, items: firstPage.items });
+    onAllPages(firstPage.items, firstPage.total_count);
   } catch (error) {
-    console.error('Error fetching paginated GitHub data:', error);
+    console.error('[GitTrackr] Error in fetchPaginatedGitHubData:', error);
     onInitialPage({ total_count: 0, items: [] });
     onAllPages([], 0);
   }
@@ -82,16 +78,12 @@ const FetchIssuePr = async <T = unknown,>(
   setDataCallback: (data: T) => void
 ): Promise<void> => {
   try {
-    const response = await fetch(url, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/vnd.github.v3+json',
-      },
-    });
-    const data = await response.json();
-    setDataCallback(data);
+    const { data } = await fetchGitHubWithCache<T>(url, token, 180_000);
+    if (data !== null) {
+      setDataCallback(data);
+    }
   } catch (error) {
-    console.error('Error fetching data:', error);
+    console.error('[GitTrackr] Error in FetchIssuePr:', error);
   }
 };
 

@@ -12,6 +12,7 @@ import {
   FiCompass,
   FiGithub,
   FiExternalLink,
+  FiMail,
 } from 'react-icons/fi';
 
 import Logo from '../../assets/GitTrackr.png';
@@ -96,47 +97,7 @@ const Navbar: React.FC = () => {
       </Link>
 
       <div className="nav-links">
-        {session ? (
-          /* ==========================================================================
-             Logged-in User Navigation (Application Cockpit Links)
-             ========================================================================== */
-          <>
-            <Link
-              href={userLogin ? `/dashboard/${userLogin}` : '/dashboard'}
-              className={`nav-link ${router.pathname.startsWith('/dashboard') ? 'active' : ''}`}
-              aria-current={router.pathname.startsWith('/dashboard') ? 'page' : undefined}
-            >
-              <FiActivity style={{ marginRight: '0.35rem', verticalAlign: '-2px' }} />
-              <span>Dashboard</span>
-            </Link>
-
-            <Link
-              href="/profile"
-              className={`nav-link ${router.pathname === '/profile' ? 'active' : ''}`}
-              aria-current={router.pathname === '/profile' ? 'page' : undefined}
-            >
-              <FiUser style={{ marginRight: '0.35rem', verticalAlign: '-2px' }} />
-              <span>Profile</span>
-            </Link>
-
-            <Link
-              href="/help"
-              className={`nav-link ${router.pathname === '/help' ? 'active' : ''}`}
-              aria-current={isCurrent('/help')}
-            >
-              <FiHelpCircle style={{ marginRight: '0.35rem', verticalAlign: '-2px' }} />
-              <span>Help &amp; Guide</span>
-            </Link>
-
-            <Link
-              href="/contact-us"
-              className={`nav-link ${router.pathname === '/contact-us' ? 'active' : ''}`}
-              aria-current={isCurrent('/contact-us')}
-            >
-              <span>Contact</span>
-            </Link>
-          </>
-        ) : (
+        {!session && (
           /* ==========================================================================
              Guest / Visitor Navigation (Marketing Landing Links)
              ========================================================================== */
@@ -224,31 +185,65 @@ const Navbar: React.FC = () => {
               </div>
 
               <div className="dropdown-menu-list">
-                <div className="dropdown-section-title">Workspaces</div>
+                <div className="dropdown-section-title">Navigation</div>
 
                 <Link
-                  href={`/dashboard/${userLogin}`}
-                  className={`dropdown-link ${router.asPath === `/dashboard/${userLogin}` ? 'active' : ''}`}
+                  href={userLogin ? `/dashboard/${userLogin}` : '/dashboard'}
+                  className={`dropdown-link ${router.pathname.startsWith('/dashboard') && (!router.asPath.includes('/dashboard/') || router.asPath === `/dashboard/${userLogin}`) ? 'active' : ''}`}
+                  onClick={() => setShowDropdown(false)}
+                >
+                  <FiActivity aria-hidden="true" />
+                  <span>Dashboard</span>
+                </Link>
+
+                <Link
+                  href="/profile"
+                  className={`dropdown-link ${router.pathname === '/profile' ? 'active' : ''}`}
                   onClick={() => setShowDropdown(false)}
                 >
                   <FiUser aria-hidden="true" />
-                  <span>Personal ({userLogin})</span>
+                  <span>Profile</span>
                 </Link>
 
-                {orgsData.map((org) => {
-                  const isOrgActive = router.asPath.includes(`/dashboard/${org.login}`);
-                  return (
-                    <Link
-                      href={`/dashboard/${org.login}`}
-                      className={`dropdown-link ${isOrgActive ? 'active' : ''}`}
-                      key={org.id}
-                      onClick={() => setShowDropdown(false)}
-                    >
-                      <FiGithub aria-hidden="true" />
-                      <span>{org.login}</span>
-                    </Link>
-                  );
-                })}
+                <Link
+                  href="/help"
+                  className={`dropdown-link ${router.pathname === '/help' ? 'active' : ''}`}
+                  onClick={() => setShowDropdown(false)}
+                >
+                  <FiHelpCircle aria-hidden="true" />
+                  <span>Help &amp; Guide</span>
+                </Link>
+
+                <Link
+                  href="/contact-us"
+                  className={`dropdown-link ${router.pathname === '/contact-us' ? 'active' : ''}`}
+                  onClick={() => setShowDropdown(false)}
+                >
+                  <FiMail aria-hidden="true" />
+                  <span>Contact Support</span>
+                </Link>
+
+                {orgsData.length > 0 && (
+                  <>
+                    <div className="dropdown-divider" />
+                    <div className="dropdown-section-title">Organizations</div>
+
+                    {orgsData.map((org) => {
+                      const isOrgActive = router.asPath.includes(`/dashboard/${org.login}`);
+                      return (
+                        <Link
+                          href={`/dashboard/${org.login}`}
+                          className={`dropdown-link ${isOrgActive ? 'active' : ''}`}
+                          key={org.id}
+                          onClick={() => setShowDropdown(false)}
+                        >
+                          <FiGithub aria-hidden="true" />
+                          <span>{org.login}</span>
+                        </Link>
+                      );
+                    })}
+                  </>
+                )}
 
                 <div className="dropdown-divider" />
 

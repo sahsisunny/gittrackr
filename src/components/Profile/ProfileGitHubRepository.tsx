@@ -1,5 +1,5 @@
-import React from 'react';
-import { FiSearch, FiX, FiExternalLink, FiClock, FiFolder } from 'react-icons/fi';
+import React, { useState, useEffect } from 'react';
+import { FiSearch, FiX, FiExternalLink, FiClock, FiFolder, FiChevronDown } from 'react-icons/fi';
 import { RepoSkeleton } from '@/components/Loader';
 import styles from './ProfileGitHubRepository.module.css';
 import FormatDate from '@/utils/FormatDate';
@@ -28,6 +28,19 @@ const ProfileGitHubRepository: React.FC<ProfileGitHubRepositoryProps> = ({
   filteredRepos = [],
   isLoading = false,
 }) => {
+  const [visibleCount, setVisibleCount] = useState<number>(15);
+
+  useEffect(() => {
+    setVisibleCount(15);
+  }, [searchQuery]);
+
+  const displayedRepos = filteredRepos.slice(0, visibleCount);
+  const hasMore = visibleCount < filteredRepos.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 15);
+  };
+
   return (
     <div className={styles.repoWrapper}>
       {/* Search Header */}
@@ -54,7 +67,7 @@ const ProfileGitHubRepository: React.FC<ProfileGitHubRepositoryProps> = ({
         </div>
 
         <span className={styles.repoCountBadge}>
-          Showing <strong>{filteredRepos.length}</strong> repositories
+          Showing <strong>{displayedRepos.length}</strong> of <strong>{filteredRepos.length}</strong> repositories
         </span>
       </div>
 
@@ -63,64 +76,84 @@ const ProfileGitHubRepository: React.FC<ProfileGitHubRepositoryProps> = ({
         {isLoading ? (
           <RepoSkeleton count={5} />
         ) : filteredRepos.length > 0 ? (
-          filteredRepos.map((repo, index) => {
-            const langColor = languageColors[repo.language] || '#38bdf8';
+          <>
+            {displayedRepos.map((repo, index) => {
+              const langColor = languageColors[repo.language] || '#38bdf8';
 
-            return (
-              <div key={repo.id} className={styles.repoCard}>
-                <div className={styles.repoDetails}>
-                  <div className={styles.repoHeaderRow}>
-                    <span className={styles.repoIndex}>#{index + 1}</span>
-                    <FiFolder color="var(--accent-cyan)" size={16} />
-                    <a
-                      href={repo.html_url}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className={styles.repoName}
-                    >
-                      {repo.name}
-                    </a>
-                  </div>
+              return (
+                <div key={repo.id} className={styles.repoCard}>
+                  <div className={styles.repoDetails}>
+                    <div className={styles.repoHeaderRow}>
+                      <span className={styles.repoIndex}>#{index + 1}</span>
+                      <FiFolder color="var(--accent-cyan)" size={16} />
+                      <a
+                        href={repo.html_url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={styles.repoName}
+                      >
+                        {repo.name}
+                      </a>
+                    </div>
 
-                  <div className={styles.repoMetaRow}>
-                    {repo.language && (
-                      <span className={styles.languagePill}>
-                        <span
-                          className={styles.languageDot}
-                          style={{ backgroundColor: langColor }}
-                        />
-                        <span>{repo.language}</span>
+                    <div className={styles.repoMetaRow}>
+                      {repo.language && (
+                        <span className={styles.languagePill}>
+                          <span
+                            className={styles.languageDot}
+                            style={{ backgroundColor: langColor }}
+                          />
+                          <span>{repo.language}</span>
+                        </span>
+                      )}
+
+                      <span
+                        className={`${styles.privacyBadge} ${
+                          repo.private ? styles.privateBadge : styles.publicBadge
+                        }`}
+                      >
+                        {repo.private ? 'Private' : 'Public'}
                       </span>
-                    )}
 
-                    <span
-                      className={`${styles.privacyBadge} ${
-                        repo.private ? styles.privateBadge : styles.publicBadge
-                      }`}
-                    >
-                      {repo.private ? 'Private' : 'Public'}
-                    </span>
-
-                    <span className={styles.updatedTime}>
-                      <FiClock size={12} />
-                      <span suppressHydrationWarning>Updated {FormatDate(repo.updated_at)}</span>
-                    </span>
+                      <span className={styles.updatedTime}>
+                        <FiClock size={12} />
+                        <span suppressHydrationWarning>Updated {FormatDate(repo.updated_at)}</span>
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                <a
-                  href={repo.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className={styles.repoViewButton}
-                  title={`View ${repo.name} on GitHub`}
+                  <a
+                    href={repo.html_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={styles.repoViewButton}
+                    title={`View ${repo.name} on GitHub`}
+                  >
+                    <span>Open</span>
+                    <FiExternalLink size={13} />
+                  </a>
+                </div>
+              );
+            })}
+
+            {hasMore && (
+              <div className={styles.paginationContainer}>
+                <button
+                  type="button"
+                  className={styles.loadMoreBtn}
+                  onClick={handleLoadMore}
                 >
-                  <span>Open</span>
-                  <FiExternalLink size={13} />
-                </a>
+                  <FiChevronDown size={16} />
+                  <span>
+                    Load More Repositories ({filteredRepos.length - visibleCount} remaining)
+                  </span>
+                </button>
+                <span className={styles.paginationStatus}>
+                  Showing {displayedRepos.length} of {filteredRepos.length} repositories
+                </span>
               </div>
-            );
-          })
+            )}
+          </>
         ) : (
           <div className={styles.emptyState}>
             <FiSearch size={32} color="var(--accent-cyan)" />
