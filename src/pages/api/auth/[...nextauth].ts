@@ -40,6 +40,7 @@ export const authOptions: AuthOptions = {
             sessionUser.company = user.company;
             sessionUser.blog = user.blog;
             sessionUser.bio = user.bio;
+            sessionUser.twitter_username = user.twitter_username;
           }
         } catch (err) {
           console.error('[NextAuth] Error enriching session with GitHub user profile:', err);

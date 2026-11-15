@@ -340,6 +340,46 @@ button {
   font-weight: 600;
 }
 
+.dropdown-org-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.35rem;
+}
+
+.dropdown-org-row .dropdown-link {
+  flex: 1;
+  min-width: 0;
+}
+
+.dropdown-cockpit-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.55rem;
+  border-radius: var(--radius-xs);
+  font-size: 0.725rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  border: 1px solid transparent;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.dropdown-cockpit-link:hover {
+  color: var(--accent-cyan);
+  background-color: var(--bg-surface-hover);
+  border-color: rgba(56, 189, 248, 0.25);
+}
+
+.dropdown-cockpit-link.active {
+  color: var(--accent-cyan);
+  background-color: rgba(56, 189, 248, 0.1);
+  border-color: rgba(56, 189, 248, 0.35);
+  font-weight: 600;
+}
+
 .dropdown-divider {
   height: 1px;
   background-color: var(--border-subtle);

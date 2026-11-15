@@ -8,6 +8,7 @@ export interface DemoUser {
   bio: string;
   company: string;
   blog: string;
+  twitter_username?: string;
   followers: number;
   following: number;
   public_repos: number;
@@ -50,6 +51,7 @@ export interface DemoOrg {
   avatar_url: string;
   description: string;
   html_url: string;
+  twitter_username?: string;
 }
 
 export const DEMO_USER: DemoUser = {
@@ -62,6 +64,7 @@ export const DEMO_USER: DemoUser = {
   bio: 'Building tools for open-source developers worldwide. Passionate about Git, collaboration, and high-performance engineering.',
   company: '@GitHub',
   blog: 'https://github.blog',
+  twitter_username: 'github',
   followers: 14820,
   following: 9,
   public_repos: 48,
@@ -77,6 +80,7 @@ export const DEMO_ORGS: DemoOrg[] = [
     avatar_url: 'https://avatars.githubusercontent.com/u/9919?v=4',
     description: 'How people build software.',
     html_url: 'https://github.com/github',
+    twitter_username: 'github',
   },
   {
     id: 2,

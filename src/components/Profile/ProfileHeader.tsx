@@ -10,6 +10,8 @@ type ProfileHeaderProps = {
   USERNAME?: string;
   COMPANY?: string | null;
   AVATAR_URL?: string | null;
+  isOrg?: boolean;
+  badgeText?: string;
 };
 
 const ProfileHeader: React.FC<ProfileHeaderProps> = ({
@@ -17,8 +19,11 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
   USERNAME,
   COMPANY,
   AVATAR_URL,
+  isOrg = false,
+  badgeText,
 }) => {
-  const displayName = NAME || USERNAME || 'Developer';
+  const displayName = NAME || USERNAME || (isOrg ? 'Organization' : 'Developer');
+  const badgeLabel = badgeText || (isOrg ? 'Verified Organization' : 'Verified Developer');
 
   return (
     <div className={styles.headerCard}>
@@ -41,7 +46,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             <h2 className={styles.userName}>{displayName}</h2>
             <span className={styles.userBadge}>
               <FiCheckCircle size={12} />
-              <span>Verified Developer</span>
+              <span>{badgeLabel}</span>
             </span>
           </div>
 
@@ -52,7 +57,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.userLoginLink}
-                title="View GitHub profile"
+                title={isOrg ? 'View GitHub organization' : 'View GitHub profile'}
               >
                 <FiGithub size={15} />
                 <span>@{USERNAME}</span>
@@ -62,7 +67,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             {COMPANY && (
               <span className={styles.companyPill}>
                 <FiBriefcase size={14} />
-                <span>Worked at {COMPANY}</span>
+                <span>{isOrg ? COMPANY : `Worked at ${COMPANY}`}</span>
               </span>
             )}
           </div>
@@ -74,7 +79,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
           <Link
             href={`/dashboard/${USERNAME}`}
             className={styles.actionBtnPrimary}
-            title="Open PR & Issue Cockpit"
+            title={isOrg ? 'Open Org PR & Issue Cockpit' : 'Open PR & Issue Cockpit'}
           >
             <FiActivity size={15} />
             <span>Open Dashboard</span>
@@ -87,7 +92,7 @@ const ProfileHeader: React.FC<ProfileHeaderProps> = ({
             target="_blank"
             rel="noopener noreferrer"
             className={styles.actionBtnSecondary}
-            title="View external profile on GitHub"
+            title={`View ${isOrg ? 'organization' : 'external profile'} on GitHub`}
           >
             <span>GitHub</span>
             <FiExternalLink size={13} />

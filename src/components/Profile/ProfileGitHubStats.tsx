@@ -465,10 +465,10 @@ const ProfileGitHubStats: React.FC<ProfileGitHubStatsProps> = ({
           <div className={styles.orgsGrid} style={{ marginTop: '0.85rem' }}>
             {(hasMembers ? usersData : orgsData).map((item) => (
               <Link
-                href={hasMembers ? `/profile/${item.login}` : `/dashboard/${item.login}`}
+                href={hasMembers ? `/profile/${item.login}` : `/orgs/${item.login}`}
                 key={item.id}
                 className={styles.orgCard}
-                title={`View ${item.login}`}
+                title={hasMembers ? `View member @${item.login}` : `View organization @${item.login}`}
               >
                 <Image
                   src={item.avatar_url}

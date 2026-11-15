@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
-import { FiAlertCircle, FiGitPullRequest, FiGithub } from 'react-icons/fi';
+import Link from 'next/link';
+import { FiAlertCircle, FiGitPullRequest, FiGithub, FiExternalLink } from 'react-icons/fi';
 import styles from './DashboardHeader.module.css';
 
 type DashBoardHeaderProps = {
@@ -10,6 +11,8 @@ type DashBoardHeaderProps = {
   NAME: string;
   issuesCount?: number;
   prsCount?: number;
+  isOrg?: boolean;
+  profileUrl?: string;
 };
 
 const DashBoardHeader: React.FC<DashBoardHeaderProps> = ({
@@ -19,6 +22,8 @@ const DashBoardHeader: React.FC<DashBoardHeaderProps> = ({
   NAME,
   issuesCount = 0,
   prsCount = 0,
+  isOrg = false,
+  profileUrl,
 }) => {
   return (
     <header className={styles.dashboardHeader}>
@@ -47,10 +52,22 @@ const DashBoardHeader: React.FC<DashBoardHeaderProps> = ({
           </div>
         )}
         <div className={styles.dashboardProfileInfo}>
-          <h2 className={styles.dashboardProfileName}>{NAME}</h2>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.65rem', flexWrap: 'wrap' }}>
+            <h2 className={styles.dashboardProfileName}>{NAME}</h2>
+            {profileUrl && (
+              <Link
+                href={profileUrl}
+                className={styles.profileBadgeLink}
+                title={isOrg ? `View @${NAME} Organization Profile` : `View @${NAME} Profile`}
+              >
+                <span>{isOrg ? 'View Org Profile' : 'View Profile'}</span>
+                <FiExternalLink size={12} />
+              </Link>
+            )}
+          </div>
           <span className={styles.dashboardProfileBadge}>
             <FiGithub aria-hidden="true" />
-            <span>Developer Cockpit</span>
+            <span>{isOrg ? 'Organization Cockpit' : 'Developer Cockpit'}</span>
           </span>
         </div>
       </div>

@@ -26,9 +26,12 @@ interface OrgData {
   login?: string;
   name?: string;
   company?: string;
+  location?: string;
   avatar_url?: string;
   blog?: string;
   bio?: string;
+  description?: string;
+  twitter_username?: string | null;
   created_at?: string;
   followers?: number;
   following?: number;
@@ -62,6 +65,8 @@ const OrgProfilePage: React.FC = () => {
         avatar_url: matchOrg.avatar_url,
         blog: `https://${matchOrg.login}.com`,
         bio: matchOrg.description,
+        description: matchOrg.description,
+        twitter_username: matchOrg.login === 'github' ? 'github' : undefined,
         created_at: '2012-01-01T00:00:00Z',
         followers: 45000,
         following: 0,
@@ -135,17 +140,20 @@ const OrgProfilePage: React.FC = () => {
         <ProfileHeader
           NAME={data?.name}
           USERNAME={data?.login || username}
-          COMPANY={data?.company}
+          COMPANY={data?.location || data?.company}
           AVATAR_URL={data?.avatar_url}
+          isOrg={true}
         />
         <div className="section-details">
           <ProfileSidebar
             USERNAME={data?.login || username}
             WEBSITE={data?.blog}
+            TWITTER_USERNAME={data?.twitter_username}
             NAME={data?.name}
-            BIO={data?.bio}
+            BIO={data?.description || data?.bio}
             mostUsedLanguages={mostUsedLanguages}
             languageColors={LANGUAGE_COLORS}
+            isOrg={true}
           />
 
           <div className="section-main">

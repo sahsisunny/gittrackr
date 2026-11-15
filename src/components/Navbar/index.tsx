@@ -229,17 +229,29 @@ const Navbar: React.FC = () => {
                     <div className="dropdown-section-title">Organizations</div>
 
                     {orgsData.map((org) => {
-                      const isOrgActive = router.asPath.includes(`/dashboard/${org.login}`);
+                      const isOrgProfileActive = router.asPath === `/orgs/${org.login}`;
+                      const isOrgDashboardActive = router.asPath === `/dashboard/${org.login}`;
                       return (
-                        <Link
-                          href={`/dashboard/${org.login}`}
-                          className={`dropdown-link ${isOrgActive ? 'active' : ''}`}
-                          key={org.id}
-                          onClick={() => setShowDropdown(false)}
-                        >
-                          <FiGithub aria-hidden="true" />
-                          <span>{org.login}</span>
-                        </Link>
+                        <div key={org.id} className="dropdown-org-row">
+                          <Link
+                            href={`/orgs/${org.login}`}
+                            className={`dropdown-link ${isOrgProfileActive ? 'active' : ''}`}
+                            onClick={() => setShowDropdown(false)}
+                            title={`View @${org.login} organization profile`}
+                          >
+                            <FiGithub aria-hidden="true" />
+                            <span>{org.login}</span>
+                          </Link>
+                          <Link
+                            href={`/dashboard/${org.login}`}
+                            className={`dropdown-cockpit-link ${isOrgDashboardActive ? 'active' : ''}`}
+                            onClick={() => setShowDropdown(false)}
+                            title={`Open @${org.login} cockpit`}
+                          >
+                            <FiActivity size={12} aria-hidden="true" />
+                            <span>Cockpit</span>
+                          </Link>
+                        </div>
                       );
                     })}
                   </>

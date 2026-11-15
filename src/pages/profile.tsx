@@ -36,6 +36,7 @@ interface ExtendedUser {
   company?: string;
   blog?: string;
   bio?: string;
+  twitter_username?: string | null;
 }
 
 const ProfilePage: React.FC = () => {
@@ -157,10 +158,12 @@ const ProfilePage: React.FC = () => {
           <ProfileSidebar
             USERNAME={USERNAME}
             WEBSITE={WEBSITE}
+            TWITTER_USERNAME={sessionUser?.twitter_username || (isDemo ? DEMO_USER.twitter_username : undefined)}
             NAME={NAME}
             BIO={BIO}
             mostUsedLanguages={mostUsedLanguages}
             languageColors={LANGUAGE_COLORS}
+            isOrg={false}
           />
 
           <div className="section-main">

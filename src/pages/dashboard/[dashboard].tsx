@@ -302,6 +302,13 @@ const Dashboard: React.FC = () => {
     syncUrlParams(validTab, 'all', searchQuery);
   };
 
+  const isOrgDashboard = Boolean(dashboard && dashboard !== USERNAME);
+  const profileUrl = isOrgDashboard
+    ? `/orgs/${dashboard}`
+    : isDemo
+    ? `/profile/octocat`
+    : `/profile`;
+
   return (
     <Layout
       title={`${NAME} | Developer Dashboard`}
@@ -353,6 +360,8 @@ const Dashboard: React.FC = () => {
           NAME={NAME}
           issuesCount={issuesTotalCount || issuesData.length}
           prsCount={prsTotalCount || prsData.length}
+          isOrg={isOrgDashboard}
+          profileUrl={profileUrl}
         />
 
         {/* Top Clickable KPI Cards */}

@@ -22,6 +22,7 @@ interface UserData {
   avatar_url?: string;
   blog?: string;
   bio?: string;
+  twitter_username?: string | null;
   created_at?: string;
   followers?: number;
   following?: number;
@@ -142,10 +143,12 @@ const ProfilePage: React.FC = () => {
           <ProfileSidebar
             USERNAME={data?.login || username}
             WEBSITE={data?.blog}
+            TWITTER_USERNAME={data?.twitter_username}
             NAME={data?.name}
             BIO={data?.bio}
             mostUsedLanguages={mostUsedLanguages}
             languageColors={LANGUAGE_COLORS}
+            isOrg={false}
           />
 
           <div className="section-main">

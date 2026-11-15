@@ -262,8 +262,10 @@ const Features: FC = () => {
                   NAME={DEMO_USER.name}
                   BIO={DEMO_USER.bio}
                   WEBSITE={DEMO_USER.blog}
+                  TWITTER_USERNAME={DEMO_USER.twitter_username}
                   mostUsedLanguages={['TypeScript', 'JavaScript', 'Python', 'Go', 'HTML']}
                   languageColors={LANGUAGE_COLORS}
+                  isOrg={false}
                 />
 
                 <ProfileGitHubStats
