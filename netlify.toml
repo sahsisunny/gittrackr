@@ -1,0 +1,9 @@
+[build]
+  command = "npm run build"
+  publish = ".next"
+
+[build.environment]
+  # Exclude non-secret email configuration from Netlify Secrets Scanner
+  SECRETS_SCAN_OMIT_KEYS = "RESEND_FROM_EMAIL,CONTACT_RECEIVER_EMAIL"
+  SECRETS_SCAN_OMIT_PATHS = ".env.example"
+

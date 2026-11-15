@@ -59,8 +59,16 @@ export default async function handler(
 
   try {
     const resend = new Resend(apiKey);
-    const receiverEmail =
-      process.env.CONTACT_RECEIVER_EMAIL || 'sahsisunny007@gmail.com';
+    const receiverEmail = process.env.CONTACT_RECEIVER_EMAIL;
+    if (!receiverEmail) {
+      console.error(
+        '[Resend API] CONTACT_RECEIVER_EMAIL is not configured.'
+      );
+      return res.status(500).json({
+        success: false,
+        message: 'Recipient email is not configured on the server.',
+      });
+    }
     const senderEmail =
       process.env.RESEND_FROM_EMAIL || 'GitTrackr Contact <onboarding@resend.dev>';
 
